@@ -1,0 +1,40 @@
+h1{
+  padding: 50px;
+  font-size: 1.5rem;
+}
+
+
+
+td{
+  font-size: 1.3rem;
+  padding: 10px;
+}
+.sen{
+  border-top: 2px solid;
+}
+.sen2{
+  border-bottom: 2px solid;
+}
+.kane{
+  padding: 10px 200px 10px 10px;
+  font-size: 1rem;
+}
+.taitoru{
+  font-size: 1.5rem;
+}
+img{
+  width: 100px;
+  margin: 10px 10px -50px 10px;
+}
+.tyatto{
+  width: 40px;
+  padding: 0 0 40px 0;
+}
+.gomi{
+  border: none;
+  background-color: #F7F7FF;
+  font-size: 1.7rem;
+}
+#yoko{
+  padding: 50px 120px;
+}

@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+/* common.cssは絶対に触らない！！！！！！！！！！！ */
+
+/* sample.cssをコピーし複製 */
+/* ファイル名はhtmlと同じ名前にしてください */
+
+
+/* sample.htmlにlinkタグがコメントアウトしてあるので良ければ使ってください */
+
+
+/*sample.html*/
+/*例*/
+#m-sample div.wrap p{
+/* 例として書いてあるだけなので消して大丈夫です */
+  color: #000;
+}

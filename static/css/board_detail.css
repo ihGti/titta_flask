@@ -1,0 +1,355 @@
+@charset "utf-8";
+
+/* common.cssは絶対に触らない！！！！！！！！！！！ */
+
+/* sample.cssをコピーし複製 */
+/* ファイル名はhtmlと同じ名前にしてください */
+
+
+/* sample.htmlにlinkタグがコメントアウトしてあるので良ければ使ってください */
+
+
+
+
+/*m-lost_post.html*/
+/*#m-lost_post*/
+
+
+#m-lost_post div.p_detail-heading{
+/*  height: 100px;*/
+  width: 1100px;
+  margin: 0 auto 0 auto;
+  padding: 20px 0px 20px 0px ;
+/*  background-color: #ddddff;*/
+}
+div.p_detail-heading p{
+  padding: 5px 0 5px 0;
+}
+div.p_detail-heading p a{
+  text-decoration: none;
+  color: #000;/*仮*/
+}
+div.p_detail-heading p a:hover{
+  opacity: 0.6;
+}
+div.p_detail-heading p#p-id{
+  margin: 30px 0 30px 0;
+  padding: 10px 0 10px 0;
+  border-top: 1px #ddd solid;
+  border-bottom: 1px #ddd solid;
+}
+
+
+
+
+/*wrap*/
+div.p-detail-wrap{
+  margin: 0 auto 0 auto;
+  display: flex;
+}
+
+
+div.p-detail-wrap div.p-detail_left{
+  width: 800px;
+/*  background-color: #ddffdd;*/
+  display: inline-block;
+}
+div.p-detail-wrap div.p-detail_left h2{
+  padding: 3px 0 0 3px;
+  font-size: 1.2rem;
+  font-weight: lighter;
+  border-left: 4px #F1B2B2 solid;
+}
+
+/*left*/
+div.post-img{
+  text-align: center;
+}
+div.post-img figure img{
+  width: 500px;
+  display: inline-block;
+}
+
+/*基本情報～詳細情報*/
+div.p-detail-wrap div.p-detail_left h3{
+  padding: 50px 0 0 0 ;
+}
+
+/*tableのcss*/
+div.p-detail-wrap div.p-detail_left table{
+  width: 680px;
+  margin: 0 0 30px 0 ;
+  border: 1px #ddd solid;
+}
+div.p-detail-wrap div.p-detail_left table tr{}
+div.p-detail-wrap div.p-detail_left table tr th{
+  width: 150px;
+  padding: 15px 15px 15px 15px ;
+  color: #fff;
+  background-color: #7D8BAE;
+  font-size: 0.8rem;
+  font-weight: lighter;
+  border: 1px #ddd solid;
+
+}
+div.p-detail-wrap div.p-detail_left table tr td{
+  padding: 15px 15px 15px 15px ;
+  font-size: 0.8rem;
+  border: 1px #ddd solid;
+}
+
+
+
+
+/*right*/
+div.p-detail-wrap div.p-detail_right{
+  width: 300px;
+/*  background-color: #ffdddd;*/
+  display: inline-block;
+}
+
+div.p-detail-wrap div.p-detail_right p#pet-buttom{
+  margin: 20px auto 20px auto;
+  padding: 30px 30px 30px 30px;
+  width: 300px;
+  text-align: center;
+  background-color:#E5857B;
+  box-shadow: 5px 3px 3px #ddd;
+}
+div.p-detail-wrap div.p-detail_right p#pet-buttom a{
+  text-decoration: none;
+  color: #fff;
+}
+div.p-detail-wrap div.p-detail_right p#pet-buttom:hover{
+  opacity: 0.7;
+}
+div.p-detail-wrap div.p-detail_right p#font-small{
+  font-size:0.8rem;
+  line-height: 1.1rem;
+}
+
+/* div.inquiry-wrap */
+div.p-detail-wrap div.p-detail_right div.inquiry-wrap{
+  margin: 30px 0 0px 0;
+  padding: 10px 10px 10px 10px ;
+  border: 1px #E5857B solid;
+}
+div.p-detail-wrap div.p-detail_right div.inquiry-wrap p {
+  margin: 0px 0 0 0;
+  padding: 7px 0 0 0;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+}
+div.p-detail-wrap div.p-detail_right div.inquiry-wrap p#line-pink{
+  padding: 0 0 4px 0 ;
+  border-bottom: 1px #E5857B solid;
+  font-size: 0.9rem;
+}
+
+/* div.apply-wrap  */
+div.p-detail-wrap div.p-detail_right div.apply-wrap{
+  margin: 30px 0 0px 0;
+  padding: 0px 10px 10px 10px ;
+  border: 1px #ddd solid;
+}
+div.p-detail-wrap div.p-detail_right div.apply-wrap p {
+  padding: 7px 0 0 0;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+}
+div.p-detail-wrap div.p-detail_right div.apply-wrap p {
+  padding: 7px 0 0 0;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+}
+/* borderのクラス */
+p.line-ddd{
+  padding: 0 0 4px 0;
+  border-bottom: 1px #ddd solid;
+  font-size: 0.9rem;
+}
+
+
+/* div.recruiter-wrap */
+div.p-detail-wrap div.p-detail_right div.recruiter-wrap{
+  margin: 30px 0 0px 0;
+  padding: 10px 10px 10px 10px;
+  border: 1px #ddd solid;
+}
+div.recruiter-wrap div#re-wrap{
+  margin: 10px 0 0px 0;
+  padding: 0px 10px 10px 10px;
+  display: flex;
+}
+div.recruiter-wrap div#re-wrap p{
+  padding: 7px 0 0 0;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+}
+div.recruiter-wrap div#re-wrap div#pro-img{
+  margin: 0 0 0 0 ;
+  text-align: center;
+}
+div.recruiter-wrap div#re-wrap div#pro-img figure{
+  margin: 0 15px 0 0  ;
+}
+div.recruiter-wrap div#re-wrap div#pro-img figure img{
+  width: 70px;
+}
+
+div.recruiter-wrap div#re-wrap div#pro-inf{}
+div.recruiter-wrap div#re-wrap div#pro-inf p{
+  line-height: 1.2rem;
+}
+
+div.recruiter-wrap div#pro-msg{
+  /* margin: 0 auto 0 auto; */
+  padding: 10px 5px 10px 5px ;
+  width: 280px;
+  background-color: #F1B2B2;
+}
+div.recruiter-wrap div#pro-msg p{
+  width: 270px;
+  /* padding: 0 3px 0 3px; */
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+}
+
+
+
+
+/* 似たような条件の里親状況 */
+div.p-similar{
+  /*  height: 100px;*/
+  width: 1100px;
+  margin: 0 auto 0 auto;
+  padding: 20px 0px 20px 0px;
+  /*  background-color: #ddddff;*/
+}
+
+div.p-similar h2{
+    margin: 0 0 10px 0;
+    padding: 3px 0 0 3px;
+    font-size: 1.2rem;
+    font-weight: lighter;
+    border-left: 4px #F1B2B2 solid;
+}
+
+/* 掲示板div.postのdiv */
+div.similar-wrap{
+  width: 1100px;
+  margin: 0 auto 0 auto;
+  padding: 0 0 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+/* 掲示板投稿パーツ */
+div.post{
+  margin: 5px 5px 5px 5px ;
+  padding: 3px 12px 20px 12px;
+  width: 19%;
+  box-sizing: border-box;
+
+  border: 1px #ddd solid;
+  box-shadow: 2px 2px 6px #ddd;
+  background-color: #fff;
+  
+}
+
+div.post a{
+  /* margin: 10px 10px 10px 10px ; */
+  /* padding: 10px 10px 10px 10px ; */
+  color: #000;
+  text-decoration: none;
+
+  display: block;
+  box-sizing: content-box;
+}
+div.post a:hover{
+  opacity: 0.6;
+}
+
+div.post a p#iine{
+  text-align: right;
+}
+div.post a input{
+  /*この３行は必要*/
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /*あったほうがいい*/
+  border: none;
+  background: none;
+  outline: none;
+  /*カーソル*/
+  cursor: pointer;
+
+
+
+  /*アイコンの色*/
+  color: #000;
+  /*  color: rgb(3, 14, 71);*/
+}
+div.post a input:hover {
+  color: #E5857B;
+  /* opacity: 0.8; */
+}
+
+
+
+div.post a figure{
+  margin: 0 0 20px 0;
+}
+
+div.post a figure img{
+  max-width: 100%;
+}
+div.post a h3{
+  margin: 0 0 3px 2px;
+  font-size: 0.9rem;
+  font-weight: lighter;
+}
+div.post a p{
+  line-height: 1.2rem;
+  font-size: 0.8rem;
+}
+div.post a p#brbr{
+  padding: 1px 0 0 0 ;
+}
+
+div.post a p span{
+  margin: 0 5px 2px 0 ;
+  padding: 1px 9px 1px 9px ;
+  color: #fff;
+  background-color: #E5857B;
+  border-radius: 7px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* p-similar */
+div.p-similar p {
+  padding: 5px 0 5px 0;
+}
+
+div.p-similar p a {
+  text-decoration: none;
+  color: #000;
+  /*仮*/
+}
+
+div.p-similar p a:hover {
+  opacity: 0.6;
+}

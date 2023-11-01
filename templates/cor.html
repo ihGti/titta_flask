@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>登録完了</title>
+
+    <!-- この２つのcssは触らない -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/cor.css" />
+
+    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/ xxx.css"> -->
+  </head>
+
+  <body>
+    <header></header>
+
+    <main id="m-sample">
+      <video id="registerd" autoplay muted>
+        <source src="video/registerd_video1.mp4" type="video/mp4" />
+      </video>
+      
+      <!-- login.htmlへ遷移 -->
+      <button id="back_login" onclick="location.href='/login'">ログイン画面へ</button>
+    </main>
+
+    <footer>
+      <div class="copy-all">
+        2023 &copy; Copyright Titta. All rights reserved.
+      </div>
+    </footer>
+
+
+
+    <!-- jQueryへのリンク -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/ebfd63cef7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/common.js"></script>
+  </body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+  <head>
+
+      <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Titta</title>
+
+    <!-- この２つのcssは触らない -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+
+    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
+    <link rel="stylesheet" type="text/css" href="css/board_detail.css">
+
+
+  </head>
+
+
+  <body>
+
+    <header>
+
+
+      <div class="r-wrap">
+
+        <div class="rr-wrap">
+
+          <a href="index.html">
+            <figure>
+              <img src="images/rogo.png" alt="rogo">
+            </figure>
+          </a>
+
+          <div class="nav-top">
+            <nav>
+              <ul>
+                <li><a href="mailbox.html"><input type="submit" value="&#xf0e0;" class="button"></a></li>
+                <li><a href="cart.html"><input type="submit" value="&#xf07a;" class="button"></a></li>
+                <li><a href="favorite.html"><input type="submit" value="&#xf004;" class="button"></a></li>
+                <li><a href="login.html"><input type="submit" value="&#xf007;" class="button"></a></li>
+              </ul>
+            </nav>
+          </div>
+
+
+        </div><!-- "rr-wrap" -->
+
+
+      </div><!-- class="r-wrap" -->
+
+
+
+      <div class="nav-buttom">
+        <nav>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="exhibit.html">出品</a></li>
+            <li><a href="foster_board.html">里親掲示板</a></li>
+            <li><a href="lost_petboard.html" class="line-a">迷子掲示板</a></li>
+            <li><a href="contest.html">コンテスト</a></li>
+            <li><a href="community.html">コミュニティ</a></li>
+            <li><a href="assignment.html">譲渡会</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+
+
+
+    <main id="m-lost_post">
+
+      <div class="wrap">
+
+
+
+        <div class="p_detail-heading">
+          <p><a href="foster_board.html"><< 検索に戻る</a></p>
+          <p id="p-id">投稿ID:xxxxxxxxxxx</p>
+        </div><!-- class="p_detail-heading" -->
+
+
+
+
+
+
+
+        <div class="p-detail-wrap">
+
+
+
+          <div class="p-detail_left">
+            <h2>投稿タイトル</h2>
+            <div class="post-img">
+              <figure>
+                <img src="images/pet1.png" alt="petimg">
+              </figure>
+            </div>
+
+
+            <h3>基本情報</h3>
+            <table>
+              <tr>
+                <th>状況</th>
+                <td colspan="3">募集中</td>
+              </tr>
+              <tr>
+                <th>種類</th>
+                <td>雑種</td>
+                <th>大きさ</th>
+                <td>子猫 1.5キロくらい</td>
+              </tr>
+              <tr>
+                <th>性別</th>
+                <td>女の子</td>
+                <th>年齢</th>
+                <td>推定7～9か月</td>
+              </tr>
+              <tr>
+                <th>保護日時</th>
+                <td>2023年5月4日</td>
+                <th>保護場所</th>
+                <td>愛知県名古屋市千種区自宅周辺</td>
+              </tr>
+              <tr>
+                <th>怪我の有無</th>
+                <td>なし</td>
+                <th>体色</th>
+                <td>キジトラ</td>
+              </tr>
+              <tr>
+                <th>掲載日</th>
+                <td>2023/05/10</td>
+                <th>掲載期日</th>
+                <td>2023/07/31</td>
+              </tr>
+              <tr>
+                <th>届出済の機関</th>
+                <td colspan="3">愛知県警察千種警察署</td>
+              </tr>
+              <tr>
+                <th>特徴</th>
+                <td colspan="3">ピンク色の首輪をしていて、細身で足が長いです。</td>
+              </tr>
+            </table>
+
+
+            <h3>詳細情報</h3>
+            <table>
+              <tr>
+                <th>募集の経緯</th>
+                <td>
+                  自宅周辺を歩いていたところ鳴きながら駆け寄ってきました。毛艶もよく人慣れしているので迷い猫だと思い、保護しました。
+                </td>
+              </tr>
+              <tr>
+                <th>性格・特徴</th>
+                <td>人懐っこく、甘えん坊で優しい性格です。</td>
+              <tr>
+                <th>健康状態</th>
+                <td>排泄、排便の問題はありません。<br>
+                    エイズ、白血病検査は、陰性でした。<br>
+                    ノミダニ駆除特にありません。<br>
+                    検便異常なしです。</td>
+              </tr>
+              <tr>
+                <th>引き渡し場所</th>
+                <td>飼い主さんとの相談のうえ決める</td>
+              </tr>
+              <tr>
+                <th>その他備考</th>
+                <td>
+                  保護当初は少し痩せていましたが、現在はきちんと餌を食べて適正体重になっています。
+                  首輪には「なな」と名前が書かれていました。
+                </td>
+              </tr>
+            </table>
+
+
+          </div><!-- class="p-detail_left" -->
+
+
+
+          <div class="p-detail_right">
+            <p>お気に入り登録者数:xx人</p>
+            <p id="pet-buttom"><a href="#">申し込み・お問い合わせ</a></p>
+            <p id="font-small">※里親募集者の都合により、応募可能地域外にお住まいの方からのお問い合わせは受け付けていません。
+                【応募可能地域】をご確認ください。</p>
+
+            <div class="inquiry-wrap">
+              <p id="line-pink">連絡先</p>
+              <p>・Twitter：titta@222<br>
+                  ・Instagram：tittaaaaa_2<br>
+                  ・メールアドレス：titta@gmail.com</p>
+            </div><!-- class="inquiry-wrap" -->
+
+            <div class="apply-wrap">
+              <p class="line-ddd">保護当時の詳細</p>
+              <p>歩いていたら、大声で鳴きながら道路を挟んだ向かい側から、こちらを目掛けてまっすぐに駆け寄ってきました。
+              人懐っこいですが、通り過ぎるバイク、車の音などに過敏に反応し、あまり外に慣れていないようだったので、迷い猫ではないかと思って保護しています。</p>
+            </div><!-- class="apply-wrap" -->
+
+            <div class="recruiter-wrap">
+              <p class="line-ddd">投稿者情報</p>
+              <div id="re-wrap">
+                <div id="pro-img">
+                  <figure>
+                    <img src="images/pro-icon.png" alt="プロフィール画像">
+                  </figure>
+                </div><!-- id="pro-img" -->
+                <div id="pro-inf">
+                  <p>名前：user1</p>
+                  <p>会員種別：一般</p>
+                  <p>法人・団体名：個人保護</p>
+                </div><!-- id="pro-inf" -->
+              </div><!-- id="re-wrap" -->
+
+              <div id="pro-msg">
+                <p>たまたま自宅周辺で猫を保護した一般人です。飼い主さんが見つかりますように。</p>
+              </div>
+            </div><!-- class="recruiter-wrap" -->
+
+
+
+          </div><!-- class="p-detail_right" -->
+
+
+
+
+        </div><!-- class="p-detail-wrap" -->
+
+
+<div class="p-similar">
+  <h2>似たような条件の迷子情報</h2>
+
+  <div class="similar-wrap">
+
+    <div class="post">
+      <a href="lost_detail.html">
+        <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+        <figure>
+          <img src="images/cat.jpeg" alt="sample">
+        </figure>
+        <h3>投稿タイトル</h3>
+        <p><span>種類</span>猫</p>
+        <p><span>性別</span>男の子</p>
+        <p><span>発見地</span>愛知県名古屋市</p>
+        <p><span>発見日時</span>2023年9月1日</p>
+        <p><span>状況</span>迷子</p>
+      </a>
+    </div><!-- class="post" -->
+
+
+
+    <div class="post">
+      <a href="lost_detail.html">
+        <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+        <figure>
+          <img src="images/cat.jpeg" alt="sample">
+        </figure>
+        <h3>投稿タイトル</h3>
+        <p><span>種類</span>猫</p>
+        <p><span>性別</span>男の子</p>
+        <p><span>発見地</span>愛知県名古屋市</p>
+        <p><span>発見日時</span>2023年9月1日</p>
+        <p><span>状況</span>迷子</p>
+      </a>
+    </div><!-- class="post" -->
+
+
+
+
+    <div class="post">
+      <a href="lost_detail.html">
+        <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+        <figure>
+          <img src="images/cat.jpeg" alt="sample">
+        </figure>
+        <h3>投稿タイトル</h3>
+        <p><span>種類</span>猫</p>
+        <p><span>性別</span>男の子</p>
+        <p><span>発見地</span>愛知県名古屋市</p>
+        <p><span>発見日時</span>2023年9月1日</p>
+        <p><span>状況</span>迷子</p>
+      </a>
+    </div><!-- class="post" -->
+
+
+
+    <div class="post">
+      <a href="lost_detail.html">
+        <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+        <figure>
+          <img src="images/cat.jpeg" alt="sample">
+        </figure>
+        <h3>投稿タイトル</h3>
+        <p><span>種類</span>猫</p>
+        <p><span>性別</span>男の子</p>
+        <p><span>発見地</span>愛知県名古屋市</p>
+        <p><span>発見日時</span>2023年9月1日</p>
+        <p><span>状況</span>迷子</p>
+      </a>
+    </div><!-- class="post" -->
+
+
+
+
+
+
+    <div class="post">
+      <a href="lost_detail.html">
+        <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+        <figure>
+          <img src="images/cat.jpeg" alt="sample">
+        </figure>
+        <h3>投稿タイトル</h3>
+        <p><span>種類</span>猫</p>
+        <p><span>性別</span>男の子</p>
+        <p><span>発見地</span>愛知県名古屋市</p>
+        <p><span>発見日時</span>2023年9月1日</p>
+        <p><span>状況</span>迷子</p>
+      </a>
+    </div><!-- class="post" -->
+
+
+
+  </div><!-- class="similar-wrap" -->
+
+
+
+  <p><a href="foster_board.html">
+      << 検索に戻る</a>
+  </p>
+</div><!-- class="p-similar" -->
+
+
+      </div><!-- class="wrap" -->
+
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+
+    <p id="page-top"><a href="#">Top</a></p>
+
+      <div class="footer-wrap">
+
+
+      <div class="rogo-wrap">
+        <figure>
+          <img src="images/rogo.png" alt="rogo">
+        </figure>
+      </div>
+
+
+
+
+      <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+            <li class="nav-bold">HELP</li>
+            <li><a href="help.html">ヘルプセンター</a></li>
+            <li><a href="inquiry.html">お問い合わせ</a></li>
+            <li><a href="guid.html">ガイド</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+
+            <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+            <li class="nav-bold">SETEMAP</li>
+            <li><a href="assignment.html">譲渡会</a></li>
+            <li><a href="lost_petboard.html">迷子掲示板</a></li>
+            <li><a href="foster_board.html">里親掲示板</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+
+
+      </div><!-- class="footer-wrap"の終了タグ -->
+
+
+
+
+      <div class="copy-all">
+        2023 &copy; Copyright Titta. All rights reserved.
+      </div>
+
+
+
+    </footer>
+
+
+ <!-- jQueryへのリンク -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
+    <script src="js/common.js"></script>
+
+  </body>
+
+</html>

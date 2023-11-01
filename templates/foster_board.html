@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+  <head>
+
+      <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Titta</title>
+
+    <!-- この２つのcssは触らない -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+
+    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
+    <link rel="stylesheet" type="text/css" href="css/board.css">
+
+
+  </head>
+
+
+  <body>
+
+    <header>
+
+
+      <div class="r-wrap">
+
+        <div class="rr-wrap">
+
+          <a href="index.html">
+            <figure>
+              <img src="images/rogo.png" alt="rogo">
+            </figure>
+          </a>
+
+          <div class="nav-top">
+            <nav>
+              <ul>
+                <li><a href="mailbox.html"><input type="submit" value="&#xf0e0;" class="button"></a></li>
+                <li><a href="cart.html"><input type="submit" value="&#xf07a;" class="button"></a></li>
+                <li><a href="favorite.html"><input type="submit" value="&#xf004;" class="button"></a></li>
+                <li><a href="login.html"><input type="submit" value="&#xf007;" class="button"></a></li>
+              </ul>
+            </nav>
+          </div>
+
+        </div><!-- "rr-wrap" -->
+
+
+      </div><!-- class="r-wrap" -->
+
+
+
+
+
+      <div class="nav-buttom">
+        <nav>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="exhibit.html">出品</a></li>
+            <li><a href="foster_board.html" class="line-a">里親掲示板</a></li>
+            <li><a href="lost_petboard.html">迷子掲示板</a></li>
+            <li><a href="contest.html">コンテスト</a></li>
+            <li><a href="community.html">コミュニティ</a></li>
+            <li><a href="assignment.html">譲渡会</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </header>
+
+
+
+
+    <main id="m-sample">
+
+      <div class="wrap">
+
+        <div class="foster-wrap">
+
+
+
+
+
+
+            <div id="left">
+
+              <div class="b-list">
+                <h2>ログイン</h2>
+                <p><a href="foster_post.html">里親情報を投稿される方</a></p>
+                <p><a href="foster_post.html">里親になられる方</a></p>
+              </div>
+
+              <div class="b-list">
+                <h2>ご利用案内</h2>
+                <ul>
+                  <li><a href="#">・初めての方へ</a></li>
+                  <li><a href="#">・里親になるには？</a></li>
+                  <li><a href="#">・募集・応募について</a></li>
+                </ul>
+              </div>
+
+              <div class="b-list">
+                <h2>里親になる</h2>
+                <ul>
+                  <li><a href="#">・ペットを探す</a></li>
+                  <li><a href="#">・譲渡会を探す</a></li>
+                  <li><a href="#">・保護活動者・法人を探す</a></li>
+                </ul>
+              </div>
+
+            </div><!-- id="left" -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div id="right">
+
+                <p id="link"><a href="index.html">Titta</a> > <a href="#">里親情報一覧</a></p>
+
+                <h2>里親情報一覧</h2>
+
+                <div id="all">
+                    <div id="square">
+                        <div id="up">
+                            <div id="type">
+                                <h3>種別</h3>
+                                <ul>
+                                    <li>すべて</li>
+                                    <li>犬</li>
+                                    <li>猫</li>
+                                    <li>鳥</li>
+                                    <li>小動物</li>
+                                    <li>爬虫類</li>
+                                    <li>魚</li>
+                                    <li>その他</li>
+                                </ul>
+                            </div>
+                            <div id="location">
+                                <h3>所在地</h3>
+                                <label class="selectbox-002">
+                                    <select>
+                                        <option>すべて</option>
+                                        <option>柴犬</option>
+                                        <option>シマエナガ</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div id="t_area">
+                                <h3>応募対象地域</h3>
+                                <label class="selectbox-002">
+                                    <select>
+                                        <option>すべて</option>
+                                        <option>柴犬</option>
+                                        <option>シマエナガ</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="middle">
+                            <div id="gen">
+                                <h3>性別</h3>
+                                <label class="selectbox-002">
+                                    <select>
+                                        <option>すべて</option>
+                                        <option>柴犬</option>
+                                        <option>シマエナガ</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div id="kinds">
+                                <h3>○○の種類</h3>
+                                <label class="selectbox-002">
+                                    <select>
+                                        <option>すべて</option>
+                                        <option>柴犬</option>
+                                        <option>シマエナガ</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div id="situation">
+                                <h3>状況</h3>
+                                <label class="selectbox-002">
+                                    <select>
+                                        <option>すべて</option>
+                                        <option>柴犬</option>
+                                        <option>シマエナガ</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="bottom">
+                            <div id="word">
+                                <h3>フリーワードで探す</h3>
+                                <input type="text" class="textbox-001" placeholder="フリーワードを入力する"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="keep">
+                      <a href="#">検索条件を保存する</a>
+                    </div>
+                    <div id="search">
+                      <a href="#">検索する</a>
+                    </div>
+                </div>
+
+
+
+
+              <div class="p-similar">
+
+                <div class="similar-wrap">
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+                  <div class="post">
+                    <a href="#">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+
+                  <div class="post">
+                    <a href="#">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+
+
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+
+                  <div class="post">
+                    <a href="foster_detail.html">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="images/cat.jpeg" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>猫</p>
+                      <p><span>性別</span>男の子</p>
+                      <p><span>所在地</span>愛知県名古屋市</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">愛知県、岐阜県、三重県</p>
+                    </a>
+                  </div><!-- class="post" -->
+
+
+
+
+
+
+
+
+
+
+
+                </div><!-- class="similar-wrap" -->
+
+              </div><!-- class="p-similar" -->
+              <!-- ここまで投稿のdiv -->
+              <div id="num">
+                <p>全 30 件中 1 - 20 件を表示</p>
+                <div id="numpage">
+                  <div id="before"><a href="#">＜ 前へ</a></div>
+              
+                  <div id="num_list">
+                    <ul>
+                      <li id="ittan-color"><a href="./product.html">1</a></li>
+                      <li><a href="./num_two.html">2</a></li>
+                      <li><a href="./num_three.html">3</a></li>
+                      <li><a href="./num_for.html">4</a></li>
+                      <li><a href="./num_five.html">5</a></li>
+                    </ul>
+                  </div>
+              
+                  <div id="after"><a href="#">次へ ＞</a></div>
+                </div>
+              </div>
+
+            </div><!-- id="right" -->
+
+        </div>
+
+        
+
+
+
+
+      </div><!-- class="wrap" -->
+
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+
+    <p id="page-top"><a href="#">Top</a></p>
+
+      <div class="footer-wrap">
+
+
+      <div class="rogo-wrap">
+        <figure>
+          <img src="images/rogo.png" alt="rogo">
+        </figure>
+      </div>
+
+
+
+
+      <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+            <li class="nav-bold">HELP</li>
+            <li><a href="help.html">ヘルプセンター</a></li>
+            <li><a href="inquiry.html">お問い合わせ</a></li>
+            <li><a href="guid.html">ガイド</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+
+            <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+            <li class="nav-bold">SETEMAP</li>
+            <li><a href="assignment.html">譲渡会</a></li>
+            <li><a href="lost_petboard.html">迷子掲示板</a></li>
+            <li><a href="foster_board.html">里親掲示板</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+
+
+      </div><!-- class="footer-wrap"の終了タグ -->
+
+
+
+
+      <div class="copy-all">
+        2023 &copy; Copyright Titta. All rights reserved.
+      </div>
+
+
+
+    </footer>
+
+
+  <!-- jQueryへのリンク -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
+    <script src="js/common.js"></script>
+
+  </body>
+
+</html>

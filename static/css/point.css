@@ -1,0 +1,201 @@
+@charset "utf-8";
+
+#right{
+    width: 800px;
+    margin: 0 auto;
+}
+
+  
+#right h2{
+    width: 200px;
+    text-align: center;
+    margin: 40px 0 0 70px;
+    font-size: 1.8rem;
+    font-weight: 500;
+    border-bottom: #000 2px solid;
+    padding: 0 0 5px 0;
+}
+
+/* ポイント表示 */
+
+#right #point{
+    background-color: #fff;
+    display: flex;
+    width: 700px;
+    border-radius: 35px;
+    border: #000 1px solid;
+    margin: 100px auto 10px auto;
+}
+
+#right #point #pointName{
+    display: flex;
+    align-items: center;
+    border-right: #000 1px solid;
+    height: 70px;
+    margin: 10px 0;
+    padding: 0 50px;
+}
+#right #point #pointName p{
+    font-size: 1.3rem;
+}
+
+
+
+
+/* ポイントアイコン */
+
+#right #point #pointManage{
+    display: flex;
+    margin: 0 auto;
+}
+
+#right #point #pointManage figure{
+    margin: auto 0 auto -60px;
+}
+
+#right #point #pointManage figure img{
+    width: 60px;
+    height: 60px;
+}
+
+
+#right #point #pointManage #countBox{
+    display: flex;
+}
+
+#right #point #pointManage #countBox #pointCount{
+    font-size: 1.5rem;
+    margin: auto 0 auto 30px;
+}
+#right #point #pointManage #countBox #P{
+    font-size: 1.5rem;
+    margin: auto 0 auto 20px;
+}
+
+
+
+
+.historyArea{
+    margin: 110px 0 0 0;
+}
+
+
+
+
+
+
+
+
+
+
+.switching{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.switching li{
+    font-size: 1.1rem;
+}
+
+.switching #onceBorder a{
+    display: block;
+    font-weight: 600;
+    color: #000;
+    margin:0 2px 0 50px;
+    padding:10px 10px;
+}
+
+.switching li a{
+    display: block;
+    margin:0 2px 0 5px;
+    padding:10px 20px;
+    color: #555;
+}
+
+.switching li a:hover{
+    display: block;
+    background-color: #ddd;
+    margin:0 2px 0 5px;
+    padding:10px 20px;
+    color: #000;
+    font-weight: 600;
+}
+
+/* .area {
+    display: none;
+    opacity: 0;
+    background: #fff;
+    padding:50px 20px;
+} */
+
+
+  
+ul{
+    list-style:none;
+}
+  
+a{
+    color:#333;
+    text-decoration: none;
+}
+  
+.wrapper{
+  width:100%;
+  max-width: 960px;
+  margin:30px auto;
+    background:#fefefe;
+}
+  
+.area h2{
+    font-size:1.3rem;
+    margin:0 0 20px 10px;
+}
+  
+.area li{
+    padding: 10px; 
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+.historyArea #history{
+    margin: 5px 0 0 0;
+}
+
+
+.minibox{
+    width: 700px;
+    margin: 0 auto 0 auto;
+    padding: 5px 0 5px 5px;
+    display: flex;
+    border-top: #000 1px solid;
+}
+.minibox:last-child{
+    width: 700px;
+    margin: 0 auto;
+    padding: 5px 0 5px 5px;
+    display: flex;
+    border-top: #000 1px solid;
+    border-bottom: #000 1px solid;
+}
+
+
+.minibox #leftBox #dateBox{
+    font-size: 0.8rem;
+    margin: 2px 0 0 0;
+}
+
+.minibox #leftBox #detailInfo{
+    width: 530px;
+    margin: 20px 0;
+}
+
+.minibox #rightBox{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.minibox #rightBox p{
+    font-size: 1.8rem;
+}

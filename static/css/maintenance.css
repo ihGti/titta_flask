@@ -1,0 +1,107 @@
+#mozi{
+  display: flex;
+  flex-direction: column;
+}
+h1{
+  font-size: 1.5rem;
+  padding: 10px 10px 20px 10px;
+}
+
+h3{
+  padding: 30px;
+}
+
+
+#tablediv{
+  overflow: scroll;
+  height: 200px;
+  padding: 10px;
+  width: 1150px;
+  margin: 0 auto;
+}
+#aaa{
+  width: 1190px;
+  border: solid;
+  position: relative;
+}
+#aaa p{
+  background-color: #F7F7FF;
+  padding: 3px;
+  position: absolute;
+  top: -15px;
+  left: 50px;
+}
+#tableup{
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  text-align: center;
+}
+#tableup td{
+  border: 2px solid black;
+  padding: 10px 20px;
+}
+th{
+  background-color: #a9a9a9;
+  border: 2px solid black;
+  padding: 10px 20px;
+}
+tr:nth-child(2n){
+  background-color: #5E6697;
+}
+#tablectn{
+  display: flex;
+  padding: 10px;
+}
+.tablebtns{
+  padding: 10px 125px;
+  margin: 10px 0 10px 10px;
+}
+#copy{
+  padding: 10px 120px;
+}
+#forms{
+  display: flex;
+  flex-wrap: wrap;
+}
+form input{
+  height: 30px;
+  width: 210px;
+  margin: 10px 20px;
+}
+label{
+  padding: 10px;
+  display: inline-block;
+  width: 160px;
+  text-align: center;
+
+}
+label section{
+  padding: 10px 0 0 0;
+  height: 35px;
+  background-color: #a9a9a9;
+  border: 2px solid;
+}
+.nyuuryoku{
+  display: flex;
+  padding: 30px 90px;
+}
+#num{
+  padding: 0 10px 0 0;
+}
+#address{
+  width: 300px;
+}
+#divbtn{
+  border: 2px solid;
+  padding: 10px;
+  margin: 10px auto;
+}
+#btn1{
+  padding: 10px 30px;
+  margin: 0 250px 0 0;
+}
+#btn2{
+  padding: 10px 30px;
+  margin: 0 0 0 250px;
+}

@@ -1,0 +1,119 @@
+#select{
+  font-size: 1.3rem;
+  margin: 0 170px
+}
+h1{
+  font-size: 1.7rem;
+  text-align: center;
+  padding: 50px 0 0 70px;
+}
+#formr{
+  padding: 125px;
+}
+
+#point{
+  background-color: #F7F7FF;
+  border: none;
+  font-size: 1.3rem;
+  padding: 20px;
+  width: 500px;
+  text-align: center;
+}
+#ku-pon{
+  background-color: #F7F7FF;
+  border: none;
+  font-size: 1.3rem;
+  padding: 20px;
+  width: 500px;
+  text-align: center;
+}
+#card{
+  background-color: #F7F7FF;
+  border: none;
+  font-size: 1.3rem;
+  padding: 20px;
+  width: 500px;
+  text-align: center;
+}
+td{
+  border-bottom: #363A58 solid;
+}
+
+
+#kei{
+  margin: 0 auto;
+}
+#ue{
+  display: flex;
+
+}
+#sita{
+  display: flex;
+}
+#pp{
+  margin: 0 auto;
+  border-bottom: 1px solid;
+  padding: 5px 100px;
+}
+#hh{
+  margin: 0 auto;
+  padding: 5px 0 20px 0;
+}
+
+#list{
+}
+#product{
+  display: flex;
+  padding: 50px 350px;
+}
+#setu{
+  padding: 0 0 0 10px;
+}
+
+#btn{
+  border: 2px solid #E5857B;
+  background-color: #F1B2B2;
+  padding: 10px;
+  margin: 30px 0 0 560px;
+}
+#btn:hover{
+  opacity: 0.7;
+}
+#Box{
+  padding: 10px;
+}
+#siyou{
+  width: 300px;
+  text-align: right;
+}
+#siyoul{
+  font-size: 0.7rem;
+  padding: 0 30px;
+}
+#Box2{
+  padding: 10px;
+  font-size: 0.8rem;
+}
+.boxl{
+  font-size: 0.7rem;
+  padding: 10px;
+}
+#yplp{
+  padding: 10px 0 0 0px;
+}
+#cvv{
+  margin: 0 0 0 22px;
+}
+#btn2{
+  margin: 10px 0 0 215px ;
+}
+.yukou{
+  width: 40px;
+  margin: 0 5px;
+}
+#meigi{
+  margin: 10px 0 0 23px;
+}
+#sura{
+  padding: 0 5px;
+}

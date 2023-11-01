@@ -1,0 +1,67 @@
+.toggle-button-001 {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: #dddddd;
+    cursor: pointer;
+    transition: background-color .4s;
+}
+
+.toggle-button-001:has(:checked) {
+    background-color: #4bd865;
+}
+
+.toggle-button-001::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+    background-color: #fff;
+    content: '';
+    transition: left .4s;
+}
+
+.toggle-button-001:has(:checked)::after {
+    left: 20px;
+}
+
+.toggle-button-001 input {
+    display: none;
+}
+
+#yoko{
+  display: flex;
+}
+#yoko p{
+  padding: 30px;
+}
+#yoko label{
+  margin: 25px;
+}
+td{
+  border-bottom: 2px solid;
+  padding: 20px;
+}
+h1{
+  font-size: 1.5rem;
+}
+h2{
+  font-size: 1.2rem;
+  padding: 30px 60px;
+}
+table{
+  margin: 30px 100px;
+}
+.kuu{
+  padding: 20px 370px 20px 20px;
+}
+#idou{
+  text-decoration: none;
+  padding: 30px 0 30px 450px;
+  color: blue;
+}

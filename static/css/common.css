@@ -1,0 +1,312 @@
+@charset "utf-8";
+
+/* 共通のスタイル */
+
+/*common.cssは触らない！！！！！！！！！！！*/
+
+body {
+}
+
+/* sample.html 松本 */
+/*header*/
+/* headerのcssは触らない */
+header {
+  width: 100%;
+  margin: 10px 1-px 10px 10px;
+  padding: 10px 0 0 0;
+
+  /* ↓垂直方向のそろえ */
+  align-items: center;
+  justify-content: space-between;
+
+  /* ↓headerを中央揃え */
+  margin: 0 auto 0 auto;
+  border-bottom: 1px #ddd solid;
+}
+
+header div.r-wrap {
+  width: 1200px;
+  height: 80px;
+  margin: 0 auto 0 auto;
+  padding: 0 0 20px 0;
+  display: flex;
+  /* ↓垂直方向のそろえ */
+  align-items: center;
+  justify-content: space-between;
+}
+
+header div.r-wrap div.rr-wrap {
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+header div.r-wrap div.rr-wrap figure {
+}
+header div.r-wrap div.rr-wrap figure img {
+  width: 200px;
+  display: inline-block;
+}
+
+header div.r-wrap div.rr-wrap div.nav-top {
+}
+header div.r-wrap div.rr-wrap div.nav-top nav {
+  margin: 50px 0 0 0;
+  display: inline-block;
+}
+header div.r-wrap div.rr-wrap div.nav-top nav ul {
+  display: flex;
+}
+header div.r-wrap div.rr-wrap div.nav-top nav ul li {
+  margin: 0 0 0 15px;
+}
+header div.r-wrap div.rr-wrap div.nav-top nav ul li a {
+  text-decoration: none;
+}
+header div.r-wrap div.rr-wrap div.nav-top nav ul li a:hover {
+  /*  opacity: 0.5;*/
+}
+
+/*アイコンのcss*/
+.r-wrap input {
+  /*この３行は必要*/
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /*あったほうがいい*/
+  border: none;
+  background: none;
+  outline: none;
+  /*カーソル*/
+  cursor: pointer;
+  font-size: 1.2rem;
+
+  /*アイコンの色*/
+  color: #000;
+}
+.r-wrap input:hover {
+  color: #363a58;
+  opacity: 0.8;
+}
+
+div.nav-buttom {
+  height: 60px;
+  margin: 0 auto 0 auto;
+  padding: 10px 0 10px 0;
+  background-color: #363a58;
+}
+div.nav-buttom nav {
+  width: 1200px;
+  margin: 0 auto 0 auto;
+}
+div.nav-buttom nav ul {
+  display: flex;
+}
+div.nav-buttom nav ul li {
+  padding: 10px 0 10px 0;
+  margin: 0 20px 0 0px;
+}
+div.nav-buttom nav ul li a {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 0.7rem;
+  color: #f7f7ff;
+}
+div.nav-buttom nav ul li a:hover {
+  /*  opacity: 0.5;*/
+  padding: 0 0 2px 0;
+  border-bottom: 1px #f7f7ff solid;
+}
+a.line-a {
+  padding: 0 0 2px 0;
+  border-bottom: 1px #f7f7ff solid;
+}
+/* ここまでheaderのcss。触らない */
+
+/*sample.html 松本*/
+
+div.wrap {
+  width: 1200px;
+
+  height: 100%; /*とりまで2000pxにしてるだけ。あとで消す。*/
+  height: 100%;
+
+  /* ↓headerを中央揃え */
+  margin: 0 auto 0 auto;
+  padding: 20px 0 50px 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f7f7ff;
+}
+
+/*footer*/
+/*fotterのcssは触らない*/
+footer {
+  width: 100%;
+  margin: 0 auto 0 auto;
+  padding: 0px 20px 0px 20px;
+  border-top: 1px #ddd solid;
+  background-color: #363a58;
+}
+
+div.footer-wrap {
+  width: 1200px;
+  /* ↓headerを中央揃え */
+  margin: 0 auto 0 auto;
+  padding: 0 0px 20px 0px;
+
+  display: flex;
+}
+div.footer-wrap div.rogo-wrap {
+  margin: 0 auto 0 auto;
+  padding: 30px 0 10px 0;
+  justify-content: space-between;
+}
+div.footer-wrap div.rogo-wrap figure {
+  width: 400px;
+}
+div.footer-wrap div.rogo-wrap figure img {
+  width: 200px;
+  display: inline-block;
+}
+
+div.footer-wrap div.f-nav-wr {
+  padding: 30px 0 30px 0;
+}
+
+div.footer-wrap div.f-nav-wr nav {
+  width: 350px;
+  /*  margin: 0 30px 0 30px ;*/
+}
+div.footer-wrap div.f-nav-wr nav ul {
+  display: block;
+}
+div.footer-wrap div.f-nav-wr nav ul li {
+  margin: 0 20px 0 0;
+}
+div.footer-wrap div.f-nav-wr nav ul li a {
+  text-decoration: none;
+  font-size: 0.7rem;
+  color: #f7f7ff;
+}
+div.footer-wrap div.f-nav-wr nav ul li a:hover {
+  opacity: 0.6;
+}
+
+.nav-bold {
+  padding: 0 0 7px 0;
+  color: #f7f7ff;
+  font-weight: bold;
+}
+
+footer div.copy-all {
+  padding: 20px 0 20px 0;
+
+  text-align: center;
+  font-size: 0.5rem;
+  /* border-top: 1px #f7f7ff solid; */
+  color: #f7f7ff;
+  background-color: #363a58;
+}
+/* ここまでfotterのcss。触らない */
+
+/* ########### 999px以下(pc) ########### */
+/* ここも触らない */
+@media (max-width: 999px) {
+  header div.r-wrap,
+  header div.nav-top,
+  main div.wrap,
+  footer div.footer-wrap {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  main div.wrap {
+    padding: 0 20px 50px 20px;
+  }
+  div.ca div.ca-small,
+  div.it div.it-small {
+    width: 33.333%;
+  }
+
+  header nav ul li a,
+  footer div nav ul li a {
+    /*    font-size: 0.8rem;*/
+  }
+
+  footer div.footer-wrap nav ul li a,
+  footer div.add-wrap address footer div.add-wrap nav ul.url-wrap li {
+    font-size: 0.7rem;
+  }
+}
+
+/*topへ戻るボタン*/
+
+/*リンクの形状*/
+#page-top a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  color: #363a58;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 0.6rem;
+  transition: all 0.3s;
+  border: 1px #363a58 solid;
+}
+
+#page-top a:hover {
+  color: #fff;
+  background-color: #363a58;
+  border: 1px #f7f7ff solid;
+}
+
+/*リンクを右下に固定*/
+#page-top {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  /*はじめは非表示*/
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+/*　上に上がる動き　*/
+
+#page-top.UpMove {
+  animation: UpAnime 0.5s forwards;
+}
+@keyframes UpAnime {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*　下に下がる動き　*/
+
+#page-top.DownMove {
+  animation: DownAnime 0.5s forwards;
+}
+@keyframes DownAnime {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(100px);
+  }
+}
