@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+  <head>
+
+      <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>決済確認</title>
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+
+    <!-- ↑左のサイドバーのcss -->
+    <!-- ↓ここ編集 -->
+    <link rel="stylesheet" type="text/css" href="css/settelement_check.css">
+
+
+  </head>
+
+
+  <body>
+
+    <header>
+
+
+      <div class="r-wrap">
+
+        <div class="rr-wrap">
+
+          <!-- index.htmlへ遷移 -->
+          <a href="/">
+            <figure>
+              <img src="images/rogo.png" alt="rogo">
+            </figure>
+          </a>
+
+          <div class="nav-top">
+            <nav>
+              <ul>
+                <!-- mailbox.htmlへ遷移 -->
+                <li><a href="/"><input type="submit" value="&#xf0e0;" class="button"></a></li>
+                <!-- favorite.htmlへ遷移 -->
+                <li><a href="/"><input type="submit" value="&#xf004;" class="button"></a></li>
+                <!-- login.htmlへ遷移 -->
+                <li><a href="/"><input type="submit" value="&#xf007;" class="button"></a></li>
+              </ul>
+            </nav>
+          </div>
+
+
+        </div><!-- "rr-wrap" -->
+
+
+      </div><!-- class="r-wrap" -->
+
+
+
+
+
+
+      <div class="nav-buttom">
+        <nav>
+          <ul>
+            <!-- index.htmlへ遷移 --><li><a href="/" class="line-a">HOME</a></li>
+            <!-- exhibit.htmlへ遷移 --><li><a href="/">出品</a></li>
+            <!-- foster_board.htmlへ遷移 --><li><a href="/">里親掲示板</a></li>
+            <!-- lost_petboard.htmlへ遷移 --><li><a href="/">迷子掲示板</a></li>
+            <!-- contest.htmlへ遷移 --><li><a href="/">コンテスト</a></li>
+            <!-- community.htmlへ遷移 --><li><a href="/">コミュニティ</a></li>
+            <!-- assignment.htmlへ遷移 --><li><a href="/">譲渡会</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </header>
+
+
+
+
+    <main id="m-my_profile">
+
+      <div class="wrap">
+
+
+
+
+
+
+
+
+
+        <!-- ↓ここに入力してって -->
+
+
+        <div id="right"><!-- 右  -->
+          <h1>決済確認</h1>
+          <div id="select">
+            <form id="formr">
+              <table>
+                <tr>
+                  <td><label>ポイント</label></td>
+                  <td><select name="point" id="point" onchange="viewChange();">
+                    <option value="no">利用しない</option>
+                    <option value="yes">利用する</option>
+                  </select><div id="Box" style="display:none;"><label id="siyoul">使用するポイント数</label><input type="text" id="siyou"></div></td>
+                </tr>
+                <!-- <input type="text" name=""> -->
+                <tr>
+                  <td><label>クーポン</label></td>
+                  <td><select name="ku-pon" id="ku-pon">
+                    <option value="0">利用可能なクーポンがｘ枚あります</option>
+                    <option value="10">クーポン１０％</option>
+                    <option value="20">クーポン２０％</option>
+                    <option value="30">クーポン３０％</option>
+                  </select></td>
+                </tr>
+                <tr>
+                  <td><label>決済方法</label></td>
+                  <td><select name="card" id="card" onchange="viewChange2();">
+                    <option value="select1">カード１</option>
+                    <option value="select2">かーど２</option>
+                    <option value="select3">カード３</option>
+                  </select>
+                  <div id="Box2" style="display:none;">
+                    <div>
+                      <label class="boxl">カード番号</label><input type="text" name="">
+                      <label class="boxl">有効期限</label><select name="" class="yukou">
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                      </select>/<select name="" class="yukou">
+                        <option value="">23</option>
+                        <option value="">24</option>
+                        <option value="">25</option>
+                        <option value="">26</option>
+                        <option value="">27</option>
+                        <option value="">28</option>
+                        <option value="">29</option>
+                        <option value="">30</option>
+                        <option value="">31</option>
+                        <option value="">32</option>
+                        <option value="">33</option>
+                        <option value="">34</option>
+                        <option value="">35</option>
+                        <option value="">36</option>
+                        <option value="">37</option>
+                        <option value="">38</option>
+                      </select>
+                    </div>
+                    <div id="yplp">
+                      <label class="boxl">名義人</label><input type="text" name="" id="meigi">
+                      <label class="boxl">CVV</label><input type="text" name="" id="cvv">
+                    </div>
+                    <div>
+                      <input type="submit" name="" value="確認" id="btn2">
+                    </div>
+                  </div>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+
+          <div id="kei">
+            <div id="ue">
+              <p id="pp">小計：￥1200 ポイント利用：なし クーポン利用：なし</p>
+            </div>
+            <div id="sita">
+              <h2 id="hh">支払合計：1200￥
+              取得ポイント：12P</h2>
+            </div>
+          </div>
+
+
+          <div id="list">
+            <h1>購入商品</h1>
+            <div id="product">
+              <img src="images/img1.jpg" alt="product">
+              <div id="setu">
+                <p>商品名：猫タワー</p>
+                <p>説明：高さ9kmです</p>
+                <p>値段：￥1200</p>
+                <p>ポイント：12</p>
+              </div>
+            </div>
+          </div>
+          <input type="submit" form="formr" value="購入を確定する" id="btn">
+        </div>
+
+
+      </div><!-- class="wrap" -->
+    <script type="text/javascript" src="js/settelement_check.js"></script>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+
+    <p id="page-top"><a href="#">Top</a></p>
+
+      <!-- <div class="footer-wrap"> -->
+
+<!-- 
+      <div class="rogo-wrap">
+        <figure>
+          <img src="images/rogo.png" alt="rogo">
+        </figure>
+      </div> -->
+
+
+
+
+      <!-- <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+            <li class="nav-bold">HELP</li>
+            <li><a href="#">ヘルプセンター</a></li>
+            <li><a href="#">お問い合わせ</a></li>
+            <li><a href="#">ガイド</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+    
+          </ul>
+          </ul>
+        </nav>
+
+      </div> -->
+
+
+            <!-- <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+            <li class="nav-bold">SETEMAP</li>
+            <li><a href="#">譲渡会</a></li>
+            <li><a href="#">迷子掲示板</a></li>
+            <li><a href="#">里親掲示板</a></li>
+          </ul>
+        </nav>
+
+      </div> -->
+
+
+
+      <!-- </div> -->
+      <!-- class="footer-wrap"の終了タグ -->
+
+
+
+
+      <div class="copy-all">
+        2023 &copy; Copyright Titta. All rights reserved.
+      </div>
+
+
+
+    </footer>
+
+
+ <!-- jQueryへのリンク -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
+    <script src="js/common.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+  <head>
+
+      <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Titta</title>
+
+    <!-- この２つのcssは触らない -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+
+    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
+    <link rel="stylesheet" type="text/css" href="css/signin.css">
+
+
+  </head>
+
+
+  <body>
+
+    <header>
+
+
+      <div class="r-wrap">
+
+        <div class="rr-wrap">
+
+          <a href="index.html">
+            <figure>
+              <img src="images/rogo.png" alt="rogo">
+            </figure>
+          </a>
+
+          <!-- <div class="nav-top">
+            <nav>
+              <ul>
+                <li><a href="#"><input type="submit" value="&#xf0e0;" class="button"></a></li>
+                <li><a href="#"><input type="submit" value="&#xf07a;" class="button"></a></li>
+                <li><a href="#"><input type="submit" value="&#xf004;" class="button"></a></li>
+                <li><a href="#"><input type="submit" value="&#xf007;" class="button"></a></li>
+              </ul>
+            </nav>
+          </div> -->
+
+
+        </div><!-- "rr-wrap" -->
+
+
+      </div><!-- class="r-wrap" -->
+
+
+
+
+
+      <!-- <div class="nav-buttom">
+        <nav>
+          <ul>
+            <li><a href="index.html" class="line-a">HOME</a></li>
+            <li><a href="#">出品</a></li>
+            <li><a href="#">里親掲示板</a></li>
+            <li><a href="#">迷子掲示板</a></li>
+            <li><a href="#">コンテスト</a></li>
+            <li><a href="#">コミュニティ</a></li>
+            <li><a href="#">イベント</a></li>
+          </ul>
+        </nav>
+      </div> -->
+
+    </header>
+
+
+
+
+    <main id="m-sample">
+
+      <div class="wrap">
+
+
+        <div id="sign-main">
+          <!-- 見出し -->
+          <h1>新規会員登録</h1>
+          <hr noshade="">
+
+          <!-- ユーザー登録フォーム -->
+          <div id="center">
+            <form action="/" method="post">
+
+              <h1>ログイン情報</h1>
+              <hr noshade="" class="under-line">
+
+              <!-- メールアドレス -->
+              <label for="email">
+                <p>メールアドレス</p>
+                <p class="red">※必須</p>
+                <input type="email" name="email" id="email" class="email" placeholder="例&#41 nhsxxxxx@nhs.hal.ac.jp" autocomplete="off">
+              </label>
+
+              <label for="email">
+                <p>メールアドレス&#40再確認&#41</p>
+                <p class="red">※必須</p>
+                <input type="email" name="email" id="email" class="email-sai" placeholder="確認のため、もう一度入力してください" autocomplete="off">
+              </label>
+
+              <!-- パスワード -->
+              <label for="Password">
+                <p>Password</p>
+                <p class="red">※必須</p>
+                <input type="password" name="password" id="Password" class="password" placeholder="半角英数字8~32文字" autocomplete="off">
+              </label>
+
+              <label for="Password">
+                <p>Password&#40再確認&#41</p>
+                <p class="red">※必須</p>
+                <input type="password" name="password" id="Password" class="Password" placeholder="確認のため、もう一度入力してください" autocomplete="off">
+              </label>
+
+              <h1>お客様情報</h1>
+              <hr noshade="" class="under-line">
+
+              <!-- お名前 -->
+              <label for="name">
+                <p>お名前</p>
+                <p class="red">※必須</p>
+                <p class="name-sei">性</p>
+                <input type="text" name="name" id="name" placeholder="例&#41 福田" autocomplete="off">
+                <p class="name-mei">名</p>
+                <input type="text" name="name" id="name" placeholder="例&#41 和真" autocomplete="off">
+              </label>
+
+              <!-- お名前(カナ) -->
+              <label for="name-kana">
+                <p>お名前&#40カナ&#41</p>
+                <p class="red">※必須</p>
+                <p class="name-skana">性</p>
+                <input type="text" name="name-kana" id="name-kana" placeholder="例&#41 フクタ" autocomplete="off">
+                <p class="name-mkana">名</p>
+                <input type="text" name="name-kana" id="name-kana" placeholder="例&#41 カズマ" autocomplete="off">
+              </label>
+
+              <!-- ユーザー名 -->
+              <label for="username">
+                <p>ニックネーム</p>
+                <p class="red">※必須</p>
+                <input type="text" name="username" id="username">
+              </label>
+
+              <!-- 生年月日 -->
+              <div id="date">
+                <p>生年月日</p>
+                <label for="year">
+                  <select name="year" id="year"></select>
+                </label>
+                <label for="month">
+                  <select name="month" id="month"></select>
+                </label>
+                <label for="day">
+                  <select name="day" id="day"></select>
+                </label>
+              </div>
+
+              <!-- 性別 -->
+              <label for="seibetu">
+                <p>性別</p>
+                <input type="radio" name="seibetu" id="seibetu" class="seibetu-man" value="man">男
+                <input type="radio" name="seibetu" id="seibetu" class="seibetu-woman" value="woman">女
+                <input type="radio" name="seibetu" id="seibetu" class="seibetu-gender" value="gender">その他
+              </label>
+
+              <!-- 電話番号 -->
+              <label for="telphone">
+                <p>電話番号</p>
+                <p class="red">※必須</p>
+                <input type="tel" name="telphone" id="telphone" placeholder="例&#41 090-xxxx-xxxx" autocomplete="off">
+              </label>
+
+              <!-- 郵便番号 -->
+              <label for="yuubin">
+                <p>郵便番号</p>
+                <p class="red">※必須</p>
+                <input type="text" name="yuubin" id="yuubin" pattern="\d{3}-\d{4}" placeholder="例&#41 〒xxx-xxxx" autocomplete="off">
+              </label>
+
+              <!-- 住所 -->
+              <label for="address">
+                <p>住所</p>
+                <p class="red">※必須</p>
+                <input type="text" name="address" id="address" placeholder="例&#41 愛知県名古屋市中村区名駅4-27-1" autocomplete="off">
+              </label>
+
+              <!-- プロフ画像 -->
+              <label for="prof-image">
+                <p>プロフィール画像</p>
+                <p class="red">※必須</p>
+                <input type="file" name="prof-image" id="prof-image">
+              </label>
+
+              <!-- 送信ボタン -->
+              <input type="submit" value="同意して確認画面へ" id="bottun">
+
+            </form>
+          </div>
+        </div>
+
+
+
+
+
+    
+
+
+
+
+      </div><!-- class="wrap" -->
+
+    </main>
+
+
+
+    <footer>
+
+    <p id="page-top"><a href="#">Top</a></p>
+
+      <div class="footer-wrap">
+
+
+      <div class="rogo-wrap">
+        <figure>
+          <img src="images/rogo.png" alt="rogo">
+        </figure>
+      </div>
+
+
+
+
+      <!-- <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+           <li class="nav-bold">HELP</li>
+            <li><a href="#">ヘルプセンター</a></li>
+            <li><a href="#">お問い合わせ</a></li>
+            <li><a href="#">ガイド</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+   
+          </ul>
+          </ul>
+        </nav>
+
+      </div>
+
+
+            <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+            <li class="nav-bold">SETEMAP</li>
+            <li><a href="#">譲渡会</a></li>
+            <li><a href="#">迷子掲示板</a></li>
+            <li><a href="#">里親掲示板</a></li>
+          </ul>
+        </nav>
+
+      </div> -->
+
+
+
+      </div><!-- class="footer-wrap"の終了タグ -->
+
+
+
+
+      <div class="copy-all">
+        2023 &copy; Copyright Titta. All rights reserved.
+      </div>
+
+
+
+    </footer>
+
+
+ <!-- jQueryへのリンク -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
+    <script src="js/common.js"></script>
+    <script src="js/signin.js"></script>
+
+  </body>
+
+</html>

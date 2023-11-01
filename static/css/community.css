@@ -1,0 +1,418 @@
+@charset "utf-8";
+
+/* common.cssは絶対に触らない！！！！！！！！！！！ */
+
+/* sample.cssをコピーし複製 */
+/* ファイル名はhtmlと同じ名前にしてください */
+
+
+/* sample.htmlにlinkタグがコメントアウトしてあるので良ければ使ってください */
+
+
+html,body{
+  overflow-x: hidden;
+
+}
+
+
+div#c_frame{
+  margin:30px auto;
+  height: 900px;
+  width: 1100px;
+  display: flex;
+  background-size: cover;
+  background-image: url('../images/nekochanbkg.png');
+}
+
+div#c_frame_sb{
+  width: 325px;
+  height: 100%;
+  background-color: rgba(54, 58, 88, 0.8);
+
+}
+
+div#c_frame_sb_u{
+  margin-top: 50px;
+  background-color: #12152D;
+  height: 50px;
+  width: 100%;
+  color: #FFF;
+}
+
+div#c_frame_sb_u_co{
+  margin-left: 30px;
+  width: 10px;
+  padding: 0 5px;
+  cursor: pointer;
+  line-height: 50px;
+  font-size: 1.5rem;
+  color: #FFF;
+}
+
+.dli-arrow-left {
+  display: inline-block;
+  vertical-align: middle;
+  color: #FFF;
+  line-height: 1;
+  position: relative;
+  width: 1em;
+  height: 0.1em;
+  background: currentColor;
+}
+
+.dli-arrow-left::before {
+  content: '';
+  width: 0.65em;
+  height: 0.65em;
+  border: 0.1em solid currentColor;
+  border-right: 0;
+  border-bottom: 0;
+  transform: rotate(-45deg);
+  transform-origin: top left;
+  position: absolute;
+  top: 50%;
+  left: -0.05em;
+  box-sizing: border-box;
+}
+
+
+.dli-arrow-right {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  position: relative;
+  width: 1em;
+  height: 0.1em;
+  background: currentColor;
+}
+
+.dli-arrow-right::before {
+  content: '';
+  width: 0.65em;
+  height: 0.65em;
+  border: 0.1em solid currentColor;
+  border-left: 0;
+  border-bottom: 0;
+  transform: rotate(45deg);
+  transform-origin: top right;
+  position: absolute;
+  top: 50%;
+  right: -0.05em;
+  box-sizing: border-box;
+}
+
+#c_frame_sb_d{
+  animation:  fade-out .1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-out{
+ 0% {
+    opacity: 1;
+  }
+
+
+  100% {
+    opacity: 0;
+    display:none;
+  }
+}
+
+
+
+
+#c_frame_sb_d.act{
+  display: block;
+  animation: fade-in .9s;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+ul#c_frame_sb_d_user{
+  margin:30px auto 0 20px;
+  list-style: none;
+  color: #fff;
+}
+
+ul#c_frame_sb_d_user li{
+  height: 80px;
+  width: 90%;
+  margin: 20px auto 0 auto;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+ul#c_frame_sb_d_user li figure{
+  width: 70px;
+  height:70px;
+}
+
+ul#c_frame_sb_d_user li figure img{
+  max-width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit:cover
+}
+
+
+ul#c_frame_sb_d_user li p{
+  margin: auto auto auto 30px;
+  display: inline;
+  animation: pani .1s;
+}
+
+
+
+
+
+
+form#chatform{
+  height: 50px;
+  width: 90%;
+  margin: auto;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+div#c_frame_mc{
+  height: 100%;
+  width: 775px;
+  margin: auto 0 auto auto;
+  color: #FFF;
+}
+
+
+.form_list{
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  background-color: #D9D9D9;
+  cursor: pointer;
+}
+
+.list {
+  margin: 10px 10px;
+  font-size: 20px;
+  position: relative;
+  width: 0.2em;
+  height: 0.2em;
+  background-color: #000;
+  box-shadow:
+    0 0.4em 0 0 #000,
+    0 0.8em 0 0 #000,
+    0 1.2em 0 0 #000
+  ;
+}
+
+/* 右 */
+.list::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0.4em;
+  width: 1.2em;
+  height: 0.2em;
+  background-color: #000;
+  box-shadow:
+    0 0.4em 0 0 #000,
+    0 0.8em 0 0 #000,
+    0 1.2em 0 0 #000
+  ;
+}
+
+
+
+.chat_input{
+  display: block;
+  vertical-align: middle;
+  min-height: 50px;
+  width: 400px;
+  padding-left: 30px;
+  background-color:rgba(71,71,74,1) ;
+  -webkit-appearance: none;
+  outline: none;
+  border-radius: 0;
+  border: 1px solid rgba(71,71,74,1);
+  border-radius: 50px;
+  color: rgba(255,255,255,0.22);
+  font-size: 1rem;
+
+}
+
+.unknown{
+  border-radius: 100%;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  background-color: yellow;
+}
+
+.chat_button{
+  display: block;
+  vertical-align: middle;
+  height: 50px;
+  width: 90px;
+  font-size: 1.3rem;
+  background-color:rgba(71,71,74,1) ;
+  -webkit-appearance: none;
+  outline: none;
+  border-radius: 0;
+  border: 1px solid rgba(71,71,74,1);
+  border-radius: 50px;
+  text-align: center;
+  vertical-align: middle;
+  color: rgba(255, 255, 255, 0.78);
+
+}
+
+
+.settings, .chat_input, .unknown, .chat_button{
+  margin-left: 15px
+}
+
+
+.c_frame_mc_chat{
+  height: 90%;
+}
+
+
+.c_frame_mc_under{
+  height: 10%;
+  width: 100%;
+  margin: auto auto;
+  color: #FFF;
+
+}
+
+
+
+.mc_contents{
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat{
+  margin-top: 15px;
+  min-height: 70px;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.chat figure{
+  height: 70px;
+  width: 70px;
+}
+
+.chat figure img{
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  object-fit:cover
+}
+
+
+
+.chat span{
+  display: inline-block;
+  width: 500px;
+  min-height: 70px;
+ background-color:rgba(71,71,74,1) ;
+  border-radius: 50px;
+  color: rgba(255,255,255,0.78);
+  margin: 0 20px;
+
+}
+
+.chat  span p{
+  display: block;
+  padding: 30px;
+  margin:  0 auto;
+  font-size: 1.5rem;
+  overflow-wrap:break-word;
+}
+
+
+
+
+.mc_contents_user{
+  width: 100%;
+  height:50px;
+  text-align: center;
+  background-color: rgba(100, 100, 100, 0.7);
+
+}
+
+
+.mc_contents_user{
+  color: #bbb;
+  line-height: 50px;
+}
+
+
+div#hide_ui_sendimg{
+  bottom: 200px;
+  left: 700px;
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  background-color:rgba(71,71,74,1) ;
+  border-radius: 30px;
+  border: 1px solid #000;
+  display: none;
+}
+
+div#hide_ui_sendimg ul, div#hide_ui_stamp ul{
+  height: 100%;
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+div#hide_ui_sendimg ul li, div#hide_ui_stamp ul li{
+  height: 100px;
+  width: 100px;
+  color: #000;
+  cursor: pointer;
+  background-color: #FFF;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 20px;
+  border: 1px solid #000;
+}
+
+input#sendimg{
+  display: none;
+}
+
+
+div#hide_ui_stamp{
+  bottom: 200px;
+  right: 500px;
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background-color:rgba(71,71,74,1) ;
+  border-radius: 30px;
+  border: 1px solid #000;
+  display: none;
+}

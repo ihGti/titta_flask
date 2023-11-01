@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+  <head>
+
+      <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>テーブルメンテナンス</title>
+
+    <!-- この２つのcssは触らない -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/maintenance.css">
+
+    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/ xxx.css"> -->
+
+
+  </head>
+
+
+  <body>
+
+    <header>
+
+
+      <div class="r-wrap">
+
+        <div class="rr-wrap">
+
+          <a href="index.html">
+            <figure>
+              <img src="images/rogo.png" alt="rogo">
+            </figure>
+          </a>
+
+          <div class="nav-top">
+            <nav>
+              <ul>
+                <!-- mailbox.htmlへ遷移 -->
+                <li><a href="/"><input type="submit" value="&#xf0e0;" class="button"></a></li>
+                <!-- favorite.htmlへ遷移 -->
+                <li><a href="/"><input type="submit" value="&#xf004;" class="button"></a></li>
+                <!-- login.htmlへ遷移 -->
+                <li><a href="/"><input type="submit" value="&#xf007;" class="button"></a></li>
+              </ul>
+            </nav>
+          </div>
+
+
+        </div><!-- "rr-wrap" -->
+
+
+      </div><!-- class="r-wrap" -->
+
+
+
+
+
+      <div class="nav-buttom">
+        <nav>
+          <ul>
+            <!-- index.htmlへ遷移 -->
+            <li><a href="/" class="line-a">HOME</a></li>
+            <!-- exhibit.htmlへ遷移 -->
+            <li><a href="/">出品</a></li>
+            <!-- foster_board.htmlへ遷移 -->
+            <li><a href="/">里親掲示板</a></li>
+            <!-- lost_petboard.htmlへ遷移 -->
+            <li><a href="/">迷子掲示板</a></li>
+            <!-- contest.htmlへ遷移 -->
+            <li><a href="/">コンテスト</a></li>
+            <!-- community.htmlへ遷移 -->
+            <li><a href="/">コミュニティ</a></li>
+            <!-- assignment.htmlへ遷移 -->
+            <li><a href="/">譲渡会</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </header>
+
+
+
+
+    <main id="m-sample">
+
+      <div class="wrap">
+
+
+        <div id="mozi">
+          <h1>テーブルメンテナンス</h1>
+          <h3>テーブル：User</h3>
+        </div>
+        <div id="aaa">
+          <p>手順マスタ</p>
+          <div id="tablediv">
+            <table id="tableup">
+                <tr>
+                  <th>行番号</th>
+                  <th>username</th>
+                  <th>password</th>
+                  <th>性</th>
+                  <th>名</th>
+                  <th>性：カナ</th>
+                  <th>名：カナ</th>
+                  <th>メールアドレス</th>
+                  <th>生年月日</th>
+                  <th>住所</th>
+                  <th>郵便番号</th>
+                  <th>電話番号</th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>tomidaryouto</td>
+                  <td>tomida</td>
+                  <td>富田</td>
+                  <td>琉人</td>
+                  <td>トミタ</td>
+                  <td>リュウト</td>
+                  <td>tomy777@gmail.com</td>
+                  <td>2003/05/29</td>
+                  <td>愛知県名古屋市中村区名駅4-27スパイラルタワー23階</td>
+                  <td>450-0002</td>
+                  <td>052-551-1001</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>tomidaryouto</td>
+                  <td>tomida</td>
+                  <td>富田</td>
+                  <td>琉人</td>
+                  <td>トミタ</td>
+                  <td>リュウト</td>
+                  <td>tomy777@gmail.com</td>
+                  <td>2003/05/29</td>
+                  <td>愛知県名古屋市中村区名駅4-27スパイラルタワー23階</td>
+                  <td>450-0002</td>
+                  <td>052-551-1001</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>tomidaryouto</td>
+                  <td>tomida</td>
+                  <td>富田</td>
+                  <td>琉人</td>
+                  <td>トミタ</td>
+                  <td>リュウト</td>
+                  <td>tomy777@gmail.com</td>
+                  <td>2003/05/29</td>
+                  <td>愛知県名古屋市中村区名駅4-27スパイラルタワー23階</td>
+                  <td>450-0002</td>
+                  <td>052-551-1001</td>
+                </tr>
+            </table>
+          </div>
+          <div id="tablebtn">
+            <button class="tablebtns">新規</button>
+            <button class="tablebtns">選択</button>
+            <button class="tablebtns">削除</button>
+            <button class="tablebtns" id="copy">コピー</button>
+            </div>
+          </div>
+
+
+
+
+          <div>
+            <form id="forms">
+              <div class="nyuuryoku">
+                <label><section>行番号</section></label><input type="text" id="num" name="num" id="num">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>username</section></label><input type="username" name="username">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>password</section></label><input type="password" name="password">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>性</section></label><input type="sei" name="sei">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>名</section></label><input type="na" name="na">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>性：カナ</section></label><input type="sei2" name="sei2">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>名：カナ</section></label><input type="na2" name="na2">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>メールアドレス</section></label><input type="mailaddress" name="mailaddress">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>生年月日</section></label><input type="birthday" name="birthday">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>住所</section></label><input type="address" name="address" id="address">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>郵便番号</section></label><input type="postcode" name="postcode">
+              </div>
+              <div class="nyuuryoku">
+                <label><section>電話番号</section></label><input type="tel" name="tel">
+              </div>
+
+
+              <div id="divbtn">
+                <button id="btn1">登録</button>
+                <button id="btn2">戻る</button>
+              </div>
+            </form>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div><!-- class="wrap" -->
+
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+
+    <p id="page-top"><a href="#">Top</a></p>
+
+      <!-- <div class="footer-wrap"> -->
+
+<!-- 
+      <div class="rogo-wrap">
+        <figure>
+          <img src="images/rogo.png" alt="rogo">
+        </figure>
+      </div> -->
+
+
+
+
+      <!-- <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+           <li class="nav-bold">HELP</li>
+            <li><a href="#">ヘルプセンター</a></li>
+            <li><a href="#">お問い合わせ</a></li>
+            <li><a href="#">ガイド</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+   
+          </ul>
+          </ul>
+        </nav>
+
+      </div> -->
+
+<!-- 
+            <div class="f-nav-wr">
+
+        <nav>
+          <ul>
+            <li class="nav-bold">SETEMAP</li>
+            <li><a href="#">譲渡会</a></li>
+            <li><a href="#">迷子掲示板</a></li>
+            <li><a href="#">里親掲示板</a></li>
+          </ul>
+        </nav>
+
+      </div> -->
+
+
+
+      <!-- </div> -->
+      <!-- class="footer-wrap"の終了タグ -->
+
+
+
+
+      <div class="copy-all">
+        2023 &copy; Copyright Titta. All rights reserved.
+      </div>
+
+
+
+    </footer>
+
+
+ <!-- jQueryへのリンク -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
+    <script src="js/common.js"></script>
+
+  </body>
+
+</html>

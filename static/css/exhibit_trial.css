@@ -1,0 +1,138 @@
+@charset "utf-8";
+
+/* common.cssは絶対に触らない！！！！！！！！！！！ */
+
+/* sample.cssをコピーし複製 */
+/* ファイル名はhtmlと同じ名前にしてください */
+
+
+/* sample.htmlにlinkタグがコメントアウトしてあるので良ければ使ってください */
+
+
+/*sample.html*/
+/*例*/
+#m-sample div.wrap p{
+/* 例として書いてあるだけなので消して大丈夫です */
+  color: #000;
+}
+h1{
+  font-size: 1.5rem;
+  padding: 2px 10px 20px 10px;
+}
+p{
+  padding: 3px;
+}
+#herf{
+  display: flex;
+  max-width: 2000px;
+  width: 100%;
+}
+#img{
+  width: 40%;
+  align-items: center;
+  padding: 0 100px;
+}
+#btndiv{
+  justify-content: left;
+}
+#bigimg{
+  width: 300px;
+}
+
+#minidiv{
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 0 0;
+}
+#minidiv figure{}
+.miniimg{
+  width: 75px;
+  margin: 10px;
+}
+#form{
+  width: 60%;
+}
+form{
+
+}
+
+form label{
+  background-color: #5E6697;
+  color: white;
+  padding: 5px;
+}
+form div{
+  padding: 10px 0;
+  margin: 0 0 0 0;
+}
+#form-2{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px 0 0;
+}
+#form-2 label{
+  padding: 3px 5px;
+}
+form div input{
+  height: 27px;
+  width: 85%;
+}
+#kane{
+  height: 25px;
+  width: 150px;
+  text-align: right;
+}
+
+form div textarea{
+  width: 95.5%;
+  height: 100px;
+  align-items: center;
+  resize: none;
+
+
+}
+form div select{
+  height: 30px;
+  padding: 0 30px;
+}
+#button1{
+  margin: 50px 490px;
+  padding: 15px;
+  font-size: 1.2rem;
+  background-color: #5E6697;
+  text-decoration: none;
+  color: white;
+  transition: .3s;
+}
+#button1:hover{
+  opacity: 0.8;
+}
+
+.areatag{
+  padding: 5px 624px 5px 5px;
+  background-color: #5E6697;
+}
+#labtag{
+  padding: 0px 641px 5px 20px;
+}
+.sec{
+  margin: 0 0 5px 0;
+}
+
+#help{
+  text-decoration: none;
+  font-size: 1.2rem;
+  background-color: #DBDDEA;
+  color: black;
+  padding: 2px;
+  height: 18px;
+  border: solid 1px;
+  transition: .3s;
+}
+#help:hover{
+  background-color: black;
+  color: #DBDDEA;
+  border: solid 1px #DBDDEA;
+}

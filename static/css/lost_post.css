@@ -1,0 +1,911 @@
+@charset "utf-8";
+
+
+
+/*foster_post.html*/
+/* --里親投稿-- */
+
+
+div.wrap{
+  display: block;
+  height: auto;
+}
+
+/* -------------↓カテゴリーナビゲーション----------------- */
+
+.category-navigation {
+  height: 50px;
+  margin: 10px 0 0 50px;
+}
+
+.category-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-navigation ul li {
+  display: inline;
+  margin-right: 10px;
+  font-size: 0.6rem;
+}
+
+.category-navigation ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+
+
+
+
+#full{
+  display: flex;
+}
+
+
+
+
+
+/* --------------↓左-------------------- */
+
+
+#left{
+  display: flex;
+  flex-direction: column;
+  width: 320;
+  margin: 0 0 0 50px;
+}
+
+
+/* ------------↓プロフィール-------------- */
+
+#prof{
+  background-color: #fff;
+  border: #E5857B 1px solid;
+  width: 300px;
+  height: 90px;
+  margin: 0 auto;
+}
+#name{
+  display: flex;
+  margin: 20px 0 15px 30px;
+  font-size: 1.1rem;
+}
+#name #sama{
+  margin: 0 0 0 10px;
+}
+#prof a{
+  text-decoration: none;
+  margin: 10px 0 0 30px;
+  font-size: 0.8rem;
+  color: #E5857B;
+}
+
+
+
+
+
+
+
+/* ---------サブナビゲーション---------- */
+
+
+#sub-nav{
+  border: #E5857B 0.5px solid;
+  background-color: #fff;
+  width: 300px;
+  margin: 30px 0 0 0;
+}
+
+#sub-nav ul{
+  list-style: none;
+}
+
+#sub-nav ul li{
+  padding: 10px 10px 10px 30px;
+  border-bottom: #E5857B 2px dashed;
+  font-size: 1.1rem;
+}
+#sub-nav ul li:last-child{
+  border-bottom: none;
+}
+
+#sub-nav ul li a{
+  text-decoration: none;
+  color: #000;
+}
+
+#sub-nav ul li a:hover{
+  opacity: 0.7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------↓右------------------------ */
+
+
+#right{
+  width: 780px;
+  margin: 0 auto;
+}
+
+
+#detail h2{
+  font-weight: 500;
+  font-size: 1.6rem;
+  border-left: #E5857B 4px solid;
+  margin: 0 0 0 0;
+  padding: 0 0 0 7px;
+}
+
+
+
+
+/* ---------------↓メイン----------------- */
+
+
+
+#right table{
+  width: 780px;
+  margin: 70px 0 0 0;
+}
+
+#right table tbody tr{
+  border-bottom: #E5857B 2px solid;
+}
+
+#right table tbody tr:last-child{
+  border-bottom: none;
+}
+
+#right table tbody tr td{
+  border-right: #E5857B 2px dotted;
+}
+
+#right table tbody tr td:last-child{
+  border-right: none;
+}
+
+
+#right table tbody #background .area textarea{
+  width: 450px;
+  height: 100px;
+  margin: 22px 0 0 40px;
+  resize: none;
+  border: #E5857B 2px solid;
+  border-radius: 2px;
+}
+#right table tbody #personality .area textarea{
+  width: 450px;
+  height: 100px;
+  margin: 22px 0 0 40px;
+  resize: none;
+  border: #E5857B 2px solid;
+  border-radius: 2px;
+}
+#right table tbody #health .area textarea{
+  width: 450px;
+  height: 100px;
+  margin: 22px 0 0 40px;
+  resize: none;
+  border: #E5857B 2px solid;
+  border-radius: 2px;
+}
+#right table tbody #place .area textarea{
+  width: 450px;
+  height: 100px;
+  margin: 22px 0 0 40px;
+  resize: none;
+  border: #E5857B 2px solid;
+  border-radius: 2px;
+}
+#right table tbody #other .area textarea{
+  width: 450px;
+  height: 100px;
+  margin: 22px 0 0 40px;
+  resize: none;
+  border: #E5857B 2px solid;
+  border-radius: 2px;
+}
+
+
+
+
+#right table tbody #keisai #keisaiW{
+  width: 530px;
+}
+#right table tbody #keisai #keisaiW p{
+  font-size: 0.8rem;
+  margin: 10px 0 0 40px;
+}
+#right table tbody #kinds #kindsW{
+  display: flex;
+}
+
+#right table tbody #location #locationW p{
+  font-size: 0.8rem;
+  margin: 15px 0 15px 60px;
+}
+
+
+#right table tbody #hogo #hogoW{
+    vertical-align: middle;
+    padding: 20px 0 0 0;
+}
+
+#right table tbody #hogo #hogoW p{
+  margin: 10px 0 10px 50px;
+  font-size: 0.8rem;
+}
+
+#right table tbody #hogoplace #hogoplaceW{
+    vertical-align: middle;
+}
+
+#right table tbody #injury #injuryW{
+    vertical-align: middle;
+}
+
+#right table tbody #color #colorW{
+    vertical-align: middle;
+}
+#right table tbody #institution #institutionW{
+    vertical-align: middle;
+}
+#right table tbody #features #featuresW{
+    vertical-align: middle;
+}
+
+
+
+
+
+#right table tbody #keisai #keisaiR{
+  padding: 50px 0 50px 20px;
+}
+#right table tbody #kinds #kindsR{
+  padding: 40px 0 35px 20px;
+}
+#right table tbody #post #postR{
+  padding: 40px 0 40px 20px;
+}
+#right table tbody #location #locationR{
+  height: 160px;
+  vertical-align: middle;
+  padding: 0 0 0 20px;
+}
+#right table tbody #gen #genR{
+  padding: 35px 0 30px 20px;
+}
+#right table tbody #age #ageR{
+  padding: 35px 0 30px 20px;
+}
+#right table tbody #size #sizeR{
+  padding: 35px 0 30px 20px;
+}
+#right table tbody #hogo #hogoR{/*------------------------------------------ */
+  height: 100px;
+  vertical-align: middle;
+  padding: 0 0 0 20px;
+}
+#right table tbody #hogoplace #hogoplaceR{
+  padding: 0 0 0 20px;
+  height: 100px;
+  vertical-align: middle;
+}
+#right table tbody #injury #injuryR{
+  padding: 0 0 0 20px;
+  height: 100px;
+  vertical-align: middle;
+}
+#right table tbody #color #colorR{
+  padding: 0 0 0 20px;
+  height: 100px;
+  vertical-align: middle;
+}
+#right table tbody #institution #institutionR{
+  padding: 0 0 0 20px;
+  height: 100px;
+  vertical-align: middle;
+}
+#right table tbody #features #featuresR{
+  padding: 0 0 0 20px;
+  height: 100px;
+  vertical-align: middle;
+}
+
+
+#right table tbody #background #backgroundR{
+  padding: 0 0 0 20px;
+  height: 150px;
+  vertical-align: middle;
+}
+#right table tbody #personality #personalityR{
+  padding: 0 0 0 20px;
+  height: 150px;
+  vertical-align: middle;
+}
+#right table tbody #health #healthR{
+  padding: 0 0 0 20px;
+  height: 150px;
+  vertical-align: middle;
+}
+#right table tbody #place #placeR{
+  padding: 0 0 0 20px;
+  height: 150px;
+  vertical-align: middle;
+}
+#right table tbody #other #otherR{
+  padding: 0 0 0 20px;
+  height: 150px;
+  vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.textbox-001 {
+  width: 40%;
+  border: 2px solid #E5857B;
+  border-radius: 2px;
+  margin: 0 0 0 50px;
+  height: 30px;
+}
+
+.textbox-002 {
+  width: 60%;
+  border: 2px solid #E5857B;
+  border-radius: 2px;
+  margin: 0 0 0 50px;
+  height: 30px;
+}
+
+
+.selectbox-002 {
+  position: relative;
+  margin: 0 0 0 50px;
+}
+
+.selectbox-002::before,
+.selectbox-002::after {
+  position: absolute;
+  content: '';
+  pointer-events: none;
+}
+
+.selectbox-002::before {
+  right: 0;
+  display: inline-block;
+  width: 2.8em;
+  height: 2.8em;
+  border-radius: 0 3px 3px 0;
+  background-color: #e5857b;
+  content: '';
+}
+
+.selectbox-002::after {
+  position: absolute;
+  top: 50%;
+  right: 1.4em;
+  transform: translate(50%, -50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  border-bottom: 3px solid #fff;
+  border-right: 3px solid #fff;
+  content: '';
+}
+
+.selectbox-002 select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: 230px;
+  height: 2.8em;
+  padding: .4em 3.6em .4em .8em;
+  border: 2px solid #e5857b;
+  border-radius: 3px;
+  color: #333333;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.selectbox-002 select:focus {
+  outline: 1px solid #e5857b;
+}
+
+
+.radio-001 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3em 2em;
+  border: none;
+  margin: 0 0 0 50px;
+  padding: 12px 0 0 0;
+}
+.radio-001 label {
+  display: flex;
+  align-items: center;
+  gap: 0 .5em;
+  position: relative;
+  cursor: pointer;
+  margin: 10px 0 0 0;
+}
+.radio-001 label::before,
+.radio-001 label::after {
+  border-radius: 50%;
+  content: '';
+}
+.radio-001 label::before {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #dee5eb;
+  box-sizing: border-box;
+}
+.radio-001 label::after {
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  background-color: #dee5eb;
+}
+.radio-001 label:has(:checked)::after {
+  background-color: #000000;
+}
+.radio-001 input {
+  display: none;
+}
+
+
+.radio-002 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3em 2em;
+  border: none;
+  margin: 0 0 0 50px;
+}
+.radio-002 label {
+  display: flex;
+  align-items: center;
+  gap: 0 .5em;
+  position: relative;
+  cursor: pointer;
+}
+.radio-002 label::before,
+.radio-002 label::after {
+  border-radius: 50%;
+  content: '';
+}
+.radio-002 label::before {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #dee5eb;
+  box-sizing: border-box;
+}
+.radio-002 label::after {
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  background-color: #dee5eb;
+}
+.radio-002 label:has(:checked)::after {
+  background-color: #000000;
+}
+.radio-002 input {
+  display: none;
+}
+
+
+.radio-003 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3em 2em;
+  border: none;
+  margin: 0 0 0 50px;
+}
+.radio-003 label {
+  display: flex;
+  align-items: center;
+  gap: 0 .5em;
+  position: relative;
+  cursor: pointer;
+}
+.radio-003 label::before,
+.radio-003 label::after {
+  border-radius: 50%;
+  content: '';
+}
+.radio-003 label::before {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #dee5eb;
+  box-sizing: border-box;
+}
+.radio-003 label::after {
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  background-color: #dee5eb;
+}
+.radio-003 label:has(:checked)::after {
+  background-color: #000000;
+}
+.radio-003 input {
+  display: none;
+}
+
+
+.radio-004 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3em 2em;
+  border: none;
+  margin: 40px 0 0 50px;
+}
+.radio-004 label {
+  display: flex;
+  align-items: center;
+  gap: 0 .5em;
+  position: relative;
+  cursor: pointer;
+}
+.radio-004 label::before,
+.radio-004 label::after {
+  border-radius: 50%;
+  content: '';
+}
+.radio-004 label::before {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #dee5eb;
+  box-sizing: border-box;
+}
+.radio-004 label::after {
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  background-color: #dee5eb;
+}
+.radio-004 label:has(:checked)::after {
+  background-color: #000000;
+}
+.radio-004 input {
+  display: none;
+}
+
+
+.radio-005 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3em 2em;
+  border: none;
+  margin: 40px 0 0 50px;
+}
+.radio-005 label {
+  display: flex;
+  align-items: center;
+  gap: 0 .5em;
+  position: relative;
+  cursor: pointer;
+}
+.radio-005 label::before,
+.radio-005 label::after {
+  border-radius: 50%;
+  content: '';
+}
+.radio-005 label::before {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #dee5eb;
+  box-sizing: border-box;
+}
+.radio-005 label::after {
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  background-color: #dee5eb;
+}
+.radio-005 label:has(:checked)::after {
+  background-color: #000000;
+}
+.radio-005 input {
+  display: none;
+}
+
+
+.radio-006 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3em 2em;
+  border: none;
+  margin: 40px 0 0 50px;
+}
+.radio-006 label {
+  display: flex;
+  align-items: center;
+  gap: 0 .5em;
+  position: relative;
+  cursor: pointer;
+}
+.radio-006 label::before,
+.radio-006 label::after {
+  border-radius: 50%;
+  content: '';
+}
+.radio-006 label::before {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #dee5eb;
+  box-sizing: border-box;
+}
+.radio-006 label::after {
+  position: absolute;
+  top: 50%;
+  left: 9px;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  background-color: #dee5eb;
+}
+.radio-006 label:has(:checked)::after {
+  background-color: #000000;
+}
+.radio-006 input {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.checkbox-001 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5em 2em;
+  border: none;
+  margin: 0 0 0 -10px;
+}
+
+.checkbox-001 label {
+  display: flex;
+  align-items: center;
+  gap: 0 .5em;
+  position: relative;
+  cursor: pointer;
+  
+  margin: 0 0 0 60px;
+}
+
+.checkbox-001 label::before,
+.checkbox-001 label:has(:checked)::after {
+  content: '';
+}
+
+.checkbox-001 label::before {
+  width: 17px;
+  height: 17px;
+  border-radius: 3px;
+  background-color: #e6edf3;
+}
+
+.checkbox-001 label:has(:checked)::before {
+  background-color: #2589d0;
+}
+
+.checkbox-001 label:has(:checked)::after {
+  position: absolute;
+  left: 6px;
+  transform: rotate(45deg);
+  width: 4px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+}
+
+.checkbox-001 input {
+  display: none;
+}
+
+
+.hissu{
+  margin: -24px 0 0 120px;
+  padding: 7px;
+  background-color: #fff;
+  border: #E5857B 1px solid;
+  width: 60px;
+  text-align: center;
+}
+
+
+
+
+
+
+#right h3{
+  font-weight: 500;
+  font-size: 1.6rem;
+  border-bottom: #363A58 3px solid;
+  margin: 100px 0 60px 0;
+  padding: 0 0 7px 0;
+}
+
+
+#right #upload{
+  display: flex;
+}
+
+#right #upload #first img{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 2px;
+  margin: 0 0 0 5px;
+  border: #7D8BAE 1px solid;
+}
+#right #upload #second img{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 2px;
+  margin: 0 0 0 20px;
+  border: #7D8BAE 1px solid;
+}
+
+#right #upload #info{
+  margin: 10px 0 0 0;
+}
+
+#right #upload #info p{
+  font-size: 0.8rem;
+  margin: 0 0 10px 10px;
+
+}
+
+#right #upload #info #btn{
+  display: flex;
+  margin: 0 0 0 10px;
+}
+
+
+
+#file{
+  margin: 20px 0 0 5px;
+}
+
+
+#file a{
+  border-radius: 1px;
+  border: #7D8BAE 2px solid;
+  justify-content: space-around;
+  margin: 20px 0 15px 0;
+  font-weight: 500;
+  width: 100px;
+  text-decoration: none;
+  padding: 3px 5px;
+  color: #000;
+}
+
+#btn p{
+  padding: 21px 0 0 3px;
+}
+
+
+
+
+#last{
+  display: flex;
+  margin: 140px 0 50px 20%;
+  text-align: center;
+  justify-content: space-between;
+  width: 450px;
+}
+
+#last #regi{
+  border-radius: 1px;
+  background-color: #E5857B;
+  justify-content: space-around;
+  margin: 20px 0 15px 0;
+  font-weight: 500;
+  width: 200px;
+  height: 40px;
+  text-decoration: none;
+  padding: 3px 5px;
+  color: #000;
+  text-align: center;
+  line-height: 35px;
+  font-size: 1.1rem;
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .3);
+}
+#last #regi a{
+  text-decoration: none;
+  color: #000;
+}
+
+
+
+
+
+
+#last #memo{
+  border-radius: 1px;
+  border: #E5857B 2px solid;
+  justify-content: space-around;
+  margin: 20px 0 15px 0;
+  width: 200px;
+  text-decoration: none;
+  padding: 3px 5px;
+  color: #000;
+  text-align: center;
+  line-height: 35px;
+  font-size: 1.1rem;
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .3);
+}
+
+#last #memo a{
+  text-decoration: none;
+  color: #000;
+}
+
+
+
+
+
+
+
+
+
+

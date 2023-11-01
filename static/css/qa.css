@@ -1,0 +1,58 @@
+h1{
+    padding: 50px;
+    font-size: 2rem;
+}
+.itemm{
+    padding: 0 0 0 600px;
+
+}
+.A{
+    display: inline-block;
+    background: #7D8BAE;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 700px;
+    color: white;
+    display: flex;
+}
+.B{
+    background: #F7F7FF;
+    height: 100px;
+    width: 700px;
+    border: 1px solid #ddd;
+}
+.C{
+    display: inline-block;
+    background: #7D8BAE;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 700px;
+    color: white;
+    display: flex;
+}
+.D{
+    background: #F7F7FF;
+    height: 100px;
+    width: 700px;
+    border: 1px solid #ddd;
+}
+.E{
+    display: inline-block;
+    background: #7D8BAE;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 700px;
+    color: white;
+    display: flex;
+}
+.F{
+    background: #F7F7FF;
+    height: 100px;
+    width: 700px;
+    border: 1px solid #ddd;
+}
+
+.and{
+    padding: 30px 80px;
+    font-size: 1.2rem;
+}

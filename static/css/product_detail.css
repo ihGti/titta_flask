@@ -1,0 +1,451 @@
+@charset "utf-8";
+
+/* common.cssは絶対に触らない！！！！！！！！！！！ */
+
+/* sample.cssをコピーし複製 */
+/* ファイル名はhtmlと同じ名前にしてください */
+
+/* sample.htmlにlinkタグがコメントアウトしてあるので良ければ使ってください */
+
+#m-sample div.wrap {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #f7f7ff;
+}
+
+/*sample.html*/
+/*例*/
+#m-sample div.wrap p {
+  /* 例として書いてあるだけなので消して大丈夫です */
+  color: #000;
+}
+
+div#pankuzu {
+  margin: 50px 0 0 0;
+}
+
+div#shouhinfl {
+  width: 1200px;
+  height: auto;
+  background-color: rgba(0, 255, 255, 0);
+  margin: 50px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+div#shouhinfl div#shouhinfl1 {
+  width: 580px;
+  height: auto;
+  background-color: rgba(131, 236, 236, 0);
+}
+
+div#shouhinfl1 div#shouhinPic {
+  width: 500px;
+  height: 500px;
+  background-color: rgb(196, 149, 200);
+  background-image: url(../images/hoshitu.jpg);
+  background-size: contain;
+}
+
+div#shouhinfl1 div#shouhinhukusuu {
+  width: 500px;
+  height: 150px;
+  background-color: rgba(132, 210, 210, 0);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+div#shouhinhukusuu div:first-child,
+div#shouhinhukusuu div:nth-child(2),
+div#shouhinhukusuu div:nth-child(3),
+div#shouhinhukusuu div:nth-child(4) {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(227, 144, 162);
+  margin: 50px 0 0 0;
+  background-image: url(../images/hoshitu.jpg);
+  background-size: contain;
+}
+
+div#shouhinfl div#shouhinfl2 {
+  width: 580px;
+  height: auto;
+  background-color: rgba(142, 229, 229, 0);
+}
+
+div#shouhinfl2 p:first-child {
+  width: 580px;
+  height: 30px;
+  background-color: rgba(88, 110, 218, 0);
+  font-size: 1.6rem;
+}
+
+div#shouhinfl2 p:nth-child(2) {
+  width: 580px;
+  height: 30px;
+  background-color: rgba(88, 110, 218, 0);
+  font-size: 1.2rem;
+  margin-top: 15px;
+}
+
+div#shouhinfl2 div#flkakaku {
+  width: 580px;
+  height: 50px;
+  background-color: rgba(88, 110, 218, 0);
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+div#flkakaku p {
+  font-size: 1.7rem;
+  font-weight: bold;
+  line-height: 55px;
+}
+
+div#flkakaku a:first-child {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-left: 20px;
+  background-color: rgba(0, 0, 255, 0);
+}
+
+a#ka-to {
+  display: block;
+  width: 300px;
+  height: 60px;
+  background-color: rgb(246, 150, 171);
+  border-radius: 10px;
+  margin: 100px auto 0 auto;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f7f7ff;
+  text-decoration: none;
+  line-height: 65px;
+  text-align: center;
+  transition: 0.7s;
+}
+
+a#ka-to:hover {
+  background-color: aqua;
+}
+
+h1#shouhinsetumei {
+  width: 580px;
+  height: 40px;
+  background-color: rgba(0, 0, 255, 0);
+  margin: 150px auto 0 auto;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #f7f7ff;
+  line-height: 45px;
+}
+
+h1#shouhinsetumei + p {
+  width: 580px;
+  height: auto;
+  background-color: rgb(255, 255, 255);
+  font-size: 1.2rem;
+  line-height: 30px;
+  padding: 20px 20px 0 20px;
+}
+
+div#moxtutomiru {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+/* 隠す高さを指定 */
+
+div#moxtutomiru h1#shouhinnsetumei1 {
+  width: 580px;
+  height: 40px;
+  background-color: rgb(94, 94, 140);
+  margin: 130px auto -15px auto;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #f7f7ff;
+  line-height: 45px;
+}
+
+div#moxtutomiru p#texttexttext {
+  position: relative;
+  width: 580px;
+  height: 200px;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  overflow: hidden;
+  line-height: 30px;
+}
+
+/* ボタンで高さを自動に変更 */
+div#moxtutomiru p#texttexttext.active {
+  height: auto;
+}
+
+/* 透過グラデーションをposition指定 */
+div#moxtutomiru p::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: linear-gradient(rgba(255, 255, 255, 0) 0, #fff 90%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* ボタンで透過グラデーションを解除 */
+div#moxtutomiru p.active::before {
+  background: none;
+}
+
+div#moxtutomiru button#moxtutomirubotan {
+  width: 200px;
+  height: auto;
+  background-color: rgba(0, 255, 255, 0);
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  position: absolute;
+  bottom: -40px;
+  left: 200px;
+  color: #7c869b;
+}
+
+div#shouhinjyouhou {
+  width: 580px;
+  height: auto;
+  background-color: rgba(137, 43, 226, 0);
+  margin: 0px 0 0 0;
+}
+
+div#shouhinjyouhou h1#shouhinnjyouhoutext {
+  width: 580px;
+  height: 40px;
+  background-color: rgb(94, 94, 140);
+  margin: 80px auto -15px auto;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #f7f7ff;
+  line-height: 45px;
+}
+
+div#shouhinjyouhou table#shouhinnhyou {
+  width: 580px;
+  height: auto;
+  background-color: rgb(255, 255, 255);
+  border: solid 2px #00000000;
+  margin-top: 15px;
+  text-align: left;
+}
+
+table#shouhinnhyou th {
+  width: 40%;
+  background-color: rgba(0, 255, 255, 0);
+  padding: 30px;
+}
+
+table#shouhinnhyou td {
+}
+
+table#shouhinnhyou td a {
+  text-decoration: none;
+  line-height: 30px;
+}
+
+table#shouhinnhyou td p.hyounomoji {
+  display: inline;
+  background-color: rgba(0, 255, 255, 0);
+  font-size: 1.1rem;
+}
+
+h1#saizuchecktext {
+  width: 580px;
+  height: 40px;
+  background-color: rgb(94, 94, 140);
+  margin: 30px auto -15px auto;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #f7f7ff;
+  line-height: 45px;
+  position: relative;
+}
+
+h1#saizuchecktext a {
+  display: block;
+  width: 50px;
+  height: 25px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  border-radius: 40px;
+  text-decoration: none;
+  /* font-size: 0.8rem;
+  color: #000; */
+  padding: 0 0 5px 0;
+}
+
+h1#saizuchecktext a#popup-link {
+  display: block;
+  width: 45px;
+  line-height: 30px;
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  background-color: rgba(0, 255, 255, 0);
+  font-size: 1rem;
+  color: #000;
+}
+
+div#saizukankakuninnBox {
+  width: 580px;
+  height: 400px;
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  margin-top: 15px;
+}
+
+div#saizukankakuninnBox p#shouhinhyouji {
+  display: inline-block;
+  background-color: #f7f7ff00;
+  color: #b5b5b5;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 430px;
+}
+
+/* ポップアップ画像を非表示にする */
+div#saizukankakuninnBox div.popup-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 580px;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.7); /* 背景の半透明度を調整 */
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* 画像を他の要素の上に表示 */
+}
+
+div.popup-container img {
+  max-width: 80%;
+  max-height: 80%;
+  border: 2px solid #fff;
+  border-radius: 5px;
+}
+
+div.popup-container div.close-button {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  background-image: url(../images/batu.png);
+  background-size: contain;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+}
+
+h1#shuxtupinshaProtext {
+  width: 580px;
+  height: 40px;
+  background-color: rgb(94, 94, 140);
+  margin: 0 auto 30px auto;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #f7f7ff;
+  line-height: 40px;
+}
+
+div#shuxtupinshaPro {
+  width: 580px;
+  height: 100px;
+  background-color: rgb(255, 255, 255);
+  margin-top: 10px;
+  margin-bottom: 100px;
+  position: relative;
+}
+
+div#shuxtupinshaPro div#shuxtupinnshaProPic {
+  width: 80px;
+  height: 80px;
+  background-color: rgb(192, 195, 195);
+  border-radius: 50%;
+  margin: 0 0 0 0;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+div#namaetofollow {
+  width: auto;
+  height: 30px;
+  background-color: rgba(0, 255, 255, 0);
+  position: absolute;
+  top: 20px;
+  left: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+
+div#namaetofollow a {
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 30px;
+  margin: 0 70px 0 0;
+}
+
+div#namaetofollow button {
+  background-color: rgba(0, 255, 255, 0);
+  cursor: pointer;
+  padding: 0 20px 0 20px;
+}
+
+div#namaetofollow a#reviewhoshi {
+  position: absolute;
+  top: 35px;
+}
+
+div#namaetofollow p {
+  position: absolute;
+  top: 42px;
+  left: 120px;
+}
+
+p#osusume {
+  width: 90%;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0 auto 0 auto;
+}
+
+div#osusumeshouhin {
+  width: 90%;
+  height: 150px;
+  background-color: rgba(0, 255, 255, 0);
+  margin: 20px auto 50px auto;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+div#osusumeshouhin a {
+  display: block;
+  width: 150px;
+  height: 150px;
+  background-color: blueviolet;
+  background-image: url(../images/geji.jpg);
+  background-size: contain;
+}
