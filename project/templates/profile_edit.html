@@ -11,11 +11,11 @@
     <title>Titta</title>
 
     <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
 
     <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
-    <link rel="stylesheet" type="text/css" href="css/profile_edit.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/profile_edit.css">
 
     <!-- google-fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,9 +36,9 @@
         <div class="rr-wrap">
 
           <!-- index.htmlへ遷移 -->
-          <a href="/">
+          <a href="/top">
             <figure>
-              <img src="images/rogo.png" alt="rogo">
+              <img src="/static/images/rogo.png" alt="rogo">
             </figure>
           </a>
 
@@ -96,12 +96,12 @@
 
     <h1>プロフィール編集</h1>
     <hr>
-    <form action="/" method="post" id="profile_edit" enctype="multipart/form-data">
+    <form method="post" id="profile_edit" enctype="multipart/form-data">
       <div class="profile-picture">
-        <img src="images/default-icon.jpg" alt="デフォルトのプロフィール画像" id="profile_image">
+        <img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="デフォルトのプロフィール画像" id="profile_image">
       </div>
       
-      <input type="file" id="profile_image" name="profile_image" onchange="document.getElementById('profile_edit').submit();">
+      <input type="file" id="profile_image_input" name="profile_image" style="display: none;">
 
         <div class="form-group">
           <label for="username" class="profile-user">ニックネーム</label>
@@ -196,7 +196,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
     <script src="js/common.js"></script>
-    <script src="js/profile_edit.js"></script>
+    <script src="/static/js/profile_edit.js"></script>
 
   </body>
 

@@ -10,13 +10,13 @@
 
     <title>Titta</title>
 
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
 
-    <link rel="stylesheet" type="text/css" href="css/my_prof_left.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/my_prof_left.css">
     <!-- ↑左のサイドバーのcss -->
     <!-- ↓ここ編集 -->
-    <link rel="stylesheet" type="text/css" href="css/my_profile.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/my_profile.css">
 
 
   </head>
@@ -34,7 +34,7 @@
           <!-- index.htmlへ遷移 -->
           <a href="/">
             <figure>
-              <img src="images/rogo.png" alt="rogo">
+              <img src="/static/images/rogo.png" alt="rogo">
             </figure>
           </a>
 
@@ -182,18 +182,18 @@
           <div id="prof">
             <div id="top">
 
-              <a href="/">プロフィールを編集</a><!-- 編集へ -->
+              <a href="/prof_edit">プロフィールを編集</a><!-- 編集へ -->
 
-              <figure><img id="account-icon" src="images/default-icon.jpg" alt="デフォルトアイコン"></figure><!-- アップロードしてね -->
+              <figure><img id="account-icon" src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="デフォルトアイコン"></figure><!-- アップロードしてね -->
 
             </div>
 
-            <div id="mid"><p id="name"><!-- 編集画面で変更可能 -->シャーク</p></div>
+            <div id="mid"><p id="name"><!-- 編集画面で変更可能 -->{{username}}</p></div>
 
             <div id="bot">
-              <div id="follow"><!--{{ follow_count }}-->0フォロー</div><!--後で0消す-->
-              <div id="follower"><!--{{ follower_count }}-->0フォロワー</div>
-              <div id="star"><figure><img src="images/empty.jpg" alt=""></figure><!-- {{ evaluation_count }} -->278</div><!--一旦写真入れとくプログラムわからん-->
+              <div id="follow">{{ followers_count }}フォロー</div><!--後で0消す-->
+              <div id="follower">{{ following_count }}フォロワー</div>
+              <div id="star"><figure><img src="/static/images/empty.jpg" alt=""></figure><!-- {{ evaluation_count }} -->278</div><!--一旦写真入れとくプログラムわからん-->
             </div>
           </div>
 
@@ -204,29 +204,6 @@
       </div><!-- class="wrap" -->
 
     </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <footer>
 
@@ -291,10 +268,10 @@
     </footer>
 
 
- <!-- jQueryへのリンク -->
+<!-- jQueryへのリンク -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
+    <script src="/static/js/common.js"></script>
 
   </body>
 

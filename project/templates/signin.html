@@ -11,11 +11,11 @@
     <title>Titta</title>
 
     <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css')}}">
 
     <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
-    <link rel="stylesheet" type="text/css" href="css/signin.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/signin.css')}}">
 
 
   </head>
@@ -30,9 +30,9 @@
 
         <div class="rr-wrap">
 
-          <a href="index.html">
+          <a href="/top">
             <figure>
-              <img src="images/rogo.png" alt="rogo">
+              <img src="{{ url_for('static', filename='images/rogo.png')}}" alt="rogo">
             </figure>
           </a>
 
@@ -88,7 +88,7 @@
 
           <!-- ユーザー登録フォーム -->
           <div id="center">
-            <form action="/" method="post">
+            <form method="post" enctype="multipart/form-data">
 
               <h1>ログイン情報</h1>
               <hr noshade="" class="under-line">
@@ -100,46 +100,50 @@
                 <input type="email" name="email" id="email" class="email" placeholder="例&#41 nhsxxxxx@nhs.hal.ac.jp" autocomplete="off">
               </label>
 
-              <label for="email">
+              <label for="email_conform">
                 <p>メールアドレス&#40再確認&#41</p>
                 <p class="red">※必須</p>
-                <input type="email" name="email" id="email" class="email-sai" placeholder="確認のため、もう一度入力してください" autocomplete="off">
+                <input type="email" name="email_conform" id="email" class="email-sai" placeholder="確認のため、もう一度入力してください" autocomplete="off">
               </label>
 
               <!-- パスワード -->
-              <label for="Password">
+              <label for="password">
                 <p>Password</p>
                 <p class="red">※必須</p>
                 <input type="password" name="password" id="Password" class="password" placeholder="半角英数字8~32文字" autocomplete="off">
               </label>
 
-              <label for="Password">
+              <label for="password_conform">
                 <p>Password&#40再確認&#41</p>
                 <p class="red">※必須</p>
-                <input type="password" name="password" id="Password" class="Password" placeholder="確認のため、もう一度入力してください" autocomplete="off">
+                <input type="password" name="password_conform" id="Password" class="Password" placeholder="確認のため、もう一度入力してください" autocomplete="off">
               </label>
 
               <h1>お客様情報</h1>
               <hr noshade="" class="under-line">
 
               <!-- お名前 -->
-              <label for="name">
+              <label for="sei">
                 <p>お名前</p>
                 <p class="red">※必須</p>
                 <p class="name-sei">性</p>
-                <input type="text" name="name" id="name" placeholder="例&#41 福田" autocomplete="off">
+                <input type="text" name="sei" id="name" placeholder="例&#41 福田" autocomplete="off">
+              </label>
+              <label for="mei">
                 <p class="name-mei">名</p>
-                <input type="text" name="name" id="name" placeholder="例&#41 和真" autocomplete="off">
+                <input type="text" name="mei" id="name" placeholder="例&#41 和真" autocomplete="off">
               </label>
 
               <!-- お名前(カナ) -->
-              <label for="name-kana">
+              <label for="sei-kana">
                 <p>お名前&#40カナ&#41</p>
                 <p class="red">※必須</p>
                 <p class="name-skana">性</p>
-                <input type="text" name="name-kana" id="name-kana" placeholder="例&#41 フクタ" autocomplete="off">
+                <input type="text" name="sei-kana" id="name-kana" placeholder="例&#41 フクタ" autocomplete="off">
+              </label>
+              <label for="mei-kana">
                 <p class="name-mkana">名</p>
-                <input type="text" name="name-kana" id="name-kana" placeholder="例&#41 カズマ" autocomplete="off">
+                <input type="text" name="mei-kana" id="name-kana" placeholder="例&#41 カズマ" autocomplete="off">
               </label>
 
               <!-- ユーザー名 -->
@@ -193,14 +197,14 @@
               </label>
 
               <!-- プロフ画像 -->
-              <label for="prof-image">
+              <label for="prof_image">
                 <p>プロフィール画像</p>
                 <p class="red">※必須</p>
-                <input type="file" name="prof-image" id="prof-image">
+                <input type="file" name="prof_image" id="prof-image">
               </label>
 
               <!-- 送信ボタン -->
-              <input type="submit" value="同意して確認画面へ" id="bottun">
+              <input type="submit" value="同意して確認画面へ" id="bottun" onclick="submitBirthday()">
 
             </form>
           </div>
@@ -230,7 +234,7 @@
 
       <div class="rogo-wrap">
         <figure>
-          <img src="images/rogo.png" alt="rogo">
+          <img src="/static/images/rogo.png" alt="rogo">
         </figure>
       </div>
 
@@ -286,8 +290,8 @@
  <!-- jQueryへのリンク -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
-    <script src="js/signin.js"></script>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/signin.js"></script>
 
   </body>
 

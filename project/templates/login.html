@@ -11,11 +11,11 @@
     <title>Titta</title>
 
     <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css')}}">
 
     <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css')}}">
 
 
   </head>
@@ -31,7 +31,7 @@
         <div id="left">
           <div id="site-image">
             <figure>
-              <img src="images/rogo.png" alt="rogo">
+              <img src="/static/images/rogo.png" alt="rogo">
             </figure>
           </div>
         </div>
@@ -57,7 +57,7 @@
               <input type="submit" value="ログインする" id="bottun">
             </form>
 
-            <a href="signin.html">会員登録はこちら</a>
+            <a href="/signup">会員登録はこちら</a>
           </div>
         </div>
 
@@ -78,7 +78,7 @@
  <!-- jQueryへのリンク -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
+    <script src="{{ url_for('static', filename='js/signin.js')}}"></script>
 
   </body>
 

@@ -11,11 +11,11 @@
     <title>Titta</title>
 
     <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
 
     <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
 
 
   </head>
@@ -29,10 +29,9 @@
       <div class="r-wrap">
 
         <div class="rr-wrap">
-
-          <a href="index.html">
+          <a href="/top">
             <figure>
-              <img src="images/rogo.png" alt="rogo">
+              <img src="/static/images/rogo.png" alt="rogo">
             </figure>
           </a>
 
@@ -42,7 +41,13 @@
                 <li><a href="mailbox.html"><input type="submit" value="&#xf0e0;" class="button"></a></li>
                 <li><a href="cart.html"><input type="submit" value="&#xf07a;" class="button"></a></li>
                 <li><a href="favorite.html"><input type="submit" value="&#xf004;" class="button"></a></li>
-                <li><a href="login.html"><input type="submit" value="&#xf007;" class="button"></a></li>
+                <li>
+                  {% if user.F_ProfileImage %}
+                    <a href="/myprof"><img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;"></a>
+                  {% else %}
+                    <a href="/myprof"><input type="submit" value="&#xf007;" class="button"></a>
+                  {% endif %}
+                </li>
               </ul>
             </nav>
           </div>
@@ -59,8 +64,8 @@
       <div class="nav-buttom">
         <nav>
           <ul>
-            <li><a href="index.html" class="line-a">HOME</a></li>
-            <li><a href="exhibit.html">出品</a></li>
+            <li><a href="/top" class="line-a">HOME</a></li>
+            <li><a href="/exhibit">出品</a></li>
             <li><a href="foster_board.html">里親掲示板</a></li>
             <li><a href="lost_petboard.html">迷子掲示板</a></li>
             <li><a href="contest.html">コンテスト</a></li>
@@ -79,14 +84,14 @@
 
       <section class="index_M_sec1_1">
         <div id="kisekaeyounoheya">
-          <img src="images/toppage_room.jpg">
+          <img src="/static/images/toppage_room.jpg">
         </div>
         
         <div class="index_M_sec1_di_1">
           <div class="index_M_sec1_di_1_1">
             <h1>最新の迷子情報</h1>
             <div>
-              <img src="images/maigotori.png"><br>
+              <img src="/static/images/maigotori.png"><br>
               セキセイインコの男の子
             </div>
           </div>
@@ -96,7 +101,7 @@
           <div class="index_M_sec1_di_1_1">
             <h1>コンテスト情報</h1>
             <div>
-              <img src="images/maigotori.png"><br>
+              <img src="/static/images/maigotori.png"><br>
               鳥のかわいい角度選手権
             </div>
           </div>
@@ -361,28 +366,6 @@
     </main>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <footer>
 
     <p id="page-top"><a href="#">Top</a></p>
@@ -392,7 +375,7 @@
 
       <div class="rogo-wrap">
         <figure>
-          <img src="images/rogo.png" alt="rogo">
+          <img src="/static/images/rogo.png" alt="rogo">
         </figure>
       </div>
 
@@ -443,10 +426,10 @@
     </footer>
 
 
- <!-- jQueryへのリンク -->
+<!-- jQueryへのリンク -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
+    <script src="/static/js/common.js"></script>
 
   </body>
 

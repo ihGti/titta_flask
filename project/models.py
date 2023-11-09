@@ -13,7 +13,7 @@ class T_User(db.Model,UserMixin):
     
     F_SignUpDay = db.Column(db.DateTime, default = datetime.utcnow)
     
-    F_BirthDay = db.Column(db.DateTime, default = datetime.utcnow)
+    F_BirthDay = db.Column(db.Date, nullable=False)
     
     F_Gender = db.Column(db.String(10), nullable=True)
     
@@ -34,9 +34,16 @@ class T_User(db.Model,UserMixin):
     F_FirstName_Kana = db.Column(db.String(256), nullable=False)
     
     F_ProfileImage = db.Column(db.String(256), nullable=False)
+    
+    F_Profile_Comment = db.Column(db.String(256), nullable=True)
+    
+    images = db.relationship('T_Exhibit', backref='user',lazy=True)
+    
+    def get_id(self):
+        return str(self.F_UserID)
+    
 
-
-class T_Tore_do(db.Model):
+class T_Exhibit(db.Model):
     
     F_ExID = db.Column(db.Integer, primary_key=True)
     
@@ -44,10 +51,42 @@ class T_Tore_do(db.Model):
     
     F_ExPrice = db.Column(db.Integer, nullable=False)
     
+    F_ExTag = db.Column(db.String(256), nullable=False)
+    
+    F_ExSit = db.Column(db.String(256), nullable=False)
+    
+    F_ExDeli = db.Column(db.String(256) , nullable=False)
+    
     F_ExInfo = db.Column(db.String(256), nullable=False)
     
     F_ExPhoto = db.Column(db.String(256), nullable=False)
     
-    F_UserID = db.Column(db.Integer, db.ForeignKey('T_User.F_UserID'), nullable=False)
+    F_ExPhotoS = db.Column(db.String(256), nullable=True)
+    
+    F_ExPhotoT = db.Column(db.String(256), nullable=True)
+    
+    F_ExPhotoF = db.Column(db.String(256), nullable=True)
+    
+    F_ExPhotoH = db.Column(db.String(256), nullable=True)
+    
+    F_EXhibitType = db.Column(db.Integer, nullable=False)
+    
+    F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
     
     
+
+
+class T_Paramerter(db.Model):
+    F_ID = db.Column(db.Integer, primary_key=True)
+    F_userid = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    F_friendid = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    db.UniqueConstraint('F_userid', 'F_friendid', name='unique_friendship')
+    
+    user = db.relationship('T_User', foreign_keys=[F_userid])
+    friend = db.relationship('T_User', foreign_keys=[F_friendid])
+    
+
+class T_Category(db.Model):
+    F_CategoryID = db.Column(db.Integer, primary_key=True)
+    
+    F_CategoryName = db.Column(db.String(256), unique=True , nullable=False)
