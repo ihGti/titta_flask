@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+
+{% block title %}
+-exhibit_comp
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/exhibit_comp.css" />
+{% endblock %}
+
+
+{% block content %}
+    <main id="m-sample">
+      <div class="wrap">
+        <video id="registerd" autoplay muted>
+          <source src="/static/video/Titta_exhibit2.mp4" type="video/mp4" />
+        </video>
+
+        <!-- index.htmlへ -->
+        <button id="back_login" onclick="location.href='/'">TOPページへ</button>
+      </div>
+    </main>
+
+
+{% endblock %}

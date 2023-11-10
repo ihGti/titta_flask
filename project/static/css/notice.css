@@ -1,0 +1,108 @@
+@charset "utf-8";
+
+/* common.cssは絶対に触らない！！！！！！！！！！！ */
+
+/* sample.cssをコピーし複製 */
+/* ファイル名はhtmlと同じ名前にしてください */
+
+/* sample.htmlにlinkタグがコメントアウトしてあるので良ければ使ってください */
+
+/*sample.html*/
+/*例*/
+
+#m-sample div.wrap p {
+  /* 例として書いてあるだけなので消して大丈夫です */
+  color: #000;
+}
+
+#notice_fla {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.tab-buttons {
+  width: 100%;
+  display: block;
+  justify-content: center;
+  margin: 20px 20px 0 20px; /* ボタンとコンテンツの間隔を調整 */
+}
+
+.tab-button {
+  width: 120px;
+  border: none;
+  font-size: 0.8rem;
+  padding: 6px 0px 6px 0px;
+  margin: 50px 0 0 20px;
+}
+
+.tab-contents .tab-content {
+  display: none;
+  width: 800px;
+  margin: 0 auto;
+}
+
+/* 表示されてるコンテンツ内容 */
+.tab-contents .tab-content.active {
+  display: block;
+  width: 720px;
+  /* height: auto; */
+  height: 800px;
+  overflow: auto;
+  margin: 0 auto 50px auto;
+  background-color: rgba(0, 255, 255, 0);
+}
+
+.tab-content.active::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tab-content.active::-webkit-scrollbar-thumb {
+  background-color: #796de5;
+}
+
+.tab-content.active::-webkit-scrollbar-track {
+  background-color: #d4d4d4;
+}
+
+.tab-button.active-button {
+  background-color: #796de5;
+  color: #fff; /* テキストの色を白に */
+}
+
+.notice_deta {
+  width: 100%;
+  background-color: #3f368f00;
+  border-top: solid 1px #796de5;
+  border-bottom: solid 1px #796de5;
+  margin: 0 0 30px 0;
+  padding: 50px 0 50px 0;
+}
+
+#noticeflame {
+  width: 100%;
+  height: 25px;
+  background-color: #796de500;
+  display: flex;
+  justify-content: space-between;
+}
+
+#noticeflame div {
+  width: 25px;
+  height: 25px;
+  background-color: aqua;
+  margin-left: 10px;
+}
+
+#noticeflame h1 {
+  width: 400px;
+  line-height: 30px;
+  font-weight: lighter;
+  background-color: rgba(127, 255, 212, 0);
+}
+
+#noticeflame p {
+  width: 150px;
+  line-height: 30px;
+  background-color: rgba(0, 0, 255, 0);
+  margin-right: 30px;
+}

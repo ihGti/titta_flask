@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/notice.css" />
+{% endblock %}
+
+{% block js%}
+  <script src="./static/js/notice.js"></script>
+{% endblock %}
+
+{% block content%}
+
+    <main id="m-sample">
+      <div class="wrap">
+        <div id="notice_fla">
+          <div class="tab-buttons">
+            <button class="tab-button active-button" data-target="notification">
+              お知らせ
+            </button>
+            <button class="tab-button" data-target="mail">メールBOX</button>
+          </div>
+
+          <div class="tab-contents">
+            <!-- お知らせタブ -->
+            <div id="notification" class="tab-content active">
+              
+              {% for i in range(8)%}
+              <div class="notice_deta">
+                <div id="noticeflame">
+                  <div></div>
+                  <h1>{{ i[0] }}</h1>
+                  <p>{{ i[1] }}</p>
+                </div>
+              </div>
+              {% endfor %}
+
+            </div>
+            <div id="mail" class="tab-content">
+              {% for a in range(6)%}
+              <div class="notice_deta">
+                <div id="noticeflame">
+                  <div></div>
+                  <h1>{{ a[0] }}</h1>
+                  <p>{{ a[1] }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- class="wrap" -->
+    </main>
+
+{% endblock %}

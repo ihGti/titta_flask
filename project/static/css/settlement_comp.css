@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+/* common.cssは絶対に触らない！！！！！！！！！！！ */
+
+/* sample.cssをコピーし複製 */
+/* ファイル名はhtmlと同じ名前にしてください */
+
+/* sample.htmlにlinkタグがコメントアウトしてあるので良ければ使ってください */
+
+/*sample.html*/
+/*例*/
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+}
+
+#m-sample div.wrap p {
+  /* 例として書いてあるだけなので消して大丈夫です */
+  color: #000;
+}
+
+main#m-sample {
+  position: relative;
+}
+
+main#m-sample video#registerd {
+  position: relative;
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: -20.5px;
+  margin-bottom: -71.5px;
+  z-index: 1;
+}
+
+main#m-sample button {
+  width: auto;
+  transform-origin: top left;
+  transform: scale(1.5);
+  padding: 0 50px 0 50px;
+  height: 35px;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 150;
+  border: none;
+  font-size: 0.7rem;
+  color: #363a58;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+
+main#m-sample button:hover {
+  background-color: #363a58;
+  color: #f7f7ff;
+}
+
+footer div.copy-all_jyanai {
+  position: relative;
+  bottom: 0;
+
+  padding: 0px 0 10px 0;
+
+  text-align: center;
+  font-size: 0.5rem;
+  color: #f7f7ff;
+  background-color: #363a58;
+
+  z-index: 100;
+}

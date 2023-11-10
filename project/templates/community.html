@@ -1,77 +1,18 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="ja">
+{% block title %}
+-community
+{% endblock %}
 
-  <head>
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="static/css/community.css">
+{% endblock %}
 
-      <meta charset="utf_8">
+{% block js%}
+     <script type="text/javascript" src="./static/js/community.js"></script>
+{% endblock%}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Titta</title>
-
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-
-     <link rel="stylesheet" type="text/css" href="css/community.css"> 
-
-
-  </head>
-
-
-  <body>
-
-    <header>
-
-
-      <div class="r-wrap">
-
-        <div class="rr-wrap">
-
-          <a href="index.html">
-            <figure>
-              <img src="images/rogo.png" alt="rogo">
-            </figure>
-          </a>
-
-          <div class="nav-top">
-            <nav>
-              <ul>
-                <li><a href="mailbox.html"><input type="submit" value="&#xf0e0;" class="button"></a></li>
-                <li><a href="cart.html"><input type="submit" value="&#xf07a;" class="button"></a></li>
-                <li><a href="favorite.html"><input type="submit" value="&#xf004;" class="button"></a></li>
-                <li><a href="login.html"><input type="submit" value="&#xf007;" class="button"></a></li>
-              </ul>
-            </nav>
-          </div>
-
-        </div><!-- "rr_wrap" -->
-
-
-      </div><!-- class="r_wrap" -->
-
-
-
-
-
-
-      <div class="nav-buttom">
-        <nav>
-          <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="exhibit.html">出品</a></li>
-            <li><a href="foster_board.html">里親掲示板</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="contest.html">コンテスト</a></li>
-            <li><a href="community.html" class="line-a">コミュニティ</a></li>
-            <li><a href="assignment.html">譲渡会</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-
-
+{% block content %}
 
     <main id="m-sample">
 
@@ -133,7 +74,7 @@
 
             <div class=" c_frame_mc_under">
 
-              <form action="" id="chatform"> 
+              <form action="get" id="chatform" name="chatter"> 
 
 
               <div id="hide_ui_sendimg" class="hide_ui_sendimg">
@@ -199,7 +140,7 @@
 
                 <input type="text" class="chat_input" placeholder="入力してください">
                 <span  id="stamp" class="unknown"></span>
-                <button class="chat_button">送信</button>
+                <button type="submit" class="chat_button">送信</button>
 
               </form>
 
@@ -209,99 +150,8 @@
 
 
         </div><!-- c_frame　終わり -->
-      </div><!-- class="wrap" -->
+              </div><!-- class="wrap" -->
 
     </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <footer>
-
-    <p id="page-top"><a href="#">Top</a></p>
-
-      <div class="footer-wrap">
-
-
-      <div class="rogo-wrap">
-        <figure>
-          <img src="images/rogo.png" alt="rogo">
-        </figure>
-      </div>
-
-
-
-
-      <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">HELP</li>
-            <li><a href="help.html">ヘルプセンター</a></li>
-            <li><a href="inquiry.html">お問い合わせ</a></li>
-            <li><a href="guid.html">ガイド</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-            <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">SETEMAP</li>
-            <li><a href="assignment.html">譲渡会</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="foster_board.html">里親掲示板</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-
-      </div><!-- class="footer_wrap"の終了タグ -->
-
-
-
-
-      <div class="copy-all">
-        2023 &copy; Copyright Titta. All rights reserved.
-      </div>
-
-
-
-    </footer>
-
-
- <!-- jQueryへのリンク -->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
-    <script src="js/community.js"></script>
-
-  </body>
-
-</html>
+        {% endblock %}

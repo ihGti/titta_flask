@@ -1,0 +1,320 @@
+@charset "utf-8";
+
+#userProf{
+    width: 800px;
+    margin: 0 auto;
+}
+
+#userProf #top{
+    display: flex;
+    margin: 50px 0 0 0;
+
+}
+
+#userProf #top #t_left{
+    margin: 0 0 0 40px;
+}
+
+#userProf #top #t_left figure img{
+    border-radius: 100%;
+}
+
+#userProf #top #t_mid{
+    margin: 0 0 0 70px;
+}
+
+#userProf #top #t_mid #userName{
+    font-size: 2rem;
+    margin: 65px 0 0 30px;
+}
+
+#userProf #top #t_mid #eva{
+    display: flex;
+    margin: 43px 0 0 30px;
+}
+
+#userProf #top #t_mid #eva #starBox{
+
+}
+
+#userProf #top #t_mid #eva #starBox span{
+    font-size: 21px;
+}
+
+#userProf #top #t_mid #eva #starBox .s_one{
+    color: yellow;
+}
+#userProf #top #t_mid #eva #starBox .s_two{}
+#userProf #top #t_mid #eva #starBox .s_three{}
+#userProf #top #t_mid #eva #starBox .s_four{}
+#userProf #top #t_mid #eva #starBox .s_five{}
+
+#userProf #top #t_mid #eva p{
+    margin: 3px 0 0 10px;
+}
+
+
+#userProf #top #t_right{
+    margin: 65px 0 0 110px;
+}
+
+#userProf #top #t_right #followBtn{
+    background-color: #fff;
+    color: #E5857B;
+    padding: 5px 25px;
+    border: #E5857B 1px solid;
+    border-radius: 7px;
+    font-size: 1.1rem;
+}
+
+/* --------------- */
+
+#userProf #top_down{
+    display: flex;
+    margin: 50px 0 0 0;
+}
+
+#userProf #top_down #exhibitsNum{
+    font-size: 0.9rem;
+    margin: 0 0 0 80px;
+}
+
+#userProf #top_down #follow{
+    font-size: 0.9rem;
+    margin: 0 0 0 140px;
+}
+
+#userProf #top_down #follower{
+    font-size: 0.9rem;
+    margin: 0 0 0 30px;
+}
+
+
+
+
+
+#itiran{
+    width: 820px;
+    margin: 60px 0 0 10px;
+  }
+  
+  
+  #pro-wrap{
+    margin: 0 0 0 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #fff;
+  }
+  
+  .product{
+    width: 190px;
+    height: 250px;
+    background-color: #F7F7FF;
+    border: #dddddd 1px solid;
+    margin: 10px 0 10px 0;
+  }
+  
+  .product a{
+    margin: 0 auto;
+    text-decoration: none;
+  }
+  
+  .product a .proImg .main {
+    position: relative;
+    margin: 15px 0 0 20px;
+  }
+  
+  .product a .proImg .main img{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  
+  .product a .proImg .main .situ{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 0px;
+  }
+  
+  
+  .product .pro_detail a h2{
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 0.85rem;
+    margin: 15px 0 0 0;
+    text-align: center;
+    padding: 165px 0 0 0;
+  }
+  
+  
+  .product .pro_detail .heart{
+    display: flex;
+  }
+  
+  
+  
+  .product .pro_detail .heart .price{
+    display: flex;
+    margin: 10px 0 0 10px;
+    color: #000;
+    margin: 20px 0 0 20px;
+  }
+  
+  .product .pro_detail .heart figure {
+    margin: 10px 0 0 40px;
+  }
+  .product .pro_detail .heart figure img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 30px;
+  }
+  
+  
+  
+
+
+
+/* -----------もっと見るボタンを押した場合のとこ---------- */
+#pro-wrap-ad{
+    display: none;
+    margin: 0 0 0 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #fff;
+}
+
+
+#btnPosition{
+    text-align: center;
+    margin: 25px 0 0 0;
+}
+
+
+#load-more-button{
+    background-color: #fff;
+    color: #E5857B;
+    padding: 7px 100px;
+    border: #E5857B 2px solid;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------checkbox----- */
+
+.checkbox-001 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5em 2em;
+    border: none;
+  }
+  
+  .checkbox-001 label {
+    display: flex;
+    align-items: center;
+    gap: 0 .5em;
+    position: relative;
+    cursor: pointer;
+    
+    margin: 0 0 20px 40px;
+  }
+
+  .checkbox-001 label p{
+    margin: 2px 0 0 5px;
+  }
+
+  
+  .checkbox-001 label::before,
+  .checkbox-001 label:has(:checked)::after {
+    content: '';
+  }
+  
+  .checkbox-001 label::before {
+    width: 22px;
+    height: 22px;
+    border-radius: 2px;
+    background-color: #fff;
+    border: #999 1px solid;
+  }
+  
+  .checkbox-001 label:has(:checked)::before {
+    background-color: #2589d0;
+  }
+  
+  .checkbox-001 label:has(:checked)::after {
+    position: absolute;
+    left: 9px;
+    transform: rotate(45deg);
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    margin: 0 0 2px 0;
+  }
+  
+  .checkbox-001 input {
+    display: none;
+  }
+
+
+
+
+

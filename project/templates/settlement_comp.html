@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/settlement_comp.css" />
+{% endblock %}
+
+{% block title %}
+-settlement_comp
+{% endblock %}
+
+
+{% block content %}
+    <main id="m-sample">
+      <div class="wrap">
+        <video id="registerd" autoplay muted>
+          <source src="/static/video/settlement_check.mp4" type="video/mp4" />
+        </video>
+
+        <button id="back_login" onclick="location.href='/'">TOPページへ</button>
+      </div>
+    </main>
+{% endblock %}

@@ -1,195 +1,109 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="ja">
+{% block title %}
+{% endblock %}
 
-  <head>
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="static/css/index.css">
+{% endblock %}
 
-      <meta charset="utf-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Titta</title>
-
-    <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
-
-    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
-    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
-
-
-  </head>
-
-
-  <body>
-
-    <header>
-
-
-      <div class="r-wrap">
-
-        <div class="rr-wrap">
-          <a href="/top">
-            <figure>
-              <img src="/static/images/rogo.png" alt="rogo">
-            </figure>
-          </a>
-
-          <div class="nav-top">
-            <nav>
-              <ul>
-                <li><a href="mailbox.html"><input type="submit" value="&#xf0e0;" class="button"></a></li>
-                <li><a href="cart.html"><input type="submit" value="&#xf07a;" class="button"></a></li>
-                <li><a href="favorite.html"><input type="submit" value="&#xf004;" class="button"></a></li>
-                <li>
-                  {% if user.F_ProfileImage %}
-                    <a href="/myprof"><img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;"></a>
-                  {% else %}
-                    <a href="/myprof"><input type="submit" value="&#xf007;" class="button"></a>
-                  {% endif %}
-                </li>
-              </ul>
-            </nav>
-          </div>
-
-
-        </div><!-- "rr-wrap" -->
-
-
-      </div><!-- class="r-wrap" -->
-
-
-
-
-      <div class="nav-buttom">
-        <nav>
-          <ul>
-            <li><a href="/top" class="line-a">HOME</a></li>
-            <li><a href="/exhibit">出品</a></li>
-            <li><a href="foster_board.html">里親掲示板</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="contest.html">コンテスト</a></li>
-            <li><a href="community.html">コミュニティ</a></li>
-            <li><a href="assignment.html">譲渡会</a></li>
-          </ul>
-        </nav>
-      </div>
-
-    </header>
-
-
-
+{% block content %}
 
     <main id="m-sample">
 
-      <section class="index_M_sec1_1">
-        <div id="kisekaeyounoheya">
-          <img src="/static/images/toppage_room.jpg">
-        </div>
-        
-        <div class="index_M_sec1_di_1">
-          <div class="index_M_sec1_di_1_1">
-            <h1>最新の迷子情報</h1>
-            <div>
-              <img src="/static/images/maigotori.png"><br>
-              セキセイインコの男の子
-            </div>
-          </div>
-        </div>
-
-        <div class="index_M_sec1_di_2">
-          <div class="index_M_sec1_di_1_1">
-            <h1>コンテスト情報</h1>
-            <div>
-              <img src="/static/images/maigotori.png"><br>
-              鳥のかわいい角度選手権
-            </div>
-          </div>
-        </div>
-      </section>
-
       <div class="wrap">
+        <section class="index_M_sec1_1">
+          <div class="index_M_sec1_di_1">
+            <div class="index_M_sec1_di_1_1">
+              <h1>最新の迷子情報</h1>
+              <div>
+                <img src="./static/images/maigotori.png"><br>
+                セキセイインコの男の子
+              </div>
+            </div>
+          </div>
+
+          <div class="index_M_sec1_di_2">
+            <div class="index_M_secc1_di_2_1">
+              <h1>今週の注目コンテスト</h1>
+              <img src="./static/images/maigotori.png">
+            </div>
+          </div>
+        </section>
 
         <section class="index_M_sec2_1">
           <div class="index_M_sec2_fl_1">
             <div class="index_M_sec2_di_1">
-              <a href="#" id="loginB"></a>
+              <a href="/login" id="loginB"></a>
+
+            <form method="get" action="#">
 
               <div class="index_M_sec2_di_1_1">
                 <h1>絞り込み</h1>
-                <div>
-                  <p>キーワード</p>
-                  <form method="get" action="#">
-                    <input type="text" placeholder="&nbsp;キーワード検索">
-                  </form>
-                </div>
 
-                <div class="index_M_sec2_fl_1_1_2">
-                  <p>除外ワード</p>
-                  <form method="get" action="#">
-                    <input type="text" placeholder="&nbsp;除外ワード">
-                  </form>
-                </div>
+                    <div class="index_M_sec2_fl_1_1_1">
+                      <p>キーワード</p>
+                        <input type="text" placeholder="キーワード検索" name="word">
+                    </div>
 
-                <div class="index_M_sec2_fl_1_1_3">
-                  <p>カテゴリ</p>
-                  <form method="get" action="#">
-                    <input type="text" placeholder="カテゴリ1">
-                  </form>
-                  <form method="get" action="#">
-                    <input type="text" placeholder="カテゴリ2">
-                  </form>
-                </div>
+                    <div class="index_M_sec2_fl_1_1_2">
+                      <p>除外ワード</p>
+                        <input type="text" placeholder="除外ワード" name="exword">
+                    </div>
 
-                <div class="index_M_sec2_fl_1_1_4">
-                  <p>価格</p>
-                  <div>
-                    <form method="get" action="#">
-                      <input type="text" placeholder="下限">
-                    </form>
-                    <p>～</p>
-                    <form method="get" action="#">
-                      <input type="text" placeholder="上限">
-                    </form>
-                  </div>
-                </div>
+                    <div class="index_M_sec2_fl_1_1_3">
+                      <p>カテゴリ</p>
+                        <input class="catogoinput" type="text" placeholder="カテゴリ1" name="cate1">
+                        <input class="catogoinput" type="text" placeholder="カテゴリ2" name="cate2">
+                    </div>
 
-                <button>検索</button>
+                    <div class="index_M_sec2_fl_1_1_4">
+                      <p>価格</p>
+                      <div>
+                          <input type="text" placeholder="下限" name="lowerprice">
+                        <p>～</p>
+                          <input type="text" placeholder="上限" name="highprice">
+                      </div>
+                    </div>
+                    <button type="submit">検索する</button>
+
               </div>
+                </form>
+              
 
               <div class="index_M_sec2_di_1_2">
                 <h1>ペットから探す</h1>
                 <nav>
                   <ul>
-                    <li><a href="#">犬</a></li>
-                    <li><a href="#">猫</a></li>
-                    <li><a href="#">小動物</a></li>
-                    <li><a href="#">鳥</a></li>
-                    <li><a href="#">爬虫類</a></li>
-                    <li><a href="#">両生類</a></li>
-                    <li><a href="#">昆虫</a></li>
-                    <li><a href="#">淡水魚</a></li>
-                    <li><a href="#">浄水魚</a></li>
+                    <li><a href="/product?dog">犬</a></li>
+                    <li><a href="/product?cat">猫</a></li>
+                    <li><a href="/product?">小動物</a></li>
+                    <li><a href="/product?bird">鳥</a></li>
+                    <li><a href="/product?rep">爬虫類</a></li>
+                    <li><a href="/product">両生類</a></li>
+                    <li><a href="/product">昆虫</a></li>
+                    <li><a href="/product">淡水魚</a></li>
+                    <li><a href="/product">浄水魚</a></li>
                   </ul>
                 </nav>
 
                 <h1>カテゴリから探す</h1>
                 <nav>
                   <ul>
-                    <li><a href="#">ゲージ/水槽</a></li>
-                    <li><a href="#">エサ入れ/水入れ</a></li>
-                    <li><a href="#">首輪/リード/ハーネス</a></li>
-                    <li><a href="#">おもちゃ</a></li>
-                    <li><a href="#">キャリーバッグ</a></li>
-                    <li><a href="#">爪とぎ</a></li>
-                    <li><a href="#">ペット家具</a></li>
-                    <li><a href="#">飼育セット</a></li>
-                    <li><a href="#">照明</a></li>
-                    <li><a href="#">保湿器具</a></li>
-                    <li><a href="#">床材</a></li>
-                    <li><a href="#">シェルター</a></li>
-                    <li><a href="#">湿温度計/サーモスタット</a></li>
-                    <li><a href="#">ピンセット</a></li>
+                    <li><a href="/">ゲージ/水槽</a></li>
+                    <li><a href="/">エサ入れ/水入れ</a></li>
+                    <li><a href="/">首輪/リード/ハーネス</a></li>
+                    <li><a href="/">おもちゃ</a></li>
+                    <li><a href="/">キャリーバッグ</a></li>
+                    <li><a href="/">爪とぎ</a></li>
+                    <li><a href="/">ペット家具</a></li>
+                    <li><a href="/">飼育セット</a></li>
+                    <li><a href="/">照明</a></li>
+                    <li><a href="/">保湿器具</a></li>
+                    <li><a href="/">床材</a></li>
+                    <li><a href="/">シェルター</a></li>
+                    <li><a href="/">湿温度計/サーモスタット</a></li>
+                    <li><a href="/">ピンセット</a></li>
                   </ul>
                 </nav>
               </div>
@@ -202,235 +116,92 @@
               <div>
                 <h1>イベント情報</h1>
                 <div>
-                  <a href="event.html" class="event1_frame"></a>
-                  <a href="event.html" class="event2_frame"></a>
+                  <a href="#" class="event1_frame"></a>
+                  <a href="#" class="event2_frame"></a>
                 </div>
               </div>
 
               <div class="search_from_kinds_of_pet">
                 <h1>ペットの種類から探す</h1>
                 <div class="kind_of_pets_flex">
-                  <a href="#">
-                    <p>犬</p>
-                  </a>
-                  <a href="#">
-                    <p>猫</p>
-                  </a>
-                  <a href="#">
-                    <p>ハム</p>
-                  </a>
-                  <a href="#">
-                    <p>鳥</p>
-                  </a>
-                  <a href="#">
-                    <p>トカゲ</p>
-                  </a>
-                  <a href="#">
-                    <p>カエル</p>
-                  </a>
-                  <a href="#">
-                    <p>ヘビ</p>
-                  </a>
+                  <a href="#"></a>
+                  <a href="#"></a>
+                  <a href="#"></a>
+                  <a href="#"></a>
+                  <a href="#"></a>
+                  <a href="#"></a>
+                  <a href="#"></a>
                 </div>
                 <a href="#">全てのペットを見る</a>
               </div>
 
               <div class="tutorial_choice">
-                <a href="exhibit_trial.html"></a>
+                <a href="#"></a>
                 <a href="#"></a>
               </div>
 
               <div class="search_from_category_of_goods">
                 <h1>商品から探す</h1>
                 <div class="category_of_goods_flex">
-                  <a href="product.html">
+                  <a href="#">
                     <p>ゲージ</p>
                   </a>
-                  <a href="product.html">
+                  <a href="#">
                     <p>エサ入れ</p>
                   </a>
-                  <a href="product.html">
+                  <a href="#">
                     <p>リード</p>
                   </a>
-                  <a href="product.html">
+                  <a href="#">
                     <p>おもちゃ</p>
                   </a>
-                  <a href="product.html">
+                  <a href="#">
                     <p>キャリーバッグ</p>
                   </a>
-                  <a href="product.html">
+                  <a href="#">
                     <p>ペット家具</p>
                   </a>
-                  <a href="product.html">
+                  <a href="#">
                     <p>床材</p>
                   </a>
-                  <a href="product.html">
+                  <a href="#">
                     <p>加湿器</p>
                   </a>
                   </div>
-              <a href="product.html">全ての商品を見る</a>
+              <a href="/product">全ての商品を見る</a>
               </div>
+
+<!-- この下デバッグ用変数の設定、flask側で処理が作れたら消す -->
+              {% set foster = "里親募集" %} 
+              {% set lost = "迷子" %}
+              {% set dogitem = "犬用品" %}
+              {% set catitem = "猫用品" %}
+
 
               <p class="satooyabo">里親掲示板</p>
-
-              <div id="satooya_flex">
-                <a href="foster_board.html" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">里親募集猫１</p>
-                </a>
-                <a href="foster_board.html" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">里親募集猫２</p>
-                </a>
-                <a href="foster_board.html" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">里親募集猫３</p>
-                </a>
-                <a href="foster_board.html" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">里親募集猫４</p>
-                </a>
-              </div>
+               {% with cont = foster %}
+                  {% include "index_flex_module.html" %}
+               {% endwith%}
 
               <p class="satooyabo">迷子掲示板</p>
-
-              <div id="satooya_flex">
-                <a href="lost_petboard.html" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">迷子猫１</p>
-                </a>
-                <a href="lost_petboard.html" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">迷子猫２</p>
-                </a>
-                <a href="lost_petboard.html" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">迷子猫３</p>
-                </a>
-                <a href="lost_petboard.html" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">迷子猫４</p>
-                </a>
-              </div>
+              {% with cont = lost %}
+                 {% include "index_flex_module.html" %}
+              {% endwith%}
 
               <p class="satooyabo">犬用品</p>
-
-              <div id="satooya_flex">
-                <a href="#" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">犬用商品１</p>
-                </a>
-                <a href="#" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">犬用商品２</p>
-                </a>
-                <a href="#" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">犬用商品３</p>
-                </a>
-                <a href="#" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">犬用商品４</p>
-                </a>
-              </div>
+              {% with cont = dogitem %}
+                 {% include "index_flex_module.html" %}
+              {% endwith%}
 
               <p class="satooyabo">猫用品</p>
-
-              <div id="satooya_flex">
-                <a href="#" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">猫用商品１</p>
-                </a>
-                <a href="#" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">猫用商品２</p>
-                </a>
-                <a href="#" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">猫用商品３</p>
-                </a>
-                <a href="#" class="satooyaboshuBox">
-                  <div class="satooyaoseru"></div>
-                  <p class="satooyasagasi_m">猫用商品４</p>
-                </a>
-              </div>
+              {% with cont = catitem %}
+                 {% include "index_flex_module.html" %}
+              {% endwith%}
+              
 
         </section>
-
-
-
       </div><!-- class="wrap" -->
-
-
 
     </main>
 
-
-    <footer>
-
-    <p id="page-top"><a href="#">Top</a></p>
-
-      <div class="footer-wrap">
-
-
-      <div class="rogo-wrap">
-        <figure>
-          <img src="/static/images/rogo.png" alt="rogo">
-        </figure>
-      </div>
-
-
-
-
-      <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">HELP</li>
-            <li><a href="help.html">ヘルプセンター</a></li>
-            <li><a href="inquiry.html">お問い合わせ</a></li>
-            <li><a href="guid.html">ガイド</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-            <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">SETEMAP</li>
-            <li><a href="assignment.html">譲渡会</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="foster_board.html">里親掲示板</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-
-      </div><!-- class="footer-wrap"の終了タグ -->
-
-
-
-
-      <div class="copy-all">
-        2023 &copy; Copyright Titta. All rights reserved.
-      </div>
-
-
-
-    </footer>
-
-
-<!-- jQueryへのリンク -->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="/static/js/common.js"></script>
-
-  </body>
-
-</html>
+{% endblock %}

@@ -1,0 +1,15 @@
+            {% set a = ["img", "syurui", "seibetu", "syozai", "oubokanoutiiki"] %}
+                  <div class="post">
+                    <a href="/foster_detail">
+                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+                      <figure>
+                        <img src="/static/images/rogo.png" alt="sample">
+                      </figure>
+                      <h3>投稿タイトル</h3>
+                      <p><span>種類</span>{{ a[1] }}</p>
+                      <p><span>性別</span>{{ a[2] }}</p>
+                      <p><span>所在地</span>{{ a[3] }}</p>
+                      <p><span>応募可能地域</span></p>
+                      <p id="brbr">{{ a[4] }}</p>
+                    </a>
+                  </div><!-- class="post" -->

@@ -1,0 +1,241 @@
+@charset "utf-8";
+
+#right{
+    width: 800px;
+    margin: 0 auto;
+}
+
+  
+#right h2{
+    width: 170px;
+    text-align: center;
+    margin: 40px 0 0 70px;
+    font-size: 1.8rem;
+    font-weight: 500;
+    border-bottom: #000 2px solid;
+    padding: 0 0 5px 0;
+}
+
+#allbox{
+    width: 740px;
+    margin: 30px auto 0 auto;
+    background-color: #fff;
+    padding: 10px 0 0 0;
+}
+
+#allbox #tradedUser{
+    font-size: 0.8rem;
+    margin: 10px 0 0 73%;
+    padding: 0 0 0 20px;
+}
+
+
+
+.minibox{
+    width: 700px;
+    margin: 0 auto;
+    padding: 30px 0;
+    display: flex;
+    border-bottom: #000 1px solid;
+}
+.minibox:last-child{
+    width: 700px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    border-bottom: none;
+}
+
+.minibox a{
+    height: 170px;
+}
+
+.minibox a:hover{
+    opacity: 0.8;
+}
+
+.minibox a figure{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 5px 0 0 0;
+}
+
+.minibox a figure img{
+    width: 170px;
+}
+
+
+.minibox .detailbox{
+    margin: 0 0 0 80px;
+}
+
+.minibox .detailbox a{
+    text-decoration: none;
+    color: #000;
+}
+
+.minibox .detailbox a p{
+    font-size: 1.3rem;
+    margin: 55px 0 0 0;
+}
+
+
+.minibox .detailbox .price{
+    margin: 30px 0 0 0;
+    font-size: 0.9rem;
+}
+
+
+.minibox .othersbox{
+    margin: 0 0 0 130px;
+    border: #000 1px solid;
+}
+
+.minibox .othersbox .userbox{
+    margin: 0 auto;
+    width: 180px;
+    height: 160px;
+}
+  
+.minibox .othersbox .userbox .top{
+    margin: 0px auto 0 auto;
+}
+  
+.minibox .othersbox .userbox .top a figure{
+    margin: 20px auto 0px auto;
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+  
+.minibox .othersbox .userbox .top a figure img{
+    width: 100%;
+    height: 100%;
+}
+  
+.minibox .othersbox .userbox .mid a{
+    color: #000;
+    text-decoration: none;
+}
+  
+.minibox .othersbox .userbox .mid a #name{
+    font-size: 1rem;
+    text-align: center;
+    margin: 20px 0 0 0;
+}
+  
+
+
+
+
+
+
+
+
+
+
+/* ここまで履歴 */
+
+
+
+/* ↓ページ遷移リンクの設定 */
+
+#num {
+    width: 480px;
+    margin: 50px auto 40px auto;
+    font-size: 0.9rem;
+
+}
+
+#num p {
+    font-size: 0.8rem;
+    margin: 0 0 15px 0;
+    text-align: center;
+    color: #7D8BAE;
+}
+
+#numpage {
+    display: flex;
+    justify-content: space-around;
+}
+
+#numpage #before {
+    margin: 13px 10px 0 0;
+}
+
+#numpage #before a {
+    padding: 8px 10px 8px 15px;
+    border: #7D8BAE 1px solid;
+    white-space: nowrap;
+    height: 42px;
+    text-decoration: none;
+    color: #7D8BAE;
+}
+
+#numpage #before a:hover {
+    text-decoration: none;
+    background-color: #7D8BAE;
+    color: #fff;
+}
+
+#num_list {
+    text-align: center;
+    margin: 13px 0 0 0;
+}
+
+#num_list ul {
+    display: flex;
+    justify-content: center;
+}
+
+#num_list ul li {
+    text-decoration: none;
+    list-style: none;
+    justify-content: space-around;
+    padding: 0 12px;
+}
+
+#num_list ul li a {
+    color: #7D8BAE;
+    padding: 8px 20px;
+    border: #7D8BAE 1px solid;
+    text-decoration: none;
+}
+
+#num_list ul li a:hover {
+    color: #fff;
+    background-color: #7D8BAE;
+    padding: 8px 20px;
+    border: #7D8BAE 1px solid;
+    text-decoration: none;
+}
+
+#num_list ul #ittan-color a {
+    background-color: #7D8BAE;
+    color: white;
+}
+
+
+
+
+
+#numpage #after {
+    margin: 13px 0 0 5px;
+}
+
+#numpage #after a {
+    padding: 8px 15px 8px 10px;
+    border: #7D8BAE 1px solid;
+    white-space: nowrap;
+    height: 42px;
+    color: #7D8BAE;
+    text-decoration: none;
+}
+
+#numpage #after a:hover {
+    color: #fff;
+    background-color: #7D8BAE;
+}

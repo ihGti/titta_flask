@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/user_profile.css">
+{% endblock%}
+
+
+{% block title %}
+-user_profile
+{% endblock %}
+
+{% set user= ["user[0]", "user[1]", "user[2]", "user[3]", "user[4]"]%}
+
+
+
+{% block content %}
+
+    <main id="m-user_profile">
+
+      <div class="wrap">
+
+        <div id="userProf">
+          <div id="top">
+
+            <div id="t_left">
+              <figure>
+                <img src="/static/images/default-icon.jpg" alt="icon">
+              </figure>
+            </div>
+
+            <div id="t_mid">
+              <div id="userName"><!--ユーザー名ここ-->
+                {{ user[1] }}
+              </div>
+
+              <div id="eva">
+                <div id="starBox"><!--評価数を表す星-->
+                  <span class="s_one">&#9733;</span>
+                  <span class="s_two">&#9733;</span>
+                  <span class="s_three">&#9733;</span>
+                  <span class="s_four">&#9733;</span>
+                  <span class="s_five">&#9733;</span>
+                </div>
+
+                <p>{{ user[1] }}</p><!--ココ、評価数、この数字後で{{count}}に変更-->
+              </div>
+            </div>
+
+            <div id="t_right">
+              <input type="button" id="followBtn" value="＋ フォロー">
+            </div>
+
+            
+          </div>
+
+          <div id="top_down">
+            <div id="exhibitsNum"><p>{{ user[2] }}出品数</p></div><!-- ココの20000をに変えるからいずれ消す -->
+
+            <div id="follow">{{ user[3] }}フォロー</div><!--後で0消す-->
+            <div id="follower">{{ user[4] }}フォロワー</div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+          <div id="itiran">
+            <fieldset class="checkbox-001">
+              <label>
+                  <input type="checkbox" name="checkbox-001" checked/>
+                  <p>出品中のみ表示</p>
+              </label>
+            </fieldset>
+
+            <div id="pro-wrap">
+
+{% for i in range(12)%}
+
+              <div class="product">
+                <a href="/"><!-- 商品詳細ページへ -->
+                  <div class="proImg">
+                    <figure class="main">
+                      <img src="/static/images/bed.jpg" alt="サンプル画像">
+                    </figure>
+                  </div>
+                </a>
+
+                <div class="pro_detail">
+                  <a href="/"><!-- 商品詳細ページへ -->
+                    <h2>ペット用クールベッド ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  </a>
+
+                  <div class="heart">
+                    <div class="price">
+                      <h5>
+                        ￥<!--ココは固定-->
+                      </h5>
+                      <p>
+                        6,980<!--ココ、商品の値段入れて-->
+                      </p>
+                    </div>
+                      
+                    <figure>
+                      <img src="/static/images/heart.png" alt="いいね">
+                    </figure><!--クリックしてアニメーションつけるなら変更しないといけない。-->
+                  </div>
+                </div>
+
+              </div>
+              {% endfor %}
+
+
+
+            </div><!-- pro-wrap -->
+
+<!---------------------------------------------------->
+
+            <div id="pro-wrap-ad" style="display: none;"><!-- ココ、ボタンを押すと追加で出てくるとこ -->
+
+              <div class="product">
+                <a href="/"><!-- 商品詳細ページへ -->
+                  <div class="proImg">
+                    <figure class="main">
+                      <img src="images/bed.jpg" alt="サンプル画像">
+                    </figure>
+                  </div>
+                </a>
+
+                <div class="pro_detail">
+                  <a href="/"><!-- 商品詳細ページへ -->
+                    <h2>ペット用クールベッド ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  </a>
+
+                  <div class="heart">
+                    <div class="price">
+                      <h5>
+                        ￥<!--ココは固定-->
+                      </h5>
+                      <p>
+                        6,980<!--ココ、商品の値段入れて-->
+                      </p>
+                    </div>
+                      
+                    <figure>
+                      <img src="images/heart.png" alt="いいね">
+                    </figure><!--クリックしてアニメーションつけるなら変更しないといけない。-->
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div id="btnPosition">
+              <input type="button" id="load-more-button" value="もっと見る">
+            </div>
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+      </div><!-- class="wrap" -->
+
+    </main>
+
+
+
+
+{% endblock %}

@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="/static/css/exhibit.css">
+    <link rel="stylesheet" type="text/css" href="static/css/exhibit.css">
 {% endblock %}
 
 {% block content %}
-  <form method="post" enctype="multipart/form-data" id="imageForm">
+  <form action="" method="">
 
     <main id="m-sample">
 
@@ -23,49 +23,29 @@
 
         <div id="herf">
           <div id="img">
-            <figure>
-              <img src="/static/images/img1.jpg" alt="big" id="bigimg">
-              <input type="file" class="button" id="imageinput1" name="imageinput1" style="display: none;" onchange="previewImage('imageinput1','bigimg')">
-              <label class="button" for="imageinput1">&#xf03e;</label>
-            </figure>
-            <!-- <div id="btndiv">
-              <button id="btn" name="selectimg">画像選択</button>
-            </div> -->
+              <figure><img src="/static/images/img1.jpg" alt="big" id="bigimg"></figure>
+              <div id="btndiv">
+                <button id="btn" name="selectimg">画像選択</button>
+              </div>
             <div id="minidiv">
-              <figure>
-                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="secondimage">
-                <input type="file" class="button" id="imageinput2" name="imageinput2" style="display: none;" onchange="previewImage('imageinput2','secondimage')">
-                <label class="button" for="imageinput2">&#xf03e;</label>
-              </figure>
-              <figure>
-                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="thirdimage">
-                <input type="file" class="button" id="imageinput3" name="imageinput3" style="display: none;" onchange="previewImage('imageinput3','thirdimage')">
-                <label class="button" for="imageinput3">&#xf03e;</label>
-              </figure>
-              <figure>
-                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="fourimage">
-                <input type="file" class="button" id="imageinput4" name="imageinput4" style="display: none;" onchange="previewImage('imageinput4','fourthimage')">
-                <label class="button" for="imageinput4">&#xf03e;</label>
-              </figure>
-              <figure>
-                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="fifthimage">
-                <input type="file" class="button" id="imageinput5" name="imageinput5" style="display: none;" onchange="previewImage('imageinput5','fifthimage')">
-                <label class="button" for="imageinput5">&#xf03e;</label>
-              </figure>
+              <figure><img src="/static/images/img1.jpg" alt="mini" class="miniimg"></figure>
+              <figure><img src="/static/images/img1.jpg" alt="mini" class="miniimg"></figure>
+              <figure><img src="/static/images/img1.jpg" alt="mini" class="miniimg"></figure>
+              <figure><img src="/static/images/img1.jpg" alt="mini" class="miniimg"></figure>
             </div>
           </div>
           <div id="form">
             <div id="inform">
               <div>
-                <label for="title">タイトル</label><input type="text" id="title" name="title">
+                <label>タイトル</label><input type="text" id="title" name="title">
               </div>
               <div>
-                <section class="sec"><label class="areatag" for="setumei">商品説明</label></section>
+                <section class="sec"><label class="areatag">商品説明</label></section>
                 <textarea id="setumei" name="setumei"></textarea>
               </div>
               <div id="form-2">
                 <div>
-                  <label for="situation">商品状態</label>
+                  <label>商品状態</label>
                   <select name="situation">
                     <option value="">選択してください</option>
                     <option value="新品">新品</option>
@@ -76,31 +56,31 @@
                 </div>
 
                 <div>
-                  <label for="deli">配達方法</label>
+                  <label>配達方法</label>
                   <select name="deli">
                     <option value="">選択してください</option>
-                    <option value="郵便">郵便</option>
-                    <option value="レターパック">レターパック</option>
-                    <option value="Titta便">Titta便</option>
-                    <option value="ゆうパック">ゆうパック</option>
+                    <option value="手段1">手段1</option>
+                    <option value="手段2">手段2</option>
+                    <option value="手段3">手段3</option>
+                    <option value="手段4">手段4</option>
                   </select>
                 </div>
                 
                 <div>
-                  <label for="genre">ジャンル</label>
+                  <label>ジャンル</label>
                   <select name="genre">
                     <option value="">選択してください</option>
                     {% for genre in range(5) %}
-                    <option value="{{ genre }}">{{genre}}</option>
+                    <option value={{ genre }}>{{genre}}</option>
                     {% endfor %}
                   </select>
                 </div>
                 <div>
-                  <label for="kane">￥</label><input type="text" id="kane" name="kane">
+                  <label>￥</label><input type="text" id="kane" name="kane">
                 </div>
               </div>
               <div>
-                <section class="sec"><label id="labtag" class="areatag" for="tag">タグ</label></section><textarea id="tag" name="tag" placeholder="#タグ"></textarea>
+                <section class="sec"><label id="labtag" class="areatag">タグ</label></section><textarea id="tag" name="tag" placeholder="#タグ"></textarea>
               </div>
             
             </div>
@@ -108,13 +88,10 @@
         </div>
 
 
-        <input type="submit"  id="button1" value="出品確認画面へ〉">
+        <button type="submit"  id="button1">出品確認画面へ〉</button>
       </div><!-- class="wrap" -->
 
     </main>
-  </form>
+        </form>
 
         {% endblock %}
-        {%block js%}
-          <script src="/static/js/exhibit.js"></script>
-        {%endblock%}
