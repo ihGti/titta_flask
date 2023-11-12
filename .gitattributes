@@ -1,1 +1,2 @@
 migrations/* -text
+migrations/versions/*.py text eol=lf

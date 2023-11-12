@@ -43,6 +43,7 @@ class T_User(db.Model,UserMixin):
         return str(self.F_UserID)
     
 
+# 出品・お試し出品用のテーブル
 class T_Exhibit(db.Model):
     
     F_ExID = db.Column(db.Integer, primary_key=True)
@@ -71,11 +72,13 @@ class T_Exhibit(db.Model):
     
     F_EXhibitType = db.Column(db.Integer, nullable=False)
     
+    F_ExTime = db.Column(db.DateTime, default=datetime.utcnow)
+    
     F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
     
-    
+    F_CategoryID = db.Column(db.Integer, db.ForeignKey('t__category.F_CategoryID'), nullable=False)
 
-
+# ユーザーのフォロー関連のテーブル
 class T_Paramerter(db.Model):
     F_ID = db.Column(db.Integer, primary_key=True)
     F_userid = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
@@ -86,7 +89,16 @@ class T_Paramerter(db.Model):
     friend = db.relationship('T_User', foreign_keys=[F_friendid])
     
 
+# 商品カテゴリーのテーブル
 class T_Category(db.Model):
     F_CategoryID = db.Column(db.Integer, primary_key=True)
     
     F_CategoryName = db.Column(db.String(256), unique=True , nullable=False)
+    
+    exhibits = db.relationship('T_Exhibit', backref='T_Category',lazy=True)
+    
+    def __repr__(self):
+        return f'<Category {self.F_CategoryName}>'
+    
+
+

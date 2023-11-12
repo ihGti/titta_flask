@@ -1,22 +1,40 @@
+# flask部品の取り込み
 from flask import Flask , request , redirect , render_template , Blueprint , current_app , url_for
+# flask-loginライブラリの取り込み
 from flask_login import login_user, login_required, logout_user, current_user
+# パスワードのセキュリティ関連のライブラリ
 from werkzeug.security import generate_password_hash, check_password_hash
+# 画像のファイル名を保護
 from werkzeug.utils import secure_filename
+# db接続に使う(更新・追加・削除)
 from project import db , create_app
-from project.models import T_User , T_Exhibit , T_Paramerter
+# models.pyで定義したテーブル
+from project.models import T_User , T_Exhibit , T_Paramerter , T_Category
+
 import os
+# 時間の制約
 from datetime import datetime
 
+# 画面表示する
 bp = Blueprint('main',__name__)
 
-app = Flask(__name__)
+# app = Flas
+# k(__name__)
 # トップページ
 @bp.route("/top")
+# loginしていないと表示できないページが
+# login情報の保持
 @login_required
 def index():
     return render_template("index.html" , username=current_user.F_UserName , user=current_user)
 
 
+# logout
+@bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/login')
 
 # user関連
 # 会員登録
@@ -144,6 +162,7 @@ def user_prof(user_id):
     following_count = T_Paramerter.query.filter_by(user_id=user.id).count()
     return render_template("user_profile.html",user=user, friends=friends , followers_count=followers_count , following_count=following_count)
 
+# フォロー関連
 @bp.route("/add_friend/<int:user_id>",methods=['POST'])
 @login_required
 def add_friend(user_id):
@@ -162,14 +181,15 @@ def add_friend(user_id):
 
 # 出品関連
 # 本出品
-@bp.route("/exhibit" , methods=['POST'])
+@bp.route("/upload" , methods=['POST'])
 def exhibit():
-    user=current_user
     
-    for i in range(1,5):
-        file = request.files[f'imageinput{i}']
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(current_app.config['UPLOAD_FOLDER_EXHIBIT'], filename))
+    for i in range(1,6):
+        file = request.files.get(f'imageinput{i}')
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER_TOREDO'], filename))
+        
         
         if i == 1:
             exhibit = T_Exhibit(F_ExPhoto=filename)
@@ -188,27 +208,60 @@ def exhibit():
     
     title = request.form.get('title')
     
+    info = request.form.get('setumei')
+    
     situation = request.form.get('situation')
     
     deli = request.form.get('deli')
     
-    # genre = request.form.get('genre')
+    genre = request.form.get('genre')
+    
+    category = T_Category.query.get(genre)
     
     many = request.form.get('kane')
     
     tag = request.form.get('tag')
     
+    exhibit.F_ExTitle = title
     
-    return render_template("exhibit.html", user=user)
+    exhibit.F_ExInfo = info
+    
+    exhibit.F_ExDeli = deli
+    
+    exhibit.F_CategoryID = category.F_CategoryID
+    
+    exhibit.F_ExPrice = many
+    
+    exhibit.F_ExTag = tag
+    
+    exhibit.F_ExSit = situation
+    
+    exhibit.F_EXhibitType = 1
+    
+    exhibit.F_UserID = current_user.F_UserID
+    
+    db.session.add(exhibit)
+    db.session.commit()
+    
+    return redirect('/exhibit_con')
 
-@bp.route('/upload_page', methods=['GET'])
+# 出品
+@bp.route('/exhibit', methods=['GET'])
+@login_required
 def upload_page():
-    return render_template('exhibit.html')
+    categories = T_Category.query.all()
+    return render_template('exhibit.html' , user=current_user , categories=categories)
 
-# 出品完了
+# 出品確認
 @bp.route("/exhibit_con")
 def exhibit_con():
-    return render_template("exhibit_con.html")
+    exhibit = T_Exhibit.query.filter_by(F_UserID = current_user.F_UserID)
+    return render_template("exhibit_con.html" , exhibit=exhibit)
+
+# 出品完了
+@bp.route("/exhibit_comp")
+def exhibit_comp():
+    return render_template("exhibit_comp.html")
 
 # お試し出品
 @bp.route("/exhibit_trial")
@@ -219,6 +272,7 @@ def exhibit_trial():
 # 商品一覧
 @bp.route("/product")
 def product():
+    
     return render_template("product.html")
 
 # 商品詳細

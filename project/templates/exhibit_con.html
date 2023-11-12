@@ -11,9 +11,9 @@
     <title>出品確認</title>
 
     <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/exhibit_con.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/exhibit_con.css">
 
     <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
     <!-- <link rel="stylesheet" type="text/css" href="css/ xxx.css"> -->
@@ -34,7 +34,7 @@
           <!-- index.htmlへ遷移 -->
           <a href="/">
             <figure>
-              <img src="images/rogo.png" alt="rogo">
+              <img src="/static/images/rogo.png" alt="rogo">
             </figure>
           </a>
 
@@ -92,40 +92,40 @@
 
         <div id="herf">
           <div id="img">
-              <figure><img src="images/img1.jpg" alt="big" id="bigimg"></figure>
+              <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhoto)}}" alt="big" id="bigimg"></figure>
 
             <div id="minidiv">
-              <figure><img src="images/img1.jpg" alt="mini" class="miniimg"></figure>
-              <figure><img src="images/img1.jpg" alt="mini" class="miniimg"></figure>
-              <figure><img src="images/img1.jpg" alt="mini" class="miniimg"></figure>
-              <figure><img src="images/img1.jpg" alt="mini" class="miniimg"></figure>
+              <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoS)}}" alt="mini" class="miniimg"></figure>
+              <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoT)}}" alt="mini" class="miniimg"></figure>
+              <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoH)}}" alt="mini" class="miniimg"></figure>
+              <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoF)}}" alt="mini" class="miniimg"></figure>
             </div>
           </div>
           <div id="form">
             <form>
               <div>
-                <label>タイトル</label><input type="text" id="title" name="title" value="猫タワー" disabled>
+                <label>タイトル</label><p>{{ exhibit.F_ExTitle }}</p>
               </div>
               <div>
                 <section class="sec"><label class="areatag">商品説明</label></section>
-                <textarea id="setumei" name="setumei" disabled>ただの猫タワーです</textarea>
+                <p>{{exhibit.F_ExInfo}}</p>
               </div>
               <div id="form-2">
                 <div class="henka">
-                  <label>商品状態</label><input type="text" id="syouhin" name="syouhin" value="良好" disabled>
+                  <label>商品状態</label><p>{{exhibit.F_ExSit}}</p>
                 </div>
                 <div class="henka">
-                  <label>配達方法</label><input type="text" id="haitatu" name="haitatu" value="郵便" disabled>
+                  <label>配達方法</label><p>{{exhibit.F_ExDeli}}</p>
                 </div>
                 <div class="henka">
-                  <label>ジャンル</label><input type="text" id="zyanru" name="zyanru" value="猫/おもちゃ" disabled>
+                  <label>ジャンル</label><p>{{exhibit.F_CategoryName}}</p>
                 </div>
                 <div>
-                  <label>￥</label><input type="text" id="kane" name="kane" value="1200" disabled>
+                  <label>￥</label><p>{{exhibit.F_ExPrice}}</p>
                 </div>
               </div>
               <div>
-                <section class="sec"><label id="labtag" class="areatag">タグ</label></section><textarea id="tag" name="tag" placeholder="#タグ" disabled>#猫,#猫タワー,#おもちゃ</textarea>
+                <section class="sec"><label id="labtag" class="areatag">タグ</label></section><p>{{exhibit.F_ExTag}}</p>
               </div>
             </form>
           </div>
@@ -133,9 +133,9 @@
 
         <div id="btn12">
           <!-- index.htmlへ遷移 -->
-          <a href="/" id="button1">出品をやめる　〉</a>
+          <a href="/top" id="button1">出品をやめる　〉</a>
           <!-- exhibit._compへ遷移 -->
-          <a href="/" id="button2">出品を確定する　〉</a>
+          <a href="/exhibit_comp" id="button2">出品を確定する　〉</a>
         </div>
 
       </div><!-- class="wrap" -->
@@ -231,7 +231,7 @@
  <!-- jQueryへのリンク -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
+    <script src="/static/js/common.js"></script>
 
   </body>
 
