@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-  <form action="/exhibit" method="post">
+  <form action="/upload" method="post" enctype="multipart/form-data" id="imageForm">
 
     <main id="m-sample">
 
@@ -70,8 +70,8 @@
                   <label>ジャンル</label>
                   <select name="genre">
                     <option value="">選択してください</option>
-                    {% for genre in range(5) %}
-                    <option value={{ genre }}>{{genre}}</option>
+                    {% for category in categories %}
+                    <option value="{{ category.F_CategoryID }}">{{ category.F_CategoryName }}</option>
                     {% endfor %}
                   </select>
                 </div>

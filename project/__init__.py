@@ -15,9 +15,9 @@ def create_app(config_filename='config.py'):
     migrate.init_app(app, db)
     login_manager.init_app(app)
     app.config['UPLOAD_FOLDER'] = 'project/static/prof_image'
-    app.config['UPLOAD_FOLDER_EXHIBIT'] = 'project/static/exhibit'
-    app.config['UPLOAD_FOLDER_DEMOEXHIBIT'] = 'project/static/demo_exhibit'
-    from project.models import T_User , T_Exhibit , T_Paramerter
+    app.config['UPLOAD_FOLDER_TOREDO'] = 'project/static/toredo'
+    app.config['UPLOAD_FOLDER_DEMOEXHIBIT'] = 'project/static/demo_toredo'
+    from project.models import T_User , T_Exhibit , T_Paramerter , T_Category
 
     @login_manager.user_loader
     def load_user(user_id):
