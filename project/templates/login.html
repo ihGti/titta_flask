@@ -1,85 +1,47 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="ja">
+{% block title %}
+-login
+{% endblock %}
 
-  <head>
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="static/css/login.css">
+{% endblock %}
 
-      <meta charset="utf-8">
+{% block content %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Titta</title>
-
-    <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css')}}">
-
-    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css')}}">
-
-
-  </head>
-
-
-  <body>
-
-    <main id="m-login">
+    <main id="m-sample">
 
       <div class="wrap">
-
-
-        <div id="left">
-          <div id="site-image">
-            <figure>
-              <img src="/static/images/rogo.png" alt="rogo">
-            </figure>
-          </div>
+        <div id="site-image">
+          <figure>
+            <img src="./static/images/rogo.png" alt="rogo">
+          </figure>
         </div>
 
-        
+        <div id="vartical-line"></div>
 
-        <div id="right">
+        <div id="login-form">
+          <form method="post" action="/">
+            <h1>LOGIN</h1>
 
-          <div id="login-form">
-            <form method="post">
-              <h1>LOGIN</h1>
+            <label for="email">
+              <p>メールアドレス</p>
+              <input type="email" name="email" id="email" autocomplete="off">
+            </label>
 
-              <label for="email">
-                <p>メールアドレス</p>
-                <input type="email" name="email" id="email" autocomplete="off">
-              </label>
+            <label for="password">
+              <p>パスワード</p>
+              <input type="password" name="password" id="password" autocomplete="off">
+            </label>
 
-              <label for="password">
-                <p>パスワード</p>
-                <input type="password" name="password" id="password" autocomplete="off">
-              </label>
+            <input type="submit" value="ログインする" id="bottun">
+          </form>
 
-              <input type="submit" value="ログインする" id="bottun">
-            </form>
-
-            <a href="/signup">会員登録はこちら</a>
-          </div>
+          <a href="/signup">会員登録はこちら</a>
         </div>
-
       </div><!-- class="wrap" -->
 
     </main>
 
-
-    <footer>
-
-      <div class="copy-all">
-        2023 &copy; Copyright Titta. All rights reserved.
-      </div>
-
-    </footer>
-
-
- <!-- jQueryへのリンク -->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='js/signin.js')}}"></script>
-
-  </body>
-
-</html>
+{% endblock %}

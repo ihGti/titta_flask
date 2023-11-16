@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block css%}
+    <link rel="stylesheet" type="text/css" href="/static/css/my_prof_left.css">
+    <!-- ↑左のサイドバーのcss -->
+    <!-- ↓ここ編集 -->
+    <link rel="stylesheet" type="text/css" href="/static/css/petpublish_history.css">
+{% endblock %}
+
+
+{%block title%}
+-petpublish_history
+{% endblock%}
+
+{% block content%}
+
+    <main id="m-my_profile">
+
+      <div class="wrap">
+{% include "myside.html" %}
+
+
+
+
+
+
+
+        <!-- ↓ここに入力してって -->
+
+
+        <div id="right"><!-- 右  -->
+
+          <div id="title">
+            <h2>掲載履歴</h2>
+          </div>
+
+          
+          <div id="yoko">
+
+            <fieldset class="checkbox-001">
+              <label>
+                  <input type="checkbox" name="checkbox-001" checked/>
+                  里親募集ペット表示
+              </label>
+            </fieldset>
+
+            <fieldset class="checkbox-001">
+              <label>
+                  <input type="checkbox" name="checkbox-001" checked/>
+                  迷子ペット表示
+              </label>
+            </fieldset>
+
+          </div>
+
+
+
+          <div id="itiran">
+            <div id="pagesuu">
+              <p>約6917件中</p>
+              <p id="nasi">1-7件</p><!--同じく-->
+            </div>
+
+            <div id="pro-wrap">
+
+
+{% for i in range(12) %}
+              <div class="product">
+                <a href="/"><!-- 商品詳細ページへ -->
+                  <div class="proImg">
+                    <figure class="main">
+                      <img src="/static/images/bed.jpg" alt="サンプル画像">
+                      <img src="/static/images/oya_icon.png" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                    </figure>
+                  </div>
+                </a>
+
+                <div class="pro_detail">
+                  <a href="/"><!-- 商品詳細ページへ -->
+                    <h2></h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  </a>
+
+                  <div class="heart">
+                    <figure>
+                      <img src="/static/images/me_transparent.png" alt="いいね">
+                    </figure>
+                    <div class="price">
+                      <p>
+                        6,980<!--ココ、商品の値段入れて-->
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+{% endfor %}
+<!-- 迷子画像サンプル 消してくれ -->
+              <div class="product">
+                <a href="/"><!-- 商品詳細ページへ -->
+                  <div class="proImg">
+                    <figure class="main">
+                      <img src="/static/images/bed.jpg" alt="サンプル画像">
+                      <img src="/static/images/maigo_icon.png" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                    </figure>
+                  </div>
+                </a>
+
+                <div class="pro_detail">
+                  <a href="/"><!-- 商品詳細ページへ -->
+                    <h2>説明</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  </a>
+
+                  <div class="heart">
+                    <figure>
+                      <img src="/static/images/me_transparent.png" alt="いいね">
+                    </figure>
+                    <div class="price">
+                      <p>
+                        6,980<!--ココ、商品の値段入れて-->
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+            </div>
+
+          </div>
+
+          <div id="num">
+            <p>全 30 件中 1 - 20 件を表示</p>
+            <div id="numpage">
+              <div id="before"><a href="#">＜ 前へ</a></div>
+
+              <div id="num_list">
+                <ul>
+                  <li id="ittan-color"><a href="./product.html">1</a></li>
+                  <li><a href="./num_two.html">2</a></li>
+                  <li><a href="./num_three.html">3</a></li>
+                  <li><a href="./num_for.html">4</a></li>
+                  <li><a href="./num_five.html">5</a></li>
+                </ul>
+              </div>
+
+              <div id="after"><a href="#">次へ ＞</a></div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+      </div><!-- class="wrap" -->
+
+    </main>
+
+
+{% endblock %}

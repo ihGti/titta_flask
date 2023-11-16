@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/my_prof_left.css">
+    <!-- ↑左のサイドバーのcss -->
+    <!-- ↓ここ編集 -->
+    <link rel="stylesheet" type="text/css" href="/static/css/earnings_history.css">
+{% endblock %}
+
+{% block title %}
+-earnings_history
+{% endblock %}
+
+
+
+{% block content%}
+    <main id="m-my_profile">
+
+      <div class="wrap">
+
+
+        {% include "myside.html" %}
+
+
+
+
+
+        <!-- ↓ここに入力してって -->
+
+
+        <div id="right"><!-- 右  -->
+
+          <h2>売上履歴</h2>
+
+          <div id="allbox">
+            
+            <p id="tradedUser">取引したユーザー</p>
+            
+
+{% set a = ["a[0]", "a[1]", "a[2]", "/static/images/petkagu.jpg"] %}
+
+            {% for i in range(5)%}
+            <div class="minibox">
+
+              <a href="/product_detail?id={{i}}">
+                <figure>
+                  <img src="{{a[3]}}" alt="閲覧履歴商品画像"><!-- ここに過去に閲覧した商品の画像が出力される -->
+                </figure>
+              </a>
+
+              <div class="detailbox">
+                <a href="/product_detail?id={{i}}"><p>{{ a[0] }}</p></a><!--いずれ文字を消してで入れるようにする-->
+                <p class="price">売上利益　￥{{a[1]}} </p><!-- 2000は消して -->
+              </div>
+
+              <div class="othersbox">
+                <div class="userbox"><!--取引したユーザー情報がここにでる(移動先他者プロフ)-->
+                  <div class="top">
+                    <a href="/user_profile?id={{i}}">
+                      <figure><img id="account-icon" src="/static/images/default-icon.jpg" alt="デフォルトアイコン"></figure><!-- ユーザーアイコン -->
+                    </a>
+                  </div>
+      
+                  <div class="mid"><a href="/user_profile?id={{i}}"><p id="name">{{i}}</p></a></div><!-- ユーザーネーム -->
+
+                </div>
+              </div>
+
+            </div>
+
+            {% endfor %}
+
+
+
+
+          </div>
+          <!-- ここまでが履歴 -->
+
+
+          <div id="num"><!-- ページ遷移リンク -->
+            <p>全 30 件中 1 - 20 件を表示</p><!-- ここ、数字のところこいつ使うかも -->
+            <div id="numpage">
+              <div id="before"><a href="#">＜ 前へ</a></div>
+          
+              <div id="num_list">
+                <ul>
+                  <li id="ittan-color"><a href="/product">1</a></li><!-- 現在位置 -->
+                  <li><a href="./num_two.html">2</a></li><!-- 2page -->
+                  <li><a href="./num_three.html">3</a></li><!-- 3page -->
+                  <li><a href="./num_for.html">4</a></li><!-- 4page -->
+                  <li><a href="./num_five.html">5</a></li><!-- 5page -->
+                </ul>
+              </div>
+          
+              <div id="after"><a href="#">次へ ＞</a></div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+
+      </div><!-- class="wrap" -->
+
+    </main>
+
+
+{% endblock %}

@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
+<<<<<<< HEAD
 <html lang="ja">
 
   <head>
@@ -14,11 +15,20 @@
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/static/css/common.css">
     <link rel="stylesheet" type="text/css" href="/static/css/exhibit_con.css">
+=======
+{% block title %}
+-exhibit_con
+{% endblock %}
+>>>>>>> d07d9d0e9d4482a60ae524e77efa62fdd6f66cf5
 
+{% block css%}
+    <link rel="stylesheet" type="text/css" href="/static/css/exhibit_con.css">
+{% endblock %}
     <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
     <!-- <link rel="stylesheet" type="text/css" href="css/ xxx.css"> -->
 
 
+<<<<<<< HEAD
   </head>
 
 
@@ -81,6 +91,9 @@
 
 
 
+=======
+{% block content %}
+>>>>>>> d07d9d0e9d4482a60ae524e77efa62fdd6f66cf5
     <main id="m-sample">
 
       <div class="wrap">
@@ -92,7 +105,11 @@
 
         <div id="herf">
           <div id="img">
+<<<<<<< HEAD
               <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhoto)}}" alt="big" id="bigimg"></figure>
+=======
+              <figure><img src="/static/images/img1.jpg" alt="big" id="bigimg"></figure>
+>>>>>>> d07d9d0e9d4482a60ae524e77efa62fdd6f66cf5
 
             <div id="minidiv">
               <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoS)}}" alt="mini" class="miniimg"></figure>
@@ -142,7 +159,7 @@
 
     </main>
 
-
+{% endblock %}
 
 
 

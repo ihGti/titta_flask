@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+
+{% block title%}
+-exhibition_list
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/my_prof_left.css">
+    <!-- ↑左のサイドバーのcss -->
+    <!-- ↓ここ編集 -->
+    <link rel="stylesheet" type="text/css" href="/static/css/exhibition_list.css">
+{% endblock %}
+
+{% block content %}
+    <main id="m-my_profile">
+
+      <div class="wrap">
+
+        <div id="left"> <!-- 左 -->
+
+          <div class="setmanage">
+
+            <p class="minitop">商品管理</p>
+
+            <ul>
+              <li><a href="/">お気に入り一覧<div class="arrow no1"></div></a></li><!-- favorite.html -->
+              <li><a href="/">出品状況<div class="arrow no1"></div></a></li><!-- exhibition_list.html -->
+              <!-- <li><a href="/">下書き一覧<div class="arrow no1"></div></a></li> -->
+              <li><a href="/">閲覧履歴<div class="arrow no1"></div></a></li><!-- browsing.html -->
+              <li><a href="/">購入履歴<div class="arrow no1"></div></a></li><!-- listing_list.html -->
+            </ul>
+
+          </div>
+
+          <div class="setmanage">
+
+            <p class="minitop">売上・ポイント</p>
+
+            <ul>
+              <li><a href="/">売上履歴<div class="arrow no1"></div></a></li><!-- earnings_history.html -->
+              <li><a href="/">ポイント<div class="arrow no1"></div></a></li><!-- point.html -->
+            </ul>
+
+          </div>
+
+          <div class="setmanage">
+
+            <p class="minitop">里親・迷子掲示板</p>
+
+            <ul>
+              <li><a href="/">過去の掲載履歴<div class="arrow no1"></div></a></li><!-- petpublish_history.html -->
+              <li><a href="/">登録中のペット一覧<div class="arrow no1"></div></a></li><!-- reg_pet.html -->
+            </ul>
+
+          </div>
+
+          <div class="setmanage">
+
+            <p class="minitop">コンテスト</p>
+
+            <ul>
+              <li><a href="/">開催中のコンテスト<div class="arrow no1"></div></a></li><!-- contest.html -->
+              <!-- <li><a href="/">過去のコンテスト参加履歴<div class="arrow no1"></div></a></li> -->
+            </ul>
+
+          </div>
+
+          <div class="setmanage">
+
+            <p class="minitop">登録</p>
+
+            <ul>
+              <li><a href="/">里親募集ペットを登録<div class="arrow no1"></div></a></li><!-- foster_post.html -->
+              <li><a href="/">迷子ペット情報を登録<div class="arrow no1"></div></a></li><!-- lost_post.html -->
+              <li><a href="/">譲渡誓約書<div class="arrow no1"></div></a></li><!-- pdfに遷移-->
+            </ul>
+
+          </div>
+
+          <div class="setmanage">
+
+            <p class="minitop">設定</p>
+
+            <ul>
+              <li><a href="/">お知らせ設定<div class="arrow no1"></div></a></li><!-- notice.html -->
+              <li><a href="/">着せ替え設定<div class="arrow no1"></div></a></li><!-- dressup.html -->
+            </ul>
+
+          </div>
+
+          <div class="setmanage">
+
+            <p class="minitop">ヘルプ</p>
+
+            <ul>
+              <li><a href="/">Q&A<div class="arrow no1"></div></a></li><!-- qa.html -->
+              <li><a href="/">お問い合わせ<div class="arrow no1"></div></a></li><!-- inquiry.html -->
+            </ul>
+
+          </div>
+
+          <div id="logout"><a href="/">ログアウト</a></div>
+
+        </div>
+
+
+
+
+
+
+
+        <!-- ↓ここに入力してって -->
+
+
+        <div id="right"><!-- 右  -->
+
+          <div id="title">
+            <h2>出品状況リスト</h2>
+          </div>
+
+          
+          <div id="yoko">
+
+            <fieldset class="checkbox-001">
+              <label>
+                  <input type="checkbox" name="checkbox-001" checked/>
+                  販売中の商品表示
+              </label>
+            </fieldset>
+
+            <fieldset class="checkbox-001">
+              <label>
+                  <input type="checkbox" name="checkbox-001" checked/>
+                  売れた商品表示
+              </label>
+            </fieldset>
+
+            <fieldset class="checkbox-001">
+              <label>
+                  <input type="checkbox" name="checkbox-001" checked/>
+                  お試し出品表示
+              </label>
+            </fieldset>
+
+          </div>
+
+
+
+          <div id="itiran">
+            <div id="pagesuu">
+              <p>約6917件中</p><!--{{count}}入れる-->
+              <p id="nasi">1-7件</p><!--同じく-->
+            </div>
+
+            <div id="pro-wrap">
+
+
+{% set a = [1,"/static/images/bed.jpg", "/static/images/sale_icon.png", "a[3]", "a[4]"]%}
+
+<!-- DB連携あと修正 -->
+{%for i in range(11) %}
+              <div class="product">
+                <a href="/product_detail?{{ a[0] }}"><!-- 商品詳細ページへ -->
+                  <div class="proImg">
+                    <figure class="main">
+                      <img src="{{ a[1] }}" alt="サンプル画像">
+                      <img src="{{ a[2] }}" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                    </figure>
+                  </div>
+                </a>
+
+                <div class="pro_detail">
+                  <a href="/product_detail?{{ a[0] }}"><!-- 商品詳細ページへ -->
+                    <h2>{{ a[3] }} ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  </a>
+
+                  <div class="heart">
+                    <div class="price">
+                      <h5>
+                        ￥<!--ココは固定-->
+                      </h5>
+                      <p>
+                        {{ a[4] }}<!--ココ、商品の値段入れて-->
+                      </p>
+                    </div>
+                      
+                    <figure>
+                      <img src="/static/images/heart.png" alt="いいね">
+                    </figure><!--クリックしてアニメーションつけるなら変更しないといけない。-->
+                  </div>
+                </div>
+
+              </div>
+
+{%endfor%}
+
+<!-- soldのサンプル残し -->
+              <div class="product">
+                <a href="/product_detail"><!-- 商品詳細ページへ -->
+                  <div class="proImg">
+                    <figure class="main">
+                      <img src="/static/images/bed.jpg" alt="サンプル画像">
+                      <img src="/static/images/sold_icon.png" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                    </figure>
+                  </div>
+                </a>
+
+                <div class="pro_detail">
+                  <a href="/"><!-- 商品詳細ページへ -->
+                    <h2>ペット用クールベッド ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  </a>
+
+                  <div class="heart">
+                    <div class="price">
+                      <h5>
+                        ￥<!--ココは固定-->
+                      </h5>
+                      <p>
+                        6,980<!--ココ、商品の値段入れて-->
+                      </p>
+                    </div>
+                      
+                    <figure>
+                      <img src="/static/images/heart.png" alt="いいね">
+                    </figure><!--クリックしてアニメーションつけるなら変更しないといけない。-->
+                  </div>
+                </div>
+
+              </div>
+
+              </div>
+
+
+
+
+            </div>
+
+          </div>
+
+          <div id="num">
+            <p>全 30 件中 1 - 20 件を表示</p>
+            <div id="numpage">
+              <div id="before"><a href="#">＜ 前へ</a></div>
+
+              <div id="num_list">
+                <ul>
+                  <li id="ittan-color"><a href="./product.html">1</a></li>
+                  <li><a href="./num_two.html">2</a></li>
+                  <li><a href="./num_three.html">3</a></li>
+                  <li><a href="./num_for.html">4</a></li>
+                  <li><a href="./num_five.html">5</a></li>
+                </ul>
+              </div>
+
+              <div id="after"><a href="#">次へ ＞</a></div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+      </div><!-- class="wrap" -->
+
+    </main>
+
+
+{% endblock %}

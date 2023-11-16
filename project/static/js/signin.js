@@ -8,13 +8,6 @@ function populateDropdown(selectElement, start, end){
     }
 }
 
-function submitBirthday(){
-    let year = document.getElementById("year").value;
-    let month = document.getElementById("month").value;
-    let day = document.getElementById("day").value;
-    let fullDate = year + "-" + month + "-" + day;
-}
-
 
 let yearDropdown = document.getElementById("year");
 let monthDropdown = document.getElementById("month");

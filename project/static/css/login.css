@@ -1,113 +1,88 @@
 @charset "utf-8";
 
+/* common.cssは絶対に触らない！！！！！！！！！！！ */
 
-#m-login{
-  height: 93vh;
-}
-
-div.wrap{
-  padding: 0 0 0 0;
-}
+/* sample.cssをコピーし複製 */
+/* ファイル名はhtmlと同じ名前にしてください */
 
 
-
-#m-login .wrap #right{
-  width: 50%;
-  border-left: #363A58 1px solid;
-}
+/* sample.htmlにlinkタグがコメントアウトしてあるので良ければ使ってください */
 
 
-
-#m-login div.wrap #right div#login-form{
-  width: 450px;
-  height: 570px;
+/*sample.html*/
+/*例*/
+#m-sample div.wrap div#login-form{
+  width: 400px;
+  height: 500px;
   background-color: #363a58;
   flex-direction: column;
-  margin: 0 auto;
-  align-items: center;
-  margin: 65px 0 0 75px;
+  margin-left: 100px;
 }
 
-#m-login div.wrap #right div#login-form form{
-  height: 450px;
-  margin: auto;
+#m-sample div.wrap div#login-form form{
+  height: 300px;
+  margin: 50px auto 0 80px;
   color: #fff;
 }
 
-#m-login div.wrap #right div#login-form form h1{
+#m-sample div.wrap div#login-form form h1{
   font-size: 2.5rem;
-  margin: 0 0 0 55px;
-  padding: 60px 0 0 0;
-  font-weight: 600;
-  letter-spacing: 1px;
 }
 
-#m-login div.wrap #right div#login-form form label p{
-  margin: 50px 0 0 55px;
-  font-size: 1.1rem;
+#m-sample div.wrap div#login-form form label p{
+  margin: 50px 0 0 0;
 }
 
-#m-login div.wrap #right div#login-form form input{
-  width: 340px;
+#m-sample div.wrap div#login-form form input{
+  width: 250px;
+}
+
+#m-sample div.wrap div#login-form form input#bottun{
   height: 30px;
-  margin: 10px 0 0 55px;
-}
-
-#m-login div.wrap #right div#login-form form input#bottun{
-  height: 40px;
-  margin: 70px 0 0 55px;
-  border: 1px solid #363A58;
-  border-radius: 1px;
-  color: #363A58;
-  background-color: #fff;
+  margin: 50px 0 0 0;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #363a58;
   cursor: pointer;
-  box-shadow: 5px 3px 10px #222;
+  box-shadow: 5px 3px 3px #ddd;
 }
 
 
-#m-login div.wrap #right div#login-form form input#bottun:hover{
+#m-sample div.wrap div#login-form form input#bottun:hover{
+  background-color: #fff;
   color: #000;
-  box-shadow: none;
 }
 
 /* 会員登録へのリンク設定 */
-#m-login div.wrap a{
-  display: flex;
+#m-sample div.wrap a{
+  display: inline-block;
   color: white;
-  padding: 0 0 3px 0;
-  justify-content: center;
-  margin: 30px 0 0 0;
+  margin: 30px 0 0 140px;
 }
 
 
+/* 縦線 */
+#m-sample div.wrap div#vartical-line{
+  width: 1px;
+  height: 100vh;
+  background-color: #ddd;
+  margin: -20px 0 0 10px;
+}
 
 
 /* 画像設定 */
 
-
-.wrap #left{
-  width: 50%;
-  display: flex;
-  margin: 0 auto;
-  vertical-align: middle;
-  justify-content: center;
-  align-items: center;
+#m-sample div.wrap div#site-image figure{
+  width: 600px;
 }
 
-
-#m-login div.wrap #left div#site-image figure img{
+#m-sample div.wrap div#site-image figure img{
   width: 250px;
   height: auto;
+  margin: 180px 0 0 180px;
 }
 
 
 
 
-
-
-
-
-footer{
-  padding: 0 0 0 0;
-  height: 7vh;
-}

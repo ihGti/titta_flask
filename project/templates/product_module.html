@@ -1,0 +1,24 @@
+
+              <div class="product">
+                <a href="/product_detail?id={{i}}"><!-- 商品詳細ページへ -->
+                  <div class="proImg">
+                    <figure class="main">
+                      <img src="{{ a[0] }}" alt="サンプル画像">
+                      <img src="{{ a[1] }}" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                    </figure>
+                  </div>
+                </a>
+
+                <div class="pro_detail">
+                  <a href="/product_detail?id={{i}}"><!-- 商品詳細ページへ -->
+                    <h2>{{ a[2] }}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  </a>
+
+                  <div class="more_detail">
+                    <p><span>種類</span>{{ a[3] }}</p>
+                    <p><span>名前</span>{{ a[4] }}</p>
+                    <p><span>状況</span>{{ a[5] }}</p>
+                  </div>
+                </div>
+
+              </div>

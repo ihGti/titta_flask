@@ -1,0 +1,261 @@
+@charset "utf-8";
+
+
+div.foster-wrap{
+    /* width: 1100px; */
+    margin: 20px auto 0 auto;
+    display: flex;
+}
+
+
+div.foster-wrap div#left{
+    width: 300px;
+    background-color: aqua;
+    height: 1000px;
+}
+
+
+div.foster-wrap div#right{
+    width: 800px;
+    background-color: bisque;
+}
+
+
+
+
+#right #link a{
+    margin: 0 5px 0 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+
+
+#right h2{
+    font-size: 1.6rem;
+    font-weight: 500;
+    border-left: #E5857B 4px solid;
+    margin: 40px 0 40px 10px;
+    padding: 0 0 0 3px;
+}
+
+
+
+
+
+
+#square{
+    background-color: #fff;
+    width: 760px;
+    height: 325px;
+    margin: 0 auto;
+    border: #7D8BAE 1px solid;
+    font-size: 0.9rem;
+}
+
+#square #up{
+    border-bottom: #7D8BAE 1px dotted;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0 20px 0;
+}
+
+#square #up #type{
+    display: flex;
+}
+
+#square #up #type h3{
+    font-weight: 400;
+    color: #363A58;
+    margin: 25px 0 0 30px;
+}
+
+#square #up #type ul{
+    display: flex;
+    margin: 15px 0 0 45px;
+}
+
+#square #up #type ul li{
+    list-style: none;
+    border: #7D8BAE 1px solid;
+    padding: 0 5px 0 5px;
+    width: 75px;
+    height: 35px;
+    text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#square #up #location{
+    display: flex;
+}
+#square #up #location h3{
+    margin: 30px 0 0 30px;
+    font-weight: 400;
+    color: #363A58;
+}
+
+
+#square #up #t_area{
+    display: flex;
+}
+#square #up #t_area h3{
+    margin: 30px 0 0 70px;
+    font-weight: 400;
+    color: #363A58;
+}
+
+
+
+#square #middle{
+    border-bottom: #7D8BAE 1px dotted;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0 20px 0;
+}
+
+#square #middle #gen{
+    display: flex;
+}
+
+#square #middle #gen h3{
+    margin: 30px 15px 0 30px;
+    font-weight: 400;
+    color: #363A58;
+}
+
+#square #middle #kinds{
+    display: flex;
+}
+
+#square #middle #kinds h3{
+    margin: 30px 15px 0 70px;
+    font-weight: 400;
+    color: #363A58;
+}
+
+
+#square #middle #situation{
+    display: flex;
+}
+
+#square #middle #situation h3{
+    margin: 30px 15px 0 30px;
+    font-weight: 400;
+    color: #363A58;
+}
+
+
+#square #bottom #word{
+    display: flex;
+}
+
+#square #bottom #word h3{
+    margin: 25px 0 0 30px;
+    font-weight: 400;
+    color: #363A58;
+}
+
+
+#all #keep{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0 20px 0 0;
+    
+}
+#all #keep a{
+    text-decoration: none;
+    color: #fff;
+    background-color: #363A58;
+    padding: 10px;
+    font-size: 0.8rem;
+    box-shadow: 5px 5px 20px #888;
+} 
+
+
+#all #search{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 0 0;
+}
+
+#all #search a{
+    text-decoration: none;
+    color: #fff;
+    background-color: #363A58;
+    padding: 10px 60px 10px 60px;
+    box-shadow: 5px 5px 20px #888;
+}
+
+
+
+
+
+.selectbox-002 {
+    position: relative;
+    margin: 20px 0 0 30px;
+}
+  
+.selectbox-002::before,
+.selectbox-002::after {
+    position: absolute;
+    content: '';
+    pointer-events: none;
+}
+  
+.selectbox-002::before {
+    right: 0;
+    display: inline-block;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 0 3px 3px 0;
+    content: '';
+}
+  
+.selectbox-002::after {
+    position: absolute;
+    top: 50%;
+    right: 1.4em;
+    transform: translate(50%, -50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-bottom: 3px solid #363A58;
+    border-right: 3px solid #363A58;
+    content: '';
+}
+  
+.selectbox-002 select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-width: 200px;
+    height: 2.5em;
+    padding: .4em 3.6em .4em .8em;
+    border: 2px solid #7D8BAE;
+    border-radius: 2px;
+    color: #333333;
+    font-size: 1em;
+    cursor: pointer;
+}
+  
+.selectbox-002 select:focus {
+    outline: 1px solid #363A58;
+}
+
+
+
+
+.textbox-001 {
+    width: 35%;
+    border: 1px solid #363A58;
+    border-radius: 1px;
+    margin: 15px 0 0 30px;
+    height: 30px;
+}
+
+
+
+
+

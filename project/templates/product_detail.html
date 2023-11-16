@@ -1,78 +1,18 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="ja">
+{% block title %}
+-product_detail
+{% endblock %}
 
-  <head>
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="./static/css/product_detail.css">
+{% endblock %}
 
-      <meta charset="utf-8">
+{% block js%}
+     <script type="text/javascript" src="./static/js/product_detail.js"></script>
+{% endblock%}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Titta</title>
-
-    <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-
-    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
-    <link rel="stylesheet" type="text/css" href="css/product_detail.css">
-
-
-  </head>
-
-
-  <body>
-
-    <header>
-
-
-      <div class="r-wrap">
-
-        <div class="rr-wrap">
-
-          <a href="index.html">
-            <figure>
-              <img src="images/rogo.png" alt="rogo">
-            </figure>
-          </a>
-
-
-          <div class="nav-top">
-            <nav>
-              <ul>
-                <li><a href="mailbox.html"><input type="submit" value="&#xf0e0;" class="button"></a></li>
-                <li><a href="cart.html"><input type="submit" value="&#xf07a;" class="button"></a></li>
-                <li><a href="favorite.html"><input type="submit" value="&#xf004;" class="button"></a></li>
-                <li><a href="login.html"><input type="submit" value="&#xf007;" class="button"></a></li>
-              </ul>
-            </nav>
-          </div>
-
-        </div><!-- "rr-wrap" -->
-
-
-      </div><!-- class="r-wrap" -->
-
-
-
-
-
-      <div class="nav-buttom">
-        <nav>
-          <ul>
-            <li><a href="index.html" class="line-a">HOME</a></li>
-            <li><a href="exhibit.html">出品</a></li>
-            <li><a href="foster_board.html">里親掲示板</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="contest.html">コンテスト</a></li>
-            <li><a href="community.html">コミュニティ</a></li>
-            <li><a href="assignment.html">譲渡会</a></li>
-          </ul>
-        </nav>
-      </div>
-
-    </header>
-
+{% block content %}
 
 
 
@@ -81,14 +21,10 @@
       <div class="wrap">
 
 
-
-
-
-
     <div id="pankuzu">
       <a href="#">くず</a>>
       <a href="#">くず</a>>
-      <a href="#">くず</a>
+      <a href="product">商品一覧</a>
     </div>
 
     <div id="shouhinfl">
@@ -103,29 +39,20 @@
       </div>
 
       <div id="shouhinfl2">
-        <p>ペット用クールベッド トナカイ</p>
-        <p>PCB-22R</p>
+        <p>{{ name }}</p>
+        <p>{{ nameid }}</p>
         <div id="flkakaku">
-          <p>￥6690 (税込)</p>
+          <p>￥{{ money }} (税込)</p>
           <a href="#"></a>
           <a href="#"></a>
         </div>
 
-        <a href="#" id="ka-to">カートに入れる</a>
+        <a href="/" id="ka-to">カートに入れる</a>
 
         <div id="moxtutomiru">
           <h1 id="shouhinnsetumei1">商品詳細</h1>
           <p id="texttexttext">
-            お布団みたいにふんわり優しい寝心地で人気のホットマット。<br>
-          ふっかふかの枕に、頭をのせてまったりお昼寝できます。。<br>
-          枕の中材は取り外し可能でフラットにもなります。。<br>
-          ドライブやお出かけ先に♪くるっと巻けて超軽量！。<br>
-          猫ちゃんや小型犬から大型犬まで使えます♪<br>
-          お布団みたいにふんわり優しい寝心地で人気のホットマット。<br>
-          ふっかふかの枕に、頭をのせてまったりお昼寝できます。。<br>
-          枕の中材は取り外し可能でフラットにもなります。。<br>
-          ドライブやお出かけ先に♪くるっと巻けて超軽量！。<br>
-          猫ちゃんや小型犬から大型犬まで使えます♪
+           {{ producttext }}
           </p>
           <button id="moxtutomirubotan">もっと見る▽</button>
         </div>
@@ -145,19 +72,19 @@
             </tr>
             <tr>
               <th>商品の状態</th>
-              <td><p class="hyounomoji">新品・未使用品</p></td>
+              <td><p class="hyounomoji">{{ jotai }}</p></td>
             </tr>
             <tr>
               <th>配送料の負担</th>
-              <td><p class="hyounomoji">購入者</p></td>
+              <td><p class="hyounomoji">{{ tax }}</p></td>
             </tr>
             <tr>
               <th>配送方法</th>
-              <td><p class="hyounomoji">直接受け渡し</p></td>
+              <td><p class="hyounomoji">{{ haisou }}</p></td>
             </tr>
             <tr>
               <th>配送元の地域</th>
-              <td><p class="hyounomoji">日本</p></td>
+              <td><p class="hyounomoji">{{ tiiki }}</p></td>
             </tr>
           </table>
 
@@ -181,10 +108,10 @@
           <div id="shuxtupinshaPro">
             <div id="shuxtupinnshaProPic"></div>
             <div id="namaetofollow">
-              <a href="#">clone</a>
+              <a href="#">{{ exhibitname}}</a>
               <button>＋フォロー</button>
-              <a href="#" id="reviewhoshi">★★★★★</a>
-              <p>788</p>
+              <a href="#" id="reviewhoshi">{{ review }}</a>
+              <p>{{ reviewnum }}</p>
             </div>
           </div>
         </div>
@@ -201,103 +128,8 @@
       <a href="#"></a>
       <a href="#"></a>
     </div>
-
-
-
-
       </div><!-- class="wrap" -->
 
     </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <footer>
-
-    <p id="page-top"><a href="#">Top</a></p>
-
-      <div class="footer-wrap">
-
-
-      <div class="rogo-wrap">
-        <figure>
-          <img src="images/rogo.png" alt="rogo">
-        </figure>
-      </div>
-
-
-
-
-      <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">HELP</li>
-            <li><a href="help.html">ヘルプセンター</a></li>
-            <li><a href="inquiry.html">お問い合わせ</a></li>
-            <li><a href="guid.html">ガイド</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-            <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">SETEMAP</li>
-            <li><a href="assignment.html">譲渡会</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="foster_board.html">里親掲示板</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-
-      </div><!-- class="footer-wrap"の終了タグ -->
-
-
-
-
-      <div class="copy-all">
-        2023 &copy; Copyright Titta. All rights reserved.
-      </div>
-
-
-
-    </footer>
-
-
- <!-- jQueryへのリンク -->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
-    <script src="js/product_detail.js"></script>
-
-  </body>
-
-</html>
+{% endblock %}

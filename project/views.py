@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 # db接続に使う(更新・追加・削除)
 from project import db , create_app
 # models.pyで定義したテーブル
-from project.models import T_User , T_Exhibit , T_Paramerter , T_Category
+from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point
 
 import os
 # 時間の制約
@@ -91,6 +91,10 @@ def signup():
             F_FirstName_Kana=mei_kana,
             F_ProfileImage=prof_image_filename  # 画像のファイル名を保存
         )
+        
+        init_point =T_Point(F_PointQuantity=100)
+        user.points.append(init_point)
+        
         db.session.add(user)
         db.session.commit()
         return redirect('/cor')
@@ -240,6 +244,20 @@ def exhibit():
     
     exhibit.F_UserID = current_user.F_UserID
     
+    exhibit.F_ExTime = datetime.utcnow()
+    
+    user = T_User.query.get(current_user.F_UserID)
+    if user:
+        # 新しいポイントオブジェクトを作成し、50ポイントを加算
+        new_point = T_Point(F_PointQuantity=50, F_UserID=user.F_UserID)
+        db.session.add(new_point)
+        db.session.commit()
+
+        # ユーザーのポイントを取得して合計を計算する
+        user_points = user.points
+        total_points = sum(point.F_PointQuantity for point in user_points)
+        print(f"Total points for user {user.F_UserID}: {total_points}")
+    
     db.session.add(exhibit)
     db.session.commit()
     
@@ -255,7 +273,7 @@ def upload_page():
 # 出品確認
 @bp.route("/exhibit_con")
 def exhibit_con():
-    exhibit = T_Exhibit.query.filter_by(F_UserID = current_user.F_UserID)
+    exhibit = T_Exhibit.query.filter_by(F_UserID = current_user.F_UserID).first()
     return render_template("exhibit_con.html" , exhibit=exhibit)
 
 # 出品完了
@@ -263,10 +281,79 @@ def exhibit_con():
 def exhibit_comp():
     return render_template("exhibit_comp.html")
 
-# お試し出品
-@bp.route("/exhibit_trial")
+# お試し出品投稿
+@bp.route('/trial_page',methods=['POST'])
+def trial_upload():
+    for i in range(1,6):
+        file = request.files.get(f'image{i}')
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(current_app.config['UPLOAD_FOLDER_DEMOEXHIBIT'],filename))
+            
+        if i == 1:
+            demoexhibit = T_Exhibit(F_ExPhoto=filename)
+        
+        elif i == 2:
+            demoexhibit.F_ExPhotoS = filename
+            
+        elif i == 3:
+            demoexhibit.F_ExPhotoT = filename
+            
+        elif i == 4:
+            demoexhibit.F_ExPhotoF = filename
+            
+        elif i == 5:
+            demoexhibit.F_ExPhotoH = filename
+            
+    title = request.form.get('')
+        
+    info = request.form.get('')
+        
+    situation = request.form.get('')
+        
+    deli = request.form.get('')
+        
+    genre = request.form.get('genre')
+        
+    category = T_Category.query.get(genre)
+        
+    many = request.form.get('')
+        
+    tag = request.form.get('')
+        
+    demoexhibit.F_ExTitle = title
+        
+    demoexhibit.F_ExInfo = info
+        
+    demoexhibit.F_ExSit = situation
+        
+    demoexhibit.F_ExDeli = deli
+        
+    demoexhibit.F_ExPrice = many
+        
+    demoexhibit.F_CategoryID = category.F_CategoryID
+        
+    demoexhibit.F_ExTag = tag
+        
+    demoexhibit.F_EXhibitType = 2
+        
+    demoexhibit.F_UserID = current_user.F_UserID
+    
+    demoexhibit.F_ExTime = datetime.utcnow()
+    
+    user = T_User.query.get(current_user.F_UserID)
+    user.points.F_PointQuantity += 50
+    
+    db.session.add(demoexhibit)
+    db.session.commit()
+        
+    return redirect("/top")
+
+# お試し出品画面表示
+@bp.route("/exhibit_trial", methods=['GET'])
 def exhibit_trial():
-    return render_template("exhibit_trial.html")
+    categories = T_Category.query.all()
+    return render_template("exhibit_trial.html" , user=current_user , categories=categories)
 
 # 商品関連
 # 商品一覧
@@ -335,9 +422,25 @@ def community():
 
 # 履歴関連
 # お気に入り
-@bp.route("/favorite")
-def favorite():
-    return render_template("favorite.html")
+@bp.route("/favorite/<int:exhibit_id>", methods=['POST'])
+@login_required
+def favorite(exhibit_id):
+    favorite = T_Favorite.query.filetr_by(user_id=current_user.F_UserID,exhibit_id=exhibit_id).first()
+    
+    if favorite:
+        db.session.delete(favorite)
+        
+    else:
+        new_favorite = T_Favorite(user_id=current_user.F_UserID, exhibit_id=exhibit_id)
+        db.session.add(new_favorite)
+        db.session.commit()
+    return redirect("/home")
+
+@bp.route('/favorites')
+@login_required
+def favorites():
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).all()
+    return render_template('favorite.html',favorites_exhibit=favorites_exhibit)
 
 # 閲覧履歴
 @bp.route("/browsing")
@@ -367,14 +470,19 @@ def petpublish_history():
 # 出品履歴
 @bp.route("/listing_history")
 def listing_history():
-    return render_template("listing_list.html")
+    user_id = current_user.F_UserID
+    post_exhibit = T_Exhibit.query.filter_by(F_UserID =user_id, F_ExhibitType=2).all()
+    return render_template("listing_list.html",post_exhibit=post_exhibit)
 
 
 # その他
 # ポイント管理
 @bp.route("/point")
 def point():
-    return render_template("point.html")
+    
+    user = current_user.F_UserID
+    points = T_Point.query.filter_by(F_UserID = user).all()
+    return render_template("point.html" , points=points)
 
 # メールボックス
 @bp.route("/mailbox")

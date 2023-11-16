@@ -1,13 +1,21 @@
 from flask import Flask
+# flask-sqlalchemyの取り込み
 from flask_sqlalchemy import SQLAlchemy
+# flask-migrateの取り込み
 from flask_migrate import Migrate
+# flask-loginの取り込み
 from flask_login import LoginManager
 
+# sqlalchemyの定義
 db = SQLAlchemy()
+# migrateの定義
 migrate = Migrate()
+# loginの定義
 login_manager = LoginManager()
 
+# flaskのアプリケーション登録
 def create_app(config_filename='config.py'):
+    # アプリ名
     app = Flask(__name__)
     app.config.from_pyfile(config_filename)
     app.config['DEBUG'] = True 
@@ -17,7 +25,9 @@ def create_app(config_filename='config.py'):
     app.config['UPLOAD_FOLDER'] = 'project/static/prof_image'
     app.config['UPLOAD_FOLDER_TOREDO'] = 'project/static/toredo'
     app.config['UPLOAD_FOLDER_DEMOEXHIBIT'] = 'project/static/demo_toredo'
-    from project.models import T_User , T_Exhibit , T_Paramerter , T_Category
+    app.config['UPLOAD_FOLDER_LOSTPET'] = 'project/static/lost_pet'
+    app.config['UPLOAD_FOLDER_FOSTERPET'] = 'project/static/foster_pet'
+    from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point
 
     @login_manager.user_loader
     def load_user(user_id):

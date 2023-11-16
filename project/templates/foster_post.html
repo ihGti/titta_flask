@@ -1,85 +1,25 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="ja">
+{% block title %}
+-foster_post
+{% endblock %}
 
-  <head>
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="static/css/foster_post.css">
+    <link rel="stylesheet" type="text/css" href="static/css/my_prof_left.css">
 
-      <meta charset="utf-8">
+{% endblock %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Titta</title>
-
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-
-    <link rel="stylesheet" type="text/css" href="css/foster_post.css">
-
-
-  </head>
-
-
-  <body>
-
-    <header>
-
-
-      <div class="r-wrap">
-
-        <div class="rr-wrap">
-
-          <a href="index.html">
-            <figure>
-              <img src="images/rogo.png" alt="rogo">
-            </figure>
-          </a>
-
-          <div class="nav-top">
-            <nav>
-              <ul>
-                <li><a href="mailbox.html"><input type="submit" value="&#xf0e0;" class="button"></a></li>
-                <li><a href="cart.html"><input type="submit" value="&#xf07a;" class="button"></a></li>
-                <li><a href="favorite.html"><input type="submit" value="&#xf004;" class="button"></a></li>
-                <li><a href="login.html"><input type="submit" value="&#xf007;" class="button"></a></li>
-              </ul>
-            </nav>
-          </div>
-
-        </div><!-- "rr-wrap" -->
-
-
-      </div><!-- class="r-wrap" -->
-
-
-
-      <div class="nav-buttom">
-        <nav>
-          <ul>
-            <li><a href="index.html" >HOME</a></li>
-            <li><a href="exhibit.html">出品</a></li>
-            <li><a href="foster_board.html">里親掲示板</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="contest.html">コンテスト</a></li>
-            <li><a href="community.html">コミュニティ</a></li>
-            <li><a href="assignment.html">譲渡会</a></li>
-          </ul>
-        </nav>
-      </div>
-
-    </header>
-
-
-
+{% block content %}
 
     <main id="m-sample">
 
       <div class="wrap">
-
         <div class="category-navigation">
           <ul>
-              <li><a href="#">Titta</a></li>
+              <li><a href="/">Titta</a></li>
               <li><a href="#">マイページ</a></li>
-              <li><a href="#">里親募集登録</a></li>
+              <li><a href="foster_post">里親募集登録</a></li>
           </ul>
         </div>
 
@@ -89,7 +29,9 @@
             <div id="prof">
               <div id="name">
                 <p>
-                  ニックネーム
+                  <!-- テスト用変数 -->
+                  {% set authuser = "ニックネーム" %}
+                  {{ authuser}}
                 </p>
                 <p id="sama">
                   様
@@ -98,7 +40,6 @@
               <a href="#">[ ログアウト ]</a>
 
             </div>
-
             <div id="sub-nav">
 
               <ul>
@@ -111,6 +52,7 @@
                 <li><a href="#">売上・ポイント管理</a></li>
                 <li><a href="#">各種設定</a></li>
                 <li><a href="#">ヘルプ</a></li>
+
               </ul>
 
             </div>
@@ -118,7 +60,8 @@
           </div>
 
 
-          <div id="right">
+         <div id="right">
+<form method="" action="">        
 
             <div id="detail">
               <h2>里親募集ペットを登録</h2>
@@ -130,13 +73,12 @@
 
 
 
-
             <table>
               <tbody>
                 <tr id="keisai">
                   <td id="keisaiR">掲載期日<p class="hissu">必須</p></td>
                   <td id="keisaiW">
-                    <input type="text" class="textbox-001" placeholder=""/>
+                    <input type="text" class="textbox-001" name="keisaiW" placeholder=""/>
                     <p>（入力例:2023/05/26 の場合  →  20230526）</p>
                   </td>
                 </tr>
@@ -144,7 +86,7 @@
                   <td id="kindsR">ペット種別<p class="hissu">必須</p></td>
                   <td id="kindsW">
                     <label class="selectbox-002">
-                      <select>
+                      <select name="kindsW">
                           <option>選択してください</option>
                           <option>柴犬</option>
                           <option>シマエナガ</option>
@@ -155,7 +97,7 @@
                 <tr id="post">
                   <td id="postR">投稿タイトル</td>
                   <td id="postW">
-                    <input type="text" class="textbox-002" placeholder=""/>
+                    <input type="text" name="postW" class="textbox-002" placeholder=""/>
                   </td>
                 </tr>
                 <tr id="location">
@@ -325,108 +267,17 @@
             </div>
 
             <div id="last">
-              <div id="regi"><a href="#">登録する</a></div>
+              <div id="regi"><button type="submit">登録する</button></div>
               <div id="memo"><a href="#">下書きを保存する</a></div>
             </div>
 
 
+</form>
 
           </div>
-
         </div>
-
-      </div>
+      </div><!-- class="wrap" -->
 
     </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <footer>
-
-    <p id="page-top"><a href="#">Top</a></p>
-
-      <div class="footer-wrap">
-
-
-      <div class="rogo-wrap">
-        <figure>
-          <img src="images/rogo.png" alt="rogo">
-        </figure>
-      </div>
-
-
-
-
-      <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">HELP</li>
-            <li><a href="help.html">ヘルプセンター</a></li>
-            <li><a href="inquiry.html">お問い合わせ</a></li>
-            <li><a href="guid.html">ガイド</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-            <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">SETEMAP</li>
-            <li><a href="assignment.html">譲渡会</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="foster_board.html">里親掲示板</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-
-      </div><!-- class="footer-wrap"の終了タグ -->
-
-
-
-
-      <div class="copy-all">
-        2023 &copy; Copyright Titta. All rights reserved.
-      </div>
-
-
-
-    </footer>
-
-
- <!-- jQueryへのリンク -->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
-
-  </body>
-
-</html>
+{% endblock %}

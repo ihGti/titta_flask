@@ -1,84 +1,15 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="ja">
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/settelement_check.css">
+{% endblock %}
 
-  <head>
-
-      <meta charset="utf-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>決済確認</title>
-
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-
-    <!-- ↑左のサイドバーのcss -->
-    <!-- ↓ここ編集 -->
-    <link rel="stylesheet" type="text/css" href="css/settelement_check.css">
+{% block title %}
+-settelement_check
+{% endblock %}
 
 
-  </head>
-
-
-  <body>
-
-    <header>
-
-
-      <div class="r-wrap">
-
-        <div class="rr-wrap">
-
-          <!-- index.htmlへ遷移 -->
-          <a href="/">
-            <figure>
-              <img src="images/rogo.png" alt="rogo">
-            </figure>
-          </a>
-
-          <div class="nav-top">
-            <nav>
-              <ul>
-                <!-- mailbox.htmlへ遷移 -->
-                <li><a href="/"><input type="submit" value="&#xf0e0;" class="button"></a></li>
-                <!-- favorite.htmlへ遷移 -->
-                <li><a href="/"><input type="submit" value="&#xf004;" class="button"></a></li>
-                <!-- login.htmlへ遷移 -->
-                <li><a href="/"><input type="submit" value="&#xf007;" class="button"></a></li>
-              </ul>
-            </nav>
-          </div>
-
-
-        </div><!-- "rr-wrap" -->
-
-
-      </div><!-- class="r-wrap" -->
-
-
-
-
-
-
-      <div class="nav-buttom">
-        <nav>
-          <ul>
-            <!-- index.htmlへ遷移 --><li><a href="/" class="line-a">HOME</a></li>
-            <!-- exhibit.htmlへ遷移 --><li><a href="/">出品</a></li>
-            <!-- foster_board.htmlへ遷移 --><li><a href="/">里親掲示板</a></li>
-            <!-- lost_petboard.htmlへ遷移 --><li><a href="/">迷子掲示板</a></li>
-            <!-- contest.htmlへ遷移 --><li><a href="/">コンテスト</a></li>
-            <!-- community.htmlへ遷移 --><li><a href="/">コミュニティ</a></li>
-            <!-- assignment.htmlへ遷移 --><li><a href="/">譲渡会</a></li>
-          </ul>
-        </nav>
-      </div>
-
-    </header>
-
-
-
+{% block content %}
 
     <main id="m-my_profile">
 
@@ -105,7 +36,7 @@
                   <td><select name="point" id="point" onchange="viewChange();">
                     <option value="no">利用しない</option>
                     <option value="yes">利用する</option>
-                  </select><div id="Box" style="display:none;"><label id="siyoul">使用するポイント数</label><input type="text" id="siyou"></div></td>
+                  </select><div id="Box" style="display:none;"><label id="siyoul">使用するポイント数</label><input type="text" name="pointnum" id="siyou"></div></td>
                 </tr>
                 <!-- <input type="text" name=""> -->
                 <tr>
@@ -126,8 +57,8 @@
                   </select>
                   <div id="Box2" style="display:none;">
                     <div>
-                      <label class="boxl">カード番号</label><input type="text" name="">
-                      <label class="boxl">有効期限</label><select name="" class="yukou">
+                      <label class="boxl">カード番号</label><input type="text" name="cardnum">
+                      <label class="boxl">有効期限</label><select name="mmyy" class="yukou">
                         <option value="1">01</option>
                         <option value="2">02</option>
                         <option value="3">03</option>
@@ -160,8 +91,8 @@
                       </select>
                     </div>
                     <div id="yplp">
-                      <label class="boxl">名義人</label><input type="text" name="" id="meigi">
-                      <label class="boxl">CVV</label><input type="text" name="" id="cvv">
+                      <label class="boxl">名義人</label><input type="text" name="username" id="meigi">
+                      <label class="boxl">CVV</label><input type="text" name="cvv" id="cvv">
                     </div>
                     <div>
                       <input type="submit" name="" value="確認" id="btn2">
@@ -175,11 +106,11 @@
 
           <div id="kei">
             <div id="ue">
-              <p id="pp">小計：￥1200 ポイント利用：なし クーポン利用：なし</p>
+              <p id="pp">小計：￥{{ syokei }} ポイント利用：なし クーポン利用：なし</p>
             </div>
             <div id="sita">
-              <h2 id="hh">支払合計：1200￥
-              取得ポイント：12P</h2>
+              <h2 id="hh">支払合計：￥{{ gokei }}
+              取得ポイント：{{ addpoint }}</h2>
             </div>
           </div>
 
@@ -187,12 +118,12 @@
           <div id="list">
             <h1>購入商品</h1>
             <div id="product">
-              <img src="images/img1.jpg" alt="product">
+              <img src="/static/images/img1.jpg" alt="product">
               <div id="setu">
-                <p>商品名：猫タワー</p>
-                <p>説明：高さ9kmです</p>
-                <p>値段：￥1200</p>
-                <p>ポイント：12</p>
+                <p>商品名：{{ productname }}</p>
+                <p>説明：{{ info }}</p>
+                <p>値段：￥{{ nedan }}</p>
+                <p>ポイント：{{ point }}</p>
               </div>
             </div>
           </div>
@@ -201,100 +132,13 @@
 
 
       </div><!-- class="wrap" -->
-    <script type="text/javascript" src="js/settelement_check.js"></script>
+    <script type="text/javascript" src="/static/js/settelement_check.js"></script>
     </main>
 
 
+{% endblock %}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <footer>
-
-    <p id="page-top"><a href="#">Top</a></p>
-
-      <!-- <div class="footer-wrap"> -->
-
-<!-- 
-      <div class="rogo-wrap">
-        <figure>
-          <img src="images/rogo.png" alt="rogo">
-        </figure>
-      </div> -->
-
-
-
-
-      <!-- <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">HELP</li>
-            <li><a href="#">ヘルプセンター</a></li>
-            <li><a href="#">お問い合わせ</a></li>
-            <li><a href="#">ガイド</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
-    
-          </ul>
-          </ul>
-        </nav>
-
-      </div> -->
-
-
-            <!-- <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">SETEMAP</li>
-            <li><a href="#">譲渡会</a></li>
-            <li><a href="#">迷子掲示板</a></li>
-            <li><a href="#">里親掲示板</a></li>
-          </ul>
-        </nav>
-
-      </div> -->
-
-
-
-      <!-- </div> -->
-      <!-- class="footer-wrap"の終了タグ -->
-
-
-
-
-      <div class="copy-all">
-        2023 &copy; Copyright Titta. All rights reserved.
-      </div>
-
-
-
-    </footer>
-
-
- <!-- jQueryへのリンク -->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
-
-  </body>
-
-</html>

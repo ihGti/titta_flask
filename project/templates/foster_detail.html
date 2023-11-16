@@ -1,81 +1,16 @@
-<!DOCTYPE html>
-
-<html lang="ja">
-
-  <head>
-
-      <meta charset="utf-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Titta</title>
-
-    <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-
-    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
-    <link rel="stylesheet" type="text/css" href="css/board_detail.css">
+{% extends "base.html" %}
 
 
-  </head>
+{% block title %}
+-foster_detail
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/board_detail.css">
+{% endblock %}
 
 
-  <body>
-
-    <header>
-
-
-      <div class="r-wrap">
-
-        <div class="rr-wrap">
-
-          <a href="index.html">
-            <figure>
-              <img src="images/rogo.png" alt="rogo">
-            </figure>
-          </a>
-
-          <div class="nav-top">
-            <nav>
-              <ul>
-                <li><a href="mailbox.html"><input type="submit" value="&#xf0e0;" class="button"></a></li>
-                <li><a href="cart.html"><input type="submit" value="&#xf07a;" class="button"></a></li>
-                <li><a href="favorite.html"><input type="submit" value="&#xf004;" class="button"></a></li>
-                <li><a href="login.html"><input type="submit" value="&#xf007;" class="button"></a></li>
-              </ul>
-            </nav>
-          </div>
-
-
-        </div><!-- "rr-wrap" -->
-
-
-      </div><!-- class="r-wrap" -->
-
-
-
-
-
-      <div class="nav-buttom">
-        <nav>
-          <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="exhibit.html">出品</a></li>
-            <li><a href="foster_board.html" class="line-a">里親掲示板</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="contest.html">コンテスト</a></li>
-            <li><a href="community.html">コミュニティ</a></li>
-            <li><a href="assignment.html">譲渡会</a></li>
-          </ul>
-        </nav>
-      </div>
-
-    </header>
-
-
-
-
+{% block content %}
     <main id="m-lost_post">
 
       <div class="wrap">
@@ -83,8 +18,8 @@
 
 
         <div class="p_detail-heading">
-          <p><a href="foster_board.html"><< 検索に戻る</a></p>
-          <p id="p-id">投稿ID:xxxxxxxxxxx</p>
+          <p><a href="/foster_board"><< 検索に戻る</a></p>
+          <p id="p-id">投稿ID:{{ fosterd_id }}</p>
         </div><!-- class="p_detail-heading" -->
 
 
@@ -102,6 +37,7 @@
             <div class="post-img">
               <figure>
                 <img src="images/pet1.png" alt="petimg">
+                <!-- 画像リンクはお願い -->
               </figure>
             </div>
 
@@ -114,41 +50,41 @@
               </tr>
               <tr>
                 <th>種類</th>
-                <td>雑種</td>
+                <td>{{ syurui }}</td>
                 <th>大きさ</th>
-                <td>子猫 1.5キロくらい</td>
+                <td>{{ ookisa }}</td>
               </tr>
               <tr>
                 <th>性別</th>
-                <td>女の子</td>
+                <td>{{ gender }}</td>
                 <th>年齢</th>
-                <td>８か月</td>
+                <td>{{ nenrei }}</td>
               </tr>
               <tr>
                 <th>ワクチン接種</th>
-                <td>あり</td>
+                <td>{{ vaccine }}</td>
                 <th>去勢・避妊</th>
-                <td>なし</td>
+                <td>{{ kyosei }}</td>
               </tr>
               <tr>
                 <th>単身応募</th>
-                <td>OK</td>
+                <td>{{ tanshin }}</td>
                 <th>高齢者応募</th>
-                <td>NG</td>
+                <td>{{ koureisha }}</td>
               </tr>
               <tr>
                 <th>掲載日</th>
-                <td>2023/05/17</td>
+                <td>{{ keisaibi }}</td>
                 <th>掲載期日</th>
-                <td>2023/07/31</td>
+                <td>{{ kijitsu}}</td>
               </tr>
               <tr>
                 <th>ペット所在地</th>
-                <td colspan="3">愛知県名古屋市</td>
+                <td colspan="3">{{ syozai }}</td>
               </tr>
               <tr>
                 <th>応募可能地域</th>
-                <td colspan="3">愛知県・岐阜県・三重県</td>
+                <td colspan="3">{{ oubokanou }}</td>
               </tr>
             </table>
 
@@ -157,27 +93,32 @@
             <table>
               <tr>
                 <th>募集の経緯</th>
-                <td>捨て猫を保護しましたが、家族に猫アレルギーがいるので里親さんを募集しています。</td>
+                <td>
+                  {{ keii }}
+                </td>
               </tr>
               <tr>
                 <th>性格・特徴</th>
-                <td>甘えん坊で優しい性格です。</td>
+                <td>
+                  {{ seikaku }}
+                </td>
               <tr>
                 <th>健康状態</th>
-                <td>排泄、排便の問題はありません。<br>
-                    エイズ、白血病検査は、陰性です。<br>
-                    ノミダニ駆除済<br>
-                    検便異常なし。</td>
+                <td>
+                  {{ kenkou }}
+                </td>
               </tr>
               <tr>
                 <th>引き渡し場所</th>
-                <td>里親希望者との相談のうえ決める</td>
+                <td>
+                  {{ hikiwatashi }}
+                </td>
               </tr>
               <tr>
                 <th>その他備考</th>
-                <td>完全室内飼い、脱走防止をして頂ける方。<br>
-                    最初はトイレが入る2段か3段のケージをご用意頂き、この子のペースに合わせてゆっくり環境に適応させて頂ける方。<br>
-                    責任を持って家族として迎えて頂ける方にお願い致します。</td>
+                <td>
+                  {{ bikou }}
+                </td>
               </tr>
             </table>
 
@@ -187,8 +128,8 @@
 
 
           <div class="p-detail_right">
-            <p>お気に入り登録者数:xx人</p>
-            <p id="pet-buttom"><a href="#">申し込み・お問い合わせ</a></p>
+            <p>お気に入り登録者数:{{ favorite }}人</p>
+            <p id="pet-buttom"><a href="/inquiry">申し込み・お問い合わせ</a></p>
             <p id="font-small">※里親募集者の都合により、応募可能地域外にお住まいの方からのお問い合わせは受け付けていません。<br>
                 【応募可能地域】をご確認ください。</p>
 
@@ -212,17 +153,20 @@
                 <div id="pro-img">
                   <figure>
                     <img src="images/pro-icon.png" alt="プロフィール画像">
+                    <!-- ここおねがい -->
                   </figure>
                 </div><!-- id="pro-img" -->
                 <div id="pro-inf">
-                  <p>名前：user1</p>
-                  <p>会員種別：一般</p>
-                  <p>法人・団体名：個人保護</p>
+                  <p>名前：{{ profname }}</p>
+                  <p>会員種別：{{ profcate }}</p>
+                  <p>法人・団体名：{{ profteam }}</p>
                 </div><!-- id="pro-inf" -->
               </div><!-- id="re-wrap" -->
 
               <div id="pro-msg">
-                <p>個人有志が協力して、名古屋を中心に保護猫の里親探しを行っています。</p>
+                <p>
+                  {{ profmsg }}
+                </p>
               </div>
             </div><!-- class="recruiter-wrap" -->
 
@@ -244,92 +188,11 @@
 
           <div class="similar-wrap">
 
-            <div class="post">
-              <a href="foster_detail.html">
-                <p id="iine"><input type="submit" value="&#xf004;" class="button"></p> 
-                <figure>
-                  <img src="images/cat.jpeg" alt="sample">
-                </figure>
-                <h3>投稿タイトル</h3>
-                <p><span>種類</span>猫</p>
-                <p><span>性別</span>男の子</p>
-                <p><span>所在地</span>愛知県名古屋市</p>
-                <p><span>応募可能地域</span></p>
-                <p id="brbr">愛知県、岐阜県、三重県</p>
-              </a>
-            </div><!-- class="post" -->
+          {% for i in range(5)%}
 
+          {% include "post_detail.html" %}
+          {% endfor %}
 
-            <div class="post">
-              <a href="foster_detail.html">
-                <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
-                <figure>
-                  <img src="images/cat.jpeg" alt="sample">
-                </figure>
-                <h3>投稿タイトル</h3>
-                <p><span>種類</span>猫</p>
-                <p><span>性別</span>男の子</p>
-                <p><span>所在地</span>愛知県名古屋市</p>
-                <p><span>応募可能地域</span></p>
-                <p id="brbr">愛知県、岐阜県、三重県</p>
-              </a>
-            </div><!-- class="post" -->
-
-
-
-
-            <div class="post">
-              <a href="foster_detail.html">
-                <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
-                <figure>
-                  <img src="images/cat.jpeg" alt="sample">
-                </figure>
-                <h3>投稿タイトル</h3>
-                <p><span>種類</span>猫</p>
-                <p><span>性別</span>男の子</p>
-                <p><span>所在地</span>愛知県名古屋市</p>
-                <p><span>応募可能地域</span></p>
-                <p id="brbr">愛知県、岐阜県、三重県</p>
-              </a>
-            </div><!-- class="post" -->
-
-
-
-
-            <div class="post">
-              <a href="foster_detail.html">
-                <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
-                <figure>
-                  <img src="images/cat.jpeg" alt="sample">
-                </figure>
-                <h3>投稿タイトル</h3>
-                <p><span>種類</span>猫</p>
-                <p><span>性別</span>男の子</p>
-                <p><span>所在地</span>愛知県名古屋市</p>
-                <p><span>応募可能地域</span></p>
-                <p id="brbr">愛知県、岐阜県、三重県</p>
-              </a>
-            </div><!-- class="post" -->
-
-
-
-
-
-
-            <div class="post">
-              <a href="foster_detail.html">
-                <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
-                <figure>
-                  <img src="images/cat.jpeg" alt="sample">
-                </figure>
-                <h3>投稿タイトル</h3>
-                <p><span>種類</span>猫</p>
-                <p><span>性別</span>男の子</p>
-                <p><span>所在地</span>愛知県名古屋市</p>
-                <p><span>応募可能地域</span></p>
-                <p id="brbr">愛知県、岐阜県、三重県</p>
-              </a>
-            </div><!-- class="post" -->
 
 
 
@@ -337,7 +200,7 @@
 
 
 
-          <p><a href="foster_board.html">
+          <p><a href="/foster_board">
               << 検索に戻る</a>
           </p>
         </div><!-- class="p-similar" -->
@@ -350,6 +213,7 @@
     </main>
 
 
+{% endblock %}
 
 
 
@@ -359,84 +223,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <footer>
-
-    <p id="page-top"><a href="#">Top</a></p>
-
-      <div class="footer-wrap">
-
-
-      <div class="rogo-wrap">
-        <figure>
-          <img src="images/rogo.png" alt="rogo">
-        </figure>
-      </div>
-
-
-
-
-      <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">HELP</li>
-            <li><a href="help.html">ヘルプセンター</a></li>
-            <li><a href="inquiry.html">お問い合わせ</a></li>
-            <li><a href="guid.html">ガイド</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-      <div class="f-nav-wr">
-
-        <nav>
-          <ul>
-            <li class="nav-bold">SETEMAP</li>
-            <li><a href="assignment.html">譲渡会</a></li>
-            <li><a href="lost_petboard.html">迷子掲示板</a></li>
-            <li><a href="foster_board.html">里親掲示板</a></li>
-          </ul>
-        </nav>
-
-      </div>
-
-
-
-      </div><!-- class="footer-wrap"の終了タグ -->
-
-
-
-
-      <div class="copy-all">
-        2023 &copy; Copyright Titta. All rights reserved.
-      </div>
-
-
-
-    </footer>
-
-
- <!-- jQueryへのリンク -->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
-
-  </body>
-
-</html>

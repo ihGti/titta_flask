@@ -1,0 +1,159 @@
+@charset "utf-8";
+
+/* common.cssは絶対に触らない！！！！！！！！！！！ */
+
+/* sample.cssをコピーし複製 */
+/* ファイル名はhtmlと同じ名前にしてください */
+
+
+/* sample.htmlにlinkタグがコメントアウトしてあるので良ければ使ってください */
+
+
+/*sample.html*/
+/*例*/
+
+
+
+div#upper{
+  margin: 30px 0 0 0 ;
+  height: 700px;
+  min-width: 1200px;
+}
+
+div#upper-up{
+  height: 350px;
+  min-width: 1200px;
+  background-image: url(../images/konnitiha.png);
+  background-size: contain;
+  background-position: center;
+}
+
+div#upper-down{
+  margin-top: 30px ;
+}
+
+form#assignform{
+  height: 350px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+form#assignform a{
+  margin-top: 75px;
+  padding: 0 15px 15px 15px;
+  border-bottom: solid 4px #575757;
+  font-size: 2.5rem;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+}
+
+div#upper-down form input{
+  margin-top: 75px;
+  height: 70px;
+  width: 500px;
+  text-align: center;
+  background-color: rgba(234,234, 234, 1);
+  color: #565656;
+  font-size: 1.4rem;
+  border-radius: 50px;
+  border: 1px solid rgba(234, 234, 234, 1.0);
+}
+
+
+
+input#assignarea[type="text"]:focus {
+  border: 1px solid rgba(234, 234, 234, 1.0);
+  outline: 0;
+}
+
+
+div#lower{
+  background-color: #FFF;
+  width: 100%;
+  margin: 0 auto;
+}
+
+li{
+  list-style: none;
+}
+
+.lower-content{
+  margin: 30px auto 0 auto;
+  width: 90%;
+  display: flex;
+}
+
+.lower-content figure{
+  min-height: 100px;
+  min-width: 100px;
+  max-height: 100px;
+  min-width: 100px;
+  margin: 0 0 0 auto;
+  background-color: #000;
+}
+
+.lower-content-down{
+  width: 90%;
+  margin:  5px auto 0 auto;
+}
+
+.contents{
+  margin: 20px;
+  width: 350px;
+  height: 350px;
+  box-shadow:0 0 1px 3px rgb(100 100 100 / 20%);
+  color: #888;
+  font-size: 1.2rem;
+
+}
+
+.down-inner{
+  height: 10px;
+  max-width: 170px;
+  margin: 30px 0 0 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.down-inner img{
+  height: 15px;
+  width: 15px;
+  background-color: #000;
+}
+
+.down-inner p{
+  margin-left: 30px;
+}
+
+.day{
+  margin-top: 10px;
+  height: px;
+  width: 175px;
+  font-size: 2rem;
+  overflow-wrap: break-word;
+}
+
+.ken{
+  margin-top: 10px;
+}
+
+.contents-title{
+  margin-top: 20px;
+  color: #F00;
+}
+
+.contents-detail{
+  margin-top: 5px;
+overflow-wrap: break-word;
+}
+
+div#lower ul{
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
