@@ -6,10 +6,7 @@
 /* --里親投稿-- */
 
 
-div.wrap{
-  display: block;
-  height: auto;
-}
+
 
 /* -------------↓カテゴリーナビゲーション----------------- */
 
@@ -36,89 +33,6 @@ div.wrap{
 }
 
 
-
-
-
-#full{
-  display: flex;
-}
-
-
-
-
-
-/* --------------↓左-------------------- */
-
-
-#left{
-  display: flex;
-  flex-direction: column;
-  width: 320;
-  margin: 0 0 0 50px;
-}
-
-
-/* ------------↓プロフィール-------------- */
-
-#prof{
-  background-color: #fff;
-  border: #E5857B 1px solid;
-  width: 300px;
-  height: 90px;
-  margin: 0 auto;
-}
-#name{
-  display: flex;
-  margin: 20px 0 15px 30px;
-  font-size: 1.1rem;
-}
-#name #sama{
-  margin: 0 0 0 10px;
-}
-#prof a{
-  text-decoration: none;
-  margin: 10px 0 0 30px;
-  font-size: 0.8rem;
-  color: #E5857B;
-}
-
-
-
-
-
-
-
-/* ---------サブナビゲーション---------- */
-
-
-#sub-nav{
-  border: #E5857B 0.5px solid;
-  background-color: #fff;
-  width: 300px;
-  margin: 30px 0 0 0;
-}
-
-#sub-nav ul{
-  list-style: none;
-}
-
-#sub-nav ul li{
-  padding: 10px 10px 10px 30px;
-  border-bottom: #E5857B 2px dashed;
-  font-size: 1.1rem;
-}
-#sub-nav ul li:last-child{
-  border-bottom: none;
-}
-
-#sub-nav ul li a{
-  text-decoration: none;
-  color: #000;
-}
-
-#sub-nav ul li a:hover{
-  opacity: 0.7;
-}
 
 
 
@@ -163,12 +77,6 @@ div.wrap{
   padding: 0 0 0 7px;
 }
 
-#detail p{
-  font-size: 0.9rem;
-  margin: 20px 0 0 10px;
-  line-height: 30px;
-  
-}
 
 
 
