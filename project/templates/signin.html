@@ -10,6 +10,7 @@
 
 {% block js%}
      <script type="text/javascript" src="./static/js/signin.js"></script>
+     <script type="text/javascript" src="./static/js/dialog_sample.js"></script>
 {% endblock%}
 
 {% block content %}
@@ -25,7 +26,7 @@
 
           <!-- ユーザー登録フォーム -->
           <div id="center">
-            <form action="/" method="post">
+            <form action="/top" method="post">
 
               <h1>ログイン情報</h1>
               <hr noshade="" class="under-line">
@@ -137,7 +138,7 @@
               </label>
 
               <!-- 送信ボタン -->
-              <input type="submit" value="同意して確認画面へ" id="bottun">
+              <input type="submit" value="同意して確認画面へ" id="bottun" onclick="return myfunc()">
 
             </form>
           </div>
