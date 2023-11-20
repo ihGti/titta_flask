@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="./static/css/product_detail.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/product_detail.css">
 {% endblock %}
 
 {% block js%}
-     <script type="text/javascript" src="./static/js/product_detail.js"></script>
+    <script type="text/javascript" src="/static/js/product_detail.js"></script>
 {% endblock%}
 
 {% block content %}
@@ -24,7 +24,7 @@
     <div id="pankuzu">
       <a href="#">くず</a>>
       <a href="#">くず</a>>
-      <a href="product">商品一覧</a>
+      <a href="/product">商品一覧</a>
     </div>
 
     <div id="shouhinfl">
@@ -39,20 +39,20 @@
       </div>
 
       <div id="shouhinfl2">
-        <p>{{ name }}</p>
-        <p>{{ nameid }}</p>
+        <p>{{ exhibit.F_ExTitle }}</p>
+        <p>{{ exhibit.F_ExhibitID }}</p>
         <div id="flkakaku">
-          <p>￥{{ money }} (税込)</p>
+          <p>￥{{ exhibit.F_ExPrice }} (税込)</p>
           <a href="#"></a>
           <a href="#"></a>
         </div>
 
-        <a href="/" id="ka-to">カートに入れる</a>
+        <a href="/settelement_check/{{exhibit.F_ExID}}" id="ka-to">カートに入れる</a>
 
         <div id="moxtutomiru">
           <h1 id="shouhinnsetumei1">商品詳細</h1>
           <p id="texttexttext">
-           {{ producttext }}
+           {{ exhibit.F_ExInfo }}
           </p>
           <button id="moxtutomirubotan">もっと見る▽</button>
         </div>
@@ -72,19 +72,19 @@
             </tr>
             <tr>
               <th>商品の状態</th>
-              <td><p class="hyounomoji">{{ jotai }}</p></td>
+              <td><p class="hyounomoji">{{ exhibit.F_ExSit }}</p></td>
             </tr>
             <tr>
               <th>配送料の負担</th>
-              <td><p class="hyounomoji">{{ tax }}</p></td>
+              <td><p class="hyounomoji"></p></td>
             </tr>
             <tr>
               <th>配送方法</th>
-              <td><p class="hyounomoji">{{ haisou }}</p></td>
+              <td><p class="hyounomoji">{{ exhibit.F_ExDeli }}</p></td>
             </tr>
             <tr>
               <th>配送元の地域</th>
-              <td><p class="hyounomoji">{{ tiiki }}</p></td>
+              <td><p class="hyounomoji"></p></td>
             </tr>
           </table>
 
@@ -106,12 +106,16 @@
 
           <h1 id="shuxtupinshaProtext">出品者情報</h1>
           <div id="shuxtupinshaPro">
-            <div id="shuxtupinnshaProPic"></div>
+            <div id="shuxtupinnshaProPic">
+              <img src="{{ url_for('static', filename='prof_image/' + users.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;">
+            </div>
             <div id="namaetofollow">
-              <a href="#">{{ exhibitname}}</a>
-              <button>＋フォロー</button>
-              <a href="#" id="reviewhoshi">{{ review }}</a>
-              <p>{{ reviewnum }}</p>
+              <a href="/userprof/{{users.F_UserID}}">{{ users.F_UserName}}</a>
+              <form action="/add_friend/{{ users.F_UserID }}" method="post">
+                <input type="submit" value="フォロー">
+              </form>
+              <a href="#" id="reviewhoshi"></a>
+              <p></p>
             </div>
           </div>
         </div>

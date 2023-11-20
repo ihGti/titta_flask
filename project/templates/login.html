@@ -1,14 +1,28 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
 
-{% block title %}
--login
-{% endblock %}
+<html lang="ja">
 
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="static/css/login.css">
-{% endblock %}
+  <head>
 
-{% block content %}
+      <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Titta</title>
+
+    <!-- この２つのcssは触らない -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css')}}">
+
+    <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css')}}">
+
+
+  </head>
+
+  <body>
+    
+
 
     <main id="m-sample">
 
@@ -22,7 +36,7 @@
         <div id="vartical-line"></div>
 
         <div id="login-form">
-          <form method="post" action="/">
+          <form method="post">
             <h1>LOGIN</h1>
 
             <label for="email">
@@ -44,4 +58,20 @@
 
     </main>
 
-{% endblock %}
+    <footer>
+
+      <div class="copy-all">
+        2023 &copy; Copyright Titta. All rights reserved.
+      </div>
+
+    </footer>
+
+
+ <!-- jQueryへのリンク -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/signin.js')}}"></script>
+
+  </body>
+
+</html>

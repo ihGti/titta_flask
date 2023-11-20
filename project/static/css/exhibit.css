@@ -36,6 +36,13 @@ h1{
   width: 300px;
 }
 
+.btn{
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
 #minidiv{
   display: flex;
   justify-content: center;
