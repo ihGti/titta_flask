@@ -7,7 +7,6 @@
 {% block css %}
     <link rel="stylesheet" type="text/css" href="static/css/foster_post.css">
     <link rel="stylesheet" type="text/css" href="static/css/my_prof_left.css">
-
 {% endblock %}
 
 {% block content %}
@@ -15,53 +14,10 @@
     <main id="m-sample">
 
       <div class="wrap">
-        <div class="category-navigation">
-          <ul>
-              <li><a href="/">Titta</a></li>
-              <li><a href="#">マイページ</a></li>
-              <li><a href="foster_post">里親募集登録</a></li>
-          </ul>
-        </div>
 
-        <div id="full">
-          <div id="left">
+{% include "myside.html" %}
 
-            <div id="prof">
-              <div id="name">
-                <p>
-                  <!-- テスト用変数 -->
-                  {% set authuser = "ニックネーム" %}
-                  {{ authuser}}
-                </p>
-                <p id="sama">
-                  様
-                </p>
-              </div>
-              <a href="#">[ ログアウト ]</a>
-
-            </div>
-            <div id="sub-nav">
-
-              <ul>
-                <li><a href="#">登録したペット一覧</a></li>
-                <li><a href="#">プロフィール編集</a></li>
-                <li><a href="#">里親募集ペットを登録</a></li>
-                <li><a href="#">迷子ペット情報を登録</a></li>
-                <li><a href="#">譲渡誓約書</a></li>
-                <li><a href="#">掲示板掲載履歴</a></li>
-                <li><a href="#">売上・ポイント管理</a></li>
-                <li><a href="#">各種設定</a></li>
-                <li><a href="#">ヘルプ</a></li>
-
-              </ul>
-
-            </div>
-
-          </div>
-
-
-         <div id="right">
-<form method="" action="">        
+          <div id="right">
 
             <div id="detail">
               <h2>里親募集ペットを登録</h2>
@@ -72,207 +28,208 @@
             </div>
 
 
+            <form method="post" action="" enctype="multipart/form-data">
 
-            <table>
-              <tbody>
-                <tr id="keisai">
-                  <td id="keisaiR">掲載期日<p class="hissu">必須</p></td>
-                  <td id="keisaiW">
-                    <input type="text" class="textbox-001" name="keisaiW" placeholder=""/>
-                    <p>（入力例:2023/05/26 の場合  →  20230526）</p>
-                  </td>
-                </tr>
-                <tr id="kinds">
-                  <td id="kindsR">ペット種別<p class="hissu">必須</p></td>
-                  <td id="kindsW">
-                    <label class="selectbox-002">
-                      <select name="kindsW">
-                          <option>選択してください</option>
-                          <option>柴犬</option>
-                          <option>シマエナガ</option>
-                      </select>
-                    </label>
-                  </td>
-                </tr>
-                <tr id="post">
-                  <td id="postR">投稿タイトル</td>
-                  <td id="postW">
-                    <input type="text" name="postW" class="textbox-002" placeholder=""/>
-                  </td>
-                </tr>
-                <tr id="location">
-                  <td id="locationR">ペット所在地<p class="hissu">必須</p></td>
-                  <td id="locationW">
-                    <fieldset class="radio-001">
-                      <label>
-                          <input type="radio" name="radio-001" checked/>
-                          登録した住所（名古屋市中区）にいます
+              <table>
+                <tbody>
+                  <tr id="keisai">
+                    <td id="keisaiR">掲載期日<p class="hissu">必須</p></td>
+                    <td id="keisaiW">
+                      <input type="date" class="textbox-001" name="keisaiW" placeholder=""/>
+                      <p>（入力例:2023/05/26 の場合  →  20230526）</p>
+                    </td>
+                  </tr>
+                  <tr id="kinds">
+                    <td id="kindsR">ペット種別<p class="hissu">必須</p></td>
+                    <td id="kindsW">
+                      <label class="selectbox-002">
+                        <select name="kindsW">
+                            <option value="">選択してください</option>
+                            <option value="">柴犬</option>
+                            <option value="">シマエナガ</option>
+                        </select>
                       </label>
-                      <label>
-                          <input type="radio" name="radio-001"/>
-                          上記以外の住所にいます
-                      </label>
-                    </fieldset>
-                    <p>※募集投稿では、都道府県・市区町村まで表示されます。</p>
-                    <fieldset class="checkbox-001">
-                      <label>
-                          <input type="checkbox" name="checkbox-001" checked/>
-                          行政の保護施設にいます（民間の場合は登録しないで下さい）
-                      </label>
-                    </fieldset>
-                  </td>
-                </tr>
-                <tr id="gen">
-                  <td id="genR">性別<p class="hissu">必須</p></td>
-                  <td id="genW">
-                    <fieldset class="radio-002">
-                      <label>
-                          <input type="radio" name="radio-002" checked/>
-                          男の子
-                      </label>
-                      <label>
-                          <input type="radio" name="radio-002"/>
-                          女の子
-                      </label>
-                      <label>
-                          <input type="radio" name="radio-002"/>
-                          不明
-                      </label>
-                    </fieldset>
-                  </td>
-                </tr>
-                <tr id="age">
-                  <td id="ageR">年齢<p class="hissu">必須</p></td>
-                  <td id="ageW">
-                    <input type="text" class="textbox-001" placeholder=""/>
-                  </td>
-                </tr>
-                <tr id="size">
-                  <td id="sizeR">大きさ<p class="hissu">必須</p></td>
-                  <td id="sizeW">
-                    <input type="text" class="textbox-001" placeholder=""/>
-                  </td>
-                </tr>
-                <tr id="vaccine">
-                  <td id="vaccineR">ワクチン接種<p class="hissu">必須</p></td>
-                  <td id="vaccineW">
-                    <fieldset class="radio-003">
-                      <label>
-                          <input type="radio" name="radio-003" checked/>
-                          済
-                      </label>
-                      <label>
-                          <input type="radio" name="radio-003"/>
-                          未
-                      </label>
-                    </fieldset>
-                    <p>接種済みのワクチンを登録する</p>
-                    <input type="text" class="textbox-002" placeholder=""/>
-                  </td>
-                </tr>
-                <tr id="cast">
-                  <td id="castR">去勢・避妊<p class="hissu">必須</p></td>
-                  <td id="castW">
-                    <fieldset class="radio-004">
-                      <label>
-                          <input type="radio" name="radio-004" checked/>
-                          済
-                      </label>
-                      <label>
-                          <input type="radio" name="radio-004"/>
-                          未
-                      </label>
-                    </fieldset>
-                  </td>
-                </tr>
-                <tr id="sperson">
-                  <td id="spersonR">単身応募</td>
-                  <td id="spersonW">
-                    <fieldset class="radio-005">
-                      <label>
-                          <input type="radio" name="radio-005"/>
-                          可能
-                      </label>
-                      <label>
-                          <input type="radio" name="radio-005"/>
-                          不可
-                      </label>
-                    </fieldset>
-                  </td>
-                </tr>
-                <tr id="elder">
-                  <td id="elderR">高齢者（65歳以上）応募</td>
-                  <td id="elderW">
-                    <fieldset class="radio-006">
-                      <label>
-                          <input type="radio" name="radio-006"/>
-                          可能
-                      </label>
-                      <label>
-                          <input type="radio" name="radio-006"/>
-                          不可
-                      </label>
-                    </fieldset>
-                  </td>
-                </tr>
-                <tr id="background">
-                  <td id="backgroundR">募集の経緯<p class="hissu">必須</p></td>
-                  <td class="area"><textarea></textarea></td>
-                </tr>
-                <tr id="personality">
-                  <td id="personalityR">性格・特徴<p class="hissu">必須</p></td>
-                  <td class="area"><textarea></textarea></td>
-                </tr>
-                <tr id="health">
-                  <td id="healthR">健康状態<p class="hissu">必須</p></td>
-                  <td class="area"><textarea></textarea></td>
-                </tr>
-                <tr id="place">
-                  <td id="placeR">引き渡し場所<p class="hissu">必須</p></td>
-                  <td class="area"><textarea></textarea></td>
-                </tr>
-                <tr id="other">
-                  <td id="otherR">その他備考</td>
-                  <td class="area"><textarea></textarea></td>
-                </tr>
-              </tbody>
-            </table>
+                    </td>
+                  </tr>
+                  <tr id="post">
+                    <td id="postR">投稿タイトル</td>
+                    <td id="postW">
+                      <input type="text" name="postW" class="textbox-002" placeholder=""/>
+                    </td>
+                  </tr>
+                  <tr id="location">
+                    <td id="locationR">ペット所在地<p class="hissu">必須</p></td>
+                    <td id="locationW">
+                      <fieldset class="radio-001">
+                        <label>
+                            <input type="radio" name="radio-001" checked/>
+                            登録した住所（名古屋市中区）にいます
+                        </label>
+                        <label>
+                            <input type="radio" name="radio-001"/>
+                            上記以外の住所にいます
+                        </label>
+                      </fieldset>
+                      <p>※募集投稿では、都道府県・市区町村まで表示されます。</p>
+                      <fieldset class="checkbox-001">
+                        <label>
+                            <input type="checkbox" name="checkbox-001" checked/>
+                            行政の保護施設にいます（民間の場合は登録しないで下さい）
+                        </label>
+                      </fieldset>
+                    </td>
+                  </tr>
+                  <tr id="gen">
+                    <td id="genR">性別<p class="hissu">必須</p></td>
+                    <td id="genW">
+                      <fieldset class="radio-002">
+                        <!-- kari -->
+                        <label>
+                            <input type="radio" name="radio-002" checked/>
+                            男の子
+                        </label>
+                        <label>
+                            <input type="radio" name="radio-002"/>
+                            女の子
+                        </label>
+                        <label>
+                            <input type="radio" name="radio-002"/>
+                            不明
+                        </label>
+                      </fieldset>
+                    </td>
+                  </tr>
+                  <tr id="age">
+                    <td id="ageR">年齢<p class="hissu">必須</p></td>
+                    <td id="ageW">
+                      <input type="text" class="textbox-001" name="ageW" placeholder=""/>
+                    </td>
+                  </tr>
+                  <tr id="size">
+                    <td id="sizeR">大きさ<p class="hissu">必須</p></td>
+                    <td id="sizeW">
+                      <input type="text" class="textbox-001" name="sizeW" placeholder=""/>
+                    </td>
+                  </tr>
+                  <tr id="vaccine">
+                    <td id="vaccineR">ワクチン接種<p class="hissu">必須</p></td>
+                    <td id="vaccineW">
+                      <fieldset class="radio-003">
+                        <label>
+                            <input type="radio" name="radio-003" checked/>
+                            済
+                        </label>
+                        <label>
+                            <input type="radio" name="radio-003"/>
+                            未
+                        </label>
+                      </fieldset>
+                      <p>接種済みのワクチンを登録する</p>
+                      <input type="text" class="textbox-002" name="vaccineW" placeholder=""/>
+                    </td>
+                  </tr>
+                  <tr id="cast">
+                    <td id="castR">去勢・避妊<p class="hissu">必須</p></td>
+                    <td id="castW">
+                      <fieldset class="radio-004">
+                        <label>
+                            <input type="radio" name="radio-004" checked/>
+                            済
+                        </label>
+                        <label>
+                            <input type="radio" name="radio-004"/>
+                            未
+                        </label>
+                      </fieldset>
+                    </td>
+                  </tr>
+                  <tr id="sperson">
+                    <td id="spersonR">単身応募</td>
+                    <td id="spersonW">
+                      <fieldset class="radio-005">
+                        <label>
+                            <input type="radio" name="radio-005"/>
+                            可能
+                        </label>
+                        <label>
+                            <input type="radio" name="radio-005"/>
+                            不可
+                        </label>
+                      </fieldset>
+                    </td>
+                  </tr>
+                  <tr id="elder">
+                    <td id="elderR">高齢者（65歳以上）応募</td>
+                    <td id="elderW">
+                      <fieldset class="radio-006">
+                        <label>
+                            <input type="radio" name="radio-006"/>
+                            可能
+                        </label>
+                        <label>
+                            <input type="radio" name="radio-006"/>
+                            不可
+                        </label>
+                      </fieldset>
+                    </td>
+                  </tr>
+                  <tr id="background">
+                    <td id="backgroundR">募集の経緯<p class="hissu">必須</p></td>
+                    <td class="area"><textarea name="backgroundW"></textarea></td>
+                  </tr>
+                  <tr id="personality">
+                    <td id="personalityR">性格・特徴<p class="hissu">必須</p></td>
+                    <td class="area"><textarea name="personalityW"></textarea></td>
+                  </tr>
+                  <tr id="health">
+                    <td id="healthR">健康状態<p class="hissu">必須</p></td>
+                    <td class="area"><textarea name="healthW"></textarea></td>
+                  </tr>
+                  <tr id="place">
+                    <td id="placeR">引き渡し場所<p class="hissu">必須</p></td>
+                    <td class="area"><textarea name="placeW"></textarea></td>
+                  </tr>
+                  <tr id="other">
+                    <td id="otherR">その他備考</td>
+                    <td class="area"><textarea name="otherW"></textarea></td>
+                  </tr>
+                </tbody>
+              </table>
 
 
-            <h3>ペットの画像</h3>
-            <div id="upload">
+              <h3>ペットの画像</h3>
+              <div id="upload">
 
-              <figure id="first">
-                <img src="images/dog.jpg">
-              </figure>
+                <figure id="first">
+                  <img src="images/dog.jpg">
+                </figure>
 
-              <figure id="second">
-                <img src="images/sima.jpg">
-              </figure>
+                <figure id="second">
+                  <img src="images/sima.jpg">
+                </figure>
 
-              <div id="info">
-                <p>アップロード可能なファイル種類・・・ jpf / png / gif</p>
-                <p>アップロード可能なファイル容量・・・ 1ファイル最大10BMBまで</p>
-                <p class="color">※推奨サイズ・・・ 縦横 730 px 以上のもの</p>
-                <p class="color">※写真にイラストは使用しないで下さい</p>
-                <p class="color">※直近３か月以内に撮影された画像を使用してください</p>
+                <div id="info">
+                  <p>アップロード可能なファイル種類・・・ jpf / png / gif</p>
+                  <p>アップロード可能なファイル容量・・・ 1ファイル最大10BMBまで</p>
+                  <p class="color">※推奨サイズ・・・ 縦横 730 px 以上のもの</p>
+                  <p class="color">※写真にイラストは使用しないで下さい</p>
+                  <p class="color">※直近３か月以内に撮影された画像を使用してください</p>
 
-                <div id="btn">
-                  <div id="file"><a href="#">ファイルを選択する</a></div>
-                  <p>選択されていません</p>
+                  <div id="btn">
+                    <div id="file"><input type="file" name="example"></div>
+                  </div>
+
                 </div>
 
               </div>
 
-            </div>
+              <div id="last">
+                <div id="regi"><button type="submit">登録する</button></div>
+                <div id="memo"><a href="#">下書きを保存する</a></div>
+              </div>
+            </form>
 
-            <div id="last">
-              <div id="regi"><button type="submit">登録する</button></div>
-              <div id="memo"><a href="#">下書きを保存する</a></div>
-            </div>
 
-
-</form>
 
           </div>
         </div>
