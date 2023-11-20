@@ -29,7 +29,7 @@
         <div id="right"><!-- 右  -->
           <h1>決済確認</h1>
           <div id="select">
-            <form id="formr">
+            <form id="formr" method="post">
               <table>
                 <tr>
                   <td><label>ポイント</label></td>
@@ -95,7 +95,7 @@
                       <label class="boxl">CVV</label><input type="text" name="cvv" id="cvv">
                     </div>
                     <div>
-                      <input type="submit" name="" value="確認" id="btn2">
+                      <input type="submit" name="check" value="確認" id="btn2">
                     </div>
                   </div>
                   </td>
@@ -106,29 +106,30 @@
 
           <div id="kei">
             <div id="ue">
-              <p id="pp">小計：￥{{ syokei }} ポイント利用：なし クーポン利用：なし</p>
+              <p id="pp">小計：￥{{ exhibit.F_ExPrice }} ポイント利用：なし クーポン利用：なし</p>
             </div>
             <div id="sita">
-              <h2 id="hh">支払合計：￥{{ gokei }}
+              <h2 id="hh">支払合計：￥{{ total_price }}
               取得ポイント：{{ addpoint }}</h2>
             </div>
           </div>
 
-
+          <form method="post">
           <div id="list">
             <h1>購入商品</h1>
             <div id="product">
-              <img src="/static/images/img1.jpg" alt="product">
+              <img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhoto)}}" alt="big" id="bigimg" style="height: 100px;">
               <div id="setu">
-                <p>商品名：{{ productname }}</p>
-                <p>説明：{{ info }}</p>
-                <p>値段：￥{{ nedan }}</p>
-                <p>ポイント：{{ point }}</p>
+                <p>商品名：{{ exhibit.F_ExTitle }}</p>
+                <p>説明：{{ exhibit.F_ExInfo }}</p>
+                <p>値段：￥{{ exhibit.F_ExPrice }}</p>
+                <p>ポイント：{{ user_point.F_PointQuantity }}</p>
               </div>
             </div>
           </div>
-          <input type="submit" form="formr" value="購入を確定する" id="btn">
+          <input type="submit" form="formr" value="購入を確定する" id="btn" name="comp">
         </div>
+        </form>
 
 
       </div><!-- class="wrap" -->

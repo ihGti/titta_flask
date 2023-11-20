@@ -81,6 +81,20 @@ class T_Exhibit(db.Model):
     F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
     
     F_CategoryID = db.Column(db.Integer, db.ForeignKey('t__category.F_CategoryID'), nullable=False)
+    
+# 購入テーブル
+class T_Cartlist(db.Model):
+    F_CartID = db.Column(db.Integer, primary_key=True)
+    
+    F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    
+    F_ExID = db.Column(db.Integer, db.ForeignKey('t__exhibit.F_ExID') , nullable=False)
+    
+    F_CartPrice = db.Column(db.Float, nullable=False)
+    
+    user = db.relationship('T_User',foreign_keys=[F_UserID], backref='carts')
+    
+    exhibit = db.relationship('T_Exhibit', foreign_keys=[F_ExID])
 
 # ユーザーのフォロー関連のテーブル
 class T_Paramerter(db.Model):
@@ -89,7 +103,7 @@ class T_Paramerter(db.Model):
     F_friendid = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
     db.UniqueConstraint('F_userid', 'F_friendid', name='unique_friendship')
     
-    user = db.relationship('T_User', foreign_keys=[F_userid])
+    user = db.relationship('T_User', foreign_keys=[F_userid], backref='friends')
     friend = db.relationship('T_User', foreign_keys=[F_friendid])
     
 

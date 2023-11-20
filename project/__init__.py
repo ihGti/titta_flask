@@ -27,7 +27,7 @@ def create_app(config_filename='config.py'):
     app.config['UPLOAD_FOLDER_DEMOEXHIBIT'] = 'project/static/demo_toredo'
     app.config['UPLOAD_FOLDER_LOSTPET'] = 'project/static/lost_pet'
     app.config['UPLOAD_FOLDER_FOSTERPET'] = 'project/static/foster_pet'
-    from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point
+    from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet
 
     @login_manager.user_loader
     def load_user(user_id):

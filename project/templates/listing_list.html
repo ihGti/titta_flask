@@ -34,20 +34,19 @@
             
             <p id="tradedUser">取引したユーザー</p>
             
-            {% set a = ["a[0]", "a[1]", "a[2]", "a[3]"] %}
             <!-- DB連携書き換え必須 -->
-            {% for i in range(8) %}
+            {% for exhibit, user in exhibit_info %}
             <div class="minibox">
 
-              <a href="/">
+              <a href="/product_detail/{{exhibit.F_ExID}}">
                 <figure>
-                  <img src="/static/images/petkagu.jpg" alt="閲覧履歴商品画像"><!-- ここに過去に閲覧した商品の画像が出力される -->
+                  <img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhoto)}}" alt="big" id="bigimg">
                 </figure>
               </a>
 
               <div class="detailbox">
-                <a href="/"><p>{{ a[0] }}</p></a><!--いずれ文字を消してで入れるようにする-->
-                <p class="price">￥{{ a[1] }}</p><!-- 2000は消して -->
+                <a href="/"><p></p></a><!--いずれ文字を消してで入れるようにする-->
+                <p class="price">￥{{ exhibit.F_ExPrice }}</p><!-- 2000は消して -->
               </div>
 
               <div class="othersbox">
@@ -55,12 +54,11 @@
                   <div class="top">
                     <a href="/">
                       <figure>
-                        <img id="account-icon" src="/static/images/default-icon.jpg" alt="デフォルトアイコン">
-                      </figure><!-- ユーザーアイコン -->
+                        <img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image"></figure>ユーザーアイコン
                     </a>
                   </div>
       
-                  <div class="mid"><a href="/"><p id="name">{{ a[2] }}</p></a></div><!-- ユーザーネーム -->
+                  <div class="mid"><a href="/">{{ user.F_UserName}}<p id="name"></p></a></div><!-- ユーザーネーム -->
 
                 </div>
               </div>

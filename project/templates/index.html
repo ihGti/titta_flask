@@ -36,7 +36,7 @@
             <div class="index_M_sec2_di_1">
               <a href="/login" id="loginB"></a>
 
-            <form method="get" action="#">
+            <form method="post">
 
               <div class="index_M_sec2_di_1_1">
                 <h1>絞り込み</h1>
@@ -53,8 +53,12 @@
 
                     <div class="index_M_sec2_fl_1_1_3">
                       <p>カテゴリ</p>
-                        <input class="catogoinput" type="text" placeholder="カテゴリ1" name="cate1">
-                        <input class="catogoinput" type="text" placeholder="カテゴリ2" name="cate2">
+                      <select name="genre">
+                        <option value="">選択してください</option>
+                        {% for categories in category %}
+                        <option value="{{ categories.F_CategoryID }}">{{ categories.F_CategoryName }}</option>
+                        {% endfor %}
+                      </select>
                     </div>
 
                     <div class="index_M_sec2_fl_1_1_4">
@@ -136,7 +140,7 @@
               </div>
 
               <div class="tutorial_choice">
-                <a href="#"></a>
+                <a href="/exhibit_trial"></a>
                 <a href="#"></a>
               </div>
 

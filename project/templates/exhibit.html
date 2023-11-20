@@ -9,11 +9,7 @@
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
   <form action="/upload" method="post" enctype="multipart/form-data" id="imageForm">
-=======
-  <form action="/exhibit" method="post">
->>>>>>> d07d9d0e9d4482a60ae524e77efa62fdd6f66cf5
 
     <main id="m-sample">
 
@@ -27,15 +23,35 @@
 
         <div id="herf">
           <div id="img">
-              <figure><img src="/static/images/img1.jpg" alt="big" id="bigimg"></figure>
-              <div id="btndiv">
-                <button id="btn" name="selectimg">画像選択</button>
-              </div>
+            <figure>
+              <img src="/static/images/img1.jpg" alt="big" id="bigimg">
+              <input type="file" class="button" id="imageinput1" name="imageinput1" style="display: none;" onchange="previewImage('imageinput1','bigimg')">
+              <label class="button" for="imageinput1">&#xf03e;</label>
+            </figure>
+            <!-- <div id="btndiv">
+              <button id="btn" name="selectimg">画像選択</button>
+            </div> -->
             <div id="minidiv">
-              <figure><img src="/static/images/img1.jpg" alt="mini" class="miniimg"></figure>
-              <figure><img src="/static/images/img1.jpg" alt="mini" class="miniimg"></figure>
-              <figure><img src="/static/images/img1.jpg" alt="mini" class="miniimg"></figure>
-              <figure><img src="/static/images/img1.jpg" alt="mini" class="miniimg"></figure>
+              <figure>
+                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="secondimage">
+                <input type="file" class="button" id="imageinput2" name="imageinput2" style="display: none;" onchange="previewImage('imageinput2','secondimage')">
+                <label class="button" for="imageinput2">&#xf03e;</label>
+              </figure>
+              <figure>
+                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="thirdimage">
+                <input type="file" class="button" id="imageinput3" name="imageinput3" style="display: none;" onchange="previewImage('imageinput3','thirdimage')">
+                <label class="button" for="imageinput3">&#xf03e;</label>
+              </figure>
+              <figure>
+                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="fourimage">
+                <input type="file" class="button" id="imageinput4" name="imageinput4" style="display: none;" onchange="previewImage('imageinput4','fourthimage')">
+                <label class="button" for="imageinput4">&#xf03e;</label>
+              </figure>
+              <figure>
+                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="fifthimage">
+                <input type="file" class="button" id="imageinput5" name="imageinput5" style="display: none;" onchange="previewImage('imageinput5','fifthimage')">
+                <label class="button" for="imageinput5">&#xf03e;</label>
+              </figure>
             </div>
           </div>
           <div id="form">
@@ -63,10 +79,10 @@
                   <label>配達方法</label>
                   <select name="deli">
                     <option value="">選択してください</option>
-                    <option value="手段1">手段1</option>
-                    <option value="手段2">手段2</option>
-                    <option value="手段3">手段3</option>
-                    <option value="手段4">手段4</option>
+                    <option value="レターパック">レターパック</option>
+                    <option value="郵送">郵送</option>
+                    <option value="titta便">Titta便</option>
+                    <option value="宅急便">宅急便</option>
                   </select>
                 </div>
                 
@@ -74,13 +90,8 @@
                   <label>ジャンル</label>
                   <select name="genre">
                     <option value="">選択してください</option>
-<<<<<<< HEAD
                     {% for category in categories %}
                     <option value="{{ category.F_CategoryID }}">{{ category.F_CategoryName }}</option>
-=======
-                    {% for genre in range(5) %}
-                    <option value={{ genre }}>{{genre}}</option>
->>>>>>> d07d9d0e9d4482a60ae524e77efa62fdd6f66cf5
                     {% endfor %}
                   </select>
                 </div>
@@ -103,4 +114,5 @@
     </main>
         </form>
 
+        <script src="/static/js/exhibit.js"></script>
         {% endblock %}

@@ -126,20 +126,20 @@
 
           <div id="itiran">
             <div id="pagesuu">
-              <p>約6917件中</p>
+              <p>約{{products}}件中</p>
               <p id="nasi">1-7件</p>
             </div>
 
             <div id="pro-wrap">
 
-            {% for i in range(12)%}
+        {% for products in product %}
               <div class="product">
-                <a href="#">
+                <a href="/product_detail/{{products.F_ExID}}">
                   <figure class="main">
-                    <img src="/static/images/bed.jpg" alt="サンプル画像">
+                    <img src="{{ url_for('static', filename='toredo/' + products.F_ExPhoto)}}" alt="big" id="bigimg">
                   </figure>
                   <h2>
-                    ペット用クールベッド {{i}}
+                    {{products.F_ExTitle}}
                   </h2>
                   <div class="heart">
 
@@ -149,7 +149,7 @@
                         ￥
                       </h5>
                       <p>
-                        6,980
+                        {{ products.F_ExPrice}}
                       </p>
 
                     </div>
@@ -162,7 +162,7 @@
 
                 </a>
               </div>
-            {% endfor%}
+        {% endfor%}
 
             </div>
 

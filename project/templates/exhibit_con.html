@@ -1,25 +1,8 @@
 {% extends "base.html" %}
 
-<<<<<<< HEAD
-<html lang="ja">
-
-  <head>
-
-      <meta charset="utf-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>出品確認</title>
-
-    <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/exhibit_con.css">
-=======
 {% block title %}
 -exhibit_con
 {% endblock %}
->>>>>>> d07d9d0e9d4482a60ae524e77efa62fdd6f66cf5
 
 {% block css%}
     <link rel="stylesheet" type="text/css" href="/static/css/exhibit_con.css">
@@ -28,72 +11,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="css/ xxx.css"> -->
 
 
-<<<<<<< HEAD
-  </head>
-
-
-  <body>
-
-    <header>
-
-
-      <div class="r-wrap">
-
-        <div class="rr-wrap">
-
-          <!-- index.htmlへ遷移 -->
-          <a href="/">
-            <figure>
-              <img src="/static/images/rogo.png" alt="rogo">
-            </figure>
-          </a>
-
-          <div class="nav-top">
-            <nav>
-              <ul>
-                <!-- mailbox.htmlへ遷移 -->
-                <li><a href="/"><input type="submit" value="&#xf0e0;" class="button"></a></li>
-                <!-- favorite.htmlへ遷移 -->
-                <li><a href="/"><input type="submit" value="&#xf004;" class="button"></a></li>
-                <!-- login.htmlへ遷移 -->
-                <li><a href="/"><input type="submit" value="&#xf007;" class="button"></a></li>
-              </ul>
-            </nav>
-          </div>
-
-
-        </div><!-- "rr-wrap" -->
-
-
-      </div><!-- class="r-wrap" -->
-
-
-
-
-
-
-      <div class="nav-buttom">
-        <nav>
-          <ul>
-            <!-- index.htmlへ遷移 --><li><a href="/" class="line-a">HOME</a></li>
-            <!-- exhibit.htmlへ遷移 --><li><a href="/">出品</a></li>
-            <!-- foster_board.htmlへ遷移 --><li><a href="/">里親掲示板</a></li>
-            <!-- lost_petboard.htmlへ遷移 --><li><a href="/">迷子掲示板</a></li>
-            <!-- contest.htmlへ遷移 --><li><a href="/">コンテスト</a></li>
-            <!-- community.htmlへ遷移 --><li><a href="/">コミュニティ</a></li>
-            <!-- assignment.htmlへ遷移 --><li><a href="/">譲渡会</a></li>
-          </ul>
-        </nav>
-      </div>
-
-    </header>
-
-
-
-
-=======
 {% block content %}
->>>>>>> d07d9d0e9d4482a60ae524e77efa62fdd6f66cf5
     <main id="m-sample">
 
       <div class="wrap">
@@ -105,11 +23,7 @@
 
         <div id="herf">
           <div id="img">
-<<<<<<< HEAD
               <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhoto)}}" alt="big" id="bigimg"></figure>
-=======
-              <figure><img src="/static/images/img1.jpg" alt="big" id="bigimg"></figure>
->>>>>>> d07d9d0e9d4482a60ae524e77efa62fdd6f66cf5
 
             <div id="minidiv">
               <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoS)}}" alt="mini" class="miniimg"></figure>
