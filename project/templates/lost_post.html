@@ -25,10 +25,11 @@
 
 
 
-            <form method="post" action="" enctype="multipart/form-data">
+            <form method="post" action="/lost_post_page" enctype="multipart/form-data">
               <table>
                 <tbody>
                   <tr id="keisai">
+                    <!-- t_pet -->
                     <td id="keisaiR">掲載期日<p class="hissu">必須</p></td>
                     <td id="keisaiW">
                       <input type="date" class="textbox-001" name="keisaiW" placeholder=""/>
@@ -36,33 +37,37 @@
                     </td>
                   </tr>
                   <tr id="kinds">
+                    <!-- t_pet -->
                     <td id="kindsR">ペット種別<p class="hissu">必須</p></td>
                     <td id="kindsW">
                       <label class="selectbox-002">
                         <select name="kindsW">
                             <option value="">選択してください</option>
-                            <option value="">柴犬</option>
-                            <option value="">シマエナガ</option>
+                          {% for categories in category %}
+                            <option value="{{categories.F_CategoryID}}">{{ categories.F_CategoryName }}</option>
+                          {% endfor %}
                         </select>
                       </label>
                     </td>
                   </tr>
                   <tr id="post">
+                    <!-- t_lostpet -->
                     <td id="postR">投稿タイトル</td>
                     <td id="postW">
                       <input type="text" class="textbox-002" name="postW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="location">
+                    <!-- t_lostpet -->
                     <td id="locationR">ペット所在地<p class="hissu">必須</p></td>
                     <td id="locationW">
                       <fieldset class="radio-001">
                         <label>
-                            <input type="radio" name="radio-001" checked/>
+                            <input type="radio" name="radio-001" value="登録した住所（名古屋市中区）にいます"/>
                             登録した住所（名古屋市中区）にいます
                         </label>
                         <label>
-                            <input type="radio" name="radio-001"/>
+                            <input type="radio" name="radio-001" value="上記以外の住所にいます"/>
                             上記以外の住所にいます
                         </label>
                       </fieldset>
@@ -76,77 +81,86 @@
                     </td>
                   </tr>
                   <tr id="gen">
+                    <!-- t_pet -->
                     <td id="genR">性別<p class="hissu">必須</p></td>
                     <td id="genW">
                       <fieldset class="radio-002">
                         <label>
-                            <input type="radio" name="radio-002" checked/>
+                            <input type="radio" name="radio-002" value="男"/>
                             男の子
                         </label>
                         <label>
-                            <input type="radio" name="radio-002"/>
+                            <input type="radio" name="radio-002" value="女"/>
                             女の子
                         </label>
                         <label>
-                            <input type="radio" name="radio-002"/>
+                            <input type="radio" name="radio-002" value="不明"/>
                             不明
                         </label>
                       </fieldset>
                     </td>
                   </tr>
                   <tr id="age">
+                    <!-- t_pet -->
                     <td id="ageR">年齢<p class="hissu">必須</p></td>
                     <td id="ageW">
                       <input type="text" class="textbox-001" name="ageW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="size">
+                    <!-- t_pet -->
                     <td id="sizeR">大きさ<p class="hissu">必須</p></td>
                     <td id="sizeW">
                       <input type="text" class="textbox-001" name="sizeW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="hogo">
+                    <!-- t_lostpet -->
                     <td id="hogoR">保護日時<p class="hissu">必須</p></td>
                     <td id="hogoW">
-                      <input type="text" class="textbox-001" name="hogoW" placeholder=""/>
+                      <input type="date" class="textbox-001" name="hogoW" placeholder=""/>
                       <p>（入力例:2023/05/26 の場合  →  20230526）</p>
                     </td>
                   </tr>
                   <tr id="hogoplace">
+                    <!-- t_lostpet -->
                     <td id="hogoplaceR">保護場所<p class="hissu">必須</p></td>
                     <td id="hogoplaceW">
                       <input type="text" class="textbox-002" name="hogoplaceW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="injury">
+                    <!-- t_lostpet -->
                     <td id="injuryR">怪我の有無<p class="hissu">必須</p></td>
                     <td id="injuryW">
                       <fieldset class="radio-003">
                         <label>
-                            <input type="radio" name="radio-003" checked/>
+                            <input type="radio" name="radio-003" value="有り"/>
                             有り
                         </label>
                         <label>
-                            <input type="radio" name="radio-003"/>
+                            <input type="radio" name="radio-003" value="無し"/>
                             無し
                         </label>
                       </fieldset>
                     </td>
                   </tr>
                   <tr id="color">
+                    <!-- t_pet -->
                     <td id="colorR">体色<p class="hissu">必須</p></td>
                     <td id="colorW">
                       <input type="text" class="textbox-002" name="colorW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="institution">
+                    <!-- t_lostpet -->
                     <td id="institutionR">届出済の機関</td>
                     <td id="institutionW">
                       <input type="text" class="textbox-002" name="institutionW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="features">
+                    <!-- t_lostpet -->
                     <td id="featuresR">特徴</td>
                     <td id="featuresW">
                       <input type="text" class="textbox-002" name="featuresW" placeholder=""/>
@@ -156,22 +170,27 @@
                   
 
                   <tr id="background">
+                    <!-- t_pet -->
                       <td id="backgroundR">募集の経緯<p class="hissu">必須</p></td>
                       <td class="area"><textarea name="backgroundW"></textarea></td>
                     </tr>
                     <tr id="personality">
+                      <!-- t_pet -->
                       <td id="personalityR">性格・特徴<p class="hissu">必須</p></td>
                       <td class="area"><textarea name="personalityW"></textarea></td>
                     </tr>
                     <tr id="health">
+                      <!-- t_pet -->
                       <td id="healthR">健康状態<p class="hissu">必須</p></td>
                       <td class="area"><textarea name="healthW"></textarea></td>
                     </tr>
                     <tr id="place">
+                      <!-- t_lostpet -->
                       <td id="placeR">引き渡し場所<p class="hissu">必須</p></td>
                       <td class="area"><textarea name="placeW"></textarea></td>
                     </tr>
                     <tr id="other">
+                      <!-- t_pet -->
                       <td id="otherR">その他備考</td>
                       <td class="area"><textarea name="otherW"></textarea></td>
                     </tr>
@@ -183,11 +202,11 @@
               <div id="upload">
 
                 <figure id="first">
-                  <img src="images/dog.jpg">
+                  <img src="/static/images/dog.jpg">
                 </figure>
 
                 <figure id="second">
-                  <img src="images/sima.jpg">
+                  <img src="/static/images/sima.jpg">
                 </figure>
 
                 <div id="info">
@@ -198,6 +217,7 @@
                   <p class="color">※直近３か月以内に撮影された画像を使用してください</p>
 
                   <div id="btn">
+                    <!-- t_pet -->
                     <div id="file"><input type="file" name="example"></div>
                   </div>
 

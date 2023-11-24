@@ -3,15 +3,16 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 # flask-migrateの取り込み
 from flask_migrate import Migrate
-# flask-loginの取り込み
+
 from flask_login import LoginManager
 
 # sqlalchemyの定義
 db = SQLAlchemy()
 # migrateの定義
 migrate = Migrate()
-# loginの定義
+    # loginの定義
 login_manager = LoginManager()
+
 
 # flaskのアプリケーション登録
 def create_app(config_filename='config.py'):
@@ -27,8 +28,9 @@ def create_app(config_filename='config.py'):
     app.config['UPLOAD_FOLDER_DEMOEXHIBIT'] = 'project/static/demo_toredo'
     app.config['UPLOAD_FOLDER_LOSTPET'] = 'project/static/lost_pet'
     app.config['UPLOAD_FOLDER_FOSTERPET'] = 'project/static/foster_pet'
-    from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet
+    app.config['UPLOAD_FOLDER_CHAT'] = 'project/static/chat_image'
 
+    from project.models import T_User
     @login_manager.user_loader
     def load_user(user_id):
         return T_User.query.get(int(user_id))
