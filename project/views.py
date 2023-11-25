@@ -1,7 +1,7 @@
 # flask部品の取り込み
 from flask import Flask , request , redirect , render_template , Blueprint , current_app , url_for
 # flask-loginライブラリの取り込み
-from flask_login import login_user, login_required, logout_user, current_user
+from flask_login import login_user, login_required, logout_user, current_user , login_manager
 # パスワードのセキュリティ関連のライブラリ
 from werkzeug.security import generate_password_hash, check_password_hash
 # 画像のファイル名を保護
@@ -9,14 +9,15 @@ from werkzeug.utils import secure_filename
 # db接続に使う(更新・追加・削除)
 from project import db , create_app
 # models.pyで定義したテーブル
-from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet
+from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet , T_FosterPet , T_LostPet , T_Chat
 
 import os
 # 時間の制約
-from datetime import datetime
+from datetime import datetime, date
 
 # 画面表示する
 bp = Blueprint('main',__name__)
+
 
 # app = Flas
 # k(__name__)
@@ -34,7 +35,7 @@ def index():
         l_price= request.form.get('lowerprice')
         h_price = request.form.get('highprice')
         
-        query = T_Exhibit.query
+        query = T_Exhibit.query.filter_by(F_EXhibitType=1)
         
         if word:
             query = query.filter(T_Exhibit.F_ExTag.contains(word))
@@ -52,7 +53,7 @@ def index():
             query = query.filter(T_Exhibit.F_ExPrice <= h_price)
             
         
-        product = T_Exhibit.query.filter_by(F_EXhibitType=1)
+        product = query.all()
         return render_template('product.html', product=product , user=current_user , category=category)
     
     category=T_Category.query.all()
@@ -219,7 +220,6 @@ def add_friend(user_id):
 # 本出品
 @bp.route("/upload" , methods=['POST'])
 def exhibit():
-    exhibit = T_Exhibit(F_ExhibitType=1)
     for i in range(1,6):
         file = request.files.get(f'imageinput{i}')
         if file:
@@ -276,22 +276,25 @@ def exhibit():
     
     exhibit.F_UserID = current_user.F_UserID
     
+    exhibit.F_EXhibitType= 1
+    
     exhibit.F_ExTime = datetime.utcnow()
-    
-    user = T_User.query.get(current_user.F_UserID)
-    if user:
-        # 新しいポイントオブジェクトを作成し、50ポイントを加算
-        new_point = T_Point(F_PointQuantity=50, F_UserID=user.F_UserID)
-        db.session.add(new_point)
-        db.session.commit()
-
-        # ユーザーのポイントを取得して合計を計算する
-        user_points = user.points
-        total_points = sum(point.F_PointQuantity for point in user_points)
-        print(f"Total points for user {user.F_UserID}: {total_points}")
-    
     db.session.add(exhibit)
     db.session.commit()
+    user = T_User.query.get(current_user.F_UserID)
+    
+    total_point = 50
+    
+    user_points = T_Point.query.filter_by(F_UserID=current_user.F_UserID).first()
+    
+    if user_points:
+        new_points = user_points.F_PointQuantity + total_point
+        
+        user_points.F_PointQuantity = new_points
+        
+        db.session.commit()
+
+
     
     return redirect('/exhibit_con' )
 
@@ -299,7 +302,7 @@ def exhibit():
 @bp.route('/exhibit', methods=['GET'])
 @login_required
 def upload_page():
-    categories = T_Category.query.all()
+    categories = T_Category.query.filter_by(F_CategoryCode='c')
     return render_template('exhibit.html' , user=current_user , categories=categories)
 
 # 出品確認
@@ -316,9 +319,9 @@ def exhibit_comp():
 # お試し出品投稿
 @bp.route('/trial_page',methods=['POST'])
 def trial_upload():
-    demoexhibit = T_Exhibit(F_EXhibitType=2)
+    
     for i in range(1,6):
-        file = request.files.get(f'image{i}')
+        file = request.files.get(f'imageinput{i}')
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER_DEMOEXHIBIT'],filename))
@@ -368,33 +371,31 @@ def trial_upload():
         
     demoexhibit.F_ExTag = tag
         
-        
+    demoexhibit.F_EXhibitType = 2
     demoexhibit.F_UserID = current_user.F_UserID
     
     demoexhibit.F_ExTime = datetime.utcnow()
-    
-    user = T_User.query.get(current_user.F_UserID)
-    if user:
-        # 新しいポイントオブジェクトを作成し、200ポイントを加算
-        new_point = T_Point(F_PointQuantity=200, F_UserID=user.F_UserID)
-        db.session.add(new_point)
-        db.session.commit()
-
-        # ユーザーのポイントを取得して合計を計算する
-        user_points = user.points
-        total_points = sum(point.F_PointQuantity for point in user_points)
-        print(f"Total points for user {user.F_UserID}: {total_points}")
-    
-    
     db.session.add(demoexhibit)
     db.session.commit()
+    user = T_User.query.get(current_user.F_UserID)
+    
+    total_point = 200
+    
+    user_point = T_Point.query.filter_by(F_UserID=current_user.F_UserID).first()
+    
+    if user_point:
+        new_point = user_point.F_PointQuantity + total_point
         
+        user_point.F_PointQuantity = new_point
+        
+        db.session.commit()
+
     return redirect("/top")
 
 # お試し出品画面表示
 @bp.route("/exhibit_trial", methods=['GET'])
 def exhibit_trial():
-    categories = T_Category.query.all()
+    categories = T_Category.query.filter_by(F_CategoryCode='c')
     return render_template("exhibit_trial.html" , user=current_user , categories=categories)
 
 # 商品関連
@@ -431,6 +432,7 @@ def settelement_comp(exhibit_id):
         return redirect('/product_detail', exhibit_id=exhibit_id)
     
     if request.method=='POST':
+        point_use = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
         if 'check' in request.form:        
             points = request.form.get('pointnum')
             if points.isdigit():
@@ -464,7 +466,13 @@ def settelement_comp(exhibit_id):
             
                 db.session.add(cart)
             
-                user_point.F_PointQuantity -= points
+                new_cartprice = exhibit.F_ExPrice - points_use
+                user_cart_price = T_Cartlist.query.filter_by(F_UserID=current_user.F_UserID).all()
+                post_user_price = sum(purchase.F_CartPrice for purchase in user_cart_price)
+                
+                total_cart_price = post_user_price + new_cartprice
+                
+                user_point.F_CartPrice = total_cart_price
             
                 db.session.commit()
             
@@ -473,29 +481,162 @@ def settelement_comp(exhibit_id):
     return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point)
 
 
-
-        
-
 # 目玉機能
 # 里親掲示板
 @bp.route("/foster_board")
+@login_required
 def foster_board():
-    return render_template("foster_board.html")
+    return render_template("foster_board.html" , user=current_user)
 
 # 迷子掲示板
 @bp.route("/lost_petboard")
+@login_required
 def lost_petboard():
-    return render_template("lost_petboard.html")
+    return render_template("lost_petboard.html" , user=current_user)
 
 # 里親投稿
-@bp.route("/foster_post")
+@bp.route("/foster_post_page",methods=['POST'])
 def foster_post():
-    return render_template("foster_post.html")
+    if request.method=='POST':
+        # pet
+        date_query = request.form.get('keisaiW')
+        k_date= datetime.strptime(date_query,'%Y-%m-%d').date()
+        kinds= request.form.get('kindsW')
+        category = T_Category.query.get(kinds)
+        gender = request.form.get('radio-002')
+        age = request.form.get('ageW')
+        size = request.form.get('sizeW')
+        vaccine = request.form.get('radio-003')
+        vaccine2 = request.form.get('vaccineW')
+        cast = request.form.get('radio-004')
+        background = request.form.get('backgroundW')
+        personal = request.form.get('personalityW')
+        health = request.form.get('healthW')
+        other = request.form.get('otherW')
+        image = request.files['example']
+        # foster
+        title = request.form.get('postW')
+        location = request.form.get('radio-001')
+        single = request.form.get('radio-005')
+        elder = request.form.get('radio-006')
+        place = request.form.get('placeW')
+        
+        
+        if image:
+            pet_image = secure_filename(image.filename)
+            image.save(os.path.join(current_app.config['UPLOAD_FOLDER_FOSTERPET'],pet_image))
+            
+        pet =T_Pet(
+            F_Date=k_date,
+            F_CategoryID = category.F_CategoryID,
+            F_Seibetu = gender,
+            F_Age = age,
+            F_Size = size,
+            F_VeccineR = vaccine,
+            F_VeccineT = vaccine2,
+            F_Castration = cast,
+            F_Background = background,
+            F_Features = personal,
+            F_Health = health,
+            F_Remarks = other,
+            F_Image = pet_image,
+            F_UserID = current_user.F_UserID
+        )
+        db.session.add(pet)
+        db.session.commit()
+        
+        foster = T_FosterPet(
+            F_FosterTitle= title,
+            F_Location = location,
+            F_FosterPlase = place,
+            F_Senoir = elder,
+            F_Single = single,
+            F_FosterDate = datetime.utcnow(),
+            F_PetID = pet.F_PetID
+        )
+        db.session.add(foster)
+        db.session.commit()
+            
+    return redirect('/top')
+
+@bp.route('/foster_post', methods=['GET'])
+@login_required
+def foster():
+    category = T_Category.query.filter_by(F_CategoryCode='p')
+    return render_template("foster_post.html",category=category, user=current_user)
 
 # 迷子投稿
-@bp.route("/lost_post")
+@bp.route("/lost_post_page", methods=['POST'])
 def lost_post():
-    return render_template("lost_post.html")
+    if request.method == 'POST':
+        # pet
+        k_date = datetime.strptime(request.form.get('keisaiW'),'%Y-%m-%d').date()
+        kinds = request.form.get('kindsW')
+        category = T_Category.query.get(kinds)
+        gender = request.form.get('radio-002')
+        age = request.form.get('ageW')
+        size = request.form.get('sizeW')
+        color = request.form.get('colorW')
+        background = request.form.get('backgroundW')
+        personal = request.form.get('personalityW')
+        health = request.form.get('healthW')
+        other = request.form.get('otherW')
+        image = request.files['example']
+        
+        # foster
+        title = request.form.get('postW')
+        location = request.form.get('radio-001')
+        hogodate = datetime.strptime(request.form.get('hogoW'),'%Y-%m-%d').date()
+        place = request.form.get('hogoplaceW')
+        injury = request.form.get('radio-003')
+        institution = request.form.get('institutionW')
+        feature = request.form.get('featuresW')
+        places = request.form.get('placeW')
+        
+        if image:
+            lost_image = secure_filename(image.filename)
+            image.save(os.path.join(current_app.config['UPLOAD_FOLDER_LOSTPET'],lost_image))
+        
+        pet = T_Pet(
+            F_Date = k_date,
+            F_CategoryID = category.F_CategoryID,
+            F_Seibetu = gender,
+            F_Age = age,
+            F_Size = size,
+            F_Colors = color,
+            F_Background = background,
+            F_Features = personal,
+            F_Health = health,
+            F_Remarks = other,
+            F_Image = lost_image,
+            F_UserID = current_user.F_UserID
+        )
+        
+        db.session.add(pet)
+        db.session.commit()
+        
+        lost_pet = T_LostPet(
+            F_LostTitle = title,
+            F_LostDate = hogodate,
+            F_LostPlase = location,
+            F_LostInjury = injury,
+            F_LostInstitution = institution,
+            F_LostPlace = place,
+            F_LostLocation = places,
+            F_LostFeatures = feature,
+            F_PetID = pet.F_PetID
+        )
+        
+        db.session.add(lost_pet)
+        db.session.commit()
+        
+    return redirect('/top')
+
+@bp.route('/lost_post',methods=['GET'])
+@login_required
+def lost():
+    category = T_Category.query.filter_by(F_CategoryCode='p')
+    return render_template('lost_post.html', user=current_user, category=category)
 
 # 里親詳細
 @bp.route("/foster_detail")
@@ -510,22 +651,63 @@ def lost_detail():
 # ペット一覧
 @bp.route("/reg_pet")
 def pet_list():
-    return render_template("reg_pet.html")
+    return render_template("reg_pet.html" , user=current_user)
 
 # コンテスト
 @bp.route("/contest")
 def contest():
-    return render_template("contest.html")
+    return render_template("contest.html",user=current_user)
 
 # 譲渡会
 @bp.route("/assignment")
 def assignment():
-    return render_template("assignment.html")
+    return render_template("assignment.html", user=current_user)
 
 # コミュニティルーム
-@bp.route("/community")
+@bp.route("/community", methods=['GET','POST'])
+@login_required
 def community():
-    return render_template("community.html")
+    search_results = None
+    
+    if request.method == 'POST':
+        
+        search_query = request.form.get('search')
+        search_results = T_User.query.filter(T_User.F_UserName.ilike(f'%{search_query}%')).all()
+        
+        message = request.form.get('chat_input')
+        sendimg = request.files['sendimg']
+        sender_id = current_user.F_UserID
+        
+        if sendimg:
+            send_image = secure_filename(sendimg.filename)
+            sendimg.save(os.path.join(current_app.config['UPLOAD_FOLDER_CHAT'],send_image))
+        
+        new_message = T_Chat(
+            F_SernderID = sender_id,
+            F_ReceiverID = sender_id,
+            F_ChatContest = message,
+            F_ChatImage = send_image
+        )
+        
+        db.session.add(new_message)
+        db.session.commit()
+        
+    users_chat = T_Chat.query.filter((T_Chat.F_SenderID == current_user.F_UserID)|(T_Chat.F_ReceiverID == current_user.F_UserID))
+    
+    last_message = {}
+    for chat in users_chat:
+        other_user_id = chat.F_SenderID if chat.F_SenderID != current_user.F_UserID else chat.F_ReceiverID
+        if other_user_id not in last_message or chat.F_ChatTime >last_message[other_user_id]['F_ChatTime']:
+            last_message[other_user_id] = {
+                'timestamp':chat.F_ChatTime,
+                'message':chat.F_ChatContest
+            }
+    
+    users = {}
+    for user_id in last_message.keys():
+        user = T_User.query.get(user_id)
+        users[user_id] = user
+    return render_template("community.html",user=current_user, last_message=last_message,users=users,search_results=search_results)
 
 
 # 履歴関連
@@ -572,24 +754,26 @@ def listing_list():
 # 出品リスト
 @bp.route("/exhibition_list")
 def exhibition_list():
-    return render_template("exhibition_list.html")
+    exhibit = T_Exhibit.query.filter_by(F_EXhibitType=1)
+    demoexhibit = T_Exhibit.query.filter_by(F_EXhibitType=2)
+    return render_template("exhibition_list.html",user=current_user,exhibit=exhibit, demoexhibit=demoexhibit)
 
 # 売上履歴
 @bp.route("/earnings_history")
 def earnings_history():
-    return render_template("earnings_history.html")
+    return render_template("earnings_history.html", user=current_user)
 
 # 掲載履歴
 @bp.route("/petpublish_hiatory")
 def petpublish_history():
-    return render_template("petpublish_history.html")
+    return render_template("petpublish_history.html" , user=current_user)
 
 # 出品履歴
 @bp.route("/listing_history")
 def listing_history():
     user_id = current_user.F_UserID
     post_exhibit = T_Exhibit.query.filter_by(F_UserID =user_id, F_ExhibitType=2).all()
-    return render_template("listing_list.html",post_exhibit=post_exhibit)
+    return render_template("listing_list.html",post_exhibit=post_exhibit , user=current_user)
 
 
 # その他
@@ -599,7 +783,7 @@ def point():
     
     user = current_user.F_UserID
     points = T_Point.query.filter_by(F_UserID = user).all()
-    return render_template("point.html" , points=points)
+    return render_template("point.html" , points=points , user=user)
 
 # メールボックス
 @bp.route("/mailbox")
@@ -609,12 +793,12 @@ def mailbox():
 # お知らせ
 @bp.route("/notice")
 def notice():
-    return render_template("notice.html")
+    return render_template("notice.html" , user=current_user)
 
 # 設定
 @bp.route("/setting")
 def setting():
-    return render_template("setting.html")
+    return render_template("setting.html" , user=current_user)
 
 # 着せ替え
 @bp.route("/dressup")
@@ -624,12 +808,12 @@ def dressup():
 # Q&A
 @bp.route("/qa")
 def qa():
-    return render_template("qa.html")
+    return render_template("qa.html", user=current_user)
 
 # 問い合わせ
 @bp.route("/inquiry")
 def inquiry():
-    return render_template("inquiry.html")
+    return render_template("inquiry.html" , user=current_user)
 
 
 
@@ -641,4 +825,4 @@ def admin():
 # テーブルメンテナンス
 @bp.route("/maintenance")
 def maintenance():
-    return render_template("maintenance.html")
+    return render_template("maintenance.html", user=current_user)

@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="static/css/community.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/community.css">
 {% endblock %}
 
 {% block js%}
-     <script type="text/javascript" src="./static/js/community.js"></script>
+     <script type="text/javascript" src="/static/js/community.js"></script>
 {% endblock%}
 
 {% block content %}
@@ -17,6 +17,11 @@
     <main id="m-sample">
 
       <div class="wrap">
+
+        <form action="/community" method="post">
+          <input type="text" name="search" placeholder="ユーザー名を検索">
+          <button type="submit">検索</button>
+        </form>
         <div id="c_frame">
 
 
@@ -31,8 +36,14 @@
 
             <div id="c_frame_sb_d" class="act">
               <ul id="c_frame_sb_d_user">
-                <li ><figure><img src="images/bbc.jpg" alt=""></figure><p>HogeHoge</p></li>
-                <li ><figure><img src="images/bbinu.png" alt=""></figure><p>HogePanda</p></li>
+                {% if search_results %}
+                  {% for results in search_results %}
+                  <li ><figure><img src="{{ url_for('static', filename='prof_image/' + user_info.F_ProfileImage)}}" alt="profile_image" alt=""></figure><p>{{user_info.F_UserName}}</p></li>
+                  {% endfor %}
+                {% endif %}
+                {% for user_id, user_info in users.items() %}
+                <li ><figure><img src="{{ url_for('static', filename='prof_image/' + user_info.F_ProfileImage)}}" alt="profile_image" alt=""></figure><p>{{user_info.F_UserName}}</p></li>
+                {% endfor %}
               </ul>
             </div>
 
@@ -42,7 +53,7 @@
 
             <div class="c_frame_mc_chat">
               <div class="mc_contents_user">
-                <p>「ぶんぶんぶん」と「でょんんでょん」とでゅんでゅん他３名が参加中</p>
+                <p></p>
 
               </div>
               <ul class="mc_contents">
@@ -74,12 +85,12 @@
 
             <div class=" c_frame_mc_under">
 
-              <form action="get" id="chatform" name="chatter"> 
+              <form action="post" id="chatform" name="chatter"> 
 
 
               <div id="hide_ui_sendimg" class="hide_ui_sendimg">
                 <ul>
-                  <li><input id="sendimg" type="file" accept="image/*" multiple>画像を選択</li>
+                  <li><input id="sendimg" type="file" name="sendimg">画像を選択</li>
                 </ul>
               </div>
 
@@ -138,7 +149,7 @@
                 <div  id="info" class="form_list"><div class="list"></div></div>
 
 
-                <input type="text" class="chat_input" placeholder="入力してください">
+                <input type="text" name="chat_input" class="chat_input" placeholder="入力してください">
                 <span  id="stamp" class="unknown"></span>
                 <button type="submit" class="chat_button">送信</button>
 

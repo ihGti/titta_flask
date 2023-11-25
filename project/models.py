@@ -148,31 +148,31 @@ class T_Point(db.Model):
 # ペット基本情報
 class T_Pet(db.Model):
     F_PetID = db.Column(db.Integer, primary_key=True)
-    
-    F_Date = db.Column(db.Date, default=datetime.utcnow)
-    
-    F_VeccineR = db.Column(db.String(256), nullable=False)
-    
-    F_VeccineT = db.Column(db.String(256), nullable=False)
-    
+    # 掲載期日
+    F_Date = db.Column(db.Date, nullable=False)
+    # ワクチン接種済み
+    F_VeccineR = db.Column(db.String(256), nullable=True)
+    # ワクチン登録
+    F_VeccineT = db.Column(db.String(256), nullable=True)
+    # 健康状態
     F_Health = db.Column(db.String(256), nullable=False)
-    
-    F_Colors = db.Column(db.String(256))
-    
+    # 色
+    F_Colors = db.Column(db.String(256),nullable=True)
+    # 性別
     F_Seibetu = db.Column(db.String(256), nullable=False)
-    
+    # 年齢
     F_Age = db.Column(db.Integer, nullable=False)
-    
-    F_Size = db.Column(db.String(256), nullable=False)
-    
-    F_Castration = db.Column(db.String(256))
-    
+    # 大きさ
+    F_Size = db.Column(db.Integer, nullable=False)
+    # 去勢・避妊
+    F_Castration = db.Column(db.String(256) , nullable=True)
+    # 特徴
     F_Features = db.Column(db.String(256), nullable=False)
-    
+    # 経緯
     F_Background = db.Column(db.String(256), nullable=False)
-    
+    # 画像
     F_Image = db.Column(db.String(256), nullable=False)
-    
+    # 備考
     F_Remarks = db.Column(db.String(256), nullable=False)
     
     F_CategoryID = db.Column(db.Integer, db.ForeignKey('t__category.F_CategoryID'), nullable=False)
@@ -180,5 +180,85 @@ class T_Pet(db.Model):
     F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
 
 # 迷子情報
+class T_LostPet(db.Model):
+    F_LostPetID = db.Column(db.Integer, primary_key=True)
+    
+    F_LostTitle = db.Column(db.String(256), nullable=False)
+    
+    F_LostDate = db.Column(db.Date, nullable=False)
+    
+    F_LostPlase = db.Column(db.String(256), nullable=False)
+    
+    F_LostInjury = db.Column(db.String(256), nullable=False)
+    
+    F_LostInstitution = db.Column(db.String(256), nullable=False)
+    
+    F_LostPlace = db.Column(db.String(256), nullable=False)
+    
+    F_LostFeatures = db.Column(db.String(256),nullable=False)
+    
+    F_LostLocation = db.Column(db.String(256), nullable=False)
+        
+    F_PetID = db.Column(db.Integer, db.ForeignKey('t__pet.F_PetID'), nullable=False)
+    
+    pets = db.relationship('T_Pet',foreign_keys=[F_PetID])
+    
+
 
 # 里親情報
+class T_FosterPet(db.Model):
+    F_FosterPetID = db.Column(db.Integer, primary_key=True)
+    
+    F_FosterTitle = db.Column(db.String(256), nullable=False)
+    
+    F_Location = db.Column(db.String(256), nullable=False)
+    
+    F_FosterPlase = db.Column(db.String(256), nullable=False)
+    
+    F_Senoir = db.Column(db.String(256), nullable=False)
+    
+    F_Single = db.Column(db.String(256), nullable=False)
+    
+    F_FosterDate = db.Column(db.DateTime, default= datetime.utcnow)
+    
+    F_PetID = db.Column(db.Integer, db.ForeignKey('t__pet.F_PetID'), nullable=False)
+    
+    pets = db.relationship('T_Pet',foreign_keys=[F_PetID])
+    
+
+# チャットルーム
+class T_Chat(db.Model):
+    F_ChatID = db.Column(db.Integer, primary_key=True)
+    
+    F_SenderID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    
+    F_ReceiverID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    
+    F_ChatContest = db.Column(db.String(256), nullable=True)
+    
+    F_ChatImage = db.Column(db.String(256), nullable=True)
+    
+    F_ChatTime = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    sender = db.relationship('T_User',foreign_keys=[F_SenderID])
+    receiver = db.relationship('T_User',foreign_keys=[F_ReceiverID])
+        
+
+
+class T_UserReview(db.Model):
+    F_UserReviewID = db.Column(db.Integer, primary_key=True)
+    
+    F_ReviewID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    
+    F_ReviewFollowID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    
+    F_UserReviewMessage = db.Column(db.String(256), nullable=False)
+    
+    F_Score = db.Column(db.Integer, nullable=False)
+    
+    F_Thumnbs = db.Column(db.Integer, nullable=False)
+    
+    review = db.relationship('T_User', foreign_keys=[F_ReviewID], backref='UserReview')
+    
+    reviewfollow = db.relationship('T_User', foreign_keys=[F_ReviewFollowID])
+

@@ -28,11 +28,12 @@
             </div>
 
 
-            <form method="post" action="" enctype="multipart/form-data">
+            <form action="/foster_post_page" method="post" enctype="multipart/form-data">
 
               <table>
                 <tbody>
                   <tr id="keisai">
+                    <!-- t_pet -->
                     <td id="keisaiR">掲載期日<p class="hissu">必須</p></td>
                     <td id="keisaiW">
                       <input type="date" class="textbox-001" name="keisaiW" placeholder=""/>
@@ -40,33 +41,37 @@
                     </td>
                   </tr>
                   <tr id="kinds">
+                    <!-- t_pet -->
                     <td id="kindsR">ペット種別<p class="hissu">必須</p></td>
                     <td id="kindsW">
                       <label class="selectbox-002">
                         <select name="kindsW">
                             <option value="">選択してください</option>
-                            <option value="">柴犬</option>
-                            <option value="">シマエナガ</option>
+                            {% for categorys in category %}
+                            <option value="{{categorys.F_CategoryID}}">{{categorys.F_CategoryName}}</option>
+                            {% endfor %}
                         </select>
                       </label>
                     </td>
                   </tr>
                   <tr id="post">
+                    <!-- t_lost -->
                     <td id="postR">投稿タイトル</td>
                     <td id="postW">
                       <input type="text" name="postW" class="textbox-002" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="location">
+                    <!-- t_lost -->
                     <td id="locationR">ペット所在地<p class="hissu">必須</p></td>
                     <td id="locationW">
                       <fieldset class="radio-001">
                         <label>
-                            <input type="radio" name="radio-001" checked/>
+                            <input type="radio" name="radio-001"  value="登録した住所（名古屋市中区）にいます"/>
                             登録した住所（名古屋市中区）にいます
                         </label>
                         <label>
-                            <input type="radio" name="radio-001"/>
+                            <input type="radio" name="radio-001" value="上記以外の住所にいます"/>
                             上記以外の住所にいます
                         </label>
                       </fieldset>
@@ -80,47 +85,51 @@
                     </td>
                   </tr>
                   <tr id="gen">
+                    <!-- t_pet -->
                     <td id="genR">性別<p class="hissu">必須</p></td>
                     <td id="genW">
                       <fieldset class="radio-002">
                         <!-- kari -->
                         <label>
-                            <input type="radio" name="radio-002" checked/>
+                            <input type="radio" name="radio-002" value="男"/>
                             男の子
                         </label>
                         <label>
-                            <input type="radio" name="radio-002"/>
+                            <input type="radio" name="radio-002" value="女"/>
                             女の子
                         </label>
                         <label>
-                            <input type="radio" name="radio-002"/>
+                            <input type="radio" name="radio-002" value="不明"/>
                             不明
                         </label>
                       </fieldset>
                     </td>
                   </tr>
                   <tr id="age">
+                    <!-- t_pet -->
                     <td id="ageR">年齢<p class="hissu">必須</p></td>
                     <td id="ageW">
                       <input type="text" class="textbox-001" name="ageW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="size">
+                    <!-- t_pet -->
                     <td id="sizeR">大きさ<p class="hissu">必須</p></td>
                     <td id="sizeW">
                       <input type="text" class="textbox-001" name="sizeW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="vaccine">
+                    <!-- t_pet -->
                     <td id="vaccineR">ワクチン接種<p class="hissu">必須</p></td>
                     <td id="vaccineW">
                       <fieldset class="radio-003">
                         <label>
-                            <input type="radio" name="radio-003" checked/>
+                            <input type="radio" name="radio-003" value="済"/>
                             済
                         </label>
                         <label>
-                            <input type="radio" name="radio-003"/>
+                            <input type="radio" name="radio-003" value="未"/>
                             未
                         </label>
                       </fieldset>
@@ -129,67 +138,75 @@
                     </td>
                   </tr>
                   <tr id="cast">
+                    <!-- t_pet -->
                     <td id="castR">去勢・避妊<p class="hissu">必須</p></td>
                     <td id="castW">
                       <fieldset class="radio-004">
                         <label>
-                            <input type="radio" name="radio-004" checked/>
+                            <input type="radio" name="radio-004" value="済"/>
                             済
                         </label>
                         <label>
-                            <input type="radio" name="radio-004"/>
+                            <input type="radio" name="radio-004" value="未"/>
                             未
                         </label>
                       </fieldset>
                     </td>
                   </tr>
                   <tr id="sperson">
+                    <!-- t_lost -->
                     <td id="spersonR">単身応募</td>
                     <td id="spersonW">
                       <fieldset class="radio-005">
                         <label>
-                            <input type="radio" name="radio-005"/>
+                            <input type="radio" name="radio-005" value="可能"/>
                             可能
                         </label>
                         <label>
-                            <input type="radio" name="radio-005"/>
+                            <input type="radio" name="radio-005" value="不可"/>
                             不可
                         </label>
                       </fieldset>
                     </td>
                   </tr>
                   <tr id="elder">
+                    <!-- t_lost -->
                     <td id="elderR">高齢者（65歳以上）応募</td>
                     <td id="elderW">
                       <fieldset class="radio-006">
                         <label>
-                            <input type="radio" name="radio-006"/>
+                            <input type="radio" name="radio-006" value="可能"/>
                             可能
                         </label>
                         <label>
-                            <input type="radio" name="radio-006"/>
+                            <input type="radio" name="radio-006" value="不可"/>
                             不可
                         </label>
                       </fieldset>
                     </td>
                   </tr>
                   <tr id="background">
+                    <!-- t_pet -->
                     <td id="backgroundR">募集の経緯<p class="hissu">必須</p></td>
                     <td class="area"><textarea name="backgroundW"></textarea></td>
                   </tr>
                   <tr id="personality">
+                    <!-- t_pet -->
                     <td id="personalityR">性格・特徴<p class="hissu">必須</p></td>
                     <td class="area"><textarea name="personalityW"></textarea></td>
                   </tr>
                   <tr id="health">
+                    <!-- t_pet -->
                     <td id="healthR">健康状態<p class="hissu">必須</p></td>
                     <td class="area"><textarea name="healthW"></textarea></td>
                   </tr>
                   <tr id="place">
+                    <!-- t_lost -->
                     <td id="placeR">引き渡し場所<p class="hissu">必須</p></td>
                     <td class="area"><textarea name="placeW"></textarea></td>
                   </tr>
                   <tr id="other">
+                    <!-- t_pet -->
                     <td id="otherR">その他備考</td>
                     <td class="area"><textarea name="otherW"></textarea></td>
                   </tr>
@@ -201,11 +218,11 @@
               <div id="upload">
 
                 <figure id="first">
-                  <img src="images/dog.jpg">
+                  <img src="/static/images/dog.jpg">
                 </figure>
 
                 <figure id="second">
-                  <img src="images/sima.jpg">
+                  <img src="/static/images/sima.jpg">
                 </figure>
 
                 <div id="info">

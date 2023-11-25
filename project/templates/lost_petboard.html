@@ -63,7 +63,7 @@
 
             <div id="right">
 
-                <p id="link"><a href="index.html">Titta</a> > <a href="#">里親情報一覧</a></p>
+                <p id="link"><a href="/top">Titta</a> > <a href="#">里親情報一覧</a></p>
 
                 <h2>里親情報一覧</h2>
             <form action="" method="">
@@ -170,7 +170,6 @@
 
                 <div class="similar-wrap">
 
-{% set a = ["なんだろうね", "オス", "そこら", "きのう", "やばい", ""] %}
 <!-- viewで実装する際に調整して -->
 
 {% for i in range(12)%}
@@ -182,11 +181,11 @@
                       </figure>
 
                       <h3>投稿タイトル</h3>
-                      <p><span>種類</span>{{ a[0] }}</p>
-                      <p><span>性別</span>{{ a[1] }}</p>
-                      <p><span>発見地</span>{{ a[2] }}</p>
-                      <p><span>発見日時</span>{{ a[3] }}</p>
-                      <p><span>状況</span>{{ a[4] }}</p>
+                      <p><span>種類</span></p>
+                      <p><span>性別</span></p>
+                      <p><span>発見地</span></p>
+                      <p><span>発見日時</span></p>
+                      <p><span>状況</span></p>
                     </a>
                   </div><!-- class="post" -->
 {% endfor %}

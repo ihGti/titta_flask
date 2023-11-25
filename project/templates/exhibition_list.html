@@ -23,8 +23,8 @@
             <p class="minitop">商品管理</p>
 
             <ul>
-              <li><a href="/">お気に入り一覧<div class="arrow no1"></div></a></li><!-- favorite.html -->
-              <li><a href="/">出品状況<div class="arrow no1"></div></a></li><!-- exhibition_list.html -->
+              <li><a href="/favorites">お気に入り一覧<div class="arrow no1"></div></a></li><!-- favorite.html -->
+              <li><a href="/exhibition_list">出品状況<div class="arrow no1"></div></a></li><!-- exhibition_list.html -->
               <!-- <li><a href="/">下書き一覧<div class="arrow no1"></div></a></li> -->
               <li><a href="/">閲覧履歴<div class="arrow no1"></div></a></li><!-- browsing.html -->
               <li><a href="/">購入履歴<div class="arrow no1"></div></a></li><!-- listing_list.html -->
@@ -38,7 +38,7 @@
 
             <ul>
               <li><a href="/">売上履歴<div class="arrow no1"></div></a></li><!-- earnings_history.html -->
-              <li><a href="/">ポイント<div class="arrow no1"></div></a></li><!-- point.html -->
+              <li><a href="/point">ポイント<div class="arrow no1"></div></a></li><!-- point.html -->
             </ul>
 
           </div>
@@ -155,23 +155,22 @@
             <div id="pro-wrap">
 
 
-{% set a = [1,"/static/images/bed.jpg", "/static/images/sale_icon.png", "a[3]", "a[4]"]%}
 
 <!-- DB連携あと修正 -->
-{%for i in range(11) %}
+{%for exhibits in exhibit %}
               <div class="product">
-                <a href="/product_detail?{{ a[0] }}"><!-- 商品詳細ページへ -->
+                <a href="/product_detail"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
-                      <img src="{{ a[1] }}" alt="サンプル画像">
-                      <img src="{{ a[2] }}" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                      <img src="" alt="サンプル画像">
+                      <img src="" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
                     </figure>
                   </div>
                 </a>
 
                 <div class="pro_detail">
-                  <a href="/product_detail?{{ a[0] }}"><!-- 商品詳細ページへ -->
-                    <h2>{{ a[3] }} ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  <a href="/product_detail"><!-- 商品詳細ページへ -->
+                    <h2> ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
                   </a>
 
                   <div class="heart">
@@ -180,7 +179,7 @@
                         ￥<!--ココは固定-->
                       </h5>
                       <p>
-                        {{ a[4] }}<!--ココ、商品の値段入れて-->
+                        <!--ココ、商品の値段入れて-->
                       </p>
                     </div>
                       
