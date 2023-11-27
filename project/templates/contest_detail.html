@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}
+-contest_detail
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/contest_detail.css">
+{% endblock %}
+
+
+
+{% block content %}
+  <form method="post" id="imageForm">
+
+    <main id="m-con-detail">
+
+      <div class="wrap">
+
+        <div id="content">
+
+          <div id="topFigure">
+            <figure>
+              <img src="/static/images/big_sample.jpg" alt="サンプル画像">
+            </figure> 
+          </div>
+
+          <div id="con_title">
+            <p>ペット自慢大会</p>
+          </div>
+
+          <div id="deadline">
+            <p id="limit">締切</p>
+            <p id="time">2024年11月20日</p>
+          </div>
+
+          <div id="overview">
+            <h6>・コンテストの概要</h6>
+            <p>
+              FlaskはPythonのWebアプリケーションフレームワークであり、軽量でシンプルな設計が特徴です。
+              Webアプリケーションを開発する際に、ルーティング、リクエストとレスポンスの処理、テンプレートエンジンの使用など、
+              基本的な機能を提供します。以下に、Flaskについての主要なポイントを説明します。
+            </p>
+          </div>
+
+          <div id="award">
+            <p id="sho">賞</p>
+            <p id="sho-d">titta商品券一万円分</p>
+          </div>
+
+          <div id="divide">
+            <div id="app_req">
+              <h5>・募集要項</h5>
+              <ul>
+                <li>
+                  <p class="headingA">募集内容</p>
+                  <p class="app-con">スマホで撮影された写真が対象です。撮影時期について制限はありません。</p>
+                </li>
+                <li>
+                  <p class="headingA">コンテストの募集期間</p>
+                  <p class="app-con">2023年11月06日(月) から 2024年03月31日(日) まで</p>
+                </li>
+                <li>
+                  <p class="headingA">コンテストの日程</p>
+                  <p class="app-con">正式な発表は、後日行います。2024年5月上旬を予定しております。</p>
+                </li>
+                <li>
+                  <p class="headingA">参加方法</p>
+                  <p class="app-con">下の、応募ボタンから応募してください</p>
+                </li>
+                <li>
+                  <p class="headingA">参加資格</p>
+                  <p class="app-con">不問</p>
+                </li>
+                <li>
+                  <p class="headingA">著作権の取扱について</p>
+                  <p class="app-con">tittaサイト利用規約に準じます。 エントリー作品につきまして、titta利用規約第5条に則り本サイト・コンテンツページなどへの二次利用がある場合がございます。</p>
+                </li>
+                <li>
+                  <p class="headingA">主催</p>
+                  <p class="app-con">マリオ株式会社</p>
+                </li>
+              </ul>
+            </div>
+
+            <div id="ad">
+              <div class="ad-con">
+                <p>どういう形で広告を出すのか...</p>
+              </div>
+              <div class="ad-con">
+                <p>どういう形で広告を出すのか...</p>
+              </div>
+            </div>
+
+          </div>
+
+          <input type="submit"  id="ApplyBtn" value="応募する">
+
+        </div>
+
+      </div><!-- class="wrap" -->
+
+    </main>
+      
+  </form>
+
+{% endblock %}

@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 # db接続に使う(更新・追加・削除)
 from project import db , create_app
 # models.pyで定義したテーブル
-from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet , T_FosterPet , T_LostPet , T_Chat
+from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet , T_FosterPet , T_LostPet , T_Chat , T_UserReview , T_Contest
 
 import os
 # 時間の制約
@@ -657,6 +657,16 @@ def pet_list():
 @bp.route("/contest")
 def contest():
     return render_template("contest.html",user=current_user)
+
+# コンテスト詳細
+@bp.route("/contest_detail")
+def contest_detail():
+    return render_template("contest_detail.html",user=current_user)
+
+# コンテスト応募
+@bp.route("/apply")
+def apply():
+    return render_template("apply.html",user=current_user)
 
 # 譲渡会
 @bp.route("/assignment")

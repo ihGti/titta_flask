@@ -60,6 +60,12 @@ form{
 
 }
 
+.button{
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 form label{
   background-color: #5E6697;
   color: white;
