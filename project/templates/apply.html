@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+-apply
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="static/css/apply.css">
+{% endblock %}
+
+{% block content %}
+
+    <main id="m-sample">
+
+      <div class="wrap">
+
+        <div id="apply-main">
+          <!-- 見出し -->
+            <h1>応募ページ</h1>
+            <hr noshade="">
+
+          <!-- 応募情報 -->
+            <div id="center">
+                <form action="/" method="post" enctype="multipart/form-data">
+
+                    <h2>応募情報</h2>
+
+                    <!-- タイトル -->
+                    <label for="title">
+                        <p>タイトル</p>
+                        <p class="red">※必須</p>
+                        <input type="text" name="title" id="title" autocomplete="off">
+                    </label>
+
+                    <!-- コメント -->
+                    <label for="comment">
+                        <p>コメント</p>
+                        <p class="red">※必須</p>
+                        <input type="password" name="comment" id="comment" autocomplete="off">
+                    </label>
+
+
+
+
+<!-- こいつをどうにかしてくれ -->
+                    <figure>
+                        <img src="/static/images/img1.jpg" alt="big" id="bigimg">
+                        <input type="file" class="button" id="imageinput1" name="imageinput1" style="display: none;" onchange="previewImage('imageinput1','bigimg')">
+                        <label class="button" for="imageinput1">&#xf03e;</label>
+                    </figure>
+<!-- ↓のどっかにこいつを... -->
+
+                    <!-- プロフ画像 -->
+                    <label for="prof-image">
+                        <p>応募画像</p>
+                        <p class="red">※必須</p>
+                        <input type="file" name="prof-image" id="prof-image">
+                    </label>
+
+                    <!-- 送信ボタン -->
+                    <input type="submit" value="同意して確認画面へ" id="bottun">
+
+                </form>
+            </div>
+        </div>
+
+
+
+
+      </div><!-- class="wrap" -->
+
+    </main>
+
+    
+
+
+{% endblock %}

@@ -1,0 +1,98 @@
+@charset "utf-8";
+
+p{
+    margin: auto 0;
+}
+
+#apply-main{
+  width: 100%;
+  height: auto;
+}
+
+#apply-main h1{
+    padding: 5px 0 5px 0;
+    text-align: center;
+    border-bottom: #000 2px solid;
+    font-size: 1.3rem;
+    margin: 0 0 0 150px;
+    width: 160px;
+}
+
+#m-sample div.wrap div#apply-main hr{
+  width: 100%;
+  size: 1.5rem;
+  color: #000;
+  margin-top: -2px;
+}
+
+#center{
+  width: 800px;
+  height: auto;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#center form h2{
+    padding: 5px 0 5px 0;
+    text-align: center;
+    border-bottom: #000 1px solid;
+    margin: 20px 0 0 10px;
+    width: 120px;
+}
+
+#center form{
+  margin: 0 auto 0 150px;
+}
+
+
+
+/* label設定(label要素ないの横並び) */
+#m-sample div.wrap div#apply-main div#center form label{
+  display: flex;
+  margin: 50px 0 0 20px;
+}
+
+
+#title{
+    width: 250px;
+    margin: 0 0 0 62px;
+}
+
+#comment{
+    resize: none;
+    width: 300px;
+    height: 50px;
+    margin: 0 0 0 110px;
+}
+
+
+
+#m-sample div.wrap div#apply-main div#center form label input#prof-image{
+  margin: -3px 0 0 43px;
+}
+
+
+/* 必須の設定 */
+.red{
+  font-size: smaller;
+  margin: 2px 10px 0 10px;
+  color: #ff0000;
+}
+
+
+/* ボタン設定 */
+#m-sample div.wrap div#apply-main div#center form input#bottun{
+  width: 200px;
+  height: 40px;
+  margin: 50px 0 0 150px;
+  background-color: #e5857b;
+  color: #fff;
+  border: unset;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#m-sample div.wrap div#apply-main div#center form input#bottun:hover{
+  opacity: 0.5;
+}
+
