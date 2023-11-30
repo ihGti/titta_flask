@@ -44,7 +44,7 @@ div#shouhinfl1 div#shouhinPic {
   width: 500px;
   height: 500px;
   background-color: rgb(196, 149, 200);
-  background-image: url(../images/hoshitu.jpg);
+  /* background-image: url(/static/toredo/{{exhibit.F_ExPhoto}}); */
   background-size: contain;
 }
 

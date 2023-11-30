@@ -29,7 +29,9 @@
 
     <div id="shouhinfl">
       <div id="shouhinfl1">
-        <div id="shouhinPic"></div>
+        <div id="shouhinPic">
+          <img src="/static/toredo/{{exhibit.F_ExPhoto}}" alt="">
+        </div>
         <div id="shouhinhukusuu">
           <div class="shouhinbetween"></div>
           <div class="shouhinbetween"></div>
@@ -107,7 +109,7 @@
           <h1 id="shuxtupinshaProtext">出品者情報</h1>
           <div id="shuxtupinshaPro">
             <div id="shuxtupinnshaProPic">
-              <img src="{{ url_for('static', filename='prof_image/' + users.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;">
+              <img src="{{ url_for('static', filename='prof_image/' + users.F_ProfileImage)}}" alt="profile_image" style="width: 80px; height:80px; border-radius:50%;">
             </div>
             <div id="namaetofollow">
               <a href="/userprof/{{users.F_UserID}}">{{ users.F_UserName}}</a>
