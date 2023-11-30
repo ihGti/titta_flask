@@ -2,14 +2,13 @@ var email = document.getElementById("email");
 var reemail = document.getElementById("reemail");
 var Password = document.getElementById("Password");
 var rePassword = document.getElementById("rePassword");
-var name = document.getElementById("name");
-var name_kana = document.getElementById("name-kana");
 var username = document.getElementById("username");
 var telphone = document.getElementById("telphone");
 var yuubin = document.getElementById("yuubin");
+var address = document.getElementById("address");
 var image = document.getElementById("prof_image");
-let inputvalue = [email, reemail, Password, rePassword, name,name_kana,  username, telphone, yuubin, image]
-var valuename = {"email":"メールアドレス", "reemail":"メールアドレス", "password":"パスワード","repassword":"パスワード" , "Sname":"名前","Sname-kana":"カナ",  "username":"ユーザーネーム", "telphone":"電話番号", "yuubin":"郵便番号", "prof_image": "画像"};
+let inputvalue = [email, reemail, Password, rePassword,username, telphone, yuubin,address, image]
+var valuename = {"email":"メールアドレス", "email_conform":"メールアドレス", "password":"パスワード","password_conform":"パスワード確認" , "username":"ユーザーネーム", "telphone":"電話番号", "yuubin":"郵便番号","address":"住所", "prof_image":"画像"};
 
 
 
