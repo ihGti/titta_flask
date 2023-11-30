@@ -8,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Titta </title>
+    <title>Titta{% block title %} {% endblock%}</title>
 
     <!-- この２つのcssは触らない -->
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
@@ -47,7 +47,11 @@
                 <li><a href="/favorite"><input type="submit" value="&#xf004;" class="button"></a></li>
                 <!-- login.htmlへ遷移 -->
                 <li>
+                  {# {% if user.F_ProfileImage %}
+                     <a href="/myprof"><img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;"></a>
+                   {% else %}
                      <a href="/login"><input type="submit" value="&#xf007;" class="button"></a>
+                   {% endif %} #}
                 </li>
               </ul>
             </nav>

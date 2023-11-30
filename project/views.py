@@ -31,7 +31,6 @@ def index():
         word = request.form.get('word')
         exword = request.form.get('exword')
         genre = request.form.get('genre')
-        category = T_Category.query.get(genre)
         l_price= request.form.get('lowerprice')
         h_price = request.form.get('highprice')
         
@@ -43,18 +42,21 @@ def index():
         if exword:
             query = query.filter(T_Exhibit.F_ExInfo.like(f"%{exword}%"))
             
-        if category:
-            query = query.filter(T_Exhibit.F_CategoryID==category)
-            
         if l_price:
             query = query.filter(T_Exhibit.F_ExPrice >= l_price)
             
         if h_price:
             query = query.filter(T_Exhibit.F_ExPrice <= h_price)
             
-        
+        if genre:
+            category = T_Category.query.filter_by(F_CategoryID=genre).first()
+            if category:
+                query = query.filter(T_Exhibit.F_CategoryID==category.F_CategoryID)
+            
         product = query.all()
-        return render_template('product.html', product=product , user=current_user , category=category)
+        
+        num_product = len(product)
+        return render_template('product.html', product=product , user=current_user , category=category , num_product=num_product)
     
     category=T_Category.query.all()
     return render_template("index.html" , username=current_user.F_UserName , user=current_user, category=category)
@@ -429,54 +431,48 @@ def settelement_comp(exhibit_id):
     exhibit = T_Exhibit.query.get(exhibit_id)
     user_point = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
     if exhibit.F_UserID == current_user.F_UserID:
-        return redirect('/product_detail', exhibit_id=exhibit_id)
+        return redirect(url_for('main.product_detail', exhibit_id=exhibit_id))
     
     if request.method=='POST':
-        point_use = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
         if 'check' in request.form:        
-            points = request.form.get('pointnum')
-            if points.isdigit():
-                points = int(points)
+            points = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
             if user_point.F_PointQuantity < points:
                 return render_template("settelement_check.html", user=current_user,points=points , user_point=user_point)
     
             return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point)
         
         elif 'comp' in request.form:        
-            points_use = request.form.get('pointnum')
-            if points_use.isdigit():
-                points = int(points_use)
-                cart_price = exhibit.F_ExPrice - points
-                
-                if user_point and user_point.F_PointQuantity > 0:
+            points_use = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
+            cart_price = exhibit.F_ExPrice - points_use if points_use <= exhibit.F_ExPrice else 0
+            if user_point and user_point.F_PointQuantity > 0:
                 # ユーザーがポイントを持っており、ポイントを使う場合の処理
                     cart_price = exhibit.F_ExPrice
         
                 # ポイントを利用して購入金額を減額
-                if user_point.F_PointQuantity >= cart_price:
+            if user_point.F_PointQuantity >= cart_price:
                     cart_price -= user_point.F_PointQuantity
                     user_point.F_PointQuantity = 0
-                else:
+            else:
                     user_point.F_PointQuantity -= cart_price
                     cart_price = 0
             
-                cart = T_Cartlist(F_UserID = current_user.F_UserID,
+            cart = T_Cartlist(F_UserID = current_user.F_UserID,
                                 F_ExID = exhibit_id,
                                 F_CartPrice = cart_price)
             
-                db.session.add(cart)
+            db.session.add(cart)
             
-                new_cartprice = exhibit.F_ExPrice - points_use
-                user_cart_price = T_Cartlist.query.filter_by(F_UserID=current_user.F_UserID).all()
-                post_user_price = sum(purchase.F_CartPrice for purchase in user_cart_price)
+            new_cartprice = exhibit.F_ExPrice - points_use
+            user_cart_price = T_Cartlist.query.filter_by(F_UserID=current_user.F_UserID).all()
+            post_user_price = sum(purchase.F_CartPrice for purchase in user_cart_price)
                 
-                total_cart_price = post_user_price + new_cartprice
+            total_cart_price = post_user_price + new_cartprice
                 
-                user_point.F_CartPrice = total_cart_price
+            user_point.F_CartPrice = total_cart_price
             
-                db.session.commit()
+            db.session.commit()
             
-                return render_template("settlement_comp.html",exhibit_id=exhibit_id, user=current_user)
+            return render_template("settlement_comp.html",exhibit_id=exhibit_id, user=current_user)
 
     return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point)
 
@@ -741,7 +737,7 @@ def favorite(exhibit_id):
 @login_required
 def favorites():
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).all()
-    return render_template('favorite.html',favorites_exhibit=favorites_exhibit)
+    return render_template('favorite.html',favorites_exhibit=favorites_exhibit , user=current_user)
 
 # 閲覧履歴
 @bp.route("/browsing")
@@ -759,7 +755,9 @@ def listing_list():
         exhibit = T_Exhibit.query.get(carts.F_ExID)
         user = T_User.query.get(exhibit.F_UserID)
         exhibit_info.append((exhibit,user))
-    return render_template("listing_list.html",user=current_user, exhibit_info=exhibit_info)
+        
+    num_list = len(exhibit_info)
+    return render_template("listing_list.html",user=current_user, exhibit_info=exhibit_info , num_list=num_list)
 
 # 出品リスト
 @bp.route("/exhibition_list")
@@ -827,10 +825,6 @@ def inquiry():
 
 
 
-# 管理者ページ
-@bp.route("/admin")
-def admin():
-    return render_template("adminnistrator.html")
 
 # テーブルメンテナンス
 @bp.route("/maintenance")

@@ -25,7 +25,7 @@
 
           <!-- ユーザー登録フォーム -->
           <div id="center">
-            <form method="post">
+            <form  method="post" onsubmit="return signinsub()" enctype="multipart/form-data">
 
               <h1>ログイン情報</h1>
               <hr noshade="" class="under-line">
@@ -40,20 +40,20 @@
               <label for="email">
                 <p>メールアドレス&#40再確認&#41</p>
                 <p class="red">※必須</p>
-                <input type="email" name="email_conform" id="email" class="email-sai" placeholder="確認のため、もう一度入力してください" autocomplete="off">
+                <input type="email" name="email_conform" id="reemail" class="email-sai" placeholder="確認のため、もう一度入力してください" autocomplete="off">
               </label>
 
               <!-- パスワード -->
               <label for="Password">
                 <p>Password</p>
                 <p class="red">※必須</p>
-                <input type="password" name="password" id="Password" class="password" placeholder="半角英数字8~32文字" autocomplete="off">
+                <input type="password" name="password" id="Password" class="password" placeholder="半角英数字8~32文字"  autocomplete="off">
               </label>
 
               <label for="Password">
                 <p>Password&#40再確認&#41</p>
                 <p class="red">※必須</p>
-                <input type="password" name="password_conform" id="Password" class="Password" placeholder="確認のため、もう一度入力してください" autocomplete="off" required>
+                <input type="password" name="password_conform" id="rePassword" class="Password" placeholder="確認のため、もう一度入力してください" autocomplete="off">
               </label>
 
               <h1>お客様情報</h1>
@@ -119,7 +119,7 @@
               <label for="yuubin">
                 <p>郵便番号</p>
                 <p class="red">※必須</p>
-                <input type="text" name="yuubin" id="yuubin" pattern="\d{3}-\d{4}" placeholder="例&#41 〒xxx-xxxx" autocomplete="off">
+                <input type="text" name="yuubin" id="yuubin"  placeholder="例&#41 〒xxx-xxxx" autocomplete="off">
               </label>
 
               <!-- 住所 -->
@@ -133,9 +133,8 @@
               <label for="prof-image">
                 <p>プロフィール画像</p>
                 <p class="red">※必須</p>
-                <input type="file" name="prof_image" id="prof-image">
+                <input type="file" name="prof_image" id="prof-image" >
               </label>
-
               <!-- 送信ボタン -->
               <input type="submit" value="同意して確認画面へ" id="bottun">
 
@@ -149,8 +148,6 @@
       </div><!-- class="wrap" -->
 
     </main>
-
-    
 
 
 {% endblock %}
