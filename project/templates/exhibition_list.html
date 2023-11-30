@@ -159,10 +159,10 @@
 <!-- DB連携あと修正 -->
 {%for exhibits in exhibit %}
               <div class="product">
-                <a href="/product_detail"><!-- 商品詳細ページへ -->
+                <a href="/product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
-                      <img src="" alt="サンプル画像">
+                      <img src="/static/toredo/{{exhibits.F_ExPhoto}}" alt="サンプル画像">
                       <img src="" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
                     </figure>
                   </div>
@@ -179,7 +179,7 @@
                         ￥<!--ココは固定-->
                       </h5>
                       <p>
-                        <!--ココ、商品の値段入れて-->
+                        {{exhibits.F_ExPrice}}<!--ココ、商品の値段入れて-->
                       </p>
                     </div>
                       
@@ -195,18 +195,18 @@
 
 <!-- soldのサンプル残し -->
               <div class="product">
-                <a href="/product_detail"><!-- 商品詳細ページへ -->
+                <a href="//product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
-                      <img src="/static/images/bed.jpg" alt="サンプル画像">
+                      <img src="/static/toredo/{{exhibits.F_ExPhoto}}" alt="サンプル画像">
                       <img src="/static/images/sold_icon.png" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
                     </figure>
                   </div>
                 </a>
 
                 <div class="pro_detail">
-                  <a href="/"><!-- 商品詳細ページへ -->
-                    <h2>ペット用クールベッド ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  <a href="/product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
+                    <h2>{{exhibits.F_ExTitle}} ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
                   </a>
 
                   <div class="heart">
@@ -215,7 +215,7 @@
                         ￥<!--ココは固定-->
                       </h5>
                       <p>
-                        6,980<!--ココ、商品の値段入れて-->
+                        {{exhibits.F_ExPrice}}<!--ココ、商品の値段入れて-->
                       </p>
                     </div>
                       
