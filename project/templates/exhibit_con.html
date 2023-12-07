@@ -24,13 +24,21 @@
         <div id="herf">
           <div id="img">
               <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhoto)}}" alt="big" id="bigimg"></figure>
-
-            <div id="minidiv">
-              <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoS)}}" alt="mini" class="miniimg"></figure>
-              <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoT)}}" alt="mini" class="miniimg"></figure>
-              <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoH)}}" alt="mini" class="miniimg"></figure>
-              <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoF)}}" alt="mini" class="miniimg"></figure>
+              <div id="minidiv">
+                {% if exhibit.F_ExPhotoS %}
+                    <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoS)}}" alt="mini" class="miniimg"></figure>
+                {% endif %}
+                {% if exhibit.F_ExPhotoT %}
+                    <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoT)}}" alt="mini" class="miniimg"></figure>
+                {% endif %}
+                {% if exhibit.F_ExPhotoH %}
+                    <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoH)}}" alt="mini" class="miniimg"></figure>
+                {% endif %}
+                {% if exhibit.F_ExPhotoF %}
+                    <figure><img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhotoF)}}" alt="mini" class="miniimg"></figure>
+                {% endif %}
             </div>
+            
           </div>
           <div id="form">
             <form>

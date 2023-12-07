@@ -38,7 +38,7 @@
               </figure>
 
               <div id="countBox">
-                <p id="pointCount"><!--  -->12345</p><!-- 一旦入れとく -->
+                <p id="pointCount">{{points}}</p><!-- 一旦入れとく -->
                 <p id="P">P</p>
               </div>
 
@@ -54,16 +54,15 @@
           
             <div id="history" class="area">
 
-{% set a = ["yy/mm/dd","古戦場から逃げた",1114] %}
 <!-- DB連携時書き換えちゃんとお願いね -->
 {% for i in range(5) %}
 
               <div class="minibox">
 
                 <div id="leftBox">
-                  <p id="dateBox">{{a[0]}}</p><!-- 2023/08/29  的な情報が入る -->
+                  <p id="dateBox"></p><!-- 2023/08/29  的な情報が入る -->
                   <p id="detailInfo">
-                    {{ a[1] }}
+                    
                   </p>
                 </div>
   
@@ -75,7 +74,7 @@
                                       {{ points }}
                                   {% endif %}って感じになるかな？
                     +なら黒　-なら赤　今は↓  5桁までなら綺麗に並ぶようにはしとく #} -->
-                      {{ a[2]}}
+                      
                   </p>
                 </div>
 

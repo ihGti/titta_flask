@@ -109,8 +109,8 @@
               <p id="pp">小計：￥{{ exhibit.F_ExPrice }} ポイント利用：なし クーポン利用：なし</p>
             </div>
             <div id="sita">
-              <h2 id="hh">支払合計：￥{{ total_price }}
-              取得ポイント：{{ addpoint }}</h2>
+              <h2 id="hh">支払合計：￥{{ new_cartprice }}
+              取得ポイント：{{ points_use }}</h2>
             </div>
           </div>
 
@@ -122,7 +122,7 @@
               <div id="setu">
                 <p>商品名：{{ exhibit.F_ExTitle }}</p>
                 <p>説明：{{ exhibit.F_ExInfo }}</p>
-                <p>値段：￥{{ exhibit.F_ExPrice }}</p>
+                <p>値段：￥{{ cart_price }}</p>
                 <p>ポイント：{{ user_point.F_PointQuantity }}</p>
               </div>
             </div>

@@ -89,20 +89,20 @@
 
             <div id="pro-wrap">
 
-{% for i in range(12)%}
+{% for exhibit in exhibits %}
 
               <div class="product">
                 <a href="/"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
-                      <img src="/static/images/bed.jpg" alt="サンプル画像">
+                      <img src="/static/toredo/{{exhibit.F_ExPhoto}}" alt="サンプル画像">
                     </figure>
                   </div>
                 </a>
 
                 <div class="pro_detail">
-                  <a href="/"><!-- 商品詳細ページへ -->
-                    <h2>ペット用クールベッド ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  <a href="/product_detail/{{exhibit.F_ExID}}"><!-- 商品詳細ページへ -->
+                    <h2>{{exhibit.F_ExInfo}}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
                   </a>
 
                   <div class="heart">
@@ -111,7 +111,7 @@
                         ￥<!--ココは固定-->
                       </h5>
                       <p>
-                        6,980<!--ココ、商品の値段入れて-->
+                        {{exhibit.F_ExPrice}}<!--ココ、商品の値段入れて-->
                       </p>
                     </div>
                       
@@ -133,17 +133,17 @@
             <div id="pro-wrap-ad" style="display: none;"><!-- ココ、ボタンを押すと追加で出てくるとこ -->
 
               <div class="product">
-                <a href="/"><!-- 商品詳細ページへ -->
+                <a href="/product/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
-                      <img src="images/bed.jpg" alt="サンプル画像">
+                      <img src="/static/toredo/{{exhibits.F_ExPhoto}}" alt="サンプル画像">
                     </figure>
                   </div>
                 </a>
 
                 <div class="pro_detail">
                   <a href="/"><!-- 商品詳細ページへ -->
-                    <h2>ペット用クールベッド ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                    <h2>{{exhibits.F_ExInfo}}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
                   </a>
 
                   <div class="heart">
@@ -152,12 +152,12 @@
                         ￥<!--ココは固定-->
                       </h5>
                       <p>
-                        6,980<!--ココ、商品の値段入れて-->
+                        {{exhibits.F_ExPrice}}<!--ココ、商品の値段入れて-->
                       </p>
                     </div>
                       
                     <figure>
-                      <img src="images/heart.png" alt="いいね">
+                      <img src="/static/images/heart.png" alt="いいね">
                     </figure><!--クリックしてアニメーションつけるなら変更しないといけない。-->
                   </div>
                 </div>
