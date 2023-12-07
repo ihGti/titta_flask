@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="static/css/product.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/product.css">
 {% endblock %}
 
 {% block content %}
@@ -60,20 +60,20 @@
             </ul>
             <p class="category-head">カテゴリーから探す</p>
             <ul>
-              <li><a href="#">ケージ/水槽</a></li>
-              <li><a href="#">エサ入れ/水入れ</a></li>
-              <li><a href="#">首輪/リード/ハーネス</a></li>
-              <li><a href="#">おもちゃ</a></li>
-              <li><a href="#">キャリーバッグ</a></li>
-              <li><a href="#">爪とぎ</a></li>
-              <li><a href="#">ペット家具</a></li>
-              <li><a href="#">飼育セット</a></li>
-              <li><a href="#">照明</a></li>
-              <li><a href="#">保温器具</a></li>
-              <li><a href="#">床材</a></li>
-              <li><a href="#">シェルター</a></li>
-              <li><a href="#">温湿度計/サーモスタット</a></li>
-              <li><a href="#">ピンセット</a></li>
+              <li><a href="">ケージ/水槽</a></li>
+              <li><a href="">エサ入れ/水入れ</a></li>
+              <li><a href="">首輪/リード/ハーネス</a></li>
+              <li><a href="">おもちゃ</a></li>
+              <li><a href="">キャリーバッグ</a></li>
+              <li><a href="">爪とぎ</a></li>
+              <li><a href="">ペット家具</a></li>
+              <li><a href="">飼育セット</a></li>
+              <li><a href="">照明</a></li>
+              <li><a href="">保温器具</a></li>
+              <li><a href="">床材</a></li>
+              <li><a href="">シェルター</a></li>
+              <li><a href="">温湿度計/サーモスタット</a></li>
+              <li><a href="">ピンセット</a></li>
             </ul>
 
           </div>
@@ -94,7 +94,7 @@
 
           <div id="kekka">
             <h2>
-              ペット用ベッド
+              {{category.F_CategoryName}}
             </h2>
             <p>
               の検索結果
@@ -172,7 +172,7 @@
 
 
           <div id="num">
-            <p>全 30 件中 1 - 20 件を表示</p>
+            <p>全 {{num_product}} 件中 1 - 20 件を表示</p>
             <div id="numpage">
               <div id="before"><a href="#">＜ 前へ</a></div>
 

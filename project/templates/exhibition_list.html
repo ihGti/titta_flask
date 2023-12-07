@@ -99,7 +99,7 @@
 
           </div>
 
-          <div id="logout"><a href="/">ログアウト</a></div>
+          <div id="logout"><a href="/logout">ログアウト</a></div>
 
         </div>
 
@@ -120,7 +120,7 @@
 
           
           <div id="yoko">
-
+            <form method="post">
             <fieldset class="checkbox-001">
               <label>
                   <input type="checkbox" name="checkbox-001" checked/>
@@ -130,25 +130,25 @@
 
             <fieldset class="checkbox-001">
               <label>
-                  <input type="checkbox" name="checkbox-001" checked/>
+                  <input type="checkbox" name="checkbox-002" />
                   売れた商品表示
               </label>
             </fieldset>
 
             <fieldset class="checkbox-001">
               <label>
-                  <input type="checkbox" name="checkbox-001" checked/>
+                  <input type="checkbox" name="checkbox-003" />
                   お試し出品表示
               </label>
             </fieldset>
-
+            </form>
           </div>
 
 
 
           <div id="itiran">
             <div id="pagesuu">
-              <p>約6917件中</p><!--{{count}}入れる-->
+              <p>約{{num_exhibit}}件中</p><!--{{count}}入れる-->
               <p id="nasi">1-7件</p><!--同じく-->
             </div>
 
@@ -169,7 +169,7 @@
                 </a>
 
                 <div class="pro_detail">
-                  <a href="/product_detail"><!-- 商品詳細ページへ -->
+                  <a href="/product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
                     <h2> ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
                   </a>
 
@@ -195,7 +195,7 @@
 
 <!-- soldのサンプル残し -->
               <div class="product">
-                <a href="//product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
+                <a href="/product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
                       <img src="/static/toredo/{{exhibits.F_ExPhoto}}" alt="サンプル画像">
@@ -237,7 +237,7 @@
           </div>
 
           <div id="num">
-            <p>全 30 件中 1 - 20 件を表示</p>
+            <p>全 {{num_exhibit}} 件中 1 - 20 件を表示</p>
             <div id="numpage">
               <div id="before"><a href="#">＜ 前へ</a></div>
 

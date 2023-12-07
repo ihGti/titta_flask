@@ -16,7 +16,7 @@ db = SQLAlchemy()
 migrate = Migrate()
     # loginの定義
 login_manager = LoginManager()
-
+# adminの定義
 admin = Admin()
 
 
@@ -41,7 +41,7 @@ def create_app(config_filename='config.py'):
     @login_manager.user_loader
     def load_user(user_id):
         return T_User.query.get(int(user_id))
-    
+    # adminページ
     admin.add_view(ModelView(T_User,db.session))
     admin.add_view(ModelView(T_Cartlist,db.session))
 
