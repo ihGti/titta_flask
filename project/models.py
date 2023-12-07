@@ -20,7 +20,7 @@ class T_User(db.Model,UserMixin):
     # 電話番号
     F_Telphone = db.Column(db.String(16), nullable=False)
     # メールアドレス
-    F_Email = db.Column(db.String(256), nullable=False)
+    F_Email = db.Column(db.String(256), nullable=False , unique=True)
     # 
     F_Residence = db.Column(db.String(256), nullable=False)
     # 住所
