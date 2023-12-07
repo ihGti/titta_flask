@@ -8,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Titta </title>
+    <title>Titta{% block title %} {% endblock%}</title>
 
     <!-- この２つのcssは触らない -->
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
@@ -37,26 +37,17 @@
              <img src="/static/images/rogo.png" alt="rogo">
             </figure>
           </a>
-
+<!-- 
           <div class="nav-top">
             <nav>
               <ul>
-                <!-- mailbox.htmlへ遷移 -->
                 <li><a href="/mailbox"><input type="submit" value="&#xf0e0;" class="button"></a></li>
-                <!-- favorite.htmlへ遷移 -->
+                
                 <li><a href="/favorite"><input type="submit" value="&#xf004;" class="button"></a></li>
-                <!-- login.htmlへ遷移 -->
-                <li>
-
-                    {% if user.F_ProfileImage %}
-                      <a href="/myprof"><img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;"></a>
-                    {% else %}
-                      <a href="/myprof"><input type="submit" value="&#xf007;" class="button"></a>
-                    {% endif %}
-                </li>
+                
               </ul>
             </nav>
-          </div>
+          </div> -->
 
 
         </div><!-- "rr-wrap" -->
@@ -68,21 +59,21 @@
 
 
 
-
+<!-- 
       <div class="nav-buttom">
         <nav>
           <ul>
-            <!-- index.htmlへ遷移 --><li><a href="/top" class="line-a">HOME</a></li>
-            <!-- exhibit.htmlへ遷移 --><li><a href="/exhibit">出品</a></li>
-            <!-- foster_board.htmlへ遷移 --><li><a href="/foster_board">里親掲示板</a></li>
-            <!-- lost_petboard.htmlへ遷移 --><li><a href="/lost_petboard">迷子掲示板</a></li>
-            <!-- contest.htmlへ遷移 --><li><a href="/contest">コンテスト</a></li>
-            <!-- community.htmlへ遷移 --><li><a href="/community">コミュニティ</a></li>
-            <!-- assignment.htmlへ遷移 --><li><a href="/assignment">譲渡会</a></li>
+            <li><a href="/top" class="line-a">HOME</a></li>
+            <li><a href="/exhibit">出品</a></li>
+            <li><a href="/foster_board">里親掲示板</a></li>
+            <li><a href="/lost_petboard">迷子掲示板</a></li>
+            <li><a href="/contest">コンテスト</a></li>
+            <li><a href="/community">コミュニティ</a></li>
+            <li><a href="/assignment">譲渡会</a></li>
           </ul>
           
         </nav>
-      </div>
+      </div> -->
 
     </header>
 
@@ -160,7 +151,7 @@
  <!-- jQueryへのリンク -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="/static/js/common.js"></script>
+    <script src="./static/js/common.js"></script>
     {% block js %}
     {% endblock %}
 
