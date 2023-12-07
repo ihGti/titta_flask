@@ -27,6 +27,7 @@ bp = Blueprint('main',__name__)
 # login情報の保持
 @login_required
 def index():
+    # methodがpostの場合
     if request.method== 'POST':
         word = request.form.get('word')
         exword = request.form.get('exword')
@@ -34,30 +35,37 @@ def index():
         l_price= request.form.get('lowerprice')
         h_price = request.form.get('highprice')
         
+        # 本出品だけを抽出
         query = T_Exhibit.query.filter_by(F_EXhibitType=1)
         
+        # タグ検索
         if word:
             query = query.filter(T_Exhibit.F_ExTag.contains(word))
             
+        # 除外ワード
         if exword:
             query = query.filter(T_Exhibit.F_ExInfo.like(f"%{exword}%"))
             
+        # 下限金額
         if l_price:
             query = query.filter(T_Exhibit.F_ExPrice >= l_price)
-            
+        # 上限金額
         if h_price:
             query = query.filter(T_Exhibit.F_ExPrice <= h_price)
-            
+        
+        # カテゴリー検索
         if genre:
             category = T_Category.query.filter_by(F_CategoryID=genre).first()
             if category:
                 query = query.filter(T_Exhibit.F_CategoryID==category.F_CategoryID)
-            
+        
+        # 商品検索結果
         product = query.all()
         
+        # 検索した商品の数を取得
         num_product = len(product)
         return render_template('product.html', product=product , user=current_user , category=category , num_product=num_product)
-    
+    # カテゴリーを全件取得
     category=T_Category.query.all()
     return render_template("index.html" , username=current_user.F_UserName , user=current_user, category=category)
 
@@ -97,9 +105,12 @@ def signup():
 
         
         hashed_password = None
+        
+        # 画像を保存する場合の処理
         prof_image_filename = secure_filename(prof_image.filename)
         prof_image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], prof_image_filename))
 
+        # メールアドレスとパスワードが一致した場合、パスワードをハッシュ化する
         if mail == mail_conform and password == password_conform:
             hashed_password = generate_password_hash(password, method='sha256')
         else:
@@ -107,7 +118,7 @@ def signup():
 
 
         
-        
+        # T_Userの対応するカラムに変数を格納
         user = T_User(
             F_UserName=username,
             F_Password=hashed_password,
@@ -125,6 +136,7 @@ def signup():
             F_ProfileImage=prof_image_filename  # 画像のファイル名を保存
         )
         
+        # 登録したら初期ポイントで100ポイント付加
         init_point =T_Point(F_PointQuantity=100)
         user.points.append(init_point)
         
@@ -142,8 +154,10 @@ def login():
         mail = request.form.get('email')
         password = request.form.get('password')
         
+        # T_UserのF_Emailと入力したメールアドレスを比較し、対象ユーザーを取り出す
         user = T_User.query.filter_by(F_Email=mail).first()
         
+        # ハッシュ化したパスワードを直して入力したパスワードが一致するか検証
         if check_password_hash(user.F_Password,password):
             login_user(user)
             return redirect('/top')
@@ -159,7 +173,9 @@ def cor():
 
 # マイページ
 @bp.route("/myprof")
+@login_required
 def myprof():
+    # ログインしているユーザーの情報を取得
     user = T_User.query.get(current_user.F_UserID)
     
     return render_template("my_profile.html" , user=user)
@@ -169,20 +185,24 @@ def myprof():
 def prof_edit():
     user = T_User.query.get(current_user.F_UserID)
     if request.method=='POST':
-        
+        # ユーザーネームを入力
         username = request.form.get("username")
+        # プロフィールコメント
         user_description = request.form.get("user-description")
+        # プロフ画像
         profile_image = request.files['profile_image']
-        
+        # ユーザーネームの更新
         user.F_UserName = username
+        # プロフコメントの更新
         user.F_Profile_Comment = user_description
         
+        # プロフ画像の更新
         if profile_image:
             fileimage = secure_filename(profile_image.filename)
             profile_image.save(os.path.join(current_app.config['UPLOAD_FOLDER'],fileimage))
             
             user.F_ProfileImage = fileimage
-        
+        # 内容の更新処理
         db.session.commit()
         return redirect('myprof')
     
@@ -192,26 +212,32 @@ def prof_edit():
 @bp.route("/userprof/<int:user_id>")
 @login_required
 def user_prof(user_id):
+    # 他者プロフを取得
     users = T_User.query.get(user_id)
     
-    if users:
-        friends = T_User.query.join(T_Paramerter, T_Paramerter.F_friendid == T_User.F_UserID).filter(T_Paramerter.F_userid == T_User.F_UserID).all()
+    exhibits = T_Exhibit.query.get(user_id)
     
+    if users:
+        # フォローしているユーザーを取得
+        friends = T_User.query.join(T_Paramerter, T_Paramerter.F_friendid == T_User.F_UserID).filter(T_Paramerter.F_userid == T_User.F_UserID).all()
+        # フォロワーをカウント
         followers_count = T_Paramerter.query.filter_by(F_friendid=users.F_UserID).count()
+        # フォロー中のユーザーをカウント
         following_count = T_Paramerter.query.filter_by(F_userid=users.F_UserID).count()
-    return render_template("user_profile.html",users=users, friends=friends , followers_count=followers_count , following_count=following_count , user=current_user)
+    return render_template("user_profile.html",users=users, friends=friends , followers_count=followers_count , following_count=following_count , user=current_user , exhibits=exhibits)
 
 # フォロー関連
 @bp.route("/add_friend/<int:user_id>",methods=['POST'])
 @login_required
 def add_friend(user_id):
-    
+    # ログインユーザー
     current_user_id = current_user.F_UserID
-    
+    # ユーザーをフォローしているか
     user_friendship = T_Paramerter.query.filter_by(F_userid = current_user_id, F_friendid = user_id).first()
+    # フォローしていたら
     if user_friendship:
         return "すでにフォローされています"
-    
+    # フォローしていない場合はフォロー処理をする
     friendship = T_Paramerter(F_userid=current_user_id, F_friendid=user_id)
     db.session.add(friendship)
     db.session.commit()
@@ -222,43 +248,46 @@ def add_friend(user_id):
 # 本出品
 @bp.route("/upload" , methods=['POST'])
 def exhibit():
+    # 1~5枚の画像を保存する処理
     for i in range(1,6):
         file = request.files.get(f'imageinput{i}')
+        # 画像の保存
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER_TOREDO'], filename))
         
-        
-        if i == 1:
-            exhibit = T_Exhibit(F_ExPhoto=filename)
-            
-        elif i == 2:
-            exhibit.F_ExPhotoS = filename
-        
-        elif i == 3:
-            exhibit.F_ExPhotoT = filename
-            
-        elif i == 4:
-            exhibit.F_ExPhotoH = filename
-            
-        elif i == 5:
-            exhibit.F_ExPhotoF = filename
-    
+        # 一枚目
+            if i == 1:
+                exhibit = T_Exhibit(F_ExPhoto=filename)
+        # 2枚目
+            elif i == 2:
+                exhibit.F_ExPhotoS = filename
+        # 3枚目
+            elif i == 3:
+                exhibit.F_ExPhotoT = filename
+        # 4枚目
+            elif i == 4:
+                exhibit.F_ExPhotoH = filename
+        # 5枚目
+            elif i == 5:
+                exhibit.F_ExPhotoF = filename
+    # タイトル
     title = request.form.get('title')
-    
+    # 説明
     info = request.form.get('setumei')
-    
+    # 状態
     situation = request.form.get('situation')
-    
+    # 配達方法
     deli = request.form.get('deli')
-    
+    # ジャンル
     genre = request.form.get('genre')
-    
+    # カテゴリーテーブルから取得
     category = T_Category.query.get(genre)
-    
+    # 金額
     many = request.form.get('kane')
-    
+    # ハッシュタグ
     tag = request.form.get('tag')
+    # ハッシュタグから単語を抽出
     hashtags = [word for word in tag.split() if word.startswith('#')]
     hashtags = ' '.join(hashtags)
     
@@ -277,21 +306,23 @@ def exhibit():
     exhibit.F_ExSit = situation
     
     exhibit.F_UserID = current_user.F_UserID
-    
+    # 本出品の形態
     exhibit.F_EXhibitType= 1
     
     exhibit.F_ExTime = datetime.utcnow()
+    # 出品登録
     db.session.add(exhibit)
     db.session.commit()
     user = T_User.query.get(current_user.F_UserID)
-    
+    # ポイント付加処理
     total_point = 50
-    
+    # 出品したユーザーのポイントを取得
     user_points = T_Point.query.filter_by(F_UserID=current_user.F_UserID).first()
     
     if user_points:
+        # ポイント換算
         new_points = user_points.F_PointQuantity + total_point
-        
+        # 更新
         user_points.F_PointQuantity = new_points
         
         db.session.commit()
@@ -304,13 +335,16 @@ def exhibit():
 @bp.route('/exhibit', methods=['GET'])
 @login_required
 def upload_page():
+    # カテゴリー全件取得
     categories = T_Category.query.filter_by(F_CategoryCode='c')
     return render_template('exhibit.html' , user=current_user , categories=categories)
 
 # 出品確認
 @bp.route("/exhibit_con")
 def exhibit_con():
-    exhibit = T_Exhibit.query.filter_by(F_UserID = current_user.F_UserID).first()
+    # 出品した商品の内容を取得
+    exhibit = T_Exhibit.query.order_by(T_Exhibit.F_ExID.desc()).first()
+    
     return render_template("exhibit_con.html" , exhibit=exhibit, user=current_user)
 
 # 出品完了
@@ -328,20 +362,20 @@ def trial_upload():
             filename = secure_filename(file.filename)
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER_DEMOEXHIBIT'],filename))
             
-        if i == 1:
-            demoexhibit = T_Exhibit(F_ExPhoto=filename)
+            if i == 1:
+                demoexhibit = T_Exhibit(F_ExPhoto=filename)
         
-        elif i == 2:
-            demoexhibit.F_ExPhotoS = filename
+            elif i == 2:
+                demoexhibit.F_ExPhotoS = filename
             
-        elif i == 3:
-            demoexhibit.F_ExPhotoT = filename
+            elif i == 3:
+                demoexhibit.F_ExPhotoT = filename
             
-        elif i == 4:
-            demoexhibit.F_ExPhotoF = filename
+            elif i == 4:
+                demoexhibit.F_ExPhotoF = filename
             
-        elif i == 5:
-            demoexhibit.F_ExPhotoH = filename
+            elif i == 5:
+                demoexhibit.F_ExPhotoH = filename
             
     title = request.form.get('title')
         
@@ -402,16 +436,28 @@ def exhibit_trial():
 
 # 商品関連
 # 商品一覧
-# @bp.route("/product")
-# def product():
+@bp.route("/product")
+def product():
     
-#     return render_template("product.html")
+    return render_template("product.html")
+
+# カテゴリー検索:index.html
+@bp.route('/category_product/<int:category_id>/products', methods=['GET'])
+@login_required
+def category_product(category_id):
+    category = T_Category.query.get(category_id)
+    product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
+    
+    return render_template('product.html', product=product, category=category , user=current_user)
+
 
 # 商品詳細
 @bp.route("/product_detail/<int:exhibit_id>")
 @login_required
 def product_detail(exhibit_id):
+    # idに基づいた商品を取得
     exhibit = T_Exhibit.query.get(exhibit_id)
+    # 商品を出品したユーザーを取得
     users = T_User.query.get(exhibit.F_UserID)
     return render_template("product_detail.html", exhibit=exhibit , user=current_user , users=users)
 
@@ -420,6 +466,7 @@ def product_detail(exhibit_id):
 @bp.route("/settelement_comp/<int:exhibit_id>", methods=['POST'])
 @login_required
 def settelement_check(exhibit_id):
+    # 商品を取得
     exhibit = T_Exhibit.query.get(exhibit_id)
     
     return render_template('settelement_comp.html', exhibit=exhibit, user=current_user)
@@ -428,19 +475,24 @@ def settelement_check(exhibit_id):
 @bp.route("/settelement_check/<int:exhibit_id>", methods=['GET','POST'])
 @login_required
 def settelement_comp(exhibit_id):
+    # 商品取得
     exhibit = T_Exhibit.query.get(exhibit_id)
+    # ユーザーポイント取得
     user_point = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
+    # 出品したユーザーとログインユーザーが一致した場合
     if exhibit.F_UserID == current_user.F_UserID:
         return redirect(url_for('main.product_detail', exhibit_id=exhibit_id))
     
     if request.method=='POST':
-        if 'check' in request.form:        
+        # 購入方法などのフォーム
+        if 'check' in request.form:
+            # ポイント取得
             points = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
             if user_point.F_PointQuantity < points:
                 return render_template("settelement_check.html", user=current_user,points=points , user_point=user_point)
     
             return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point)
-        
+        # 購入完了画面に進む
         elif 'comp' in request.form:        
             points_use = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
             cart_price = exhibit.F_ExPrice - points_use if points_use <= exhibit.F_ExPrice else 0
@@ -472,9 +524,9 @@ def settelement_comp(exhibit_id):
             
             db.session.commit()
             
-            return render_template("settlement_comp.html",exhibit_id=exhibit_id, user=current_user)
+            return render_template("settlement_comp.html",exhibit_id=exhibit_id, user=current_user , new_cartprice=new_cartprice)
 
-    return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point)
+    return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point , cart_price=cart_price , points_use=points_use)
 
 
 # 目玉機能
@@ -730,7 +782,7 @@ def favorite(exhibit_id):
         new_favorite = T_Favorite(user_id=current_user.F_UserID, exhibit_id=exhibit_id)
         db.session.add(new_favorite)
         db.session.commit()
-    return redirect("/home")
+    return redirect("/top")
 
 # お気に入り表示
 @bp.route('/favorites')
@@ -760,16 +812,49 @@ def listing_list():
     return render_template("listing_list.html",user=current_user, exhibit_info=exhibit_info , num_list=num_list)
 
 # 出品リスト
-@bp.route("/exhibition_list")
+@bp.route("/exhibition_list",methods=['GET','POST'])
 def exhibition_list():
+    if request.method == 'POST':
+        
+        exhibition = request.form.get('checkbox-001')
+        sold = request.form.get('checkbox-002')
+        trial = request.form.get('checkbox-003')
+        
+        query = T_Exhibit.query.filter(F_EXhibitType=1)
+        
+        if not exhibition:
+            query = query.filter(T_Exhibit.F_EXhibitType==1)
+        
+        if not sold :
+            query = query.filter(T_Exhibit)
+            
+        if not trial:
+            query = query.filter(T_Exhibit.F_EXhibitType==2)
+        
+        products = query.all()
+        
+        return render_template("exhibition_list.html",products=products,user=current_user)
     exhibit = T_Exhibit.query.filter_by(F_EXhibitType=1)
     demoexhibit = T_Exhibit.query.filter_by(F_EXhibitType=2)
-    return render_template("exhibition_list.html",user=current_user,exhibit=exhibit, demoexhibit=demoexhibit)
+    
+    num_exhibit =len(exhibit)
+    return render_template("exhibition_list.html",user=current_user,exhibit=exhibit, demoexhibit=demoexhibit , num_exhibit=num_exhibit)
 
 # 売上履歴
 @bp.route("/earnings_history")
 def earnings_history():
-    return render_template("earnings_history.html", user=current_user)
+    
+    sales = T_Cartlist.query.all()
+    
+    sales_info = []
+    
+    for purchase in sales:
+        exhibit = T_Exhibit.query.get(purchase.F_ExID)
+        user = T_User.query.get(exhibit.F_UserID)
+        
+        sales_info.append((exhibit, user))
+        
+    return render_template("earnings_history.html", user=current_user , sales_info=sales_info)
 
 # 掲載履歴
 @bp.route("/petpublish_hiatory")
@@ -790,7 +875,7 @@ def listing_history():
 def point():
     
     user = current_user.F_UserID
-    points = T_Point.query.filter_by(F_UserID = user).all()
+    points = sum(T_Point.query.filter_by(F_UserID = user).all())
     return render_template("point.html" , points=points , user=user)
 
 # メールボックス
