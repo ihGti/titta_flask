@@ -22,7 +22,7 @@ function signinsub() {
         }};
 
     if(valid(3,Password.value) == null){
-        window.alert("半角英数字8文字以上32文字以下でよろしく")
+        window.alert("パスワードは半角英数字8文字以上32文字以下で設定してください。")
         return false
     }
 
