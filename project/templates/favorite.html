@@ -26,17 +26,16 @@
             <table>
 
 <!-- DB連携書き換え -->
-{% set a = ["タイトル", "値段", "2", "3"]%}
-              {% for i in range(4)%}
+              {% for favorite in favorites_exhibit %}
               <div>
                 <tr class="sen">
-                  <td rowspan="2"><img src="/static/images/img1.jpg" alt=""></td>
-                  <td colspan="4" class="taitoru">{{ a[0] }}</td>
+                  <td rowspan="2"><img src="/static/toredo/{{favorite.F_ExPhoto}}" alt=""></td>
+                  <td colspan="4" class="taitoru">{{ favorite.F_ExTitle }}</td>
                 </tr>
                 <tr class="sen2">
-                  <td class="kane">￥{{ a[1] }}</td>
+                  <td class="kane">￥{{ favorite.F_ExPrice }}</td>
                   <td>&#9829;{{ a[2] }}</td>
-                  <td><img src="/static/images/tyatto.png" class="tyatto">{{ a[3] }}</td>
+                  <td><img src="/static/images/tyatto.png" class="tyatto"></td>
                   <td><button class="gomi">&#128465;</button></td>
                 </tr>
               </div>

@@ -26,7 +26,7 @@
                 {% if users.F_ProfileImage %}
                 <a href="/myprof"><img src="{{ url_for('static', filename='prof_image/' + users.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;"></a>
                 {% else %}
-                <a href="/login"><input type="submit" value="&#xf007;" class="button"></a>
+                <a href="/myprof"><input type="submit" value="&#xf007;" class="button"></a>
                 {% endif %}               
               </figure>
             </div>
@@ -50,7 +50,9 @@
             </div>
 
             <div id="t_right">
-              <input type="button" id="followBtn" value="＋ フォロー">
+              <form action="/add_friend/{{users.F_UserID}}" method="post">
+                <input type="submit" id="followBtn" value="＋ フォロー">
+              </form>
             </div>
 
             
