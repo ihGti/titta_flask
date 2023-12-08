@@ -54,7 +54,7 @@ function signinsub() {
 function valid(select, num){
 
     var yubin = new RegExp('\\d{3}-\\d{4}');
-    var phone = new RegExp("0[589]0-[0-9]{4}-[0-9]{4}");
+    var phone = new RegExp("0[5879]0-[0-9]{4}-[0-9]{4}");
     var pass = new RegExp("[0-9a-zA-Z]{8,32}");
     var postcode = num;
     if(select == 1){
