@@ -66,7 +66,7 @@ def index():
         num_product = len(product)
         return render_template('product.html', product=product , user=current_user , category=category , num_product=num_product)
     # カテゴリーを全件取得
-    category=T_Category.query.all()
+    category=T_Category.query.filter_by(F_CategoryCode='c')
     return render_template("index.html" , username=current_user.F_UserName , user=current_user, category=category)
 
 
@@ -486,27 +486,28 @@ def settelement_comp(exhibit_id):
     if request.method=='POST':
         # 購入方法などのフォーム
         if 'check' in request.form:
+            exhibit = T_Exhibit.query.get(exhibit_id)
             # ポイント取得
             points = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
+            user_point = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
             if user_point.F_PointQuantity < points:
-                return render_template("settelement_check.html", user=current_user,points=points , user_point=user_point)
-    
-            return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point)
+                return render_template("settelement_check.html", user=current_user,points=points , user_point=user_point , exhibit=exhibit)
+            if points and user_point.F_PointQuantity > 0:
+                # ユーザーがポイントを持っており、ポイントを使う場合の処理
+                    cart_price =exhibit.F_ExPrice - points
+        
+                # ポイントを利用して購入金額を減額
+                    if user_point.F_PointQuantity >= cart_price:
+                        cart_price = exhibit.F_ExPrice - points
+                        user_point.F_PointQuantity -= points
+
+            else:
+                cart_price = exhibit.F_ExPrice
+            return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price)
         # 購入完了画面に進む
         elif 'comp' in request.form:        
             points_use = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
             cart_price = exhibit.F_ExPrice - points_use if points_use <= exhibit.F_ExPrice else 0
-            if user_point and user_point.F_PointQuantity > 0:
-                # ユーザーがポイントを持っており、ポイントを使う場合の処理
-                    cart_price = exhibit.F_ExPrice
-        
-                # ポイントを利用して購入金額を減額
-            if user_point.F_PointQuantity >= cart_price:
-                    cart_price -= user_point.F_PointQuantity
-                    user_point.F_PointQuantity = 0
-            else:
-                    user_point.F_PointQuantity -= cart_price
-                    cart_price = 0
             
             cart = T_Cartlist(F_UserID = current_user.F_UserID,
                                 F_ExID = exhibit_id,
@@ -524,9 +525,9 @@ def settelement_comp(exhibit_id):
             
             db.session.commit()
             
-            return render_template("settlement_comp.html",exhibit_id=exhibit_id, user=current_user , new_cartprice=new_cartprice)
+            return render_template("settlement_comp.html",exhibit_id=exhibit_id, user=current_user , new_cartprice=new_cartprice , cart_price=cart_price)
 
-    return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point , cart_price=cart_price , points_use=points_use)
+    return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point )
 
 
 # 目玉機能

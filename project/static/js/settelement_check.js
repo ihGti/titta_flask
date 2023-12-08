@@ -7,8 +7,8 @@ function viewChange(){
             document.getElementById('Box').style.display = "none";
         }
     }
-window.onload = viewChange;
 }
+window.onload = viewChange;
 
 
 function viewChange2(){
@@ -22,5 +22,5 @@ function viewChange2(){
             document.getElementById('Box2').style.display = "";
         }
     }
-window.onload = viewChange2;
 }
+window.onload = viewChange2;
