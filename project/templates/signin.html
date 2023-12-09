@@ -36,12 +36,15 @@
                 <p class="red">※必須</p>
                 <input type="email" name="email" id="email" class="email" placeholder="例&#41 nhsxxxxx@nhs.hal.ac.jp" autocomplete="off">
               </label>
+              <p id="emailer" class="hideer"></p>
+              <p id="emailer_equal" class="hideer"></p>
 
               <label for="email">
                 <p>メールアドレス&#40再確認&#41</p>
                 <p class="red">※必須</p>
                 <input type="email" name="email_conform" id="reemail" class="email-sai" placeholder="確認のため、もう一度入力してください" autocomplete="off">
               </label>
+              <p id="remailer" class="hideer"></p>
 
               <!-- パスワード -->
               <label for="Password">
@@ -49,35 +52,43 @@
                 <p class="red">※必須</p>
                 <input type="password" name="password" id="Password" class="password" placeholder="半角英数字8~32文字"  autocomplete="off">
               </label>
+              <p id="Passworder" class="hideer"></p>
+              <p id="Passworder_equal" class="hideer"></p>
 
               <label for="Password">
                 <p>Password&#40再確認&#41</p>
                 <p class="red">※必須</p>
                 <input type="password" name="password_conform" id="rePassword" class="Password" placeholder="確認のため、もう一度入力してください" autocomplete="off">
               </label>
+              <p id="rePassworder" class="hideer"></p>
 
               <h1>お客様情報</h1>
               <hr noshade="" class="under-line">
 
               <!-- お名前 -->
               <label for="name">
-                <p>お名前</p>
+                <p>お名前</p> 
                 <p class="red">※必須</p>
                 <p class="name-sei">性</p>
-                <input type="text" name="sei" id="name" placeholder="例&#41 福田" autocomplete="off">
+                <input type="text" name="sei" id="sei" placeholder="例&#41 福田" autocomplete="off">
                 <p class="name-mei">名</p>
-                <input type="text" name="mei" id="name" placeholder="例&#41 和真" autocomplete="off">
+                <input type="text" name="mei" id="mei" placeholder="例&#41 和真" autocomplete="off">
               </label>
+              <p id="seier" class="hideer"></p>
+              <p id="meier" class="hideer"></p>
 
               <!-- お名前(カナ) -->
               <label for="name-kana">
                 <p>お名前&#40カナ&#41</p>
                 <p class="red">※必須</p>
                 <p class="name-skana">性</p>
-                <input type="text" name="sei-kana" id="name-kana" placeholder="例&#41 フクタ" autocomplete="off">
+                <input type="text" name="sei-kana" id="sei-kana" placeholder="例&#41 フクタ" autocomplete="off">
                 <p class="name-mkana">名</p>
-                <input type="text" name="mei-kana" id="name-kana" placeholder="例&#41 カズマ" autocomplete="off">
+                <input type="text" name="mei-kana" id="mei-kana" placeholder="例&#41 カズマ" autocomplete="off">
+                
               </label>
+              <p id="sei-kanaer" class="hideer"></p>
+              <p id="mei-kanaer" class="hideer"></p>
 
               <!-- ユーザー名 -->
               <label for="username">
@@ -85,6 +96,7 @@
                 <p class="red">※必須</p>
                 <input type="text" name="username" id="username">
               </label>
+              <p id="usernameer" class="hideer"></p>
 
               <!-- 生年月日 -->
               <div id="date">
@@ -114,13 +126,16 @@
                 <p class="red">※必須</p>
                 <input type="tel" name="telphone" id="telphone" placeholder="例&#41 090-xxxx-xxxx" autocomplete="off">
               </label>
+              <p id="telphoneer" class="hideer">電話番号が正しい形式ではありません</p>
 
               <!-- 郵便番号 -->
               <label for="yuubin">
                 <p>郵便番号</p>
                 <p class="red">※必須</p>
                 <input type="text" name="yuubin" id="yuubin"  placeholder="例&#41 〒xxx-xxxx" autocomplete="off">
+
               </label>
+              <p id="yuubiner" class="hideer">郵便番号が正しい形式ではありません</p>
 
               <!-- 住所 -->
               <label for="address">
@@ -128,13 +143,16 @@
                 <p class="red">※必須</p>
                 <input type="text" name="address" id="address" placeholder="例&#41 愛知県名古屋市中村区名駅4-27-1" autocomplete="off">
               </label>
+              <p id="addresser" class="hideer"></p>
 
               <!-- プロフ画像 -->
               <label for="prof-image">
                 <p>プロフィール画像</p>
                 <p class="red">※必須</p>
-                <input type="file" name="prof_image" id="prof_image">
+                <input type="file" name="prof_image" id="prof-image">
               </label>
+              <p id="prof_imageer" class="hideer"></p>
+
               <!-- 送信ボタン -->
               <input type="submit" value="同意して確認画面へ" id="bottun">
 

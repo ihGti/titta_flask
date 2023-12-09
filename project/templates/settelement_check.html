@@ -29,7 +29,7 @@
         <div id="right"><!-- 右  -->
           <h1>決済確認</h1>
           <div id="select">
-            <form id="formr" method="post">
+            <form id="formr" method="post" onsubmit="return settelesub()">
               <table>
                 <tr>
                   <td><label>ポイント</label></td>
@@ -57,8 +57,8 @@
                   </select>
                   <div id="Box2" style="display:none;">
                     <div>
-                      <label class="boxl">カード番号</label><input type="text" name="cardnum">
-                      <label class="boxl">有効期限</label><select name="mmyy" class="yukou">
+                      <label class="boxl">カード番号</label><input type="text" name="cardnum" id="cardnum">
+                      <label class="boxl">有効期限</label><select name="mmyy" class="yukou" id="yukou">
                         <option value="1">01</option>
                         <option value="2">02</option>
                         <option value="3">03</option>
@@ -71,7 +71,7 @@
                         <option value="10">10</option>
                         <option value="11">11</option>
                         <option value="12">12</option>
-                      </select>/<select name="" class="yukou">
+                      </select>/<select name="" class="yukou" id="yukou2">
                         <option value="">23</option>
                         <option value="">24</option>
                         <option value="">25</option>
@@ -99,7 +99,7 @@
                     </div>
                   </div>
                   </td>
-                </tr>
+                </tr> 
               </table>
             </form>
           </div>
