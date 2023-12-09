@@ -42,10 +42,14 @@ div#shouhinfl div#shouhinfl1 {
 
 div#shouhinfl1 div#shouhinPic {
   width: 500px;
-  height: 500px;
+  height: auto;
   background-color: rgb(196, 149, 200);
   /* background-image: url(/static/toredo/{{exhibit.F_ExPhoto}}); */
   background-size: contain;
+}
+
+div#shouhinfl1 div#shouhinPic img{
+  max-width: 100%;
 }
 
 div#shouhinfl1 div#shouhinhukusuu {
