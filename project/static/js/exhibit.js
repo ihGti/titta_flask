@@ -41,7 +41,7 @@ function exhibisub(){
   return getFunc(message);
 
 };
-
+  
 
 function getFunc(message) {// はい or いいえ ダイアログ
       
