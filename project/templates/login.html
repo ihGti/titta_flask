@@ -39,6 +39,19 @@
           <form method="post">
             <h1>LOGIN</h1>
 
+            {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+        <ul id="flash">
+            <li>
+                <font color="red">{{ message }}</font>
+            </li>
+          </ul>
+    {% endfor %}
+{% endwith %}
+<style>
+ul#flash{ list-style: none; margin-top: 10px;}
+</style>
+
             <label for="email">
               <p>メールアドレス</p>
               <input type="email" name="email" id="email" autocomplete="off">

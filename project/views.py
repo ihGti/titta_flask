@@ -1,5 +1,5 @@
 # flask部品の取り込み
-from flask import Flask , request , redirect , render_template , Blueprint , current_app , url_for
+from flask import Flask , request , flash, redirect , render_template , Blueprint , current_app , url_for
 # flask-loginライブラリの取り込み
 from flask_login import login_user, login_required, logout_user, current_user , login_manager
 # パスワードのセキュリティ関連のライブラリ
@@ -157,12 +157,16 @@ def login():
         # T_UserのF_Emailと入力したメールアドレスを比較し、対象ユーザーを取り出す
         user = T_User.query.filter_by(F_Email=mail).first()
         
-        # ハッシュ化したパスワードを直して入力したパスワードが一致するか検証
-        if check_password_hash(user.F_Password,password):
-            login_user(user)
-            return redirect('/top')
+        if user :
+            if check_password_hash(user.F_Password,password):
+                login_user(user)
+                return redirect('/top')
+            else:
+                flash('パスワードが違います')
+                return render_template('login.html')
         else:
-            return render_template('login.html')
+            flash('メールアドレスが存在しません')
+            return redirect('/login')
         
     return render_template('login.html')
 
