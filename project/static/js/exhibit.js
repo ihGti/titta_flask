@@ -23,7 +23,7 @@ function exhibisub(){
   var situation = document.getElementById("situation");
   var  deli= document.getElementById("deli");
   var genre = document.getElementById("genre")
-  var kane = Number(document.getElementById("kane"))
+  var kane = document.getElementById("kane")
   var tag = document.getElementById("tag")
 
   let inputvalue = [bigimage, title, setumei, situation, deli, genre, kane, tag]

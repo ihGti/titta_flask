@@ -442,8 +442,9 @@ def exhibit_trial():
 # 商品一覧
 @bp.route("/product")
 def product():
-    
-    return render_template("product.html")
+    product = T_Exhibit.query.all()
+    category = T_Category.query.all()
+    return render_template("product.html" , product=product , user=current_user , category=category)
 
 # カテゴリー検索:index.html
 @bp.route('/category_product/<int:category_id>/products', methods=['GET'])
@@ -500,36 +501,42 @@ def settelement_comp(exhibit_id):
                 # ユーザーがポイントを持っており、ポイントを使う場合の処理
                     cart_price =exhibit.F_ExPrice - points
         
-                # ポイントを利用して購入金額を減額
-                    if user_point.F_PointQuantity >= cart_price:
-                        cart_price = exhibit.F_ExPrice - points
-                        user_point.F_PointQuantity -= points
+                    user_point.F_PointQuantity -= points
 
             else:
                 cart_price = exhibit.F_ExPrice
             return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price)
         # 購入完了画面に進む
-        elif 'comp' in request.form:        
-            points_use = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
-            cart_price = exhibit.F_ExPrice - points_use if points_use <= exhibit.F_ExPrice else 0
-            
+        elif 'comp' in request.form:
+            exhibit = T_Exhibit.query.get(exhibit_id)
+            # ポイント取得
+            points = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
+            user_point = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
+            if user_point.F_PointQuantity < points:
+                return render_template("settelement_check.html", user=current_user,points=points , user_point=user_point , exhibit=exhibit)
+            if points and user_point.F_PointQuantity > 0:
+                # ユーザーがポイントを持っており、ポイントを使う場合の処理
+                    cart_price =exhibit.F_ExPrice - points
+                    user_point.F_PointQuantity -= points
+
+            else:
+                cart_price = exhibit.F_ExPrice
             cart = T_Cartlist(F_UserID = current_user.F_UserID,
                                 F_ExID = exhibit_id,
                                 F_CartPrice = cart_price)
             
             db.session.add(cart)
             
-            new_cartprice = exhibit.F_ExPrice - points_use
             user_cart_price = T_Cartlist.query.filter_by(F_UserID=current_user.F_UserID).all()
             post_user_price = sum(purchase.F_CartPrice for purchase in user_cart_price)
                 
-            total_cart_price = post_user_price + new_cartprice
+            total_cart_price = post_user_price + cart_price
                 
             user_point.F_CartPrice = total_cart_price
             
             db.session.commit()
             
-            return render_template("settlement_comp.html",exhibit_id=exhibit_id, user=current_user , new_cartprice=new_cartprice , cart_price=cart_price)
+            return render_template("settlement_comp.html",exhibit=exhibit, user=current_user ,points=points, cart_price=cart_price)
 
     return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point )
 
