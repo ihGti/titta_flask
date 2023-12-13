@@ -1,5 +1,5 @@
 # flask部品の取り込み
-from flask import Flask , request , flash, redirect , render_template , Blueprint , current_app , url_for
+from flask import Flask , request , flash, redirect , render_template , Blueprint , current_app , url_for , session
 # flask-loginライブラリの取り込み
 from flask_login import login_user, login_required, logout_user, current_user , login_manager
 # パスワードのセキュリティ関連のライブラリ
@@ -251,89 +251,53 @@ def add_friend(user_id):
 # 出品関連
 # 本出品
 @bp.route("/upload" , methods=['POST'])
-def exhibit():
-    # 1~5枚の画像を保存する処理
-    for i in range(1,6):
-        file = request.files.get(f'imageinput{i}')
+def exhibit():    
+    if request.method == "POST":
+        image_files=[]
+            # 1~5枚の画像を保存する処理
+        for i in range(1,6):
+            file = request.files.get(f'imageinput{i}')
         # 画像の保存
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER_TOREDO'], filename))
+            if file:
+                filename = secure_filename(file.filename)
+                image_files.append(filename)
+                filepath=os.path.join(current_app.config['UPLOAD_FOLDER_TOREDO'], filename)
+                file.save(filepath)
         
-        # 一枚目
-            if i == 1:
-                exhibit = T_Exhibit(F_ExPhoto=filename)
-        # 2枚目
-            elif i == 2:
-                exhibit.F_ExPhotoS = filename
-        # 3枚目
-            elif i == 3:
-                exhibit.F_ExPhotoT = filename
-        # 4枚目
-            elif i == 4:
-                exhibit.F_ExPhotoH = filename
-        # 5枚目
-            elif i == 5:
-                exhibit.F_ExPhotoF = filename
-    # タイトル
-    title = request.form.get('title')
-    # 説明
-    info = request.form.get('setumei')
-    # 状態
-    situation = request.form.get('situation')
-    # 配達方法
-    deli = request.form.get('deli')
-    # ジャンル
-    genre = request.form.get('genre')
-    # カテゴリーテーブルから取得
-    category = T_Category.query.get(genre)
-    # 金額
-    many = request.form.get('kane')
-    # ハッシュタグ
-    tag = request.form.get('tag')
-    # ハッシュタグから単語を抽出
-    hashtags = [word for word in tag.split() if word.startswith('#')]
-    hashtags = ' '.join(hashtags)
-    
-    exhibit.F_ExTitle = title
-    
-    exhibit.F_ExInfo = info
-    
-    exhibit.F_ExDeli = deli
-    
-    exhibit.F_CategoryID = category.F_CategoryID
-    
-    exhibit.F_ExPrice = many
-    
-    exhibit.F_ExTag = hashtags
-    
-    exhibit.F_ExSit = situation
-    
-    exhibit.F_UserID = current_user.F_UserID
-    # 本出品の形態
-    exhibit.F_EXhibitType= 1
-    
-    exhibit.F_ExTime = datetime.utcnow()
-    # 出品登録
-    db.session.add(exhibit)
-    db.session.commit()
-    user = T_User.query.get(current_user.F_UserID)
-    # ポイント付加処理
-    total_point = 50
-    # 出品したユーザーのポイントを取得
-    user_points = T_Point.query.filter_by(F_UserID=current_user.F_UserID).first()
-    
-    if user_points:
-        # ポイント換算
-        new_points = user_points.F_PointQuantity + total_point
-        # 更新
-        user_points.F_PointQuantity = new_points
+        # タイトル
+        title = request.form.get('title')
+        # 説明
+        info = request.form.get('setumei')
+        # 状態
+        situation = request.form.get('situation')
+        # 配達方法
+        deli = request.form.get('deli')
+        # ジャンル
+        genre = request.form.get('genre')
+        # カテゴリーテーブルから取得
+        category = T_Category.query.get(genre)
+        # 金額
+        many = request.form.get('kane')
+        # ハッシュタグ
+        tag = request.form.get('tag')
+        # ハッシュタグから単語を抽出
+        hashtags = [word for word in tag.split() if word.startswith('#')]
+        hashtags = ' '.join(hashtags)
         
-        db.session.commit()
-
-
-    
-    return redirect('/exhibit_con' )
+        user_id = current_user.F_UserID
+        
+        session["exhibit_info"] = {
+            "title":title,
+            "info":info,
+            "situation":situation,
+            "deli":deli,
+            "category":category.F_CategoryID,
+            "many":many,
+            "tag":tag,
+            "user":user_id,
+            "image_files":image_files,
+        }
+    return redirect('/exhibit_con')
 
 # 出品
 @bp.route('/exhibit', methods=['GET'])
@@ -344,16 +308,50 @@ def upload_page():
     return render_template('exhibit.html' , user=current_user , categories=categories)
 
 # 出品確認
-@bp.route("/exhibit_con")
+@bp.route("/exhibit_con", methods=["GET","POST"])
 def exhibit_con():
-    # 出品した商品の内容を取得
-    exhibit = T_Exhibit.query.order_by(T_Exhibit.F_ExID.desc()).first()
     
-    return render_template("exhibit_con.html" , exhibit=exhibit, user=current_user)
+    exhibit_info = session.get('exhibit_info')
+    print(exhibit_info)
+    return render_template("exhibit_con.html" , user=current_user , exhibit_info=exhibit_info )
 
 # 出品完了
-@bp.route("/exhibit_comp")
+@bp.route("/exhibit_comp", methods=["GET","POST"])
 def exhibit_comp():
+    if request.method=="POST":
+        exhibit_data= session.get('exhibit_info')
+        
+        if exhibit_data:
+            exhibit = T_Exhibit(
+                F_ExTitle = exhibit_data["title"],
+                F_ExPrice = exhibit_data["many"],
+                F_ExSit = exhibit_data["situation"],
+                F_ExInfo = exhibit_data["info"],
+                F_ExDeli = exhibit_data["deli"],
+                F_ExTag = exhibit_data["tag"],
+                F_CategoryID = exhibit_data["category"],
+                F_UserID = exhibit_data["user"],
+                F_ExPhoto = exhibit_data["image_files"][0],
+                F_ExPhotoS = exhibit_data["image_files"][1] if len(exhibit_data["image_files"])>1 else None,
+                F_ExPhotoT = exhibit_data["image_files"][2] if len(exhibit_data["image_files"])>2 else None,
+                F_ExPhotoF = exhibit_data["image_files"][3] if len(exhibit_data["image_files"])>3 else None,
+                F_ExPhotoH = exhibit_data["image_files"][4] if len(exhibit_data["image_files"])>4 else None,
+                F_EXhibitType = 1,
+                F_ExTime = datetime.utcnow()
+            )
+            db.session.add(exhibit)
+            db.session.commit()
+        total_point = 50
+    
+        user_point = T_Point.query.filter_by(F_UserID=current_user.F_UserID).first()
+    
+        if user_point:
+            new_point = user_point.F_PointQuantity + total_point
+        
+            user_point.F_PointQuantity = new_point
+        
+            db.session.commit()
+        return render_template("exhibit_comp.html", user=current_user)
     return render_template("exhibit_comp.html" , user=current_user)
 
 # お試し出品投稿
