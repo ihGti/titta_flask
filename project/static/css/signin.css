@@ -77,12 +77,12 @@
   margin: 0 0 0 38px;
 }
 
-#m-sample div.wrap div#sign-main div#center form label input#name{
+#m-sample div.wrap div#sign-main div#center form label input#sei, #mei{
   width: 60px;
   margin: -5px 0 0 5px;
 }
 
-#m-sample div.wrap div#sign-main div#center form label input#name-kana{
+#m-sample div.wrap div#sign-main div#center form label input#sei-kana, #mei-kana{
   width: 60px;
   margin: -5px 0 0 5px;
 }
@@ -186,3 +186,14 @@
   opacity: 0.5;
 }
 
+
+.hideer{
+  display: none;
+}
+
+.seer{
+  display: block;
+  color: #ff0000;
+  margin: 15px 0 0 20px;
+  text-align: left;
+}
