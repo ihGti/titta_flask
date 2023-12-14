@@ -26,23 +26,51 @@ function exhibisub(){
   var kane = document.getElementById("kane")
   var tag = document.getElementById("tag")
 
-  let inputvalue = [bigimage, title, setumei, situation, deli, genre, kane, tag]
-  var valuename = {"imageinput1":"画像", "title":"タイトル", "setumei":"説明", "situation":"商品状態", "deli":"配送方法", "genre":"ジャンル", "kane":"金額", "tag":"タグ"};
+  let inputvalue = [bigimage, title, setumei, situation, deli, genre,  tag]
+  var valuename = {"imageinput1":"画像", "title":"タイトル", "setumei":"説明", "situation":"商品状態", "deli":"配送方法", "genre":"ジャンル", "kane":"金額"  ,"tag":"タグ"};
 
     for(let i = 0; i < inputvalue.length; i++) { 
         var a = inputvalue[i].name
-        if(inputvalue[i].value == false) {
+        if(inputvalue[i].value == false ) {
             window.alert(valuename[a] + "の項目が未入力です");
             return false
         }};
+
+      if(kane.value != 0 && kane.value == false){
+        window.alert(valuename["kane"] +"を入力してください")
+        return false   
+    }
+
+    if(valid("-*", kane.value) == null){
+      window.alert(valuename["kane"] + "の項目は整数で入力してください")
+      return false
+    }
+
+    
+
+
+
+    if(Math.sign(kane.value) == -1){
+      window.alert(valuename["kane"] + "は正の数で入力してください")
+      return false   
+
+    }
+
 
 
   var message = "この内容で出品しますか？"      //json.key名   
   return getFunc(message);
 
 };
-  
 
+function valid(invali, num){
+
+  var con = new RegExp(invali);
+  var postcode = num;
+  var result = postcode.match(con);
+  return result;
+
+};
 function getFunc(message) {// はい or いいえ ダイアログ
       
 
