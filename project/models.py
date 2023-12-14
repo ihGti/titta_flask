@@ -55,7 +55,7 @@ class T_Exhibit(db.Model):
     # 主キー
     F_ExID = db.Column(db.Integer, primary_key=True)
     # タイトル
-    F_ExTitle = db.Column(db.String(256), unique=True ,nullable=False)
+    F_ExTitle = db.Column(db.String(256) ,nullable=False)
     # 金額
     F_ExPrice = db.Column(db.Integer, nullable=False)
     # タグ
