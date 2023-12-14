@@ -44,6 +44,17 @@ def create_app(config_filename='config.py'):
     # adminページ
     admin.add_view(ModelView(T_User,db.session))
     admin.add_view(ModelView(T_Cartlist,db.session))
+    admin.add_view(ModelView(T_Category,db.session))
+    admin.add_view(ModelView(T_Chat,db.session))
+    admin.add_view(ModelView(T_Contest,db.session))
+    admin.add_view(ModelView(T_Exhibit,db.session))
+    admin.add_view(ModelView(T_Pet,db.session))
+    admin.add_view(ModelView(T_LostPet,db.session))
+    admin.add_view(ModelView(T_FosterPet,db.session))
+    admin.add_view(ModelView(T_Favorite,db.session))
+    admin.add_view(ModelView(T_Paramerter,db.session))
+    admin.add_view(ModelView(T_Point,db.session))
+    admin.add_view(ModelView(T_UserReview,db.session))
 
     from project.views import bp as main_bp
     app.register_blueprint(main_bp)
