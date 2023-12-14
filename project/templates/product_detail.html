@@ -42,7 +42,7 @@
         <p>{{ exhibit.F_ExTitle }}</p>
         <p>{{ exhibit.F_ExhibitID }}</p>
         <div id="flkakaku">
-          <p>￥{{ exhibit.F_ExPrice }} (税込)</p>
+          <p>￥{{ '{:,.0f}'.format(exhibit.F_ExPrice) }} (税込)</p> 
           <a href="#"></a>
           <a href="#"></a>
         </div>

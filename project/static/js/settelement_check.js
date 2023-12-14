@@ -44,7 +44,7 @@ function settelesub(){
       for(let i = 0; i < inputvalue.length; i++) { 
           var a = inputvalue[i].name
           if(inputvalue[i].value == false) {
-              window.alert(valuename[a] + "の項目が未入力です");
+              window.alert( "カード情報が未入力です");
               return false
           }};
 

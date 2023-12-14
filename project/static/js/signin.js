@@ -14,10 +14,10 @@ var address = document.getElementById("address");
 var image = document.getElementById("prof-image");
 
 var emailer = document.getElementById("emailer");
-var emailer_equal = document.getElementById("emailer_equal");
+var reemailer_equal = document.getElementById("reemailer_equal");
 var reemailer = document.getElementById("remailer");
 var Passworder = document.getElementById("Passworder");
-var Passworder_equal = document.getElementById("Passworder_equal");
+var rePassworder_equal = document.getElementById("rePassworder_equal");
 var rePassworder = document.getElementById("rePassworder");
 var seier = document.getElementById("seier");
 var meier = document.getElementById("meier");
@@ -50,13 +50,14 @@ function signinsub() {
     };
 
 
-    for(let i = 0; i <= 2; i++){
-        let forvali = [Password, telphone, yuubin,Passworder, telphoneer,yuubiner]
-        let invali = ["[0-9a-zA-Z]{8,32}", "0[5879]0-[0-9]{4}-[0-9]{4}",'\\d{3}-\\d{4}']
-        let valimsg = ["半角英数字8文字以上32文字以内で入力して下さい","正しい電話番号を入力してください","正しい形式で郵便番号を入力してください"]
+    
+    let forvali = [Password, telphone, yuubin, sei_kana, mei_kana,Passworder, telphoneer,yuubiner,sei_kanaer,mei_kanaer]
+    let invali = ["^[0-9a-zA-Z]{8,32}$", "^0[5879]0-*[0-9]{4}-*[0-9]{4}$",'^\\d{3}-*\\d{4}$', '[ァ-ヴ]+', '[ァ-ヴ]+']
+    let valimsg = ["半角英数字8文字以上32文字以内で入力して下さい","正しい電話番号を入力してください","正しい形式で郵便番号を入力してください","姓カナで入力してください", "名カナで入力してください"]
+    for(let i = 0; i <= 4; i++){
         if(valid(invali[i], forvali[i].value) == null){
-            forvali[i+3].className = "seer"
-            forvali[i+3].textContent = valimsg[i]
+            forvali[i+5].className = "seer"
+            forvali[i+5].textContent = valimsg[i]
             var val = false
         }
         else{
@@ -64,8 +65,8 @@ function signinsub() {
         }
     }
 
-    equal(email,reemail,emailer_equal)
-    equal(Password,rePassword,Passworder_equal)
+    equal(email,reemail,reemailer_equal)
+    equal(Password,rePassword,rePassworder_equal)
     
    
 
