@@ -29,7 +29,7 @@
         <div id="right"><!-- 右  -->
           <h1>決済確認</h1>
           <div id="select">
-            <form id="formr" method="post" onsubmit="return settelesub()">
+            <form id="formr" method="post">
               <table>
                 <tr>
                   <td><label>ポイント</label></td>
@@ -95,7 +95,7 @@
                       <label class="boxl">CVV</label><input type="text" name="cvv" id="cvv">
                     </div>
                     <div>
-                      <input type="submit" name="check" value="確認" id="btn2">
+                      <input type="submit" name="check" value="確認" id="btn2" onclick="return settelesub()">
                     </div>
                   </div>
                   </td>
@@ -127,7 +127,7 @@
               </div>
             </div>
           </div>
-          <input type="submit" form="formr" value="購入を確定する" id="btn" name="comp">
+          <input type="submit" form="formr" value="購入を確定する" id="btn" name="comp" onclick="return setteledialog()">
         </div>
         </form>
 

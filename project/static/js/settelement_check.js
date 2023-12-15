@@ -48,13 +48,15 @@ function settelesub(){
               return false
           }};
 
-  
+        }
+        
+function setteledialog(){
+     
   
     var message = "この内容で出品しますか？"      //json.key名   
     return getFunc(message);
   
   };
-    
   
   function getFunc(message) {// はい or いいえ ダイアログ
         
