@@ -50,10 +50,10 @@ function signinsub() {
     };
 
 
-    
+    //ここ関数化したほうがいいかもね
     let forvali = [Password, telphone, yuubin, sei_kana, mei_kana,Passworder, telphoneer,yuubiner,sei_kanaer,mei_kanaer]
     let invali = ["^[0-9a-zA-Z]{8,32}$", "^0[5879]0-*[0-9]{4}-*[0-9]{4}$",'^\\d{3}-*\\d{4}$', '[ァ-ヴ]+', '[ァ-ヴ]+']
-    let valimsg = ["半角英数字8文字以上32文字以内で入力して下さい","正しい電話番号を入力してください","正しい形式で郵便番号を入力してください","姓カナで入力してください", "名カナで入力してください"]
+    let valimsg = ["半角英数字8文字以上32文字以内で入力して下さい","存在する電話番号を入力してください例08022346222","正しい形式で郵便番号を入力してください","姓カナで入力してください", "名カナで入力してください"]
     for(let i = 0; i <= 4; i++){
         if(valid(invali[i], forvali[i].value) == null){
             forvali[i+5].className = "seer"
@@ -64,7 +64,7 @@ function signinsub() {
             forvali[i+3].className = "hideer"
         }
     }
-
+    //equea(比較１, 比較2, 変更を与えるID)
     equal(email,reemail,reemailer_equal)
     equal(Password,rePassword,rePassworder_equal)
     
@@ -81,7 +81,7 @@ function signinsub() {
                    
 };
 
-function valid(invali, num){
+function valid(invali, num){ //正規表現でバリデーション
 
     var con = new RegExp(invali);
     var postcode = num;
@@ -105,7 +105,7 @@ function getFunc(message) {// はい or いいえ ダイアログ
     };
 };           
 
-function equal(content,content2,msg){
+function equal(content,content2,msg){ //二つの入力値が一致するかの比較
 
     if(content.value != content2.value){
         msg.textContent =valuename[content.name] + "が一致しません"
