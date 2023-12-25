@@ -726,6 +726,11 @@ def contest_detail():
 def apply():
     return render_template("apply.html",user=current_user)
 
+# コンテストリスト
+@bp.route("/contest_list")
+def contest_list():
+    return render_template("contest_list.html",user=current_user)
+
 # 譲渡会
 @bp.route("/assignment")
 def assignment():
