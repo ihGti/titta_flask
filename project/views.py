@@ -797,6 +797,11 @@ def apply_upload(contest_id):
         db.session.commit()
     return redirect('/contest')
 
+# コンテストリスト
+@bp.route("/contest_list")
+def contest_list():
+    return render_template("contest_list.html",user=current_user)
+
 # 譲渡会
 @bp.route("/assignment")
 def assignment():
