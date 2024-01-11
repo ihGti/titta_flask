@@ -80,6 +80,8 @@ class T_Exhibit(db.Model):
     F_EXhibitType = db.Column(db.Integer, nullable=False)
     # 出品時間
     F_ExTime = db.Column(db.DateTime, default=datetime.utcnow)
+    # 商品状態
+    F_Sold = db.Column(db.Boolean , default=False)
     # 外部キー
     F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
     # 外部キー
@@ -276,7 +278,22 @@ class T_UserReview(db.Model):
     review = db.relationship('T_User', foreign_keys=[F_ReviewID], backref='UserReview')
     
     reviewfollow = db.relationship('T_User', foreign_keys=[F_ReviewFollowID])
-
+    
+# コンテスト開催
+class T_ContestMaster(db.Model):
+    # 主キー
+    F_ContestMasterID = db.Column(db.Integer, primary_key=True)
+    # タイトル
+    F_ContestMasterTitle = db.Column(db.String(256), nullable=False, unique=True)
+    # 画像
+    F_ContestMasterImage = db.Column(db.String(256) , nullable=False)
+    # 内容
+    F_ContestMasterContent = db.Column(db.String(256), nullable=False)
+    # 募集期間
+    F_ContestMasterTime = db.Column(db.Date , nullable=False)
+    
+    contest = db.relationship('T_Contest',backref='contest',lazy=True)
+    
 # コンテスト
 class T_Contest(db.Model):
     # 主キー
@@ -289,3 +306,6 @@ class T_Contest(db.Model):
     F_ContestComment = db.Column(db.String(256), nullable=False)
     # 外部キー
     F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    # 外部キー
+    F_ContestMasterID = db.Column(db.Integer, db.ForeignKey('t__contest_master.F_ContestMasterID'), nullable=False)
+    

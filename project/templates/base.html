@@ -44,14 +44,14 @@
                 <!-- mailbox.htmlへ遷移 -->
                 <li><a href="/mailbox"><input type="submit" value="&#xf0e0;" class="button"></a></li>
                 <!-- favorite.htmlへ遷移 -->
-                <li><a href="/favorite"><input type="submit" value="&#xf004;" class="button"></a></li>
+                <li><a href="/favorites"><input type="submit" value="&#xf004;" class="button"></a></li>
                 <!-- login.htmlへ遷移 -->
                 <li>
 
                     {% if user.F_ProfileImage %}
-                      <a href="/myprof"><img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;"></a>
+                    <a href="/myprof"><img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;"></a>
                     {% else %}
-                      <a href="/myprof"><input type="submit" value="&#xf007;" class="button"></a>
+                    <a href="/myprof"><input type="submit" value="&#xf007;" class="button"></a>
                     {% endif %}
                 </li>
               </ul>

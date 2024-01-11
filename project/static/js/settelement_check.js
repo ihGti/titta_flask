@@ -57,18 +57,18 @@ function setteledialog(){
 
   };
   
-  function getFunc(message) {// はい or いいえ ダイアログ
+//   function getFunc(message) {// はい or いいえ ダイアログ
         
   
-      if(window.confirm(message)){
-            // 「はい」を選択した場合の処理
-            window.alert("この内容で登録します");
-            return true //このまま画面遷移
-      } else {
-            // 「いいえ」を選択した場合の処理
-            window.alert('キャンセルされました'); // 警告ダイアログを表示
-                return false; // 送信を中止
+//       if(window.confirm(message)){
+//             // 「はい」を選択した場合の処理
+//             window.alert("この内容で登録します");
+//             return true //このまま画面遷移
+//       } else {
+//             // 「いいえ」を選択した場合の処理
+//             window.alert('キャンセルされました'); // 警告ダイアログを表示
+//                 return false; // 送信を中止
         
-      };
-  };     
+//       };
+//   };     
 

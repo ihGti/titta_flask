@@ -69,8 +69,12 @@ div#shouhinhukusuu div:nth-child(4) {
   height: 100px;
   background-color: rgb(227, 144, 162);
   margin: 50px 0 0 0;
-  background-image: url(../images/hoshitu.jpg);
+  /* background-image: url(../images/hoshitu.jpg); */
   background-size: contain;
+}
+
+div#shouhinhukusuu img{
+  max-width: 100%;
 }
 
 div#shouhinfl div#shouhinfl2 {
