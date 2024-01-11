@@ -1,7 +1,4 @@
-.wrap{
-  border-left: 1px solid;
-  border-right: 1px solid;
-}
+
 
 #atama img{
   padding: 30px;
@@ -46,7 +43,7 @@
   flex-wrap: wrap;
   padding: 30px;
   margin: 50px;
-  border: 1px solid;
+  border: 1px solid #ddd;
   border-radius: 50px;
 }
 .item{
@@ -54,6 +51,7 @@ padding: 20px 22px;
 }
 .img{
   width: 300px;
+  height: 220px; /* kari  */
 }
 .text{
   margin: 10px 0 0 0;
