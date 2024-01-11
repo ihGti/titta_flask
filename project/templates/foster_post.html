@@ -9,6 +9,11 @@
     <link rel="stylesheet" type="text/css" href="static/css/my_prof_left.css">
 {% endblock %}
 
+{% block js %}
+<script type="text/javascript" src="./static/js/foster_post.js"></script>
+
+{% endblock %}
+
 {% block content %}
 
     <main id="m-sample">
@@ -25,27 +30,30 @@
                 円滑な取引の為、1募集に対して掲載するペットは1匹にしてください。<br>
                 複数匹まとめて譲渡希望の場合は、譲渡条件に入力してください。
               </p>
+              <p id="errtitle"></p>
             </div>
 
 
-            <form action="/foster_post_page" method="post" enctype="multipart/form-data">
+            <form action="/foster_post_page" method="post" enctype="multipart/form-data" onsubmit="return fostersub()">
 
               <table>
                 <tbody>
                   <tr id="keisai">
                     <!-- t_pet -->
-                    <td id="keisaiR">掲載期日<p class="hissu">必須</p></td>
+                    <td id="keisaiR">掲載期日<p class="hissu">必須</p> <p id="keisaier"></p></td>
                     <td id="keisaiW">
-                      <input type="date" class="textbox-001" name="keisaiW" placeholder=""/>
+                      <input type="date" class="textbox-001" id="on1" name="keisaiW" placeholder=""/>
                       <p>（入力例:2023/05/26 の場合  →  20230526）</p>
                     </td>
                   </tr>
                   <tr id="kinds">
                     <!-- t_pet -->
-                    <td id="kindsR">ペット種別<p class="hissu">必須</p></td>
+                    <td id="kindsR">ペット種別<p class="hissu">必須</p>
+                      <p id="kindser"></p>
+                    </td>
                     <td id="kindsW">
                       <label class="selectbox-002">
-                        <select name="kindsW">
+                        <select name="kindsW" id="on2">
                             <option value="">選択してください</option>
                             {% for categorys in category %}
                             <option value="{{categorys.F_CategoryID}}">{{categorys.F_CategoryName}}</option>
@@ -56,14 +64,14 @@
                   </tr>
                   <tr id="post">
                     <!-- t_lost -->
-                    <td id="postR">投稿タイトル</td>
+                    <td id="postR"> <p>投稿タイトル</p><p id="poster"></p></td>
                     <td id="postW">
-                      <input type="text" name="postW" class="textbox-002" placeholder=""/>
+                      <input type="text" name="postW" id="on3" class="textbox-002" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="location">
                     <!-- t_lost -->
-                    <td id="locationR">ペット所在地<p class="hissu">必須</p></td>
+                    <td id="locationR">ペット所在地<p class="hissu">必須</p> <p id="locationer"></p></td>
                     <td id="locationW">
                       <fieldset class="radio-001">
                         <label>
@@ -86,7 +94,7 @@
                   </tr>
                   <tr id="gen">
                     <!-- t_pet -->
-                    <td id="genR">性別<p class="hissu">必須</p></td>
+                    <td id="genR">性別<p class="hissu">必須</p> <p id="gener"></p></td>
                     <td id="genW">
                       <fieldset class="radio-002">
                         <!-- kari -->
@@ -107,21 +115,21 @@
                   </tr>
                   <tr id="age">
                     <!-- t_pet -->
-                    <td id="ageR">年齢<p class="hissu">必須</p></td>
+                    <td id="ageR">年齢<p class="hissu">必須</p> <p id="ageer"></p></td>
                     <td id="ageW">
-                      <input type="text" class="textbox-001" name="ageW" placeholder=""/>
+                      <input type="text" class="textbox-001" id="on4" name="ageW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="size">
                     <!-- t_pet -->
-                    <td id="sizeR">大きさ<p class="hissu">必須</p></td>
+                    <td id="sizeR">大きさ<p class="hissu">必須</p> <p id="sizeer"></p></td>
                     <td id="sizeW">
-                      <input type="text" class="textbox-001" name="sizeW" placeholder=""/>
+                      <input type="text" class="textbox-001" id="on5" name="sizeW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="vaccine">
                     <!-- t_pet -->
-                    <td id="vaccineR">ワクチン接種<p class="hissu">必須</p></td>
+                    <td id="vaccineR">ワクチン接種<p class="hissu">必須</p> <p id="vaccinner"></p></td>
                     <td id="vaccineW">
                       <fieldset class="radio-003">
                         <label>
@@ -139,7 +147,7 @@
                   </tr>
                   <tr id="cast">
                     <!-- t_pet -->
-                    <td id="castR">去勢・避妊<p class="hissu">必須</p></td>
+                    <td id="castR">去勢・避妊<p class="hissu">必須</p> <p id="caster"></p></td>
                     <td id="castW">
                       <fieldset class="radio-004">
                         <label>
@@ -187,23 +195,23 @@
                   </tr>
                   <tr id="background">
                     <!-- t_pet -->
-                    <td id="backgroundR">募集の経緯<p class="hissu">必須</p></td>
-                    <td class="area"><textarea name="backgroundW"></textarea></td>
+                    <td id="backgroundR">募集の経緯<p class="hissu">必須</p> <p id="backgrounder"></p></td>
+                    <td class="area"><textarea id="on6" name="backgroundW"></textarea></td>
                   </tr>
                   <tr id="personality">
                     <!-- t_pet -->
-                    <td id="personalityR">性格・特徴<p class="hissu">必須</p></td>
-                    <td class="area"><textarea name="personalityW"></textarea></td>
+                    <td id="personalityR">性格・特徴<p class="hissu">必須</p> <p id="personalityer"></p></td>
+                    <td class="area"><textarea id="on7" name="personalityW"></textarea></td>
                   </tr>
                   <tr id="health">
                     <!-- t_pet -->
-                    <td id="healthR">健康状態<p class="hissu">必須</p></td>
-                    <td class="area"><textarea name="healthW"></textarea></td>
+                    <td id="healthR">健康状態<p class="hissu">必須</p> <p id="healther"></p></td>
+                    <td class="area"><textarea id="on8" name="healthW"></textarea></td>
                   </tr>
                   <tr id="place">
                     <!-- t_lost -->
-                    <td id="placeR">引き渡し場所<p class="hissu">必須</p></td>
-                    <td class="area"><textarea name="placeW"></textarea></td>
+                    <td id="placeR">引き渡し場所<p class="hissu">必須</p> <p id="placeer"></p></td>
+                    <td class="area"><textarea id="on9" name="placeW"></textarea></td>
                   </tr>
                   <tr id="other">
                     <!-- t_pet -->
