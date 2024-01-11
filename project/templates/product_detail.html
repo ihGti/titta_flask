@@ -62,7 +62,9 @@
           <a href="#"></a>
         </div>
 
-        {% if exhibit.F_EXhibitType == 1 %}
+        {% if exhibit.F_Sold == true %}
+        <a href="#" id="ka-to">SoldOut</a>
+        {% elif exhibit.F_EXhibitType == 1 %}
         <a href="/settelement_check/{{exhibit.F_ExID}}" id="ka-to">購入する</a>
         {% elif exhibit.F_EXhibitType == 2 %}
         <input type="button" value="欲しい!!">

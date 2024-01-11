@@ -64,7 +64,7 @@ def index():
         
         # 検索した商品の数を取得
         num_product = len(product)
-        return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , num_product=num_product)
+        return render_template('product.html', product=product , user=current_user , word=word , exword=exword , category=category , num_product=num_product)
     # カテゴリーを全件取得
     category=T_Category.query.filter_by(F_CategoryCode='c')
     return render_template("index.html" , username=current_user.F_UserName , user=current_user, category=category)
@@ -798,9 +798,11 @@ def apply_upload(contest_id):
     return redirect('/contest')
 
 # コンテストリスト
-@bp.route("/contest_list")
-def contest_list():
-    return render_template("contest_list.html",user=current_user)
+@bp.route("/contest_list/<int:contest_id>")
+def contest_list(contest_id):
+    contest_master = T_ContestMaster.query.get(contest_id)
+    contest_list = T_Contest.query.get(contest_id)
+    return render_template("contest_list.html",user=current_user , contest_list=contest_list , contest_master=contest_master)
 
 # 譲渡会
 @bp.route("/assignment")
@@ -999,10 +1001,6 @@ def notice():
 def setting():
     return render_template("setting.html" , user=current_user)
 
-# 着せ替え
-@bp.route("/dressup")
-def dressup():
-    return render_template("dressup.html")
 
 # Q&A
 @bp.route("/qa")
@@ -1014,11 +1012,4 @@ def qa():
 def inquiry():
     return render_template("inquiry.html" , user=current_user)
 
-
-
-
-# テーブルメンテナンス
-@bp.route("/maintenance")
-def maintenance():
-    return render_template("maintenance.html", user=current_user)
 

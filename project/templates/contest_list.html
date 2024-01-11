@@ -15,16 +15,16 @@
       <div class="wrap">
 
         <div id="atama">
-          <img src="./static/images/con1.png">
+          <img src="/static/master/{{contest_master.F_ContestMasterImage}}">
         </div>
 
         <div id="title">
           <div id="mozi">
-            <p>タイトル</p>
+            <p></p>
           </div>
           <div id="kigen">
             <p id="a">締切</p>
-            <p id="b">!!年##月$$日(曜)</p>
+            <p id="b">{{contest_master.F_ContestMasterTime}}</p>
           </div>
         </div>
 
@@ -32,10 +32,10 @@
         <div id="detail">
           
           <div class="item">
-            <img src="./static/images/kaeru.jpg" alt="" class="img">
+            <img src="/static/cotest/{{contest_list.F_ContestImage}}" alt="" class="img">
             <div class="text">
-              <h3>タイトル</h3>
-              <p>テキストテキストテキストテキストテキストテキストテキスト</p>
+              <h3>{{contest_list.F_ContestTitle}}</h3>
+              <p>{{contest_list.F_ContestContent}}</p>
               <p class="name">NAME</p>
             </div>
           </div>
