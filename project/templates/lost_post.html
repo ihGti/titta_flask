@@ -9,6 +9,11 @@
     <link rel="stylesheet" type="text/css" href="static/css/my_prof_left.css">
 {% endblock %}
 
+{% block js %}
+<script src="./static/js/lost_post.js"></script>
+
+{% endblock%}
+
 {% block content %}
 
     <main id="m-sample">
@@ -21,27 +26,28 @@
 
             <div id="detail">
               <h2>里親募集ペットを登録</h2>
+              <p id="errtitle"></p>
             </div>
 
 
 
-            <form method="post" action="/lost_post_page" enctype="multipart/form-data">
+            <form method="post" action="/lost_post_page" enctype="multipart/form-data" onsubmit="return lostsub()">
               <table>
                 <tbody>
                   <tr id="keisai">
                     <!-- t_pet -->
-                    <td id="keisaiR">掲載期日<p class="hissu">必須</p></td>
+                    <td id="keisaiR">掲載期日<p class="hissu">必須</p> <p id="keisaier"></p> </td>
                     <td id="keisaiW">
-                      <input type="date" class="textbox-001" name="keisaiW" placeholder=""/>
+                      <input type="date" class="textbox-001" name="keisaiW" id="on1" placeholder=""/>
                       <p>（入力例:2023/05/26 の場合  →  20230526）</p>
                     </td>
                   </tr>
                   <tr id="kinds">
                     <!-- t_pet -->
-                    <td id="kindsR">ペット種別<p class="hissu">必須</p></td>
+                    <td id="kindsR">ペット種別<p class="hissu">必須</p> <p id="kindser"></p> </td>
                     <td id="kindsW">
                       <label class="selectbox-002">
-                        <select name="kindsW">
+                        <select name="kindsW" id="on2">
                             <option value="">選択してください</option>
                           {% for categories in category %}
                             <option value="{{categories.F_CategoryID}}">{{ categories.F_CategoryName }}</option>
@@ -59,7 +65,7 @@
                   </tr>
                   <tr id="location">
                     <!-- t_lostpet -->
-                    <td id="locationR">ペット所在地<p class="hissu">必須</p></td>
+                    <td id="locationR">ペット所在地<p class="hissu">必須</p> <p id="locationer"></p> </td>
                     <td id="locationW">
                       <select name="radio-001">
                         <option value="北海道">北海道</option>
@@ -113,7 +119,7 @@
                   </tr>
                   <tr id="gen">
                     <!-- t_pet -->
-                    <td id="genR">性別<p class="hissu">必須</p></td>
+                    <td id="genR">性別<p class="hissu">必須</p> <p id="gener"></p> </td>
                     <td id="genW">
                       <fieldset class="radio-002">
                         <label>
@@ -133,36 +139,36 @@
                   </tr>
                   <tr id="age">
                     <!-- t_pet -->
-                    <td id="ageR">年齢<p class="hissu">必須</p></td>
+                    <td id="ageR">年齢<p class="hissu">必須</p> <p id="ageer"></p> </td>
                     <td id="ageW">
-                      <input type="text" class="textbox-001" name="ageW" placeholder=""/>
+                      <input type="text" class="textbox-001" name="ageW" id="on3" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="size">
                     <!-- t_pet -->
-                    <td id="sizeR">大きさ<p class="hissu">必須</p></td>
+                    <td id="sizeR">大きさ<p class="hissu">必須</p> <p id="sizeer"></p> </td>
                     <td id="sizeW">
-                      <input type="text" class="textbox-001" name="sizeW" placeholder=""/>
+                      <input type="text" class="textbox-001" name="sizeW" id="on4" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="hogo">
                     <!-- t_lostpet -->
-                    <td id="hogoR">保護日時<p class="hissu">必須</p></td>
+                    <td id="hogoR">保護日時<p class="hissu">必須</p> <p id="hogoer"></p>     </td>
                     <td id="hogoW">
-                      <input type="date" class="textbox-001" name="hogoW" placeholder=""/>
+                      <input type="date" class="textbox-001" id="on5" name="hogoW" placeholder=""/>
                       <p>（入力例:2023/05/26 の場合  →  20230526）</p>
                     </td>
                   </tr>
                   <tr id="hogoplace">
                     <!-- t_lostpet -->
-                    <td id="hogoplaceR">保護場所<p class="hissu">必須</p></td>
+                    <td id="hogoplaceR">保護場所<p class="hissu">必須</p><p id="hogoplaceer"></p> </td>
                     <td id="hogoplaceW">
-                      <input type="text" class="textbox-002" name="hogoplaceW" placeholder=""/>
+                      <input type="text" class="textbox-002" id="on6" name="hogoplaceW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="injury">
                     <!-- t_lostpet -->
-                    <td id="injuryR">怪我の有無<p class="hissu">必須</p></td>
+                    <td id="injuryR">怪我の有無<p class="hissu">必須</p><p id="injuryer"></p></td>
                     <td id="injuryW">
                       <fieldset class="radio-003">
                         <label>
@@ -178,9 +184,9 @@
                   </tr>
                   <tr id="color">
                     <!-- t_pet -->
-                    <td id="colorR">体色<p class="hissu">必須</p></td>
+                    <td id="colorR">体色<p class="hissu">必須</p><p id="colorer"></p></td>
                     <td id="colorW">
-                      <input type="text" class="textbox-002" name="colorW" placeholder=""/>
+                      <input type="text" class="textbox-002" id="on7" name="colorW" placeholder=""/>
                     </td>
                   </tr>
                   <tr id="institution">
@@ -202,23 +208,23 @@
 
                   <tr id="background">
                     <!-- t_pet -->
-                      <td id="backgroundR">募集の経緯<p class="hissu">必須</p></td>
-                      <td class="area"><textarea name="backgroundW"></textarea></td>
+                      <td id="backgroundR">募集の経緯<p class="hissu">必須</p><p id="backgrounder"></p></td>
+                      <td class="area"><textarea name="backgroundW" id="on8"></textarea></td>
                     </tr>
                     <tr id="personality">
                       <!-- t_pet -->
-                      <td id="personalityR">性格・特徴<p class="hissu">必須</p></td>
-                      <td class="area"><textarea name="personalityW"></textarea></td>
+                      <td id="personalityR">性格・特徴<p class="hissu">必須</p><p id="personalutyer"></p></td>
+                      <td class="area"><textarea name="personalityW" id="on9"></textarea></td>
                     </tr>
                     <tr id="health">
                       <!-- t_pet -->
-                      <td id="healthR">健康状態<p class="hissu">必須</p></td>
-                      <td class="area"><textarea name="healthW"></textarea></td>
+                      <td id="healthR">健康状態<p class="hissu">必須</p><p id="healther"></p></td>
+                      <td class="area"><textarea name="healthW" id="on10"></textarea></td>
                     </tr>
                     <tr id="place">
                       <!-- t_lostpet -->
-                      <td id="placeR">引き渡し場所<p class="hissu">必須</p></td>
-                      <td class="area"><textarea name="placeW"></textarea></td>
+                      <td id="placeR">引き渡し場所<p class="hissu">必須</p><p id="placer"></p></td>
+                      <td class="area"><textarea name="placeW" id="on11"></textarea></td>
                     </tr>
                     <tr id="other">
                       <!-- t_pet -->
