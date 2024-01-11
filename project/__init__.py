@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask , request , current_app
 # flask-sqlalchemyの取り込み
 from flask_sqlalchemy import SQLAlchemy
 # flask-migrateの取り込み
@@ -10,6 +10,8 @@ from flask_admin import Admin
 
 from flask_admin.contrib.sqla import ModelView
 
+
+import os
 # sqlalchemyの定義
 db = SQLAlchemy()
 # migrateの定義
@@ -18,6 +20,8 @@ migrate = Migrate()
 login_manager = LoginManager()
 # adminの定義
 admin = Admin()
+
+
 
 
 # flaskのアプリケーション登録
@@ -36,8 +40,10 @@ def create_app(config_filename='config.py'):
     app.config['UPLOAD_FOLDER_LOSTPET'] = 'project/static/lost_pet'
     app.config['UPLOAD_FOLDER_FOSTERPET'] = 'project/static/foster_pet'
     app.config['UPLOAD_FOLDER_CHAT'] = 'project/static/chat_image'
+    app.config['UPLOAD_FOLDER_CONTEST_MASTER'] = 'project/static/master'
+    app.config['UPLOAD_FOLDER_CONTEST'] = 'project/static/contest'
 
-    from project.models import T_User , T_Cartlist , T_Category , T_Chat , T_Contest , T_Exhibit , T_Favorite , T_FosterPet , T_LostPet , T_Paramerter , T_Pet , T_Point , T_UserReview
+    from project.models import T_User , T_Cartlist , T_Category , T_Chat , T_Contest , T_Exhibit , T_Favorite , T_FosterPet , T_LostPet , T_Paramerter , T_Pet , T_Point , T_UserReview , T_ContestMaster
     @login_manager.user_loader
     def load_user(user_id):
         return T_User.query.get(int(user_id))
@@ -55,7 +61,7 @@ def create_app(config_filename='config.py'):
     admin.add_view(ModelView(T_Paramerter,db.session))
     admin.add_view(ModelView(T_Point,db.session))
     admin.add_view(ModelView(T_UserReview,db.session))
-
+    admin.add_view(ModelView(T_ContestMaster,db.session))
     from project.views import bp as main_bp
     app.register_blueprint(main_bp)
 

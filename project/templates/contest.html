@@ -15,12 +15,12 @@
       <div class="wrap">
 
         <div class="slide">
-          <img src="/static/images/con1.png" alt="メインビジュアル01">
-          <img src="/static/images/con1-2.png" alt="メインビジュアル02">
-          <img src="/static/images/con1-2-3.png" alt="メインビジュアル03">
+          {% for sliders in slider %}
+            <img src="/static/master/{{sliders.F_ContestMasterImage}}" alt="メインビジュアル">
+          {% endfor %}
         </div>
 
-            {% set  contest = 63 %}
+
             {% set prize = 8 %}
             {% set join = 45 %}
 
@@ -28,7 +28,7 @@
         <div id="num">
           <div class="num">
             <p>コンテスト数</p>
-            <h2>{{ contest }}</h2>
+            <h2>{{ contestpost }}</h2>
           </div>
           <div class="num">
             <p>参加者数</p>
@@ -41,11 +41,13 @@
         </div>
 
         <div id="item">
-          {% for i in range(8)%}
-          <a href="#" class="aitem"><div class="item">
-            <figure><img src="{{ i[0]}}" alt="item"></figure>
-            <h3>{{ i[1] }}</h3>
-            <p>{{ i[2] }}</p>
+          {% for contests in contest %}
+          <a href="/contest_detail/{{contests.F_ContestMasterID}}" class="aitem"><div class="item">
+            <figure>
+              <img src="{{ url_for('static', filename='master/' + contests.F_ContestMasterImage)}}" alt="big" id="bigimg">
+            </figure>
+            <h3>{{ contests.F_ContestMasterTitle }}</h3>
+            <p>{{ contests.F_ContestMasterContent }}</p>
           </div></a>
             {% endfor %}
           </div>

@@ -23,7 +23,7 @@
 
     <div id="pankuzu">
       <a href="#">くず</a>>
-      <a href="#">くず</a>>
+      <a href="/top">top</a>>
       <a href="/product">商品一覧</a>
     </div>
 
@@ -33,10 +33,23 @@
           <img src="/static/toredo/{{exhibit.F_ExPhoto}}" alt="">
         </div>
         <div id="shouhinhukusuu">
-          <div class="shouhinbetween"></div>
-          <div class="shouhinbetween"></div>
-          <div class="shouhinbetween"></div>
-          <div class="shouhinbetween"></div>
+        {% if exhibit.F_ExPhotoS %}
+          <div class="shouhinbetween">
+            <img src="/static/toredo/{{exhibit.F_ExPhotoS}}" alt="">
+          </div>
+        {% elif exhibit.F_ExPhotoT %}
+          <div class="shouhinbetween">
+            <img src="/static/toredo/{{exhibit.F_ExPhotoT}}" alt="">
+          </div>
+        {% elif exhibit.F_ExPhotoF %}
+          <div class="shouhinbetween">
+            <img src="/static/toredo/{{exhibit.F_ExPhotoF}}" alt="">
+          </div>
+        {% elif exhibit.F_ExPhotoH %}
+          <div class="shouhinbetween">
+            <img src="/static/toredo/{{exhibit.F_ExPhotoH}}" alt="">
+          </div>
+        {% endif %}
         </div>
       </div>
 
@@ -49,7 +62,11 @@
           <a href="#"></a>
         </div>
 
+        {% if exhibit.F_EXhibitType == 1 %}
         <a href="/settelement_check/{{exhibit.F_ExID}}" id="ka-to">購入する</a>
+        {% elif exhibit.F_EXhibitType == 2 %}
+        <input type="button" value="欲しい!!">
+        {%endif%}
 
         <div id="moxtutomiru">
           <h1 id="shouhinnsetumei1">商品詳細</h1>
