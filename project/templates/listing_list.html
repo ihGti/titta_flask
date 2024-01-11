@@ -52,13 +52,13 @@
               <div class="othersbox">
                 <div class="userbox"><!--取引したユーザー情報がここにでる(移動先他者プロフ)-->
                   <div class="top">
-                    <a href="/">
+                    <a href="/userprof/{{user.F_UserID}}">
                       <figure>
                         <img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image"></figure>ユーザーアイコン
                     </a>
                   </div>
       
-                  <div class="mid"><a href="/">{{ user.F_UserName}}<p id="name"></p></a></div><!-- ユーザーネーム -->
+                  <div class="mid"><a href="/userprof/{{user.F_UserID}}">{{ user.F_UserName}}<p id="name"></p></a></div><!-- ユーザーネーム -->
 
                 </div>
               </div>

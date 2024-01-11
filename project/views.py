@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 # db接続に使う(更新・追加・削除)
 from project import db , create_app
 # models.pyで定義したテーブル
-from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet , T_FosterPet , T_LostPet , T_Chat , T_UserReview , T_Contest
+from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet , T_FosterPet , T_LostPet , T_Chat , T_UserReview , T_Contest , T_ContestMaster
 
 import os
 # 時間の制約
@@ -64,7 +64,7 @@ def index():
         
         # 検索した商品の数を取得
         num_product = len(product)
-        return render_template('product.html', product=product , user=current_user , category=category , num_product=num_product)
+        return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , num_product=num_product)
     # カテゴリーを全件取得
     category=T_Category.query.filter_by(F_CategoryCode='c')
     return render_template("index.html" , username=current_user.F_UserName , user=current_user, category=category)
@@ -497,29 +497,23 @@ def settelement_comp(exhibit_id):
                 return render_template("settelement_check.html", user=current_user,points=points , user_point=user_point , exhibit=exhibit)
             if points and user_point.F_PointQuantity > 0:
                 # ユーザーがポイントを持っており、ポイントを使う場合の処理
-                    cart_price =exhibit.F_ExPrice - points
-        
-                    user_point.F_PointQuantity -= points
+                cart_price =exhibit.F_ExPrice - points
 
-            else:
+                user_point.F_PointQuantity -= points
+                session["cart_price"] = cart_price
+
+            elif points==0 :
                 cart_price = exhibit.F_ExPrice
             return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price)
         # 購入完了画面に進む
         elif 'comp' in request.form:
             exhibit = T_Exhibit.query.get(exhibit_id)
             # ポイント取得
-            points = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
+            cart_price = session.get("cart_price")
             user_point = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
-            if user_point.F_PointQuantity < points:
-                return render_template("settelement_check.html", user=current_user,points=points , user_point=user_point , exhibit=exhibit)
-            if points and user_point.F_PointQuantity > 0:
-                # ユーザーがポイントを持っており、ポイントを使う場合の処理
-                    cart_price =exhibit.F_ExPrice - points
-                    user_point.F_PointQuantity -= points
-
-            else:
-                cart_price = exhibit.F_ExPrice
-            cart = T_Cartlist(F_UserID = current_user.F_UserID,
+            
+            if cart_price:
+                cart = T_Cartlist(F_UserID = current_user.F_UserID,
                                 F_ExID = exhibit_id,
                                 F_CartPrice = cart_price)
             
@@ -532,9 +526,11 @@ def settelement_comp(exhibit_id):
                 
             user_point.F_CartPrice = total_cart_price
             
+            exhibit.F_Sold = True
+            
             db.session.commit()
             
-            return render_template("settlement_comp.html",exhibit=exhibit, user=current_user ,points=points, cart_price=cart_price)
+            return render_template("settlement_comp.html",exhibit=exhibit, user=current_user , cart_price=cart_price)
 
     return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point )
 
@@ -547,9 +543,24 @@ def foster_board():
     return render_template("foster_board.html" , user=current_user)
 
 # 迷子掲示板
-@bp.route("/lost_petboard")
+@bp.route("/lost_petboard" , methods=['GET','POST'])
 @login_required
 def lost_petboard():
+    if request.method == 'POST':
+        location = request.form.get('hakkenti')
+        lostarea = request.form.get('lostarea')
+        lost_date = request.form.get('foundday')
+        found = datetime.strptime(lost_date,'%Y-%m-%d').date()
+        gender = request.form.get('gender')
+        kinds = request.form.get('kinds')
+        freeword = request.form.get('freeword')
+        
+        query = T_Pet.query.all()
+        query2 = T_LostPet.query.filter_by(T_LostPet.F_PetID == T_Pet.F_PetID)
+        
+        if location:
+            query = query2.filter(T_Pet.F_Location == location)
+            
     return render_template("lost_petboard.html" , user=current_user)
 
 # 里親投稿
@@ -709,22 +720,82 @@ def lost_detail():
 # ペット一覧
 @bp.route("/reg_pet")
 def pet_list():
+    
     return render_template("reg_pet.html" , user=current_user)
+
+# コンテストマスター
+@bp.route("/master_upload", methods=['GET','POST'])
+def master_upload():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+        c_date = datetime.strptime(request.form.get('time'),'%Y-%m-%d').date()
+        image = request.files['image']
+        
+        if image:
+            file = secure_filename(image.filename)
+            image.save(os.path.join(current_app.config['UPLOAD_FOLDER_CONTEST_MASTER'],file))
+        
+        master = T_ContestMaster(
+            F_ContestMasterTitle = title,
+            F_ContestMasterContent = content,
+            F_ContestMasterImage = file,
+            F_ContestMasterTime = c_date
+        )
+        
+        db.session.add(master)
+        db.session.commit()
+        
+    return 'Contest Successfully!'
+
+# コンテストマスター表示
+@bp.route('/master')
+def master():
+    return render_template('contest_master.html')
 
 # コンテスト
 @bp.route("/contest")
 def contest():
-    return render_template("contest.html",user=current_user)
+    slider = T_ContestMaster.query.all()
+    contest = T_ContestMaster.query.all()
+    contestpost = len(contest)
+    return render_template("contest.html",user=current_user , contest=contest , contestpost=contestpost, slider=slider)
 
 # コンテスト詳細
-@bp.route("/contest_detail")
-def contest_detail():
-    return render_template("contest_detail.html",user=current_user)
+@bp.route("/contest_detail/<int:contest_id>")
+def contest_detail(contest_id):
+    contest_detail = T_ContestMaster.query.get(contest_id)
+    return render_template("contest_detail.html",user=current_user, contest_detail=contest_detail)
 
 # コンテスト応募
-@bp.route("/apply")
-def apply():
-    return render_template("apply.html",user=current_user)
+@bp.route("/apply/<int:contest_id>")
+def apply(contest_id):
+    apply = T_ContestMaster.query.get(contest_id)
+    return render_template("apply.html",user=current_user , apply=apply)
+
+# コンテスト応募投稿
+@bp.route('/apply_upload/<int:contest_id>',methods=['GET','POST'])
+def apply_upload(contest_id):
+    if request.method == 'POST':
+        title = request.form.get('title')
+        comment = request.form.get('comment')
+        apply_image = request.files['prof-image']
+        contest_master = T_ContestMaster.query.get(contest_id)
+        if apply_image:
+            apply_file = secure_filename(apply_image.filename)
+            apply_image.save(os.path.join(current_app.config['UPLOAD_FOLDER_CONTEST'],apply_file))
+            
+        contest = T_Contest(
+            F_ContestTitle = title,
+            F_ContestComment = comment,
+            F_ContestImage = apply_file,
+            F_UserID = current_user.F_UserID,
+            F_ContestMasterID = contest_master.F_ContestMasterID
+        )
+        
+        db.session.add(contest)
+        db.session.commit()
+    return redirect('/contest')
 
 # 譲渡会
 @bp.route("/assignment")
@@ -732,41 +803,17 @@ def assignment():
     return render_template("assignment.html", user=current_user)
 
 # コミュニティルーム
-@bp.route("/community", methods=['GET','POST'])
+@bp.route("/community")
 @login_required
 def community():
-    search_results = None
     
-    if request.method == 'POST':
-        
-        search_query = request.form.get('search')
-        search_results = T_User.query.filter(T_User.F_UserName.ilike(f'%{search_query}%')).all()
-        
-        message = request.form.get('chat_input')
-        sendimg = request.files['sendimg']
-        sender_id = current_user.F_UserID
-        
-        if sendimg:
-            send_image = secure_filename(sendimg.filename)
-            sendimg.save(os.path.join(current_app.config['UPLOAD_FOLDER_CHAT'],send_image))
-        
-        new_message = T_Chat(
-            F_SernderID = sender_id,
-            F_ReceiverID = sender_id,
-            F_ChatContest = message,
-            F_ChatImage = send_image
-        )
-        
-        db.session.add(new_message)
-        db.session.commit()
-        
-    users_chat = T_Chat.query.filter((T_Chat.F_SenderID == current_user.F_UserID)|(T_Chat.F_ReceiverID == current_user.F_UserID))
+    user_chat = T_Chat.query.filter((T_Chat.F_SenderID == current_user.F_UserID) | (T_Chat.F_ReceiverID == current_user.F_UserID))
     
     last_message = {}
-    for chat in users_chat:
+    for chat in user_chat:
         other_user_id = chat.F_SenderID if chat.F_SenderID != current_user.F_UserID else chat.F_ReceiverID
-        if other_user_id not in last_message or chat.F_ChatTime >last_message[other_user_id]['F_ChatTime']:
-            last_message[other_user_id] = {
+        if other_user_id not in last_message or chat.F_ChatTime > last_message[other_user_id]['timestamp']:
+            last_message[other_user_id]={
                 'timestamp':chat.F_ChatTime,
                 'message':chat.F_ChatContest
             }
@@ -775,15 +822,59 @@ def community():
     for user_id in last_message.keys():
         user = T_User.query.get(user_id)
         users[user_id] = user
-    return render_template("community.html",user=current_user, last_message=last_message,users=users,search_results=search_results)
+        
 
+    return render_template("community.html",user=current_user , last_message=last_message,users=users)
+
+
+# チャットメイン
+@bp.route('/community_mein/<int:receiver_id>', methods=['GET','POST'])
+def community_mein(receiver_id):
+    if request.method == 'POST':
+        message = request.form.get('chat_input')
+        sendimg = request.files.get('sendimg')
+        sender_id = current_user.F_UserID
+        
+        send_image=None
+        if sendimg and sendimg.filename!= '':
+            send_image = secure_filename(sendimg.filename)
+            sendimg.save(os.path.join(current_app.config['UPLOAD_FOLDER_CHAT'],send_image))
+        
+        new_message = T_Chat(
+            F_SenderID = sender_id,
+            F_ReceiverID = receiver_id,
+            F_ChatContest = message,
+            F_ChatImage = send_image,
+            F_ChatTime = datetime.utcnow()
+        )
+        
+        db.session.add(new_message)
+        db.session.commit()
+    receiver = T_User.query.get(receiver_id)
+    messages = T_Chat.query.filter(((T_Chat.F_SenderID == current_user.F_UserID) & (T_Chat.F_ReceiverID == receiver_id)) | ((T_Chat.F_SenderID == receiver_id) & (T_Chat.F_ReceiverID == current_user.F_UserID))).order_by(T_Chat.F_ChatTime)
+    
+    user_chat = T_Chat.query.filter((T_Chat.F_SenderID == current_user.F_UserID) | (T_Chat.F_ReceiverID == current_user.F_UserID))
+    
+    last_message = {}
+    for chat in user_chat:
+        other_user_id = chat.F_SenderID if chat.F_SenderID != current_user.F_UserID else chat.F_ReceiverID
+        if other_user_id not in last_message or chat.F_ChatTime > last_message[other_user_id]['timestamp']:
+            last_message[other_user_id]={
+                'timestamp':chat.F_ChatTime,
+                'message':chat.F_ChatContest
+            }
+    users = {}
+    for user_id in last_message.keys():
+        user = T_User.query.get(user_id)
+        users[user_id] = user
+    return render_template('community.html',user=current_user, receiver=receiver, messages=messages , users=users)
 
 # 履歴関連
 # お気に入り
 @bp.route("/favorite/<int:exhibit_id>", methods=['POST'])
 @login_required
 def favorite(exhibit_id):
-    favorite = T_Favorite.query.filetr_by(user_id=current_user.F_UserID,exhibit_id=exhibit_id).first()
+    favorite = T_Favorite.query.filter_by(user_id=current_user.F_UserID,exhibit_id=exhibit_id).first()
     
     if favorite:
         db.session.delete(favorite)
@@ -925,3 +1016,4 @@ def inquiry():
 @bp.route("/maintenance")
 def maintenance():
     return render_template("maintenance.html", user=current_user)
+

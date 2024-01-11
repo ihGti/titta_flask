@@ -356,10 +356,10 @@ div.wrap{
   margin: 20px 0 0 20px;
 }
 
-.product a .heart figure {
+.product a .heart form {
   margin: 10px 0 0 40px;
 }
-.product a .heart figure img{
+.product a .heart form input{
   width: 40px;
   height: 40px;
   object-fit: cover;

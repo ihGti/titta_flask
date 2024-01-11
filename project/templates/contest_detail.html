@@ -21,12 +21,12 @@
 
           <div id="topFigure">
             <figure>
-              <img src="/static/images/big_sample.jpg" alt="サンプル画像">
+              <img src="/static/master/{{contest_detail.F_ContestMasterImage}}" alt="サンプル画像">
             </figure> 
           </div>
 
           <div id="con_title">
-            <p>ペット自慢大会</p>
+            <p>{{contest_detail.F_ContestMasterTitle}}</p>
           </div>
 
           <div id="deadline">
@@ -37,9 +37,7 @@
           <div id="overview">
             <h6>・コンテストの概要</h6>
             <p>
-              FlaskはPythonのWebアプリケーションフレームワークであり、軽量でシンプルな設計が特徴です。
-              Webアプリケーションを開発する際に、ルーティング、リクエストとレスポンスの処理、テンプレートエンジンの使用など、
-              基本的な機能を提供します。以下に、Flaskについての主要なポイントを説明します。
+              {{contest_detail.F_ContestMasterContent}}
             </p>
           </div>
 
@@ -78,7 +76,7 @@
                 </li>
                 <li>
                   <p class="headingA">主催</p>
-                  <p class="app-con">マリオ株式会社</p>
+                  <p class="app-con">Titta</p>
                 </li>
               </ul>
             </div>
@@ -94,7 +92,7 @@
 
           </div>
 
-          <input type="submit"  id="ApplyBtn" value="応募する">
+          <a href="/apply/{{contest_detail.F_ContestMasterID}}">応募する</a>
 
         </div>
 

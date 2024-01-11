@@ -94,7 +94,13 @@
 
           <div id="kekka">
             <h2>
-              {{category.F_CategoryName}}
+              {% if word %}
+                {{word}}
+              {% elif exword %}
+                {{exword}}
+              {% elif genre %}
+                {{genre}}
+              {%endif%}
             </h2>
             <p>
               の検索結果
@@ -133,6 +139,7 @@
             <div id="pro-wrap">
 
         {% for products in product %}
+              {% if products.F_Sold == False%}
               <div class="product">
                 <a href="/product_detail/{{products.F_ExID}}">
                   <figure class="main">
@@ -154,14 +161,45 @@
 
                     </div>
                     
-                    <figure>
-                      <img src="/static/images/heart.png" alt="いいね">
-                    </figure>
+                    <form action="/favorite/{{products.F_ExID}}" method="post">
+                      <input type="submit" value="&#9829;">
+                    </form>
 
                   </div>
 
                 </a>
               </div>
+              {% elif products.F_Sold == true %}
+              <div class="product">
+                <a href="/product_detail/{{products.F_ExID}}">
+                  <figure class="main">
+                    <img src="{{ url_for('static', filename='toredo/' + products.F_ExPhoto)}}" alt="big" id="bigimg">
+                  </figure>
+                  <h2>
+                    {{products.F_ExTitle}}
+                  </h2>
+                  <div class="heart">
+
+                    <div class="price">
+
+                      <h5>
+                        ￥
+                      </h5>
+                      <p>
+                        {{ '{:,.0f}'.format(products.F_ExPrice) }}
+                      </p>
+
+                    </div>
+                    <p>sold!!</p>
+                    <form action="/favorite/{{products.F_ExID}}" method="post">
+                      <input type="submit" value="&#9829;">
+                    </form>
+
+                  </div>
+
+                </a>
+              </div>
+              {%endif%}
         {% endfor%}
 
             </div>

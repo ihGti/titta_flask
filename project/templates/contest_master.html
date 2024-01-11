@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% block title %}
 -apply
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="/static/css/apply.css">
+    <link rel="stylesheet" type="text/css" href="static/css/apply.css">
 {% endblock %}
 
 {% block content %}
@@ -16,14 +16,14 @@
 
         <div id="apply-main">
           <!-- 見出し -->
-            <h1>応募ページ</h1>
+            <h1>コンテスト登録ページ</h1>
             <hr noshade="">
 
           <!-- 応募情報 -->
             <div id="center">
-                <form action="/apply_upload/{{apply.F_ContestMasterID}}" method="post" enctype="multipart/form-data">
+                <form action="/master_upload" method="post" enctype="multipart/form-data">
 
-                    <h2>応募情報</h2>
+                    <h2>コンテスト情報</h2>
 
                     <!-- タイトル -->
                     <label for="title">
@@ -36,7 +36,13 @@
                     <label for="comment">
                         <p>コメント</p>
                         <p class="red">※必須</p>
-                        <input type="text" name="comment" id="comment" autocomplete="off">
+                        <input type="text" name="content" id="comment" autocomplete="off">
+                    </label>
+
+                    <label for="time">
+                        <p>終了期日</p>
+                        <p class="red">※必須</p>
+                        <input type="date" name="time" id="time">
                     </label>
 
 
@@ -54,7 +60,7 @@
                     <label for="prof-image">
                         <p>応募画像</p>
                         <p class="red">※必須</p>
-                        <input type="file" name="prof-image" id="prof-image">
+                        <input type="file" name="image" id="prof-image">
                     </label>
 
                     <!-- 送信ボタン -->

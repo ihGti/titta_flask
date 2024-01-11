@@ -38,11 +38,11 @@
               <ul id="c_frame_sb_d_user">
                 {% if search_results %}
                   {% for results in search_results %}
-                  <li ><figure><img src="{{ url_for('static', filename='prof_image/' + user_info.F_ProfileImage)}}" alt="profile_image" alt=""></figure><p>{{user_info.F_UserName}}</p></li>
+                  <li ><figure><a href="{{ url_for('main.community_mein' , receiver_id=user_info.F_UserID)}}"><img src="{{ url_for('static', filename='prof_image/' + user_info.F_ProfileImage)}}" alt="profile_image" alt=""></figure><p>{{user_info.F_UserName}}</p></a></li>
                   {% endfor %}
                 {% endif %}
                 {% for user_id, user_info in users.items() %}
-                <li ><figure><img src="{{ url_for('static', filename='prof_image/' + user_info.F_ProfileImage)}}" alt="profile_image" alt=""></figure><p>{{user_info.F_UserName}}</p></li>
+                <li ><figure><a href="{{ url_for('main.community_mein' , receiver_id=user_info.F_UserID)}}"><img src="{{ url_for('static', filename='prof_image/' + user_info.F_ProfileImage)}}" alt="profile_image" alt=""></figure><p>{{user_info.F_UserName}}</p></a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -53,29 +53,27 @@
 
             <div class="c_frame_mc_chat">
               <div class="mc_contents_user">
-                <p></p>
+                <p>{{users.F_UserName}}</p>
 
               </div>
               <ul class="mc_contents">
+                {% for message in messages %}
 
+                {% if message.F_SenderID == current_user.F_UserID%}
                 <li class="chat">
                   
-                  <figure class="recep"><img src="images/bbc.jpg" alt=""></figure>
-                  <span><p>HogeHogeufsaiodhfashdvjgfuyjfuyhohasdfasdfasdfasdfasfasfasdfasfasfdfapshdfopiash</p></span>
+                  <figure class="recep"><img src="/static/prof_image/{{current_user.F_ProfileImage}}" alt=""></figure>
+                  <span><p>{{message.F_ChatContest}}</p></span>
                   <figure class="send"></figure>
                 </li>
-
-                <li class="chat">
-                  <figure class="recep"><img src="images/bbinu.png" alt=""></figure>
-                  <span><p>HogeHoge</p></span>
-                  <figure class="send"></figure>
-                </li>
-
+                {% else %}
                 <li class="chat">
                   <figure class="recep"></figure>
-                  <span><p>HogeHoge</p></span>
-                  <figure class="send"><img src="images/bbinu.png" alt=""></figure>
+                  <span><p>{{message.F_ChatContest}}</p></span>
+                  <figure class="send"><img src="{{ url_for('static', filename='prof_image/' + receiver.F_ProfileImage) }}" alt="Profile Image"></figure>
                 </li>
+                {% endif %}
+                {% endfor %}
 
 
 
@@ -85,12 +83,12 @@
 
             <div class=" c_frame_mc_under">
 
-              <form action="post" id="chatform" name="chatter"> 
+              <form method="post" id="chatform" name="chatter" enctype="multipart/form-data"> 
 
 
               <div id="hide_ui_sendimg" class="hide_ui_sendimg">
                 <ul>
-                  <li><input id="sendimg" type="file" name="sendimg">画像を選択</li>
+                  <li><input type="file" id="sendimg" name="sendimg"></li>
                 </ul>
               </div>
 
