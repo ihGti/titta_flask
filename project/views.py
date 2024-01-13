@@ -504,6 +504,7 @@ def settelement_comp(exhibit_id):
 
             elif points==0 :
                 cart_price = exhibit.F_ExPrice
+                session["cart_price"] = cart_price
             return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price)
         # 購入完了画面に進む
         elif 'comp' in request.form:
@@ -512,23 +513,27 @@ def settelement_comp(exhibit_id):
             cart_price = session.get("cart_price")
             user_point = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
             
+            cart = None  # デフォルト値を設定
+
             if cart_price:
-                cart = T_Cartlist(F_UserID = current_user.F_UserID,
-                                F_ExID = exhibit_id,
-                                F_CartPrice = cart_price)
-            
-            db.session.add(cart)
-            
-            user_cart_price = T_Cartlist.query.filter_by(F_UserID=current_user.F_UserID).all()
-            post_user_price = sum(purchase.F_CartPrice for purchase in user_cart_price)
-                
-            total_cart_price = post_user_price + cart_price
-                
-            user_point.F_CartPrice = total_cart_price
-            
-            exhibit.F_Sold = True
-            
-            db.session.commit()
+                cart = T_Cartlist(F_UserID=current_user.F_UserID,
+                        F_ExID=exhibit_id,
+                        F_CartPrice=cart_price)
+
+            if cart:
+                db.session.add(cart)
+
+                user_cart_price = T_Cartlist.query.filter_by(F_UserID=current_user.F_UserID).all()
+                post_user_price = sum(purchase.F_CartPrice for purchase in user_cart_price)
+
+                total_cart_price = post_user_price + cart_price
+
+                user_point.F_CartPrice = total_cart_price
+
+                exhibit.F_Sold = True
+
+                db.session.commit()
+
             
             return render_template("settlement_comp.html",exhibit=exhibit, user=current_user , cart_price=cart_price)
 
