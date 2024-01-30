@@ -27,7 +27,7 @@
               <li><a href="/exhibition_list">出品状況<div class="arrow no1"></div></a></li><!-- exhibition_list.html -->
               <!-- <li><a href="/">下書き一覧<div class="arrow no1"></div></a></li> -->
               <li><a href="/">閲覧履歴<div class="arrow no1"></div></a></li><!-- browsing.html -->
-              <li><a href="/">購入履歴<div class="arrow no1"></div></a></li><!-- listing_list.html -->
+              <li><a href="/listing_list">購入履歴<div class="arrow no1"></div></a></li><!-- listing_list.html -->
             </ul>
 
           </div>
@@ -37,7 +37,7 @@
             <p class="minitop">売上・ポイント</p>
 
             <ul>
-              <li><a href="/">売上履歴<div class="arrow no1"></div></a></li><!-- earnings_history.html -->
+              <li><a href="/earnings_history">売上履歴<div class="arrow no1"></div></a></li><!-- earnings_history.html -->
               <li><a href="/point">ポイント<div class="arrow no1"></div></a></li><!-- point.html -->
             </ul>
 
@@ -49,7 +49,7 @@
 
             <ul>
               <li><a href="/">過去の掲載履歴<div class="arrow no1"></div></a></li><!-- petpublish_history.html -->
-              <li><a href="/">登録中のペット一覧<div class="arrow no1"></div></a></li><!-- reg_pet.html -->
+              <li><a href="/reg_pet">登録中のペット一覧<div class="arrow no1"></div></a></li><!-- reg_pet.html -->
             </ul>
 
           </div>
@@ -59,7 +59,7 @@
             <p class="minitop">コンテスト</p>
 
             <ul>
-              <li><a href="/">開催中のコンテスト<div class="arrow no1"></div></a></li><!-- contest.html -->
+              <li><a href="/contest">開催中のコンテスト<div class="arrow no1"></div></a></li><!-- contest.html -->
               <!-- <li><a href="/">過去のコンテスト参加履歴<div class="arrow no1"></div></a></li> -->
             </ul>
 
@@ -70,8 +70,8 @@
             <p class="minitop">登録</p>
 
             <ul>
-              <li><a href="/">里親募集ペットを登録<div class="arrow no1"></div></a></li><!-- foster_post.html -->
-              <li><a href="/">迷子ペット情報を登録<div class="arrow no1"></div></a></li><!-- lost_post.html -->
+              <li><a href="/foster_post">里親募集ペットを登録<div class="arrow no1"></div></a></li><!-- foster_post.html -->
+              <li><a href="/lost_pet">迷子ペット情報を登録<div class="arrow no1"></div></a></li><!-- lost_post.html -->
               <li><a href="/">譲渡誓約書<div class="arrow no1"></div></a></li><!-- pdfに遷移-->
             </ul>
 
@@ -82,7 +82,7 @@
             <p class="minitop">設定</p>
 
             <ul>
-              <li><a href="/">お知らせ設定<div class="arrow no1"></div></a></li><!-- notice.html -->
+              <li><a href="/notice">お知らせ設定<div class="arrow no1"></div></a></li><!-- notice.html -->
               <li><a href="/">着せ替え設定<div class="arrow no1"></div></a></li><!-- dressup.html -->
             </ul>
 
@@ -93,8 +93,8 @@
             <p class="minitop">ヘルプ</p>
 
             <ul>
-              <li><a href="/">Q&A<div class="arrow no1"></div></a></li><!-- qa.html -->
-              <li><a href="/">お問い合わせ<div class="arrow no1"></div></a></li><!-- inquiry.html -->
+              <li><a href="/qa">Q&A<div class="arrow no1"></div></a></li><!-- qa.html -->
+              <li><a href="/inquiry">お問い合わせ<div class="arrow no1"></div></a></li><!-- inquiry.html -->
             </ul>
 
           </div>
@@ -123,7 +123,7 @@
             <form method="post">
             <fieldset class="checkbox-001">
               <label>
-                  <input type="checkbox" name="checkbox-001" checked/>
+                  <input type="checkbox" name="checkbox-001"/>
                   販売中の商品表示
               </label>
             </fieldset>
@@ -141,6 +141,7 @@
                   お試し出品表示
               </label>
             </fieldset>
+            <input type="submit" value="sort" style="display: unset;">
             </form>
           </div>
 
@@ -157,13 +158,19 @@
 
 
 <!-- DB連携あと修正 -->
-{%for exhibits in exhibit %}
+{% for exhibits in exhibit %}
               <div class="product">
                 <a href="/product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
                       <img src="/static/toredo/{{exhibits.F_ExPhoto}}" alt="サンプル画像">
-                      <img src="" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                      {%if exhibits.F_Sold == True %}
+                      <img src="/static/images/sold_icon.png" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                      {% elif exhibits.F_EXhibitType == 1 %}
+                      <img src="/static/images/sale_icon.png" alt="商品状態" class="situ">
+                      {% elif exhibits.F_EXhibitType == 2 %}
+                      <img src="/static/images/trial_icon.png" alt="商品状態" class="situ">
+                      {%endif%}
                     </figure>
                   </div>
                 </a>
@@ -193,39 +200,7 @@
 
 {%endfor%}
 
-<!-- soldのサンプル残し -->
-              <div class="product">
-                <a href="/product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
-                  <div class="proImg">
-                    <figure class="main">
-                      <img src="/static/toredo/{{exhibits.F_ExPhoto}}" alt="サンプル画像">
-                      <img src="/static/images/sold_icon.png" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
-                    </figure>
-                  </div>
-                </a>
 
-                <div class="pro_detail">
-                  <a href="/product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
-                    <h2>{{exhibits.F_ExTitle}} ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
-                  </a>
-
-                  <div class="heart">
-                    <div class="price">
-                      <h5>
-                        ￥<!--ココは固定-->
-                      </h5>
-                      <p>
-                        {{exhibits.F_ExPrice}}<!--ココ、商品の値段入れて-->
-                      </p>
-                    </div>
-                      
-                    <figure>
-                      <img src="/static/images/heart.png" alt="いいね">
-                    </figure><!--クリックしてアニメーションつけるなら変更しないといけない。-->
-                  </div>
-                </div>
-
-              </div>
 
               </div>
 

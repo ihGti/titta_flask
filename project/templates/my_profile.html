@@ -36,8 +36,20 @@
             <div id="mid"><p id="name"><!-- 編集画面で変更可能 -->{{ user.F_UserName }}</p></div>
 
             <div id="bot">
-              <div id="follow">{{ following_count }}フォロー</div><!--後で0消す-->
-              <div id="follower">{{ follower_count }}フォロワー</div>
+              <div id="follow">
+                {%if following_count%}
+                {{ following_count }}フォロー
+                {%else%}
+                0フォロー
+                {%endif%}
+              </div><!--後で0消す-->
+              <div id="follower">
+                {%if follower_count%}
+                {{ follower_count }}フォロワー
+                {%else%}
+                0フォロー
+                {%endif%}
+              </div>
               <div id="star"><figure><img src="/static/images/empty.jpg" alt=""></figure><!-- {{ evaluation_count }} -->278</div><!--一旦写真入れとくプログラムわからん-->
             </div>
           </div>

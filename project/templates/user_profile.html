@@ -24,9 +24,9 @@
             <div id="t_left">
               <figure>
                 {% if users.F_ProfileImage %}
-                <a href="/myprof"><img src="{{ url_for('static', filename='prof_image/' + users.F_ProfileImage)}}" alt="profile_image" style="height: 25px; border:solid 1px; border-radius:100%;"></a>
+                <img src="{{ url_for('static', filename='prof_image/' + users.F_ProfileImage)}}" alt="profile_image">
                 {% else %}
-                <a href="/myprof"><input type="submit" value="&#xf007;" class="button"></a>
+                <input type="submit" value="&#xf007;" class="button">
                 {% endif %}               
               </figure>
             </div>
@@ -59,7 +59,7 @@
           </div>
 
           <div id="top_down">
-            <div id="exhibitsNum"><p>出品数</p></div><!-- ココの20000をに変えるからいずれ消す -->
+            <div id="exhibitsNum"><p>出品数:{{exhibit_len}}</p></div><!-- ココの20000をに変えるからいずれ消す -->
 
             <div id="follow">{{ following_count }}フォロー</div><!--後で0消す-->
             <div id="follower">{{ followers_count }}フォロワー</div>
@@ -92,7 +92,7 @@
 {% for exhibit in exhibits %}
 
               <div class="product">
-                <a href="/"><!-- 商品詳細ページへ -->
+                <a href="/product_detail/{{exhibit.F_ExID}}"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
                       <img src="/static/toredo/{{exhibit.F_ExPhoto}}" alt="サンプル画像">

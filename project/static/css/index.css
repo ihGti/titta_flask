@@ -9,79 +9,238 @@
 
 /*sample.html*/
 /*例*/
+section{
+  position: relative;
+}
+
+#kisekae_basic{
+  width: 100%;
+  margin: 0 auto;
+  z-index: 1;
+  position: relative;
+  background-color: #41537d;
+}
+
+#kisekae_basic img#kisekae_image{
+  width: 100%;
+}
+
+#kisekae_basic img#umekomutoko{
+  width: 30%;
+  height: auto;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%,-35%);
+}
+
+#kisekae_basic img#suisou{
+  width: 29%;
+  height: auto;
+  position: absolute;
+  top: 35.7%;
+  left: 50%;
+  transform: translate(-50%,-35.7%);
+}
+
+#kisekae_basic img#sakanatachi{
+  width: 29%;
+  height: auto;
+  position: absolute;
+  top: 34.5%;
+  left: 50%;
+  transform: translate(-50%,-34.5%);
+}
+
+#kisekae_basic img#nozokuneko{
+  width: 5%;
+  height: auto;
+  position: absolute;
+  top: 69.5%;
+  left: 90.8%;
+}
+
+#kisekae_basic img#cattower{
+  width: 8%;
+  height: auto;
+  position: absolute;
+  top: 50.6%;
+  left: 79.3%;
+}
+
+#kisekae_basic img#cat_water{
+  width: 5%;
+  height: auto;
+  position: absolute;
+  top: 79%;
+  left: 81%;
+}
+
+#kisekae_basic img#petbag{
+  width: 8%;
+  height: auto;
+  position: absolute;
+  top: 61%;
+  left: 74.5%;
+}
+
+#kisekae_basic img#hamusuke{
+  width: 12%;
+  height: auto;
+  position: absolute;
+  top: 72%;
+  left: 68%;
+}
+
+#kisekae_basic img#nekojyarashi{
+  width: 10%;
+  height: auto;
+  position: absolute;
+  top: 89%;
+  left: 79%;
+}
+
+#kisekae_basic img#ball{
+  width: 4%;
+  height: auto;
+  position: absolute;
+  top: 86%;
+  left: 60%;
+}
+
+#kisekae_basic img#rido{
+  width: 10%;
+  height: auto;
+  position: absolute;
+  top: 80%;
+  left: 45%;
+}
+
+#kisekae_basic img#came{
+  width: 7%;
+  height: auto;
+  position: absolute;
+  top: 74%;
+  left: 37%;
+}
+
+#kisekae_basic img#inu{
+  width: 10%;
+  height: auto;
+  position: absolute;
+  top: 68%;
+  left: 23%;
+}
+
+#kisekae_basic img#dog_food{
+  width: 8%;
+  height: auto;
+  position: absolute;
+  top: 86%;
+  left: 29.5%;
+}
+
+#kisekae_basic img#dog_food{
+  width: 8%;
+  height: auto;
+  position: absolute;
+  top: 86%;
+  left: 29.5%;
+}
+
+#kisekae_basic img#hachurui{
+  width: 11%;
+  height: auto;
+  position: absolute;
+  top: 43%;
+  left: 14%;
+}
+
+#kisekae_basic img#torikago{
+  width: 11%;
+  height: auto;
+  position: absolute;
+  top: 69%;
+  left: 8%;
+}
+
+#kisekae_basic div#offright{
+  width: 100%;
+  height: 100%;
+  background-color: #03061ed5;
+  position: absolute;
+  top: -1px;
+}
+
+/* -------------------------- */
+section div#maigoinko{
+  width: 180px;
+  height: 230px;
+  background-color: #00000099;
+  position: absolute;
+  top: 15px;
+  right: 0;
+}
+
+section div#maigoinko h1{
+  color: #fff;
+	text-shadow: 0 0 8px #fff,0 0 15px #fff;
+	font-size: 1rem;
+  font-weight: lighter;
+  text-align: center;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+div img.maigotori_set{
+  display: block;
+  width: 150px;
+  height: auto;
+  margin: 0 auto;
+  border: solid 2px #fff;
+}
+
+section div#maigoinko p{
+  text-align: center;
+  margin: 10px 0 0 0;
+  color: #fff;
+	text-shadow: 0 0 8px #fff,0 0 15px #fff;
+	font-size: 1rem;
+  font-weight: lighter;
+}
+
+/* ----------------------------- */
+section div#satooyainko{
+  width: 180px;
+  height: 230px;
+  background-color: #00000099;
+  position: absolute;
+  top: 15px;
+  right: 190px;
+}
+
+section div#satooyainko h1{
+  color: #fff;
+	text-shadow: 0 0 8px #fff,0 0 15px #fff;
+	font-size: 1rem;
+  font-weight: lighter;
+  text-align: center;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+section div#satooyainko p{
+  text-align: center;
+  margin: 10px 0 0 0;
+  color: #fff;
+	text-shadow: 0 0 8px #fff,0 0 15px #fff;
+	font-size: 1rem;
+  font-weight: lighter;
+}
+
 #m-sample div.wrap p {
   /* 例として書いてあるだけなので消して大丈夫です */
   color: #000;
-}
-
-/* Topページの着せ替え------------------ */
-section.index_M_sec1_1 {
-  width: 100%;
-  height: 695px;
-  /* background-image: url(../images/toppage_room.jpg); */
-  background-image: url(../images/toppage_room.jpg);
-  background-size: cover;
-  margin: 0 0 -100px 0;
-}
-
-/* 迷子掲示板フレーム */
-div.index_M_sec1_di_1 {
-  width: auto;
-  height: 308px;
-  background-color: #ff634700;
-  margin: 25px 0 0 0;
-}
-
-/* 注目コンテストフレーム */
-div.index_M_sec1_di_2 {
-  width: auto;
-  height: 308px;
-  background-color: #ff634700;
-  margin: 25px 0 0 0;
-}
-
-/* 迷子掲示板本体 */
-div.index_M_sec1_di_1_1 {
-  width: 250px;
-  height: 308px;
-  background-color: #41537d;
-  float: right;
-  text-align: center;
-  padding: 15px 0 0 0;
-}
-
-/* 注目コンテスト本体 */
-div.index_M_secc1_di_2_1 {
-  width: 250px;
-  height: 308px;
-  background-color: #41537d;
-  float: left;
-  text-align: center;
-}
-
-/* 迷子鳥のフレーム */
-div.index_M_sec1_di_1_1 div {
-  width: 226px;
-  height: 256px;
-  background-color: #fefeff;
-  margin: 10px auto 0 auto;
-  text-align: center;
-}
-
-/* 迷子鳥 */
-div.index_M_sec1_di_1_1 div img {
-  margin: 10px 0 20px 0;
-}
-
-/* コンテストタイトル */
-div.index_M_secc1_di_2_1 h1 {
-  font-size: 1.1rem;
-  margin: 35px 0 0 0;
-}
-
-/* コンテスト */
-div.index_M_secc1_di_2_1 img {
-  margin: 25px 0 0 0;
 }
 
 /* Topページ下部------------------ */
@@ -89,7 +248,7 @@ section.index_M_sec2_1 {
   width: 100%;
   height: auto;
   background-color: #ff7f5000;
-  margin: 170px 0 100px 0;
+  margin: 50px 0 100px 0;
 }
 
 /* トップページ下部（フレックスBOX） */
@@ -116,19 +275,33 @@ div.index_M_sec2_di_2 {
 }
 
 /* ログインボーナス */
-div.index_M_sec2_di_1 a#loginB {
-  width: 100%;
-  height: 100px;
+
+div.index_M_sec2_di_1 form#loginB{}
+
+div.index_M_sec2_di_1 form#loginB button#bounus img{
+  width: 320px;
+  height: auto;
+  margin: 0 0 35px 10px;
+  transition: 0.3s;
+}
+
+div.index_M_sec2_di_1 form#loginB button#bounus img:hover{
+  opacity: 0.5;
+}
+
+/* div.index_M_sec2_di_1 a#loginB {
+  width: auto;
+  height: 168px;
   text-decoration: none;
   display: block;
-  background-image: url(../images/rogbo.jpg);
+  background-image: url(../images/login_bonus.png);
   background-size: cover;
   background-position: 50%;
   text-align: center;
-  margin: 0 0 35px 0;
-}
+  margin: 0 0 35px 10px;
+  border: solid 5px #eaff00;
+} */
 
-/* 検索BOX */
 /* 検索BOX */
 div.index_M_sec2_di_1_1 {
   width: 100%;
@@ -205,7 +378,15 @@ div.index_M_sec2_fl_1_1_3 p {
 }
 
 /* カテゴリ選択 */
-div.index_M_sec2_fl_1_1_3 input {
+div.index_M_sec2_fl_1_1_3 select{
+  border: none;
+}
+
+div.index_M_sec2_fl_1_1_3 select option{
+  border-bottom-width: 2px;
+}
+
+div.index_M_sec2_fl_1_1_3 select {
   
   width: 62px;
   height: 30px;
@@ -213,7 +394,6 @@ div.index_M_sec2_fl_1_1_3 input {
   background-color: #e5867b00;
   border-radius: 8px;
   border: solid 1px #f0f0f0;
-
 }
 
 /* 価格 */
@@ -321,14 +501,47 @@ div.index_M_sec2_di_1_2 nav ul li a:hover {
   background-color: #ffcfcf;
 }
 
-a.koukoku1 {
+div.koukokuyou1{
+  width: 300px;
+  height: auto;
+}
+
+div.koukokuyou1 a img{
+  width: 100%;
+  height: auto;
+  transition: 0.3s;
+}
+
+div.koukokuyou1 a img:hover{
+  opacity: 0.5;
+}
+
+div.koukokuyou2{
+  width: 300px;
+  height: auto;
+  margin-top: 70px;
+}
+
+div.koukokuyou2 a img{
+  width: 100%;
+  height: auto;
+  transition: 0.3s;
+}
+
+div.koukokuyou2 a img:hover{
+  opacity: 0.5;
+}
+
+
+
+/* a.koukoku1 {
   display: block;
   width: 300px;
-  height: 600px;
-  background-image: url(../images/koukoku1.jpg);
+  height: 500px;
+  background-image: url(../images/dasadeza.jpg);
   background-size: cover;
   margin: 0 0 100px 0;
-}
+} */
 
 a.koukoku2 {
   display: block;
@@ -341,6 +554,19 @@ a.koukoku2 {
 
 /* Topページ下部（イベント情報）------------------ */
 
+/* div#index_M_sec2_di_2_slide */
+div#index_M_sec2_di_2_slide{
+  width: calc(100% - 40px);
+  height: 250px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative; */
+  background-color: #41537d00;
+}
+
+/* --------------------------------------ここまで */
 div.index_M_sec2_di_2 > div {
   width: 810px;
   height: auto;

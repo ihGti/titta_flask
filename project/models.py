@@ -46,6 +46,8 @@ class T_User(db.Model,UserMixin):
     
     contest = db.relationship('T_Contest',backref='user', lazy=True)
     
+    coupons = db.relationship('T_CouponPos', backref='user', lazy=True)
+    
     def get_id(self):
         return str(self.F_UserID)
     
@@ -291,7 +293,10 @@ class T_ContestMaster(db.Model):
     F_ContestMasterContent = db.Column(db.String(256), nullable=False)
     # 募集期間
     F_ContestMasterTime = db.Column(db.Date , nullable=False)
-    
+    # 募集期間終了
+    F_ContestPeriod = db.Column(db.Boolean , default=False)
+    # 投票期間終了
+    F_VotingPeriod = db.Column(db.Boolean, default=False)
     contest = db.relationship('T_Contest',backref='contest',lazy=True)
     
 # コンテスト
@@ -304,8 +309,31 @@ class T_Contest(db.Model):
     F_ContestImage = db.Column(db.String(256), nullable=False)
     # 内容
     F_ContestComment = db.Column(db.String(256), nullable=False)
+    # 投票
+    F_Voting = db.Column(db.Integer, nullable=True)
     # 外部キー
     F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
     # 外部キー
     F_ContestMasterID = db.Column(db.Integer, db.ForeignKey('t__contest_master.F_ContestMasterID'), nullable=False)
     
+#クーポン
+class T_Coupon(db.Model):
+    # 主キー
+    F_CouponID = db.Column(db.Integer, primary_key=True)
+    # クーポン名
+    F_CouponCode = db.Column(db.String(256), unique=True, nullable=False)
+    # クーポン割引
+    F_CouponDis = db.Column(db.Float, nullable=False)
+    
+    coupon = db.relationship('T_CouponPos', backref = 'coupon', lazy=True)
+
+# クーポン所持
+class T_CouponPos(db.Model):
+    # 主キー
+    F_CouponPosID = db.Column(db.Integer, primary_key=True)
+    # 外部キー
+    F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    # 外部キー
+    F_CouponID = db.Column(db.Integer, db.ForeignKey('t__coupon.F_CouponID'), nullable=False)
+    # 所持クーポン枚数
+    F_CouponQuantity = db.Column(db.Integer, nullable=False)

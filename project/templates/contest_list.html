@@ -20,7 +20,7 @@
 
         <div id="title">
           <div id="mozi">
-            <p></p>
+            <p>{{contest_master.F_ContestMasterTitle}}</p>
           </div>
           <div id="kigen">
             <p id="a">締切</p>
@@ -30,49 +30,26 @@
 
 
         <div id="detail">
-          
+          {% for contests in contest_list %}
           <div class="item">
-            <img src="/static/cotest/{{contest_list.F_ContestImage}}" alt="" class="img">
+            <img src="/static/contest/{{contests.F_ContestImage}}" alt="" class="img">
             <div class="text">
-              <h3>{{contest_list.F_ContestTitle}}</h3>
-              <p>{{contest_list.F_ContestContent}}</p>
-              <p class="name">NAME</p>
+              <h3>{{contests.F_ContestTitle}}</h3>
+              <p>{{contests.F_ContestComment}}</p>
+              <p class="name">{{contests.user.F_UserName}}</p>
             </div>
+            <form action="/contest_voting/{{contests.F_ContestID}}" method="post">
+              <input type="submit" value="投票する">
+            </form>
           </div>
-
-          <div class="item">
-            <img src="./static/images/sima.jpg" alt="" class="img">
-            <div class="text">
-              <h3>タイトル</h3>
-              <p>テキストテキストテキストテキストテキストテキストテキスト</p>
-              <p class="name">NAME</p>
-            </div>
-          </div>
-
-          <div class="item">
-            <img src="./static/images/kaeru.jpg" alt="" class="img">
-            <div class="text">
-              <h3>タイトル</h3>
-              <p>テキストテキストテキストテキストテキストテキストテキスト</p>
-              <p class="name">NAME</p>
-            </div>
-          </div>
-
-          <div class="item">
-            <img src="./static/images/kaeru.jpg" alt="" class="img">
-            <div class="text">
-              <h3>タイトル</h3>
-              <p>テキストテキストテキストテキストテキストテキストテキスト</p>
-              <p class="name">NAME</p>
-            </div>
-          </div>
+          {% endfor %}
 
 
         </div>
 
 
         <div id="num">
-          <p>全 {{num_product}} 件中 1 - 20 件を表示</p>
+          <p>全 {{contest}} 件中 1 - 20 件を表示</p>
           <div id="numpage">
             <div id="before"><a href="#">＜ 前へ</a></div>
 
