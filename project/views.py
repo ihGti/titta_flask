@@ -1,5 +1,5 @@
 # flask部品の取り込み
-from flask import Flask , request , flash, redirect , render_template , Blueprint , current_app , url_for , session
+from flask import Flask , request , flash, redirect , render_template , Blueprint , current_app , url_for , session , jsonify
 # flask-loginライブラリの取り込み
 from flask_login import login_user, login_required, logout_user, current_user , login_manager
 # パスワードのセキュリティ関連のライブラリ
@@ -9,29 +9,76 @@ from werkzeug.utils import secure_filename
 # db接続に使う(更新・追加・削除)
 from project import db , create_app
 # models.pyで定義したテーブル
-from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet , T_FosterPet , T_LostPet , T_Chat , T_UserReview , T_Contest , T_ContestMaster
+from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet , T_FosterPet , T_LostPet , T_Chat , T_UserReview , T_Contest , T_ContestMaster , T_Coupon , T_CouponPos
 
 import os
 # 時間の制約
-from datetime import datetime, date
+from datetime import datetime, timedelta
+# ランダム関数
+import random
 
 # 画面表示する
 bp = Blueprint('main',__name__)
+# ボーナスミニマムポイント
+Min_point = 100
+# ボーナスマックスポイント
+Max_point = 400
+# ボーナス有効期間
+bornas = timedelta(days=1)
+
+# ボーナス付与関数
+def login_bornas():
+    # ランダムでポイントかクーポン
+    bornus_type = random.choice(['points','coupon'])
+    
+    if bornus_type == 'points':
+        points = random.randint(Min_point,Max_point)
+    
+        session['login_bornas'] = {
+            'type':'points',
+            'points': points,
+            'expiration_time': datetime.utcnow() + bornas
+        }
+    
+    else:
+        coupon = random.choice(T_Coupon.query.all())
+        session['login_bornas'] = {
+            'type':'coupon',
+            'coupon':coupon.F_CouponID,
+            'expiration_time': datetime.utcnow() + bornas
+        }
+    return session['login_bornas']
 
 
-# app = Flas
-# k(__name__)
+
+
 # トップページ
 @bp.route("/top", methods=['GET','POST'])
 # loginしていないと表示できないページが
 # login情報の保持
 @login_required
 def index():
+    # カテゴリーを全件取得
+    category=T_Category.query.filter_by(F_CategoryCode='c')
+    c_category = session.get('category',[])
+    print("Current session:", session)
+
+    return render_template("index.html" , username=current_user.F_UserName , user=current_user, category=category , c_category=c_category)
+
+# 商品一覧(トップから)
+@bp.route("/search", methods=['GET','POST'])
+def search():
     # methodがpostの場合
     if request.method== 'POST':
+        category_list = session.get('category',[])
         word = request.form.get('word')
         exword = request.form.get('exword')
         genre = request.form.get('genre')
+        if genre:
+            category = T_Category.query.get(genre)
+            if category:
+                category_list.append(category.F_CategoryID)
+                session['category'] = category_list
         l_price= request.form.get('lowerprice')
         h_price = request.form.get('highprice')
         
@@ -61,13 +108,15 @@ def index():
         
         # 商品検索結果
         product = query.all()
+        product_dict = [{'id':products.F_ExID,'title':products.F_ExTitle,'tag':products.F_ExTag} for products in product]
         
+        session['product'] = product_dict
         # 検索した商品の数を取得
         num_product = len(product)
-        return render_template('product.html', product=product , user=current_user , word=word , exword=exword , category=category , num_product=num_product)
-    # カテゴリーを全件取得
-    category=T_Category.query.filter_by(F_CategoryCode='c')
-    return render_template("index.html" , username=current_user.F_UserName , user=current_user, category=category)
+        category= T_Category.query.filter_by(F_CategoryCode='c')
+    return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , category=category , num_product=num_product , l_price=l_price , h_price=h_price)
+
+
 
 
 # logout
@@ -75,6 +124,9 @@ def index():
 @login_required
 def logout():
     logout_user()
+    session.pop("category",None)
+    # セッションの強制削除を実行する
+    session.clear()
     return redirect('/login')
 
 # user関連
@@ -170,10 +222,57 @@ def login():
         
     return render_template('login.html')
 
+# パスワード忘れた人用
+@bp.route('/password_reset',methods=['GET','POST'])
+def password_reset():
+    if request.method == 'POST':
+        mail = request.form.get('email')
+        password = request.form.get('password')
+        password_confilm = request.form.get('password_confilm')
+        
+        user = T_User.query.filter_by(F_Email=mail).first()
+        
+        if user and password==password_confilm:
+            hash_password = generate_password_hash(password,method='sha256')
+            user.F_Password = hash_password
+            db.session.commit()
+        return redirect('/login')
+    return render_template('password_reset.html')
+
 # 登録完了
 @bp.route("/cor")
 def cor():
     return render_template("cor.html")
+
+# ログインボーナス機能
+@bp.route('/login_bornus' , methods=['POST'])
+@login_required
+def login_bornus():
+    
+    category=T_Category.query.filter_by(F_CategoryCode='c')
+    if request.method == 'POST':
+        
+        if 'login_bornas' not in session or session['login_bornas']['expiration_time'] < datetime.utcnow():
+            login_bornas()
+            point = T_Point.query.filter_by(F_UserID=current_user.F_UserID).first()
+            coupon = T_CouponPos.query.filter_by(F_UserID = current_user.F_UserID).first()
+            if session['login_bornas']['type'] == 'points':
+                get_point = session['login_bornas']['points']
+                new_point = point.F_PointQuantity + get_point
+                point.F_PointQuantity = new_point
+                db.session.commit()
+            
+            elif session['login_bornas']['type'] == 'coupon':
+                get_coupon = session['login_bornas']['coupon']
+                if coupon:
+                    coupon.F_CouponQuantity += 1
+                else:
+                    coupon = T_CouponPos(F_UserID=current_user.F_UserID, F_CouponID=get_coupon, F_CouponQuantity=1)
+                    db.session.add(coupon)
+                    db.session.commit()
+            
+        db.session.commit()
+    return render_template('index.html',user=current_user,category=category)
 
 # マイページ
 @bp.route("/myprof")
@@ -181,8 +280,15 @@ def cor():
 def myprof():
     # ログインしているユーザーの情報を取得
     user = T_User.query.get(current_user.F_UserID)
+    if user:
+        # フォローしているユーザーを取得
+        friends = T_User.query.join(T_Paramerter, T_Paramerter.F_friendid == T_User.F_UserID).filter(T_Paramerter.F_userid == T_User.F_UserID).all()
+        # フォロワーをカウント
+        followers_count = T_Paramerter.query.filter_by(F_friendid=user.F_UserID).count()
+        # フォロー中のユーザーをカウント
+        following_count = T_Paramerter.query.filter_by(F_userid=user.F_UserID).count()
     
-    return render_template("my_profile.html" , user=user)
+    return render_template("my_profile.html" , user=user , followers_count=followers_count, following_count=following_count)
 
 # マイページ編集
 @bp.route("/prof_edit", methods=['GET','POST'])
@@ -208,7 +314,7 @@ def prof_edit():
             user.F_ProfileImage = fileimage
         # 内容の更新処理
         db.session.commit()
-        return redirect('myprof')
+        return redirect('/myprof')
     
     return render_template("profile_edit.html",user=user)
 
@@ -219,7 +325,8 @@ def user_prof(user_id):
     # 他者プロフを取得
     users = T_User.query.get(user_id)
     
-    exhibits = T_Exhibit.query.get(user_id)
+    exhibits = T_Exhibit.query.filter_by(F_UserID=user_id).all()
+    exhibit_len = len(exhibits)
     
     if users:
         # フォローしているユーザーを取得
@@ -228,7 +335,7 @@ def user_prof(user_id):
         followers_count = T_Paramerter.query.filter_by(F_friendid=users.F_UserID).count()
         # フォロー中のユーザーをカウント
         following_count = T_Paramerter.query.filter_by(F_userid=users.F_UserID).count()
-    return render_template("user_profile.html",users=users, friends=friends , followers_count=followers_count , following_count=following_count , user=current_user , exhibits=exhibits)
+    return render_template("user_profile.html",users=users, friends=friends , followers_count=followers_count , following_count=following_count , user=current_user , exhibits=exhibits , exhibit_len=exhibit_len)
 
 # フォロー関連
 @bp.route("/add_friend/<int:user_id>",methods=['POST'])
@@ -246,7 +353,7 @@ def add_friend(user_id):
     db.session.add(friendship)
     db.session.commit()
     
-    return redirect(url_for('user_prof', user_id=user_id))
+    return redirect(url_for('main.user_prof', user_id=user_id))
 
 # 出品関連
 # 本出品
@@ -357,76 +464,76 @@ def exhibit_comp():
 # お試し出品投稿
 @bp.route('/trial_page',methods=['POST'])
 def trial_upload():
-    
-    for i in range(1,6):
-        file = request.files.get(f'imageinput{i}')
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER_DEMOEXHIBIT'],filename))
+    if request.method == 'POST':
+        for i in range(1,6):
+            file = request.files.get(f'imageinput{i}')
+            if file:
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(current_app.config['UPLOAD_FOLDER_DEMOEXHIBIT'],filename))
             
-            if i == 1:
-                demoexhibit = T_Exhibit(F_ExPhoto=filename)
+                if i == 1:
+                    demoexhibit = T_Exhibit(F_ExPhoto=filename)
         
-            elif i == 2:
-                demoexhibit.F_ExPhotoS = filename
+                elif i == 2:
+                    demoexhibit.F_ExPhotoS = filename
             
-            elif i == 3:
-                demoexhibit.F_ExPhotoT = filename
+                elif i == 3:
+                    demoexhibit.F_ExPhotoT = filename
             
-            elif i == 4:
-                demoexhibit.F_ExPhotoF = filename
+                elif i == 4:
+                    demoexhibit.F_ExPhotoF = filename
             
-            elif i == 5:
-                demoexhibit.F_ExPhotoH = filename
+                elif i == 5:
+                    demoexhibit.F_ExPhotoH = filename
             
-    title = request.form.get('title')
+        title = request.form.get('title')
         
-    info = request.form.get('setumei')
+        info = request.form.get('setumei')
         
-    situation = request.form.get('situation')
+        situation = request.form.get('situation')
         
-    deli = request.form.get('deli')
+        deli = request.form.get('deli')
         
-    genre = request.form.get('genre')
+        genre = request.form.get('genre')
         
-    category = T_Category.query.get(genre)
+        category = T_Category.query.get(genre)
         
-    many = request.form.get('kane')
+        many = request.form.get('kane')
         
-    tag = request.form.get('tag')
+        tag = request.form.get('tag')
         
-    demoexhibit.F_ExTitle = title
+        demoexhibit.F_ExTitle = title
         
-    demoexhibit.F_ExInfo = info
+        demoexhibit.F_ExInfo = info
         
-    demoexhibit.F_ExSit = situation
+        demoexhibit.F_ExSit = situation
         
-    demoexhibit.F_ExDeli = deli
+        demoexhibit.F_ExDeli = deli
         
-    demoexhibit.F_ExPrice = many
+        demoexhibit.F_ExPrice = many
         
-    demoexhibit.F_CategoryID = category.F_CategoryID
+        demoexhibit.F_CategoryID = category.F_CategoryID
         
-    demoexhibit.F_ExTag = tag
+        demoexhibit.F_ExTag = tag
         
-    demoexhibit.F_EXhibitType = 2
-    demoexhibit.F_UserID = current_user.F_UserID
+        demoexhibit.F_EXhibitType = 2
+        demoexhibit.F_UserID = current_user.F_UserID
     
-    demoexhibit.F_ExTime = datetime.utcnow()
-    db.session.add(demoexhibit)
-    db.session.commit()
-    user = T_User.query.get(current_user.F_UserID)
-    
-    total_point = 200
-    
-    user_point = T_Point.query.filter_by(F_UserID=current_user.F_UserID).first()
-    
-    if user_point:
-        new_point = user_point.F_PointQuantity + total_point
-        
-        user_point.F_PointQuantity = new_point
-        
+        demoexhibit.F_ExTime = datetime.utcnow()
+        db.session.add(demoexhibit)
         db.session.commit()
+        user = T_User.query.get(current_user.F_UserID)
+    
+        total_point = 200
+    
+        user_point = T_Point.query.filter_by(F_UserID=current_user.F_UserID).first()
+    
+        if user_point:
+            new_point = user_point.F_PointQuantity + total_point
+        
+            user_point.F_PointQuantity = new_point
+        
+            db.session.commit()
 
     return redirect("/top")
 
@@ -438,8 +545,29 @@ def exhibit_trial():
 
 # 商品関連
 # 商品一覧
-@bp.route("/product")
+@bp.route("/product",methods=['GET','POST'])
 def product():
+    
+    if request.method == 'POST':
+        sold = request.form.get('checkbox-001')
+        select = request.form.get('selectbox','おすすめ順')
+        
+        sort = T_Exhibit.query.filter_by(F_EXhibitType=1)
+        
+        if sold:
+            query = sort.filter(T_Exhibit.F_Sold == False)
+        
+        if select == '新しい順':
+            query = sort.order_by(T_Exhibit.F_ExTime.asc())
+        
+        if select == '価格の安い順':
+            query = sort.order_by(T_Exhibit.F_ExPrice.desc())
+            
+        if select == '価格の高い順':
+            query = sort.order_by(T_Exhibit.F_ExPrice.asc())
+            
+        product = query.all()
+        return render_template('product.html',user=current_user, product=product)
     product = T_Exhibit.query.all()
     category = T_Category.query.all()
     return render_template("product.html" , product=product , user=current_user , category=category)
@@ -452,6 +580,13 @@ def category_product(category_id):
     product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
     
     return render_template('product.html', product=product, category=category , user=current_user)
+
+# 画像クリックでカテゴリー検索:index.html
+@bp.route('/category_image/<int:category_id>/product' , methods=['GET'])
+def category_image(category_id):
+    category_image = T_Category.query.get(category_id)
+    product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
+    return render_template('product.html', product=product, category_image=category_image, user=current_user)
 
 
 # 商品詳細
@@ -482,7 +617,17 @@ def settelement_comp(exhibit_id):
     exhibit = T_Exhibit.query.get(exhibit_id)
     # ユーザーポイント取得
     user_point = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
+    # 出品ユーザーのポイント獲得
+    exhibit_user_point = T_Point.query.filter_by(F_UserID = exhibit.F_UserID).first()
+    # クーポン取得
+    user_coupon = T_CouponPos.query.filter_by(F_UserID=current_user.F_UserID).all()
     # 出品したユーザーとログインユーザーが一致した場合
+    k_point = exhibit.F_ExPrice * 0.1
+
+    coupon_info = []
+    for coupon_pos in user_coupon:
+        coupons = T_Coupon.query.get(coupon_pos.F_CouponID)
+        coupon_info.append({'id':coupons.F_CouponID,'name':coupons.F_CouponCode, 'Quantity':coupon_pos.F_CouponQuantity})
     if exhibit.F_UserID == current_user.F_UserID:
         return redirect(url_for('main.product_detail', exhibit_id=exhibit_id))
     
@@ -492,20 +637,25 @@ def settelement_comp(exhibit_id):
             exhibit = T_Exhibit.query.get(exhibit_id)
             # ポイント取得
             points = int(request.form.get('pointnum')) if request.form.get('pointnum').isdigit() else 0
+            coupon = int(request.form.get('ku-pon'))
+            use_coupon = T_CouponPos.query.filter_by(F_UserID = current_user.F_UserID).all()
+            select_coupon = next((coupon_cart for coupon_cart in use_coupon if coupon_cart.F_CouponID == coupon))
             user_point = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
             if user_point.F_PointQuantity < points:
                 return render_template("settelement_check.html", user=current_user,points=points , user_point=user_point , exhibit=exhibit)
             if points and user_point.F_PointQuantity > 0:
                 # ユーザーがポイントを持っており、ポイントを使う場合の処理
                 cart_price =exhibit.F_ExPrice - points
-
+                session["cart_price"] = cart_price
                 user_point.F_PointQuantity -= points
+            elif points==0 and select_coupon:#ポイントを使わずに、クーポン割引する場合
+                coupon_use = T_Coupon.query.get(select_coupon.F_CouponID)
+                discount = coupon_use.F_CouponDis
+                cart_price = exhibit.F_ExPrice * discount
                 session["cart_price"] = cart_price
-
-            elif points==0 :
-                cart_price = exhibit.F_ExPrice
-                session["cart_price"] = cart_price
-            return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price)
+                select_coupon.F_CouponQuantity -= 1
+                db.session.commit()
+            return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price , k_point=k_point)
         # 購入完了画面に進む
         elif 'comp' in request.form:
             exhibit = T_Exhibit.query.get(exhibit_id)
@@ -529,6 +679,10 @@ def settelement_comp(exhibit_id):
                 total_cart_price = post_user_price + cart_price
 
                 user_point.F_CartPrice = total_cart_price
+                
+                k_point = exhibit.F_ExPrice * 0.1
+                
+                exhibit_user_point.F_PointQuantity = exhibit_user_point.F_PointQuantity + k_point
 
                 exhibit.F_Sold = True
 
@@ -537,7 +691,7 @@ def settelement_comp(exhibit_id):
             
             return render_template("settlement_comp.html",exhibit=exhibit, user=current_user , cart_price=cart_price)
 
-    return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point )
+    return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point , k_point=k_point , coupon_info=coupon_info)
 
 
 # 目玉機能
@@ -748,6 +902,9 @@ def master_upload():
             F_ContestMasterTime = c_date
         )
         
+        randam_coupon = random.choice(T_Coupon.query.all())
+        session['contest_coupon'] = randam_coupon.F_CouponID
+        
         db.session.add(master)
         db.session.commit()
         
@@ -763,6 +920,41 @@ def master():
 def contest():
     slider = T_ContestMaster.query.all()
     contest = T_ContestMaster.query.all()
+    point = random.randint(1000,1500)
+    second_point = random.randint(500,800)
+    winner_list = []
+    for contests in contest:
+        date = datetime.utcnow().date()
+
+        if contests.F_ContestMasterTime == date:
+            contests.F_ContestPeriod = True
+        
+            for contest_master in contest:
+                date_week = contest_master.F_ContestMasterTime + timedelta(weeks=1)
+                print(date_week)
+                if date == date_week:
+                    contest_master.F_VotingPeriod = True
+                    winner = contest_master.order_by(T_Contest.F_Voting.asc()).limit(3).all()
+                    winner_list.extend(winner)
+                    coupon = session.get('contest_coupon')
+            
+                    for winners in winner:
+                        use_coupon = T_CouponPos.query.filter_by(F_UserID=winners.F_UserID, F_CouponID=coupon.F_CouponID)
+                        if use_coupon:
+                            use_coupon.F_CouponQuantity +=1
+                        else:
+                            use_coupon = T_CouponPos(F_UserID=winners.F_UserID, F_CouponID=coupon.F_CouponID, F_CouponQuantity=1)
+                        db.session.add(use_coupon)
+            
+                    for second_winners in enumerate(winner[1:],start=2):
+                        user_point = T_Point.query.filter_by(F_UserID=second_winners.F_UserID).first()
+                        user_point.F_PointQuantity = user_point.F_PointQuantity + point
+            
+                    for third_winner in enumerate(winner[2:],start=3):
+                        third_point = T_Point.query.filter_by(F_UserID=third_winner.F_UserID).first()
+                        third_point.F_PointQuantity = third_point.F_PointQuantity + second_point
+            
+        db.session.commit()
     contestpost = len(contest)
     return render_template("contest.html",user=current_user , contest=contest , contestpost=contestpost, slider=slider)
 
@@ -770,7 +962,8 @@ def contest():
 @bp.route("/contest_detail/<int:contest_id>")
 def contest_detail(contest_id):
     contest_detail = T_ContestMaster.query.get(contest_id)
-    return render_template("contest_detail.html",user=current_user, contest_detail=contest_detail)
+    coupon = session.get('contest_coupon')
+    return render_template("contest_detail.html",user=current_user, contest_detail=contest_detail , coupon=coupon)
 
 # コンテスト応募
 @bp.route("/apply/<int:contest_id>")
@@ -792,8 +985,8 @@ def apply_upload(contest_id):
             
         contest = T_Contest(
             F_ContestTitle = title,
-            F_ContestComment = comment,
             F_ContestImage = apply_file,
+            F_ContestComment = comment,
             F_UserID = current_user.F_UserID,
             F_ContestMasterID = contest_master.F_ContestMasterID
         )
@@ -803,11 +996,36 @@ def apply_upload(contest_id):
     return redirect('/contest')
 
 # コンテストリスト
-@bp.route("/contest_list/<int:contest_id>")
+@bp.route("/contest_list/<int:contest_id>", methods=["GET","POST"])
 def contest_list(contest_id):
     contest_master = T_ContestMaster.query.get(contest_id)
-    contest_list = T_Contest.query.get(contest_id)
-    return render_template("contest_list.html",user=current_user , contest_list=contest_list , contest_master=contest_master)
+
+    if contest_master:
+        contest_list = contest_master.contest
+        contest = len(contest_list)
+        return render_template('contest_list.html',user=current_user, contest_list=contest_list, contest_master=contest_master , contest=contest)
+    return render_template("contest_list.html" , user=current_user , contest_master=contest_master,contest=contest)
+
+# 投票
+@bp.route('/contest_voting/<int:contest_id>',methods=["GET","POST"])
+def voting(contest_id):
+    contest_user = T_Contest.query.filter_by(F_ContestID=contest_id).first()
+    master = T_ContestMaster.query.filter_by(F_ContestMasterID=contest_user.F_ContestMasterID).first()
+    if contest_user:
+        # contest_user が None でないことを確認してから、F_Voting を更新
+        if contest_user.F_Voting is not None:
+            contest_user.F_Voting += 1
+            db.session.commit()
+    return redirect(url_for('main.contest_list',contest_id=master.F_ContestMasterID))
+
+# javascriptにデータ転送用route
+@bp.route('/data_javascript',methods=['GET'])
+def data_javascript():
+    data_object = T_ContestMaster.query.with_entities(T_ContestMaster.F_ContestMasterTime).all()
+    
+    time_list = [str(time[0]) for time in data_object]
+    
+    return jsonify(time_list)
 
 # 譲渡会
 @bp.route("/assignment")
@@ -933,21 +1151,21 @@ def exhibition_list():
         sold = request.form.get('checkbox-002')
         trial = request.form.get('checkbox-003')
         
-        query = T_Exhibit.query.filter(F_EXhibitType=1)
+        query = T_Exhibit.query.filter_by(F_EXhibitType=1)
         
-        if not exhibition:
-            query = query.filter(T_Exhibit.F_EXhibitType==1)
+        if exhibition:
+            query = query.filter(T_Exhibit.F_Sold==False)
         
-        if not sold :
-            query = query.filter(T_Exhibit)
+        if sold :
+            query = query.filter(T_Exhibit.F_Sold==True)
             
-        if not trial:
+        if trial:
             query = query.filter(T_Exhibit.F_EXhibitType==2)
         
-        products = query.all()
+        exhibit = query.all()
         
-        return render_template("exhibition_list.html",products=products,user=current_user)
-    exhibit = T_Exhibit.query.filter_by(F_EXhibitType=1)
+        return render_template("exhibition_list.html",exhibit=exhibit,user=current_user)
+    exhibit = T_Exhibit.query.filter_by(F_EXhibitType=1,F_UserID=current_user.F_UserID).all()
     demoexhibit = T_Exhibit.query.filter_by(F_EXhibitType=2)
     
     num_exhibit =len(exhibit)
@@ -964,8 +1182,8 @@ def earnings_history():
     for purchase in sales:
         exhibit = T_Exhibit.query.get(purchase.F_ExID)
         user = T_User.query.get(exhibit.F_UserID)
-        
-        sales_info.append((exhibit, user))
+        cart = T_Cartlist.query.get(exhibit.F_ExID)
+        sales_info.append((exhibit, user,cart))
         
     return render_template("earnings_history.html", user=current_user , sales_info=sales_info)
 
@@ -978,23 +1196,18 @@ def petpublish_history():
 @bp.route("/listing_history")
 def listing_history():
     user_id = current_user.F_UserID
-    post_exhibit = T_Exhibit.query.filter_by(F_UserID =user_id, F_ExhibitType=2).all()
+    post_exhibit = T_Exhibit.query.filter_by(F_UserID =user_id).all()
     return render_template("listing_list.html",post_exhibit=post_exhibit , user=current_user)
 
 
 # その他
 # ポイント管理
 @bp.route("/point")
+@login_required
 def point():
     
-    user = current_user.F_UserID
-    points = sum(T_Point.query.filter_by(F_UserID = user).all())
-    return render_template("point.html" , points=points , user=user)
-
-# メールボックス
-@bp.route("/mailbox")
-def mailbox():
-    return render_template("mailbox.html")
+    points = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
+    return render_template("point.html" , points=points , user=current_user)
 
 # お知らせ
 @bp.route("/notice")

@@ -43,7 +43,7 @@
 
           <div id="award">
             <p id="sho">賞</p>
-            <p id="sho-d">titta商品券一万円分</p>
+            <p id="sho-d">{{coupon.F_CouponID}}</p>
           </div>
 
           <div id="divide">
@@ -92,9 +92,9 @@
 
           </div>
 
-          <a href="/apply/{{contest_detail.F_ContestMasterID}}">応募する</a>
+          <a href="/apply/{{contest_detail.F_ContestMasterID}}" id="ApplyBtn">応募する</a>
 
-          <a href="/contest_list/{{contest_detail.F_ContestMasterID}}">応募者一覧</a>
+          <a href="/contest_list/{{contest_detail.F_ContestMasterID}}" id="ApplyBtn">応募者一覧</a>
 
         </div>
 

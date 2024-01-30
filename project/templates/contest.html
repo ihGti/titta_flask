@@ -48,6 +48,8 @@
             </figure>
             <h3>{{ contests.F_ContestMasterTitle }}</h3>
             <p>{{ contests.F_ContestMasterContent }}</p>
+            <div class="datetime" data-time="{{contests.F_ContestMasterTime}}"></div>
+            <!-- <div>{{contests.F_ContestMasterTime}}</div> -->
           </div></a>
             {% endfor %}
           </div>
@@ -56,5 +58,5 @@
 
     </main>
 
-
+    <script src="/static/js/contest.js"></script>
 {% endblock %}

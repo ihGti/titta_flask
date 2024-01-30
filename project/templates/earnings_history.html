@@ -41,26 +41,26 @@
             {% for sales in sales_info %}
             <div class="minibox">
 
-              <a href="/product_detail/{{sales.exhibit.F_ExID}}">
+              <a href="/product_detail/{{sales[0].F_ExID}}">
                 <figure>
-                  <img src="" alt="閲覧履歴商品画像"><!-- ここに過去に閲覧した商品の画像が出力される -->
+                  <img src="/static/toredo/{{sales[0].F_ExPhoto}}" alt="閲覧履歴商品画像"><!-- ここに過去に閲覧した商品の画像が出力される -->
                 </figure>
               </a>
 
               <div class="detailbox">
-                <a href="/product_detail/{{sales.exhibit.F_ExID}}"><p>{{ sales.exhibit.F_ExTitle }}</p></a><!--いずれ文字を消してで入れるようにする-->
-                <p class="price">売上利益　￥{{sales.exhibit.F_ExPrice}} </p><!-- 2000は消して -->
+                <a href="/product_detail/{{sales[0].F_ExID}}"><p>{{ sales[1].F_ExTitle }}</p></a><!--いずれ文字を消してで入れるようにする-->
+                <p class="price">売上利益　￥{{sales[2].F_CartPrice}} </p><!-- 2000は消して -->
               </div>
 
               <div class="othersbox">
                 <div class="userbox"><!--取引したユーザー情報がここにでる(移動先他者プロフ)-->
                   <div class="top">
-                    <a href="/userprof/{{sales.user.F_UserID}}">
-                      <figure><img id="account-icon" src="/static/prof_image/{{sales.user.F_ProfileImage}}" alt="デフォルトアイコン"></figure><!-- ユーザーアイコン -->
+                    <a href="/userprof/{{sales[1].F_UserID}}">
+                      <figure><img id="account-icon" src="/static/prof_image/{{sales[1].F_ProfileImage}}" alt="デフォルトアイコン"></figure><!-- ユーザーアイコン -->
                     </a>
                   </div>
       
-                  <div class="mid"><a href="/user_profile?id={{i}}"><p id="name">{{sales.user.F_UserName}}</p></a></div><!-- ユーザーネーム -->
+                  <div class="mid"><a href="/userprof/{{sales[1].F_UserID}}"><p id="name">{{sales[1].F_UserName}}</p></a></div><!-- ユーザーネーム -->
 
                 </div>
               </div>

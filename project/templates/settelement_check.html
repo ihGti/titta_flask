@@ -16,18 +16,47 @@
       <div class="wrap">
 
 
-
-
-
-
-
-
-
         <!-- ↓ここに入力してって -->
 
 
         <div id="right"><!-- 右  -->
-          <h1>決済確認</h1>
+          <h1>- 購入手続き -</h1>
+
+          <form method="post">
+            <div id="list">
+              <div id="product">
+                <img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhoto)}}" alt="big" id="bigimg">
+                <div id="setu">
+
+                  <div class="flex_infomation">
+                    <p class="btndesign1">商品名</p>
+                    <p class="hidariniawasete">{{ exhibit.F_ExTitle }}</p>
+                  </div>
+
+                    <p id="btndesign2">詳細説明</p>
+                    <p id="sitaniyohakuakete">{{ exhibit.F_ExInfo }}</p>
+
+                  <div class="flex_infomation">
+                    <p class="btndesign1">支払い金額</p>
+                    <p class="hidariniawasete">
+                      {%if cart_price %}
+                      &yen; {{ cart_price }} -
+                      {%else%}
+                      &yen; {{ exhibit.F_ExPrice }} -
+                      {%endif%}
+                    </p>
+                  </div>
+
+                  <div class="flex_infomation">
+                    <p class="btndesign1">獲得P</p>
+                    <p class="hidariniawasete">{{ k_point }}P</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </form>
+
           <div id="select">
             <form id="formr" method="post">
               <table>
@@ -41,19 +70,21 @@
                 <!-- <input type="text" name=""> -->
                 <tr>
                   <td><label>クーポン</label></td>
-                  <td><select name="ku-pon" id="ku-pon">
-                    <option value="0">利用可能なクーポンがｘ枚あります</option>
-                    <option value="10">クーポン１０％</option>
-                    <option value="20">クーポン２０％</option>
-                    <option value="30">クーポン３０％</option>
-                  </select></td>
+                  <td>
+                    <select name="ku-pon" id="ku-pon">
+                    <option value="0">利用可能なクーポン</option>
+                    {%for coupon in coupon_info%}
+                    <option value="{{coupon.id}}">{{coupon.name}}:{{coupon.Quantity}}枚</option>
+                    {%endfor%}
+                    </select>
+                  </td>
                 </tr>
                 <tr>
                   <td><label>決済方法</label></td>
                   <td><select name="card" id="card" onchange="viewChange2();">
-                    <option value="select1">カード１</option>
-                    <option value="select2">かーど２</option>
-                    <option value="select3">カード３</option>
+                    <option value="select1">選択する</option>
+                    <option value="select2">Titta card</option>
+                    <option value="select3">クレジットカード</option>
                   </select>
                   <div id="Box2" style="display:none;">
                     <div>
@@ -114,22 +145,8 @@
             </div>
           </div>
 
-          <form method="post">
-          <div id="list">
-            <h1>購入商品</h1>
-            <div id="product">
-              <img src="{{ url_for('static', filename='toredo/' + exhibit.F_ExPhoto)}}" alt="big" id="bigimg" style="height: 100px;">
-              <div id="setu">
-                <p>商品名：{{ exhibit.F_ExTitle }}</p>
-                <p>説明：{{ exhibit.F_ExInfo }}</p>
-                <p>値段：￥{{ cart_price }}</p>
-                <p>ポイント：{{ user_point.F_PointQuantity }}</p>
-              </div>
-            </div>
-          </div>
           <input type="submit" form="formr" value="購入を確定する" id="btn" name="comp" onclick="return setteledialog()">
-        </div>
-        </form>
+
 
 
       </div><!-- class="wrap" -->

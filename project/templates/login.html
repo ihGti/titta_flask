@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 
 <html lang="ja">
-
   <head>
+    <meta charset="utf-8" />
 
-      <meta charset="utf-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Titta</title>
 
     <!-- この２つのcssは触らない -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css')}}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/reset.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/common.css')}}"
+    />
 
     <!-- cssを編集する時は各自でHTML名と同じ名前でcssファイルを作り、連携させること -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css')}}">
-
-
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/login.css')}}"
+    />
   </head>
 
-  <body>
-    
-
-
+  <body id="ugokuna">
     <main id="m-sample">
-
       <div class="wrap">
         <div id="site-image">
           <figure>
-            <img src="./static/images/rogo.png" alt="rogo">
+            <img src="./static/images/rogo.png" alt="rogo" />
           </figure>
         </div>
 
@@ -39,52 +43,69 @@
           <form method="post">
             <h1>LOGIN</h1>
 
-            {% with messages = get_flashed_messages() %}
-    {% for message in messages %}
-        <ul id="flash">
-            <li>
+            {% with messages = get_flashed_messages() %} {% for message in
+            messages %}
+            <ul id="flash">
+              <li>
                 <font color="red">{{ message }}</font>
-            </li>
-          </ul>
-    {% endfor %}
-{% endwith %}
-<style>
-ul#flash{ list-style: none; margin-top: 10px;}
-</style>
+              </li>
+            </ul>
+            {% endfor %} {% endwith %}
+            <style>
+              ul#flash {
+                list-style: none;
+                margin-top: 10px;
+              }
+            </style>
 
             <label for="email">
-              <p>メールアドレス</p>
-              <input type="email" name="email" id="email" autocomplete="off">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                autocomplete="off"
+                placeholder="メールアドレス"
+              />
             </label>
 
             <label for="password">
-              <p>パスワード</p>
-              <input type="password" name="password" id="password" autocomplete="off">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                autocomplete="off"
+                placeholder="パスワード"
+              />
             </label>
 
-            <input type="submit" value="ログインする" id="bottun">
+            <input type="submit" value="ログイン" id="bottun" />
           </form>
 
-          <a href="/signup">会員登録はこちら</a>
-        </div>
-      </div><!-- class="wrap" -->
+          <a href="/signup" id="pass_forget">パスワードお忘れの方</a>
+          <a href="/signup" id="member_regi">会員登録はこちら</a>
 
+        </div>
+
+        <div class="copy-all">
+          2023 &copy; Copyright Titta. All rights reserved.
+        </div>
+
+      </div>
+      <!-- class="wrap" -->
+
+      
     </main>
 
-    <footer>
-
-      <div class="copy-all">
-        2023 &copy; Copyright Titta. All rights reserved.
-      </div>
-
-    </footer>
-
-
- <!-- jQueryへのリンク -->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
+    <!-- jQueryへのリンク -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/ebfd63cef7.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="{{ url_for('static', filename='js/signin.js')}}"></script>
-
   </body>
-
 </html>

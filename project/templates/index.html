@@ -9,34 +9,79 @@
 
 {% block content %}
 
+<!-- <link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/reset.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-7/css/6-1-7.css"> -->
+
+<section>
+  <div id="kisekae_basic">
+    <img src="./static/images/toppage_basicimg.png" id="kisekae_image">
+    {%for category_id in session['category']%}
+      {%if category_id == 1 %}
+      <img src="./static/images/umekomutoko.png" id="umekomutoko">
+      {%elif category_id == 2 %}
+      <img src="./static/images/suisou.png" id="suisou">
+      {%elif category_id == 3 %}
+      <img src="./static/images/sakanatachi.png" id="sakanatachi">
+      {%elif category_id == 4 %}
+      <img src="./static/images/nozokuneko.png" id="nozokuneko">
+      {%elif category_id == 5 %}
+      <img src="./static/images/cattower.png" id="cattower">
+      {%elif category_id == 6 %}
+      <img src="./static/images/cat_water.png" id="cat_water">
+      {%elif category_id == 7 %}
+      <img src="./static/images/petbag.png" id="petbag">
+      {%elif category_id == 8 %}
+      <img src="./static/images/hamusuke.png" id="hamusuke">
+      {%elif category_id == 9 %}
+      <img src="./static/images/nekojyarashi.png" id="nekojyarashi">
+      {%elif category_id == 10 %}
+      <img src="./static/images/ball.png" id="ball">
+      {%elif category_id == 11 %}
+      <img src="./static/images/rido.png" id="rido">
+      {%elif category_id == 12 %}
+      <img src="./static/images/came.png" id="came">
+      {%elif category_id == 13 %}
+      <img src="./static/images/inu.png" id="inu">
+      <img src="./static/images/dog_food.png" id="dog_food">
+      <img src="./static/images/hachurui.png" id="hachurui">
+      <img src="./static/images/torikago.png" id="torikago">
+      <!-- <div id="offright"></div> -->
+
+      {%endif%}
+    {%endfor%}
+  </div>
+
+  <div id="maigoinko">
+    <h1>最新迷子募集情報</h1>
+    <div class="maigotorinoflame">
+      <img src="./static/images/maigotori.png" class="maigotori_set">
+    </div>
+    <p>name</p>
+  </div>
+
+  <div id="satooyainko">
+    <h1>最新里親募集情報</h1>
+    <div class="maigotorinoflame">
+      <img src="./static/images/maigotori.png" class="maigotori_set">
+    </div>
+    <p>name</p>
+  </div>
+</section>
+
     <main id="m-sample">
 
       <div class="wrap">
-        <section class="index_M_sec1_1">
-          <div class="index_M_sec1_di_1">
-            <div class="index_M_sec1_di_1_1">
-              <h1>最新の迷子情報</h1>
-              <div>
-                <img src="./static/images/maigotori.png"><br>
-                セキセイインコの男の子
-              </div>
-            </div>
-          </div>
-
-          <div class="index_M_sec1_di_2">
-            <div class="index_M_secc1_di_2_1">
-              <h1>今週の注目コンテスト</h1>
-              <img src="./static/images/maigotori.png">
-            </div>
-          </div>
-        </section>
 
         <section class="index_M_sec2_1">
           <div class="index_M_sec2_fl_1">
             <div class="index_M_sec2_di_1">
-              <a href="/login" id="loginB"></a>
+              <form action="/login_bornus" method="post" id="loginB">
+                <button type="submit" id="bounus"><img src="./static/images/login_bonus.png"></button>
+              </form>
+              <!-- <a href="/login" id="loginB"><img src="./static/images/login_bonus.png"></a> -->
 
-            <form method="post">
+            <form action="/search" method="post">
 
               <div class="index_M_sec2_di_1_1">
                 <h1>絞り込み</h1>
@@ -101,31 +146,26 @@
                 </nav>
               </div>
             
-              <a href="#" class="koukoku1"></a>
-              <a href="#" class="koukoku2"></a>
+              <div class="koukokuyou1">
+                <a href="https://www.hal.ac.jp/nagoya" class="koukoku1"><img src="./static/images/hal_koukoku1.png"></a>
+              </div>
+
+              <div class="koukokuyou2">
+                <a href="https://www.mode.ac.jp/osaka?utm_source=KS_Pin_Cvc&utm_medium=link&utm_content=mode&utm_campaign=DTWP&pp=0&epik=dj0yJnU9U2lkVTllSUprSEpWWXVQRE1DYjN6NXp0S3otNTBhdzUmcD0xJm49elhnOVVoaHVwYlpuTGk3UHlHcGpGUSZ0PUFBQUFBR1d3bUhn" class="koukoku1"><img src="./static/images/modo_koukoku1.png"></a>
+              </div>
+
+              <!-- <div class="koukokuyou2">
+                <a href="https://www.nagase.co.jp/glance/gallery/" class="koukoku1"><img src="./static/images/nagase.jpg"></a>
+              </div> -->
             </div>
 
             <div class="index_M_sec2_di_2">
-              <div>
-                <h1>イベント情報</h1>
-                <div>
-                  <a href="#" class="event1_frame"></a>
-                  <a href="#" class="event2_frame"></a>
-                </div>
-              </div>
-
-              <div class="search_from_kinds_of_pet">
-                <h1>ペットの種類から探す</h1>
-                <div class="kind_of_pets_flex">
-                  <a href="#"></a>
-                  <a href="#"></a>
-                  <a href="#"></a>
-                  <a href="#"></a>
-                  <a href="#"></a>
-                  <a href="#"></a>
-                  <a href="#"></a>
-                </div>
-                <a href="#">全てのペットを見る</a>
+              <h1>イベント情報</h1>
+              <div id="index_M_sec2_di_2_slide">
+                <!-- <div class="slide"><img src="./static/images/hal_koukoku1.png"></div>
+                <div class="slide"><img src="./static/images/modo_koukoku1.png"></div>
+                <div class="slide"><img src="./static/images/hal_koukoku1.png"></div>
+              </div> -->
               </div>
 
               <div class="tutorial_choice">
@@ -136,31 +176,12 @@
               <div class="search_from_category_of_goods">
                 <h1>商品から探す</h1>
                 <div class="category_of_goods_flex">
-                  <a href="#">
-                    <p>ゲージ</p>
+                  {%for categoryimages in category[:8] %}
+                  <a href="{{url_for('main.category_image', category_id = categoryimages.F_CategoryID)}}">
+                    <p>{{categoryimages.F_CategoryName}}</p>
                   </a>
-                  <a href="#">
-                    <p>エサ入れ</p>
-                  </a>
-                  <a href="#">
-                    <p>リード</p>
-                  </a>
-                  <a href="#">
-                    <p>おもちゃ</p>
-                  </a>
-                  <a href="#">
-                    <p>キャリーバッグ</p>
-                  </a>
-                  <a href="#">
-                    <p>ペット家具</p>
-                  </a>
-                  <a href="#">
-                    <p>床材</p>
-                  </a>
-                  <a href="#">
-                    <p>加湿器</p>
-                  </a>
-                  </div>
+                  {%endfor%}
+                </div>
               <a href="/product">全ての商品を見る</a>
               </div>
 
@@ -196,5 +217,11 @@
       </div><!-- class="wrap" -->
 
     </main>
+
+    <!-- <script src="./static/js/index.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-7/js/6-1-7.js"></script>
 
 {% endblock %}

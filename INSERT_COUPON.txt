@@ -1,0 +1,11 @@
+INSERT 
+INTO titta_db.t__coupon(`F_CouponID`, `F_CouponCode`, `F_CouponDis`) 
+VALUES ();
+
+1,'titta_coupon5%','0.05'
+2,'titta_coupon10%','0.1'
+3,'titta_coupon15%','0.15'
+4,'titta_coupon20%','0.2'
+5,'titta商品券(300円)','300'
+6,'titta商品券(500円)','500'
+7,'titta商品券(1000円)','1000'

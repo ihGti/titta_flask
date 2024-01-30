@@ -1,97 +1,99 @@
-#select{
-  font-size: 1.3rem;
-  margin: 0 170px
+div#right{
+  background-color: rgba(0, 0, 0, 0);
+  margin: 0 auto;
 }
+
 h1{
-  font-size: 1.7rem;
   text-align: center;
-  padding: 50px 0 0 70px;
-}
-#formr{
-  padding: 125px;
+  margin: 60px auto 50px auto;
+  font-size: 1.4rem;
+  background-color: #f1b2b200;
 }
 
-#point{
-  background-color: #F7F7FF;
-  border: none;
-  font-size: 1.3rem;
-  padding: 20px;
-  width: 500px;
-  text-align: center;
-}
-#ku-pon{
-  background-color: #F7F7FF;
-  border: none;
-  font-size: 1.3rem;
-  padding: 20px;
-  width: 500px;
-  text-align: center;
-}
-#card{
-  background-color: #F7F7FF;
-  border: none;
-  font-size: 1.3rem;
-  padding: 20px;
-  width: 500px;
-  text-align: center;
-}
-td{
-  border-bottom: #363A58 solid;
-}
-
-
-#kei{
-  margin: 0 auto;
-}
-#ue{
+#product{
+  width: auto;
+  margin: 20px auto 50px auto;
   display: flex;
+  background-color: #f6eaea00;
+}
 
+img#bigimg{
+  width: 500px;
+  height: auto;
+  margin-right: 30px;
 }
-#sita{
+
+#setu{
+  padding: 20px;
+  background-color: rgba(0, 255, 255, 0);
+}
+
+div.flex_infomation{
   display: flex;
+  margin-bottom: 15px;
+  background-color: #e5867b00;
 }
-#pp{
-  margin: 0 auto;
-  border-bottom: 1px solid;
-  padding: 5px 100px;
+
+p.btndesign1{
+  width: 80px;
+  height: 30px;
+  padding: 5px 10px 5px 10px;
+  background-color: #ffffff;
+  border-bottom: solid 1px #ddd;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  line-height: 19px;
+  color: #9d9b9b;
 }
-#hh{
-  margin: 0 auto;
-  padding: 5px 0 20px 0;
+p#btndesign2{
+  width: 80px;
+  height: 30px;
+  padding: 5px 10px 5px 10px;
+  background-color: #ffffff;
+  border-bottom: solid 1px #ddd;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  line-height: 18px;
+  color: #9d9b9b;
+}
+
+p.hidariniawasete{
+  line-height: 18px;
+  font-size: 0.8rem;
+  margin: 9px 0 20px 20px;
+}
+
+p#sitaniyohakuakete{
+  line-height: 18px;
+  font-size: 0.8rem;
+  margin: 9px 0 10px 20px;
+}
+
+#select{
+  width: 900px;
+  font-size: 0.8rem;
+  margin: 120px auto 0 auto;
+  background-color: #e5867b00;
 }
 
 #list{
 }
-#product{
-  display: flex;
-  padding: 50px 350px;
-}
-#setu{
-  padding: 0 0 0 10px;
-}
 
-#btn{
-  border: 2px solid #E5857B;
-  background-color: #F1B2B2;
-  padding: 10px;
-  margin: 30px 0 0 560px;
-}
-#btn:hover{
-  opacity: 0.7;
-}
 #Box{
-  padding: 10px;
+  padding: 5px;
 }
 #siyou{
   width: 300px;
   text-align: right;
 }
+
 #siyoul{
   font-size: 0.7rem;
   padding: 0 30px;
 }
+
 #Box2{
-  padding: 10px;
+  padding: 5px;
   font-size: 0.8rem;
 }
 .boxl{
@@ -116,4 +118,81 @@ td{
 }
 #sura{
   padding: 0 5px;
+}
+
+#formr{
+}
+
+table{
+  width: 500px;
+  margin: 0 auto;
+}
+
+#point{
+  background-color: #F7F7FF;
+  border: none;
+  font-size: 0.8rem;
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+}
+#ku-pon{
+  background-color: #F7F7FF;
+  border: none;
+  font-size: 0.8rem;
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+}
+#card{
+  background-color: #F7F7FF;
+  border: none;
+  font-size: 0.8rem;
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+}
+td{
+  border-bottom: #363A58 solid 1px;
+  width: 400px;
+}
+
+
+#kei{
+  margin: 50px auto;
+  background-color: #e5867b00;
+  margin-top: 100px;
+  margin-bottom: 60px;
+}
+#ue{
+  display: flex;
+  margin-bottom: 10px;
+
+}
+#sita{
+  display: flex;
+}
+#pp{
+  margin: 0 auto;
+  border-bottom: 1px solid;
+  padding: 5px 100px;
+}
+#hh{
+  margin: 0 auto;
+  padding: 5px 0 20px 0;
+}
+
+#btn{
+  display: block;
+  width: 200px;
+  border: 2px solid #6f00c4;
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 30px auto 0 auto;
+  color: #1a0927;
+  transition: 0.4s;
+}
+#btn:hover{
+  background-color: #6f00c4;
+  color: #ffffff;
 }

@@ -43,7 +43,7 @@ def create_app(config_filename='config.py'):
     app.config['UPLOAD_FOLDER_CONTEST_MASTER'] = 'project/static/master'
     app.config['UPLOAD_FOLDER_CONTEST'] = 'project/static/contest'
 
-    from project.models import T_User , T_Cartlist , T_Category , T_Chat , T_Contest , T_Exhibit , T_Favorite , T_FosterPet , T_LostPet , T_Paramerter , T_Pet , T_Point , T_UserReview , T_ContestMaster
+    from project.models import T_User , T_Cartlist , T_Category , T_Chat , T_Contest , T_Exhibit , T_Favorite , T_FosterPet , T_LostPet , T_Paramerter , T_Pet , T_Point , T_UserReview , T_ContestMaster , T_Coupon , T_CouponPos
     @login_manager.user_loader
     def load_user(user_id):
         return T_User.query.get(int(user_id))
@@ -62,6 +62,8 @@ def create_app(config_filename='config.py'):
     admin.add_view(ModelView(T_Point,db.session))
     admin.add_view(ModelView(T_UserReview,db.session))
     admin.add_view(ModelView(T_ContestMaster,db.session))
+    admin.add_view(ModelView(T_Coupon,db.session))
+    admin.add_view(ModelView(T_CouponPos,db.session))
     from project.views import bp as main_bp
     app.register_blueprint(main_bp)
 

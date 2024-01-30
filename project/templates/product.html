@@ -14,7 +14,7 @@
 
       <div class="wrap">
         <div id="wrap-left">
-
+        <form action="/narrow" method="post">
           <div id="Refine-search">
 
             <h2>絞り込み検索</h2>
@@ -22,29 +22,29 @@
             <ul>
               <li>
                 <p>キーワード</p>
-                <input type="text" class="textbox-001" placeholder=""/>
+                <input type="text" name="keyword" class="textbox-001" placeholder=""/>
               </li>
               <li>
                 <p id="jogai">除外<br>キーワード</p>
-                <input type="text" class="textbox-001" placeholder=""/>
+                <input type="text" name="exkeyword" class="textbox-001" placeholder=""/>
               </li>
               <li>
                 <p>カテゴリー</p>
-                <input type="text" class="textbox-001" placeholder=""/>
+                  <input type="text" name="" id="">
               </li>
               <li>
                 <p id="kakaku">価格</p>
-                <input type="text" class="textbox-002" placeholder=""/>
-                <input type="text" class="textbox-003" placeholder=""/>
+                <input type="text" name="l_price" class="textbox-002" placeholder=""/>
+                <input type="text" name="h_price" class="textbox-003" placeholder=""/>
               </li>
             </ul>
 
             <div id="btn-search">
-              <a href="#">検索する</a>
+              <button type="submit">検索する</button>
             </div>
 
           </div>
-
+        </form>
           <div id="category">
             <p class="category-head">ペットから探す</p>
             <ul>
@@ -98,8 +98,12 @@
                 {{word}}
               {% elif exword %}
                 {{exword}}
-              {% elif category %}
+              {% elif genre %}
                 {{category.F_CategoryName}}
+              {% elif l_price %}
+                {{l_price}}円以下の商品
+              {% elif h_price %}
+                {{h_price}}円以下の商品
               {%endif%}
             </h2>
             <p>
@@ -109,23 +113,28 @@
 
           <div id="yoko">
 
-            <fieldset class="checkbox-001">
-              <label>
-                  <input type="checkbox" name="checkbox-001" checked/>
-                  販売中のみ
+            <form method="post">
+              <fieldset class="checkbox-001">
+                <label>
+                    <input type="checkbox" name="checkbox-001"/>
+                    販売中のみ
+                </label>
+              </fieldset>
+
+              <label class="selectbox-001">
+                  <select name="selectbox">
+                      <option value="おすすめ順">おすすめ順</option>
+                      <option value="新しい順">あたらしい順</option>
+                      <option value="価格の安い順">価格の安い順</option>
+                      <option value="価格の高い順">価格の高い順</option>
+                    <!-- <option value="いいね!が多い順">いいね！が多い順</option> -->
+                  </select>
               </label>
-            </fieldset>
-
-            <label class="selectbox-001">
-                <select>
-                    <option>おすすめ順</option>
-                    <option>あたらしい順</option>
-                    <option>価格の安い順</option>
-                    <option>価格の高い順</option>
-                    <option>いいね！が多い順</option>
-                </select>
+              <input type="submit" value="sort" id="sort">
+            </form>
+            <label class="toggle-button-001">
+              <input type="checkbox"/ name="check" value="" id="toggle_change">
             </label>
-
           </div>
 
 
@@ -139,7 +148,6 @@
             <div id="pro-wrap">
 
         {% for products in product %}
-              {% if products.F_Sold == False%}
               <div class="product">
                 <a href="/product_detail/{{products.F_ExID}}">
                   <figure class="main">
@@ -149,6 +157,9 @@
                     {{products.F_ExTitle}}
                   </h2>
                   <div class="heart">
+                      {% if products.F_Sold == True%}
+                      <p>sold!!</p>
+                      {%endif%}
 
                     <div class="price">
 
@@ -169,37 +180,6 @@
 
                 </a>
               </div>
-              {% elif products.F_Sold == true %}
-              <div class="product">
-                <a href="/product_detail/{{products.F_ExID}}">
-                  <figure class="main">
-                    <img src="{{ url_for('static', filename='toredo/' + products.F_ExPhoto)}}" alt="big" id="bigimg">
-                  </figure>
-                  <h2>
-                    {{products.F_ExTitle}}
-                  </h2>
-                  <div class="heart">
-
-                    <div class="price">
-
-                      <h5>
-                        ￥
-                      </h5>
-                      <p>
-                        {{ '{:,.0f}'.format(products.F_ExPrice) }}
-                      </p>
-
-                    </div>
-                    <p>sold!!</p>
-                    <form action="/favorite/{{products.F_ExID}}" method="post">
-                      <input type="submit" value="&#9829;">
-                    </form>
-
-                  </div>
-
-                </a>
-              </div>
-              {%endif%}
         {% endfor%}
 
             </div>
@@ -236,7 +216,7 @@
 
     </main>
 
-
+    <script src="/static/js/product.js"></script>
 
 
 {% endblock %}

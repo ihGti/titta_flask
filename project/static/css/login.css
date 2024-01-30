@@ -11,12 +11,31 @@
 
 /*sample.html*/
 /*例*/
+html{
+  background-color: #363a58;
+}
+
+body{
+  background-color: #fff;
+}
+
+#m-sample{
+  height: 100vh;
+}
+
+#m-sample div.wrap{
+  background-color: #fff;
+  position: relative;
+}
+
 #m-sample div.wrap div#login-form{
   width: 400px;
-  height: 500px;
+  height: auto;
   background-color: #363a58;
+  background-image: url(/static/images/petwithwoman.jpg);
+  background-size: cover;
   flex-direction: column;
-  margin-left: 100px;
+  margin: 80px auto 70px auto;
 }
 
 #m-sample div.wrap div#login-form form{
@@ -27,6 +46,7 @@
 
 #m-sample div.wrap div#login-form form h1{
   font-size: 2.5rem;
+  margin-bottom: 50px;
 }
 
 #m-sample div.wrap div#login-form form label p{
@@ -35,17 +55,21 @@
 
 #m-sample div.wrap div#login-form form input{
   width: 250px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
 }
 
 #m-sample div.wrap div#login-form form input#bottun{
-  height: 30px;
-  margin: 50px 0 0 0;
+  height: 40px;
+  margin: 30px auto 0 auto;
   border: 1px solid #fff;
-  border-radius: 5px;
+  border-radius: 30px;
   color: #fff;
   background-color: #363a58;
   cursor: pointer;
-  box-shadow: 5px 3px 3px #ddd;
+  transition: 0.4s;
 }
 
 
@@ -55,19 +79,47 @@
 }
 
 /* 会員登録へのリンク設定 */
-#m-sample div.wrap a{
-  display: inline-block;
+#m-sample div.wrap div#login-form a#member_regi{
+  display: block;
+  width: 250px;
+  height: 40px;
+  margin: 30px auto 0 auto;
+  border: 1px solid #363a58;
+  border-radius: 30px;
+  color: #363a58;
+  background-color: #ffffff00;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 40px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.4s;
+}
+
+#m-sample div.wrap div#login-form a#member_regi:hover{
+  background-color: #ffffff;
+}
+
+/* パスワードお忘れの方へのリンク設定 */
+#m-sample div.wrap a#pass_forget{
+  width: 200px;
+  height: auto;
+  text-align: center;
+  display: block;
   color: white;
-  margin: 30px 0 0 140px;
+  margin: -25px auto 0 auto;
+  font-size: 0.8rem;
+  color: #363a58;
 }
 
 
 /* 縦線 */
 #m-sample div.wrap div#vartical-line{
   width: 1px;
-  height: 100vh;
+  height: auto;
   background-color: #ddd;
-  margin: -20px 0 0 10px;
+  margin: 30px 0 0 10px;
 }
 
 
@@ -81,6 +133,15 @@
   width: 250px;
   height: auto;
   margin: 180px 0 0 180px;
+}
+
+.copy-all{
+  width: 100%;
+  text-align: center;
+  margin: 0 auto 0 auto;
+  font-size: 0.6rem;
+  position: relative;
+  bottom: -50px;
 }
 
 
