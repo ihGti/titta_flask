@@ -10,6 +10,11 @@
 
 {% block js%}
     <script type="text/javascript" src="/static/js/product_detail.js"></script>
+
+    <script src="/static/js/three.js"></script>
+    <script src="https://unpkg.com/three@0.131.3/examples/js/controls/OrbitControls.js"></script>
+
+
 {% endblock%}
 
 {% block content %}
@@ -88,14 +93,14 @@
 
           <h1 id="saizuchecktext">
             サイズ感を確認する
-            <a href="#"></a>
             <a href="#" id="popup-link">見る</a>
           </h1>
 
+          
           <div id="saizukankakuninnBox">
             <p id="shouhinhyouji">ゲージなど商品を表示</p>
             <div id="popup-container" class="popup-container">
-              <img src="/static/images/saizukakuninnPic.png">
+              <canvas id="canvas" width="480px" height="300"></canvas>
               <div id="close-button" class="close-button"></div>
             </div>
           </div>

@@ -237,7 +237,16 @@ div.wrap{
 
 
 
+.paginations{
+  width: 100%;
+  display: flex;
+}
 
+.paginations{
+  margin-top: 10px;
+  justify-content: center;
+  
+}
 
 
 

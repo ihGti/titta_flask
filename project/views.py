@@ -11,6 +11,10 @@ from project import db , create_app
 # models.pyで定義したテーブル
 from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Favorite , T_Point , T_Cartlist , T_Pet , T_FosterPet , T_LostPet , T_Chat , T_UserReview , T_Contest
 
+
+from flask_paginate import Pagination, get_page_parameter
+
+
 import os
 # 時間の制約
 from datetime import datetime, date
@@ -442,7 +446,10 @@ def exhibit_trial():
 def product():
     product = T_Exhibit.query.all()
     category = T_Category.query.all()
-    return render_template("product.html" , product=product , user=current_user , category=category)
+    page = pagenate(product)
+       
+    return render_template("product.html" , product=product , user=current_user , category=category, rows=page[0], pagination=page[1])
+
 
 # カテゴリー検索:index.html
 @bp.route('/category_product/<int:category_id>/products', methods=['GET'])
@@ -541,16 +548,25 @@ def settelement_comp(exhibit_id):
 
 # 目玉機能
 # 里親掲示板
+
+#ＤＢとの連携ができてからpagenate()にクエリをぶち込む
+#よくわかんなかったら商品一覧を参照してください
+
 @bp.route("/foster_board")
 @login_required
 def foster_board():
-    return render_template("foster_board.html" , user=current_user)
+
+    page = pagenate()
+    return render_template("foster_board.html" , user=current_user, ros=page[0], pagination=page[1])
 
 # 迷子掲示板
 @bp.route("/lost_petboard")
 @login_required
 def lost_petboard():
-    return render_template("lost_petboard.html" , user=current_user)
+
+    #できてから
+    page = pagenate()
+    return render_template("lost_petboard.html" , user=current_user,rows=page[0], pagination=page[1])
 
 # 里親投稿
 @bp.route("/foster_post_page",methods=['POST'])
@@ -706,10 +722,13 @@ def foster_detail():
 def lost_detail():
     return render_template("lost_detail.html")
 
+
+#DB連携後
 # ペット一覧
 @bp.route("/reg_pet")
 def pet_list():
-    return render_template("reg_pet.html" , user=current_user)
+    page = pagenate()
+    return render_template("reg_pet.html" , user=current_user, rows=page[0], pagination=page[1])
 
 # コンテスト
 @bp.route("/contest")
@@ -925,3 +944,34 @@ def inquiry():
 @bp.route("/maintenance")
 def maintenance():
     return render_template("maintenance.html", user=current_user)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#watanabe added
+
+
+#page = pagenate(クエリ)で呼び出し
+#呼び出し元でremdertemplate(~~,rows = page[0],pagination = page[1])
+def pagenate(content):
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    res = content[(page - 1)*1: page*1]
+    pagination = Pagination(page=page, total=len(content),  per_page=1, css_framework='bootstrap4', display_msg='{total} 件中<b>{start} - {end}</b>件',)
+    return res, pagination        
+
