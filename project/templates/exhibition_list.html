@@ -177,7 +177,7 @@
 
                 <div class="pro_detail">
                   <a href="/product_detail/{{exhibits.F_ExID}}"><!-- 商品詳細ページへ -->
-                    <h2> ...</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                    <h2>{{exhibits.F_ExTitle}}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
                   </a>
 
                   <div class="heart">
@@ -194,6 +194,11 @@
                       <img src="/static/images/heart.png" alt="いいね">
                     </figure><!--クリックしてアニメーションつけるなら変更しないといけない。-->
                   </div>
+                  {%if exhibits.F_EXhibitType == 2 %}
+                  <form action="/swithing_type/{{exhibits.F_ExID}}" method="post">
+                    <input type="submit" value="出品切り替え">
+                  </form>
+                  {%endif%}
                 </div>
 
               </div>

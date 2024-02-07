@@ -300,9 +300,12 @@ div#c_frame_mc{
 
 
 .mc_contents{
+  height: 850px;
   padding: 50px;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  
 }
 
 .chat{
@@ -348,7 +351,10 @@ div#c_frame_mc{
   overflow-wrap:break-word;
 }
 
-
+.chat span#chatimage{
+  width: auto;
+  max-height: 200px;
+}
 
 
 .mc_contents_user{
@@ -401,7 +407,7 @@ div#hide_ui_sendimg ul li, div#hide_ui_stamp ul li{
 }
 
 input#sendimg{
-  display: none;
+  
 }
 
 

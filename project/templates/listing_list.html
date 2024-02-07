@@ -35,7 +35,7 @@
             <p id="tradedUser">取引したユーザー</p>
             
             <!-- DB連携書き換え必須 -->
-            {% for exhibit, user in exhibit_info %}
+            {% for exhibit, user , cart_list in exhibit_info %}
             <div class="minibox">
 
               <a href="/product_detail/{{exhibit.F_ExID}}">
@@ -46,7 +46,7 @@
 
               <div class="detailbox">
                 <a href="/"><p></p></a><!--いずれ文字を消してで入れるようにする-->
-                <p class="price">￥{{ exhibit.F_ExPrice }}</p><!-- 2000は消して -->
+                <p class="price">￥{{ cart_list.F_CartPrice }}</p><!-- 2000は消して -->
               </div>
 
               <div class="othersbox">
@@ -54,7 +54,7 @@
                   <div class="top">
                     <a href="/userprof/{{user.F_UserID}}">
                       <figure>
-                        <img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image"></figure>ユーザーアイコン
+                        <img src="{{ url_for('static', filename='prof_image/' + user.F_ProfileImage)}}" alt="profile_image"></figure>
                     </a>
                   </div>
       

@@ -48,6 +48,8 @@ class T_User(db.Model,UserMixin):
     
     coupons = db.relationship('T_CouponPos', backref='user', lazy=True)
     
+    message = db.relationship('T_Message', backref='user',lazy=True)
+    
     def get_id(self):
         return str(self.F_UserID)
     
@@ -84,6 +86,10 @@ class T_Exhibit(db.Model):
     F_ExTime = db.Column(db.DateTime, default=datetime.utcnow)
     # 商品状態
     F_Sold = db.Column(db.Boolean , default=False)
+    # 商品の縦の長さ
+    F_Width = db.Column(db.Integer, nullable=False)
+    # 商品の横の長さ
+    F_Height = db.Column(db.Integer, nullable=False)
     # 外部キー
     F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
     # 外部キー
@@ -178,7 +184,7 @@ class T_Pet(db.Model):
     # 年齢
     F_Age = db.Column(db.Integer, nullable=False)
     # 大きさ
-    F_Size = db.Column(db.Integer, nullable=False)
+    F_Size = db.Column(db.String(256), nullable=False)
     # 去勢・避妊
     F_Castration = db.Column(db.String(256) , nullable=True)
     # 特徴
@@ -214,6 +220,8 @@ class T_LostPet(db.Model):
     F_LostFeatures = db.Column(db.String(256),nullable=False)
     # 場所
     F_LostLocation = db.Column(db.String(256), nullable=False)
+    # 迷子発見
+    F_FosterPeriod = db.Column(db.Boolean, default=False)
     # 外部キー
     F_PetID = db.Column(db.Integer, db.ForeignKey('t__pet.F_PetID'), nullable=False)
     
@@ -237,6 +245,8 @@ class T_FosterPet(db.Model):
     F_Single = db.Column(db.String(256), nullable=False)
     # 投稿時間
     F_FosterDate = db.Column(db.DateTime, default= datetime.utcnow)
+    # 里親確定
+    F_FosterPeriod = db.Column(db.Boolean, default=False)
     # 外部キー
     F_PetID = db.Column(db.Integer, db.ForeignKey('t__pet.F_PetID'), nullable=False)
     
@@ -297,6 +307,8 @@ class T_ContestMaster(db.Model):
     F_ContestPeriod = db.Column(db.Boolean , default=False)
     # 投票期間終了
     F_VotingPeriod = db.Column(db.Boolean, default=False)
+    # 外部キー
+    F_CouponID = db.Column(db.Integer, db.ForeignKey('t__coupon.F_CouponID'),nullable=False)
     contest = db.relationship('T_Contest',backref='contest',lazy=True)
     
 # コンテスト
@@ -326,6 +338,8 @@ class T_Coupon(db.Model):
     F_CouponDis = db.Column(db.Float, nullable=False)
     
     coupon = db.relationship('T_CouponPos', backref = 'coupon', lazy=True)
+    
+    contest = db.relationship('T_ContestMaster', backref='coupon', lazy=True)
 
 # クーポン所持
 class T_CouponPos(db.Model):
@@ -337,3 +351,14 @@ class T_CouponPos(db.Model):
     F_CouponID = db.Column(db.Integer, db.ForeignKey('t__coupon.F_CouponID'), nullable=False)
     # 所持クーポン枚数
     F_CouponQuantity = db.Column(db.Integer, nullable=False)
+
+
+class T_Message(db.Model):
+    # 主キー
+    F_MessageID = db.Column(db.Integer, primary_key=True)
+    # 外部キー
+    F_UserID = db.Column(db.Integer, db.ForeignKey('t__user.F_UserID'), nullable=False)
+    # メッセージ
+    F_Message = db.Column(db.String(256), nullable=False)
+    # 時間
+    F_TimeStamp = db.Column(db.DateTime, nullable=False)

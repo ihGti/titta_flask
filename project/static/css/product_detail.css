@@ -54,7 +54,7 @@ div#shouhinfl1 div#shouhinPic img{
 
 div#shouhinfl1 div#shouhinhukusuu {
   width: 500px;
-  height: 150px;
+  height: auto;
   background-color: rgba(132, 210, 210, 0);
   display: flex;
   justify-content: space-between;
@@ -66,7 +66,7 @@ div#shouhinhukusuu div:nth-child(2),
 div#shouhinhukusuu div:nth-child(3),
 div#shouhinhukusuu div:nth-child(4) {
   width: 100px;
-  height: 100px;
+  height: auto;
   background-color: rgb(227, 144, 162);
   margin: 50px 0 0 0;
   /* background-image: url(../images/hoshitu.jpg); */
@@ -123,6 +123,21 @@ div#flkakaku a:first-child {
 
 a#ka-to {
   display: block;
+  width: 300px;
+  height: 60px;
+  background-color: rgb(246, 150, 171);
+  border-radius: 10px;
+  margin: 100px auto 0 auto;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f7f7ff;
+  text-decoration: none;
+  line-height: 65px;
+  text-align: center;
+  transition: 0.7s;
+}
+
+#cart{
   width: 300px;
   height: 60px;
   background-color: rgb(246, 150, 171);
@@ -415,7 +430,7 @@ div#namaetofollow a {
   margin: 0 70px 0 0;
 }
 
-div#namaetofollow button {
+div#namaetofollow form {
   background-color: rgba(0, 255, 255, 0);
   cursor: pointer;
   padding: 0 20px 0 20px;
@@ -454,6 +469,14 @@ div#osusumeshouhin a {
   width: 150px;
   height: 150px;
   background-color: blueviolet;
-  background-image: url(../images/geji.jpg);
+  /* background-image: url(../images/geji.jpg); */
+  background-size: contain;
+}
+
+div#osusumeshouhin a img{
+  width: 150px;
+  height: 150px;
+  background-color: blueviolet;
+  /* background-image: url(../images/geji.jpg); */
   background-size: contain;
 }

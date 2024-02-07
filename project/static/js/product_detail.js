@@ -34,3 +34,9 @@ popupLink.addEventListener("click", function (e) {
 closeButton.addEventListener("click", function () {
   popupContainer.style.display = "none"; // ポップアップを非表示
 });
+
+var cart = document.getElementById('cart')
+
+cart.addEventListener("click", function(){
+  alert('お試し出品機能を楽しめましたか？')
+});
