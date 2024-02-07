@@ -1,82 +1,65 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/my_prof_left.css" />
+<!-- ↑左のサイドバーのcss -->
+<!-- ↓ここ編集 -->
+<link rel="stylesheet" type="text/css" href="/static/css/qa.css" />
 
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="/static/css/my_prof_left.css">
-    <!-- ↑左のサイドバーのcss -->
-    <!-- ↓ここ編集 -->
-    <link rel="stylesheet" type="text/css" href="/static/css/qa.css">
+{% endblock %} {% block title %} -qa {% endblock %} {% block content %}
+<main id="m-my_profile">
+  <div class="wrap">
+    {% include "myside.html" %}
+    <!-- ↓ここに入力してって -->
 
-{% endblock %}
+    <div id="right">
+      <!-- 右  -->
 
+      <h1>チャットボット風質問</h1>
 
-{% block title %}
--qa
-{% endblock %}
+      <!-- これは直で書いたほうが楽な気がします -->
+      <div>
+        <div id="messages"></div>
+        <div id="text"></div>
+        <textarea id="user-message" cols="30" rows="10"></textarea>
+        <button id="send-button">送信</button>
+      </div>
+    </div>
+  </div>
+  <!-- class="wrap" -->
+</main>
 
-
-{% block content %}
-    <main id="m-my_profile">
-
-      <div class="wrap">
-
-        {% include "myside.html" %}
-        <!-- ↓ここに入力してって -->
-
-
-        <div id="right"><!-- 右  -->
-
-          <h1>よくある質問</h1>
-
-<!-- これは直で書いたほうが楽な気がします -->
-          <div class="and">
-            <div class="A"><p>ボタン</p><p class="itemm">&#8744;</p></div>
-            <div class="B">これが表示/非表示</div>
-          </div>
-          <div class="and">
-            <div class="C"><p>ボタン</p><p class="itemm">&#8744;</p></div>
-            <div class="D">これが表示/非表示</div>
-          </div>
-          <div class="and">
-            <div class="E"><p>ボタン</p><p class="itemm">&#8744;</p></div>
-            <div class="F">これが表示/非表示</div>
-          </div>
-
-
-        </div>
-
-
-
-      </div><!-- class="wrap" -->
-
-    </main>
-
-        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ebfd63cef7.js" crossorigin="anonymous"></script>
-    <script src="js/common.js"></script>
-
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://kit.fontawesome.com/ebfd63cef7.js"
+  crossorigin="anonymous"
+></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script src="js/common.js"></script>
 
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <script>
-$(function() {
-    $(".A").click(function() {
-        $(".B").slideToggle("");
+  document.addEventListener("DOMContentLoaded", (event) => {
+    var socket = io.connect("http://" + document.domain + ":" + location.port);
+
+    socket.on("receive_message", function (data) {
+      const messageBox = document.getElementById("messages");
+      messageBox.innerHTML += "<p><b>Bot:</b> " + data.message + "</p>";
     });
-});
-$(function() {
-    $(".C").click(function() {
-        $(".D").slideToggle("");
-    });
-});
-$(function() {
-    $(".E").click(function() {
-        $(".F").slideToggle("");
-    });
-});
+
+    document
+      .getElementById("send-button")
+      .addEventListener("click", function () {
+        const userMessage = document.getElementById("user-message").value;
+        const messageon = document.getElementById("text");
+        messageon.innerHTML += "<p><b>YOU:</b>" + userMessage + "</p>";
+        socket.emit("send_message", { message: userMessage });
+
+        document.getElementById("user-message").value = "";
+      });
+  });
 </script>
 
-
 {% endblock %}
-
-
-
-

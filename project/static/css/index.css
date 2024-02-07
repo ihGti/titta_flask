@@ -818,7 +818,7 @@ p.satooyabo {
 }
 
 /* 掲示板の個々Flex */
-div#satooya_flex {
+div.satooya_flex {
   width: 550px;
   height: auto;
   background-color: #e5867b00;
@@ -867,3 +867,5 @@ a.satooyaboshuBox p.satooyasagasi_m {
   margin-top: -20px;
 }
 /* --------------------------------------- */
+
+

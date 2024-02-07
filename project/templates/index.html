@@ -5,6 +5,7 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 {% endblock %}
 
 {% block content %}
@@ -16,40 +17,40 @@
 <section>
   <div id="kisekae_basic">
     <img src="./static/images/toppage_basicimg.png" id="kisekae_image">
-    {%for category_id in session['category']%}
-      {%if category_id == 1 %}
       <img src="./static/images/umekomutoko.png" id="umekomutoko">
-      {%elif category_id == 2 %}
+    {%for category_id in session['category']%}
+      {%if category_id == 1 %}<!--完了-->
       <img src="./static/images/suisou.png" id="suisou">
-      {%elif category_id == 3 %}
       <img src="./static/images/sakanatachi.png" id="sakanatachi">
-      {%elif category_id == 4 %}
-      <img src="./static/images/nozokuneko.png" id="nozokuneko">
-      {%elif category_id == 5 %}
-      <img src="./static/images/cattower.png" id="cattower">
-      {%elif category_id == 6 %}
+      {%elif category_id == 2%}<!--完了-->
+      <img src="./static/images/dog_food.png" id="dog_food">
       <img src="./static/images/cat_water.png" id="cat_water">
-      {%elif category_id == 7 %}
+      {%elif category_id == 3 %}<!--完了-->
+      <img src="./static/images/rido.png" id="rido">
+      {%elif category_id == 4 %}<!--完了-->
+      <img src="./static/images/ball.png" id="ball">
+      <img src="./static/images/nekojyarashi.png" id="nekojyarashi">
+      {%elif category_id == 5 %}<!--完了-->
       <img src="./static/images/petbag.png" id="petbag">
+      {%elif category_id == 7 %}<!--完了-->
+      <img src="./static/images/cattower.png" id="cattower">
       {%elif category_id == 8 %}
       <img src="./static/images/hamusuke.png" id="hamusuke">
-      {%elif category_id == 9 %}
-      <img src="./static/images/nekojyarashi.png" id="nekojyarashi">
-      {%elif category_id == 10 %}
-      <img src="./static/images/ball.png" id="ball">
-      {%elif category_id == 11 %}
-      <img src="./static/images/rido.png" id="rido">
-      {%elif category_id == 12 %}
-      <img src="./static/images/came.png" id="came">
-      {%elif category_id == 13 %}
-      <img src="./static/images/inu.png" id="inu">
-      <img src="./static/images/dog_food.png" id="dog_food">
-      <img src="./static/images/hachurui.png" id="hachurui">
-      <img src="./static/images/torikago.png" id="torikago">
-      <!-- <div id="offright"></div> -->
-
       {%endif%}
     {%endfor%}
+
+    {% if user.F_Profile_Comment and '亀' in user.F_Profile_Comment %}
+      <img src="./static/images/came.png" id="came">
+    {% elif user.F_Profile_Comment and '犬' in user.F_Profile_Comment %}
+      <img src="./static/images/inu.png" id="inu">
+    {% elif user.F_Profile_Comment and '蛇' in user.F_Profile_Comment %}
+      <img src="./static/images/hachurui.png" id="hachurui">
+    {% elif user.F_Profile_Comment and '鳥' in user.F_Profile_Comment %}
+      <img src="./static/images/torikago.png" id="torikago">
+      <!-- <div id="offright"></div> -->
+    {% elif user.F_Profile_Comment and '猫' in user.F_Profile_Comment %}
+      <img src="./static/images/nozokuneko.png" id="nozokuneko">
+    {%endif%}
   </div>
 
   <div id="maigoinko">
@@ -124,15 +125,9 @@
                 <h1>ペットから探す</h1>
                 <nav>
                   <ul>
-                    <li><a href="/product?dog">犬</a></li>
-                    <li><a href="/product?cat">猫</a></li>
-                    <li><a href="/product?">小動物</a></li>
-                    <li><a href="/product?bird">鳥</a></li>
-                    <li><a href="/product?rep">爬虫類</a></li>
-                    <li><a href="/product">両生類</a></li>
-                    <li><a href="/product">昆虫</a></li>
-                    <li><a href="/product">淡水魚</a></li>
-                    <li><a href="/product">浄水魚</a></li>
+                    {%for pet in p_category%}
+                    <li><a href="{{url_for('main.pet_category',category_id=pet.F_CategoryID)}}">{{pet.F_CategoryName}}</a></li>
+                    {%endfor%}
                   </ul>
                 </nav>
 
@@ -168,9 +163,22 @@
               </div> -->
               </div>
 
+
               <div class="tutorial_choice">
                 <a href="/exhibit_trial"></a>
                 <a href="#"></a>
+              </div>
+
+              <div class="search_from_kinds_of_pet">
+                <h1>ペットの種類から探す</h1>
+                <div class="kind_of_pets_flex">
+                  {%for pet_images in p_category[:7] %}
+                  <a href="{{url_for('main.pet_image', category_id = pet_images.F_CategoryID)}}">
+                    <p style="margin: 100px 0 0 30px;">{{pet_images.F_CategoryName}}</p>
+                  </a>
+                  {%endfor%}
+                </div>
+                <a href="/pet_all" style="margin-top: 20px;">全てのペットを見る</a>
               </div>
 
               <div class="search_from_category_of_goods">
@@ -186,31 +194,52 @@
               </div>
 
 <!-- この下デバッグ用変数の設定、flask側で処理が作れたら消す -->
-              {% set foster = "里親募集" %} 
-              {% set lost = "迷子" %}
-              {% set dogitem = "犬用品" %}
-              {% set catitem = "猫用品" %}
+
 
 
               <p class="satooyabo">里親掲示板</p>
-               {% with cont = foster %}
-                  {% include "index_flex_module.html" %}
-               {% endwith%}
+              <div class="satooya_flex">
+              {% for pet_f in foster %}
+                <a href="/foster_detail" class="satooyaboshuBox">
+                  <div class="satooyaoseru"><img src="/static/foster_pet/{{pet_f.pets.F_Image}}" alt=""></div>
+                  <p class="satooyasagasi_m">{{ pet_f.F_FosterTitle }}</p>
+                </a>
+              {% endfor %}
+              </div>
 
               <p class="satooyabo">迷子掲示板</p>
-              {% with cont = lost %}
-                 {% include "index_flex_module.html" %}
-              {% endwith%}
+              <div class="satooya_flex">
+              {% for losts in lost %}
+                <a href="/lost_detail/{{losts.F_LostPetID}}" class="satooyaboshuBox">
+                  <div class="satooyaoseru"><img src="/static/lost_pet/{{losts.pets.F_Image}}" alt=""></div>
+                  <p class="satooyasagasi_m">{{ losts.F_LostTitle }}</p>
+                </a>
+              {% endfor %}
+              </div>
 
               <p class="satooyabo">犬用品</p>
-              {% with cont = dogitem %}
-                 {% include "index_flex_module.html" %}
-              {% endwith%}
+              <div class="satooya_flex">
+                {% for dog in dog_product[:4]%}
+                
+                  <a href="/product_detail/{{dog.F_ExID}}" class="satooyaboshuBox">
+                    <div class="satooyaoseru"><img src="/static/toredo/{{dog.F_ExPhoto}}" alt=""></div>
+                    <p class="satooyasagasi_m">{{ dog.F_ExTitle }}</p>
+                  </a>
+                {% endfor %}
+                
+                </div>
 
               <p class="satooyabo">猫用品</p>
-              {% with cont = catitem %}
-                 {% include "index_flex_module.html" %}
-              {% endwith%}
+              <div class="satooya_flex">
+                {% for cat in c_product[:4]%}
+                
+                <a href="/product_detail/{{cat.F_ExID}}" class="satooyaboshuBox">
+                  <div class="satooyaoseru"><img src="/static/toredo/{{dog.F_ExPhoto}}" alt=""></div>
+                  <p class="satooyasagasi_m">{{ cat.F_ExTitle }}</p>
+                </a>
+                {% endfor %}
+                
+                </div>
               
 
         </section>

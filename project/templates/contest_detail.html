@@ -43,7 +43,7 @@
 
           <div id="award">
             <p id="sho">賞</p>
-            <p id="sho-d">{{coupon.F_CouponID}}</p>
+            <p id="sho-d">{{coupon.F_CouponCode}}</p>
           </div>
 
           <div id="divide">
@@ -56,7 +56,7 @@
                 </li>
                 <li>
                   <p class="headingA">コンテストの募集期間</p>
-                  <p class="app-con">2023年11月06日(月) から 2024年03月31日(日) まで</p>
+                  <p class="app-con">{{time}} から {{contest_detail.F_ContestMasterTime}} まで</p>
                 </li>
                 <li>
                   <p class="headingA">コンテストの日程</p>
@@ -91,11 +91,12 @@
             </div>
 
           </div>
-
+          {%if contest_detail.F_ContestPeriod == False%}
           <a href="/apply/{{contest_detail.F_ContestMasterID}}" id="ApplyBtn">応募する</a>
-
+          {%endif%}
+          {%if contest_detail.F_ContestPeriod == True and contest_detail.F_VotingPeriod == False %}
           <a href="/contest_list/{{contest_detail.F_ContestMasterID}}" id="ApplyBtn">応募者一覧</a>
-
+          {%endif%}
         </div>
 
       </div><!-- class="wrap" -->

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="static/css/board_detail.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/board_detail.css">
 {% endblock %}
 
 {% block content%}
@@ -17,8 +17,8 @@
 
 
         <div class="p_detail-heading">
-          <p><a href="foster_board.html"><< 検索に戻る</a></p>
-          <p id="p-id">投稿ID:{{ id }}</p>
+          <p><a href="/lost_petboard"><< 検索に戻る</a></p>
+          <p id="p-id">投稿ID:{{ pet.F_LostPetID }}</p>
         </div><!-- class="p_detail-heading" -->
 
 
@@ -35,7 +35,7 @@
             <h2>投稿タイトル</h2>
             <div class="post-img">
               <figure>
-                <img src="images/pet1.png" alt="petimg">
+                <img src="/static/lost_pet/{{lost.F_Image}}" alt="petimg">
               </figure>
             </div>
 
@@ -44,45 +44,45 @@
             <table>
               <tr>
                 <th>状況</th>
-                <td colspan="3">{{ jokyo }}</td>
+                <td colspan="3">{{ pet.F_LostInstitution }}</td>
               </tr>
               <tr>
                 <th>種類</th>
-                <td>{{ syurui }}</td>
+                <td>{{ category.F_CategoryName }}</td>
                 <th>大きさ</th>
-                <td>{{ ookisa}}</td>
+                <td>{{ lost.F_Size }}</td>
               </tr>
               <tr>
                 <th>性別</th>
-                <td>{{ gender }}</td>
+                <td>{{ lost.F_Seibetu }}</td>
                 <th>年齢</th>
-                <td>{{ nenrei }}</td>
+                <td>{{ lost.F_Age }}</td>
               </tr>
               <tr>
                 <th>保護日時</th>
-                <td>{{ hogoday }}</td>
+                <td>{{ pet.F_LostDate }}</td>
                 <th>保護場所</th>
-                <td>{{ hogoarea }}</td>
+                <td>{{ pet.F_LostPlace }}</td>
               </tr>
               <tr>
                 <th>怪我の有無</th>
-                <td>{{ kega }}</td>
+                <td>{{ pet.F_LostInjury }}</td>
                 <th>体色</th>
-                <td>{{ color }}</td>
+                <td>{{ lost.F_Colors }}</td>
               </tr>
               <tr>
                 <th>掲載日</th>
-                <td>{{ keisaibi }}</td>
+                <td>{{ lost.F_Date }}</td>
                 <th>掲載期日</th>
-                <td>{{ keisaikizitsu}}</td>
+                <td>{{ lost.F_Date}}</td>
               </tr>
               <tr>
                 <th>届出済の機関</th>
-                <td colspan="3">{{ todokede }}</td>
+                <td colspan="3">{{ pet.F_LostInstitution }}</td>
               </tr>
               <tr>
                 <th>特徴</th>
-                <td colspan="3">{{ unique }}</td>
+                <td colspan="3">{{ pet.F_LostFeatures }}</td>
               </tr>
             </table>
 
@@ -92,27 +92,27 @@
               <tr>
                 <th>募集の経緯</th>
                 <td>
-                  {{ keii }}
+                  {{ lost.F_Background }}
                 </td>
               </tr>
               <tr>
                 <th>性格・特徴</th>
-                <td>{{ seikaku }}</td>
+                <td>{{ lost.F_Features }}</td>
               <tr>
                 <th>健康状態</th>
                 <td>
-                  {{ kenkou }}
+                  {{ lost.F_Health }}
               </tr>
               <tr>
                 <th>引き渡し場所</th>
                 <td>
-                  {{ hikiwatasiarea }}
+                  {{ pet.F_LostPlase }}
                 </td>
               </tr>
               <tr>
                 <th>その他備考</th>
                 <td>
-                  {{ bikou }}
+                  {{ lost.F_Remarks }}
                 </td>
               </tr>
             </table>
@@ -174,7 +174,7 @@
 
 
         <div class="p_detail-heading">
-          <p><a href="/foster_board">
+          <p><a href="/lost_petboard">
               << 検索に戻る</a>
           </p>
         </div><!-- class="p_detail-heading" -->

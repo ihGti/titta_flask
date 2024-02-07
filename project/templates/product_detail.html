@@ -67,7 +67,7 @@
         {% elif exhibit.F_EXhibitType == 1 %}
         <a href="/settelement_check/{{exhibit.F_ExID}}" id="ka-to">購入する</a>
         {% elif exhibit.F_EXhibitType == 2 %}
-        <input type="button" value="欲しい!!">
+        <input type="button" value="欲しい!!" id="cart">
         {%endif%}
 
         <div id="moxtutomiru">
@@ -84,7 +84,7 @@
             <tr>
               <th>カテゴリー</th>
               <td>
-                <p class="hyounomoji">{{exhibit.F_CategoryID}}</p>
+                <p class="hyounomoji">{{exhibit_category.F_CategoryName}}</p>
               </td>
             </tr>
             <tr>
@@ -128,7 +128,7 @@
             </div>
             <div id="namaetofollow">
               <a href="/userprof/{{users.F_UserID}}">{{ users.F_UserName}}</a>
-              <form action="/add_friend/{{ users.F_UserID }}" method="post">
+              <form action="/add_friend_product/{{ users.F_UserID }}" method="post">
                 <input type="submit" value="フォロー">
               </form>
               <a href="#" id="reviewhoshi"></a>
@@ -142,12 +142,11 @@
 
     <p id="osusume">こちらの商品もおすすめです</p>
     <div id="osusumeshouhin">
-      <a href="#"></a>
-      <a href="#"></a>
-      <a href="#"></a>
-      <a href="#"></a>
-      <a href="#"></a>
-      <a href="#"></a>
+      {%for recomend_list in recomend%}
+        {%for recomends in recomend_list %}
+        <a href="/product_detail/{{recomends.F_ExID}}"><img src="/static/toredo/{{recomends.F_ExPhoto}}" alt=""></a>
+        {%endfor%}
+      {%endfor%}
     </div>
       </div><!-- class="wrap" -->
 

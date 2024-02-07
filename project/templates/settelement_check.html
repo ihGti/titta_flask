@@ -84,47 +84,9 @@
                   <td><select name="card" id="card" onchange="viewChange2();">
                     <option value="select1">選択する</option>
                     <option value="select2">Titta card</option>
-                    <option value="select3">クレジットカード</option>
+                    <option value="select3">オンライン決済</option>
                   </select>
                   <div id="Box2" style="display:none;">
-                    <div>
-                      <label class="boxl">カード番号</label><input type="text" name="cardnum" id="cardnum">
-                      <label class="boxl">有効期限</label><select name="mmyy" class="yukou" id="yukou">
-                        <option value="1">01</option>
-                        <option value="2">02</option>
-                        <option value="3">03</option>
-                        <option value="4">04</option>
-                        <option value="5">05</option>
-                        <option value="6">06</option>
-                        <option value="7">07</option>
-                        <option value="8">08</option>
-                        <option value="9">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                      </select>/<select name="" class="yukou" id="yukou2">
-                        <option value="">23</option>
-                        <option value="">24</option>
-                        <option value="">25</option>
-                        <option value="">26</option>
-                        <option value="">27</option>
-                        <option value="">28</option>
-                        <option value="">29</option>
-                        <option value="">30</option>
-                        <option value="">31</option>
-                        <option value="">32</option>
-                        <option value="">33</option>
-                        <option value="">34</option>
-                        <option value="">35</option>
-                        <option value="">36</option>
-                        <option value="">37</option>
-                        <option value="">38</option>
-                      </select>
-                    </div>
-                    <div id="yplp">
-                      <label class="boxl">名義人</label><input type="text" name="username" id="meigi">
-                      <label class="boxl">CVV</label><input type="text" name="cvv" id="cvv">
-                    </div>
                     <div>
                       <input type="submit" name="check" value="確認" id="btn2" onclick="return settelesub()">
                     </div>
@@ -137,11 +99,35 @@
 
           <div id="kei">
             <div id="ue">
-              <p id="pp">小計：￥{{ '{:,.0f}'.format(exhibit.F_ExPrice) }} ポイント利用：なし クーポン利用：なし</p>
+              <p id="pp">小計：￥{{ '{:,.0f}'.format(exhibit.F_ExPrice) }}
+                 ポイント利用：
+                 {%if points%}
+                  はい
+                 {%else%}
+                  無し
+                 {%endif%}
+                 クーポン利用：
+                 {%if coupon%}
+                 はい
+                 {%else%}
+                 なし
+                 {%endif%}
+                </p>
             </div>
             <div id="sita">
-              <h2 id="hh">支払合計：￥{{ cart_price }}
-              取得ポイント：{{ points }}</h2>
+              <h2 id="hh">支払合計：￥
+                {%if cart_price %}
+                {{ cart_price }}
+                {%elif cart_price == 0 %}
+                0
+                {%endif%}
+              取得ポイント：
+              {%if points%}
+                {{ points }}
+              {%else%}
+                0
+              {%endif%}
+              </h2>
             </div>
           </div>
 

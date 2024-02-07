@@ -66,7 +66,7 @@
                 <p id="link"><a href="/top">Titta</a> > <a href="/lost_board">里親情報一覧</a></p>
 
                 <h2>里親情報一覧</h2>
-            <form action="" method="post">
+            <form method="post">
 
                 <div id="all">
                     <div id="square">
@@ -74,14 +74,10 @@
                             <div id="type">
                                 <h3>種別</h3>
                                 <ul>
-                                    <li><input type="checkbox" name="syubetu" value="1">すべて</li>
-                                    <li><input type="checkbox" name="syubetu" value="2">犬</li>
-                                    <li><input type="checkbox" name="syubetu"value="3">猫</li>
-                                    <li><input type="checkbox" name="syubetu" value="4">鳥</li>
-                                    <li><input type="checkbox" name="syubetu" value="5">小動物</li>
-                                    <li><input type="checkbox" name="syubetu" value="6">爬虫類</li>
-                                    <li><input type="checkbox" name="syubetu" value="7">魚</li>
-                                    <li><input type="checkbox" name="syubetu" value="8">その他</li>
+                                    <li><input type="checkbox" name="syubetu" value="0">すべて</li>
+                                    {%for pet in category[:7]%}
+                                    <li><input type="checkbox" name="syubetu" value="{{pet.F_CategoryID}}">{{pet.F_CategoryName}}</li>
+                                    {%endfor%}
                                 </ul>
                             </div>
                             <div id="location">
@@ -211,16 +207,6 @@
                                     </select>
                                 </label>
                             </div>
-                            <div id="kinds">
-                                <h3>○○の種類</h3>
-                                <label class="selectbox-002">
-                                    <select name="kinds">
-                                        <option>すべて</option>
-                                        <option>柴犬</option>
-                                        <option>シマエナガ</option>
-                                    </select>
-                                </label>
-                            </div>
                         </div>
                         <div id="bottom">
                             <div id="word">
@@ -257,20 +243,20 @@
 
 <!-- viewで実装する際に調整して -->
 
-{% for i in range(12)%}
+{% for lost in lost_pet %}
                   <div class="post">
-                    <a href="/lost_detail">
+                    <a href="/lost_detail/{{lost.F_LostPetID}}">
                       <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
                       <figure>
-                        <img src="/static/images/cat.jpeg" alt="sample">
+                        <img src="/static/lost_pet/{{lost.pets.F_Image}}" alt="sample">
                       </figure>
 
-                      <h3>投稿タイトル</h3>
+                      <h3>投稿タイトル{{lost.F_LostTitle}}</h3>
                       <p><span>種類</span></p>
-                      <p><span>性別</span></p>
-                      <p><span>発見地</span></p>
-                      <p><span>発見日時</span></p>
-                      <p><span>状況</span></p>
+                      <p><span>性別</span>{{lost.pets.F_Seibetu}}</p>
+                      <p><span>発見地</span>{{lost.F_LostPlace}}</p>
+                      <p><span>発見日時</span>{{lost.F_LostDate}}</p>
+                      <p><span>状況</span>{{lost.F_LostInjury}}</p>
                     </a>
                   </div><!-- class="post" -->
 {% endfor %}

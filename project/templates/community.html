@@ -62,15 +62,22 @@
                 {% if message.F_SenderID == current_user.F_UserID%}
                 <li class="chat">
                   
-                  <figure class="recep"><img src="/static/prof_image/{{current_user.F_ProfileImage}}" alt=""></figure>
+                  <figure class="recep"></figure>
+                  {%if message.F_ChatContest%}
                   <span><p>{{message.F_ChatContest}}</p></span>
-                  <figure class="send"></figure>
+                  {%elif message.F_ChatImage %}
+                  <span><img src="/static/chat_image/{{message.F_ChatImage}}" alt=""></span>
+                  {%endif%}
+                  <figure class="send"><img src="/static/prof_image/{{current_user.F_ProfileImage}}" alt=""></figure>
                 </li>
                 {% else %}
                 <li class="chat">
-                  <figure class="recep"></figure>
+                  <figure class="recep"><img src="{{ url_for('static', filename='prof_image/' + receiver.F_ProfileImage) }}" alt="Profile Image"></figure>
+                  {%if message.F_ChatContest%}
                   <span><p>{{message.F_ChatContest}}</p></span>
-                  <figure class="send"><img src="{{ url_for('static', filename='prof_image/' + receiver.F_ProfileImage) }}" alt="Profile Image"></figure>
+                  {%elif message.F_ChatImage %}
+                  <span id="chatimage"><img src="/static/chat_image/{{message.F_ChatImage}}" alt=""></span>
+                  {%endif%}                  <figure class="send"></figure>
                 </li>
                 {% endif %}
                 {% endfor %}
