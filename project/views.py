@@ -134,12 +134,13 @@ def search():
         # 商品検索結果
         product = query.all()
         product_dict = [{'id':products.F_ExID,'title':products.F_ExTitle,'tag':products.F_ExTag} for products in product]
-        
+        page = pagenate(product)
+
         session['product'] = product_dict
         # 検索した商品の数を取得
         num_product = len(product)
         category= T_Category.query.filter_by(F_CategoryCode='c')
-    return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , category=category , num_product=num_product , l_price=l_price , h_price=h_price)
+    return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , category=category , num_product=num_product , l_price=l_price , h_price=h_price,rows = page[0],pagination = page[1])
 
 
 
@@ -681,15 +682,16 @@ def product():
 def category_product(category_id):
     category = T_Category.query.get(category_id)
     product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
-    
-    return render_template('product.html', product=product, category=category , user=current_user)
+    page = pagenate(product)
+    return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1])
 
 # 画像クリックでカテゴリー検索:index.html
 @bp.route('/category_image/<int:category_id>/product' , methods=['GET'])
 def category_image(category_id):
     category_image = T_Category.query.get(category_id)
     product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
-    return render_template('product.html', product=product, category_image=category_image, user=current_user)
+    page = pagenate(product)
+    return render_template('product.html', product=product, category_image=category_image, user=current_user,rows = page[0],pagination = page[1])
 
 
 # ペット検索
@@ -697,14 +699,16 @@ def category_image(category_id):
 def pet_category(category_id):
     pet_category = T_Category.query.get(category_id)
     product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
-    return render_template('product.html',user=current_user, product=product, pet_category=pet_category)
+    page = pagenate(product)
+    return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1])
 
 # ペット検索画像で
 @bp.route('/pet_image/<int:category_id>/product', methods=['GET'])
 def pet_image(category_id):
     pet_image = T_Category.query.get(category_id)
     product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_image.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
-    return render_template('product.html',user=current_user, product=product, pet_image=pet_image)
+    page=pagenate(product)
+    return render_template('product.html',user=current_user, product=product, pet_image=pet_image,rows = page[0],pagination = page[1])
 
 # ペット検索全部
 @bp.route('/pet_all',methods=['GET'])
@@ -714,7 +718,8 @@ def pet_all():
     for pet_category in pet_all:
         pet_product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
         product.extend(pet_product)
-    return render_template('product.html',user=current_user, product=product, pet_all=pet_all)
+    page = pagenate(product)
+    return render_template('product.html',user=current_user, product=product, pet_all=pet_all,rows = page[0],pagination = page[1])
 
 # 商品詳細
 @bp.route("/product_detail/<int:exhibit_id>")
@@ -1482,7 +1487,10 @@ def maintenance():
 #呼び出し元でremdertemplate(~~,rows = page[0],pagination = page[1])
 def pagenate(content):
     page = request.args.get(get_page_parameter(), type=int, default=1)
-    res = content[(page - 1)*1: page*1]
-    pagination = Pagination(page=page, total=len(content),  per_page=1, css_framework='bootstrap4', display_msg='{total} 件中<b>{start} - {end}</b>件',)
-    return res, pagination        
+    per_page = 20  # 1ページあたりの表示件数
+    start_idx = (page - 1) * per_page
+    end_idx = start_idx + per_page
+    res = content[start_idx:end_idx]
+    pagination = Pagination(page=page, total=len(content), per_page=per_page, css_framework='bootstrap4', display_msg='{total} 件中<b>{start} - {end}</b>件',)
+    return res, pagination
 

@@ -10,7 +10,7 @@
 
 
 {% endblock %}
-<script src="/static/./js/bootstrap.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
 
 {% block content %}
 
@@ -160,7 +160,7 @@
                     {{row.F_ExTitle}}
                   </h2>
                   <div class="heart">
-                      {% if products.F_Sold == True%}
+                      {% if row.F_Sold == True%}
                       <p>sold!!</p>
                       {%endif%}
 
@@ -175,7 +175,7 @@
 
                     </div>
                     
-                    <form action="/favorite/{{products.F_ExID}}" method="post">
+                    <form action="/favorite/{{row.F_ExID}}" method="post">
                       <input type="submit" value="&#9829;">
                     </form>
 
