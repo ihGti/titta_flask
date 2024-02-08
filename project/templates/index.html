@@ -222,7 +222,15 @@
                 {% for dog in dog_product[:4]%}
                 
                   <a href="/product_detail/{{dog.F_ExID}}" class="satooyaboshuBox">
-                    <div class="satooyaoseru"><img src="/static/toredo/{{dog.F_ExPhoto}}" alt=""></div>
+                    <div class="satooyaoseru">
+                    {%if dog.F_ExPhoto%}
+                      {%if dog.F_ExPhoto.endswith('.mp4')%}
+                      <video src="/static/toredo/{{dog.F_ExPhoto}}" alt="" autoplay>
+                      {%else%}
+                      <img src="/static/toredo/{{dog.F_ExPhoto}}" alt="">
+                      {%endif%}
+                    {%endif%}
+                    </div>
                     <p class="satooyasagasi_m">{{ dog.F_ExTitle }}</p>
                   </a>
                 {% endfor %}
@@ -234,7 +242,14 @@
                 {% for cat in c_product[:4]%}
                 
                 <a href="/product_detail/{{cat.F_ExID}}" class="satooyaboshuBox">
-                  <div class="satooyaoseru"><img src="/static/toredo/{{dog.F_ExPhoto}}" alt=""></div>
+                  <div class="satooyaoseru">
+                    {%if cat.F_ExPhoto%}
+                      {%if cat.F_ExPhoto.endswith('.mp4')%}
+                      <video src="/static/toredo/{{cat.F_ExPhoto}}" alt="" autoplay>
+                      {%else%}
+                      <img src="/static/toredo/{{cat.F_ExPhoto}}" alt="">
+                      {%endif%}
+                    {%endif%}                  </div>
                   <p class="satooyasagasi_m">{{ cat.F_ExTitle }}</p>
                 </a>
                 {% endfor %}
