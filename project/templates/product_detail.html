@@ -30,7 +30,11 @@
     <div id="shouhinfl">
       <div id="shouhinfl1">
         <div id="shouhinPic">
+        {%if exhibit.F_ExPhoto.endswith('.mp4')%}
+          <video src="/static/toredo/{{exhibit.F_ExPhoto}}" alt=""></video>
+        {%else%}
           <img src="/static/toredo/{{exhibit.F_ExPhoto}}" alt="">
+        {%endif%}
         </div>
         <div id="shouhinhukusuu">
         {% if exhibit.F_ExPhotoS %}
