@@ -13,7 +13,7 @@
 
     <script src="/static/js/three.js"></script>
     <script src="https://unpkg.com/three@0.131.3/examples/js/controls/OrbitControls.js"></script>
-
+    <script src="https://unpkg.com/three@0.131.0/examples/js/loaders/OBJLoader.js"></script>
 
 {% endblock%}
 
@@ -28,37 +28,20 @@
 
     <div id="pankuzu">
       <a href="#">くず</a>>
-      <a href="/top">top</a>>
+      <a href="#">くず</a>>
       <a href="/product">商品一覧</a>
     </div>
 
     <div id="shouhinfl">
       <div id="shouhinfl1">
         <div id="shouhinPic">
-        {%if exhibit.F_ExPhoto.endswith('.mp4')%}
-          <video src="/static/toredo/{{exhibit.F_ExPhoto}}" alt=""></video>
-        {%else%}
           <img src="/static/toredo/{{exhibit.F_ExPhoto}}" alt="">
-        {%endif%}
         </div>
         <div id="shouhinhukusuu">
-        {% if exhibit.F_ExPhotoS %}
-          <div class="shouhinbetween">
-            <img src="/static/toredo/{{exhibit.F_ExPhotoS}}" alt="">
-          </div>
-        {% elif exhibit.F_ExPhotoT %}
-          <div class="shouhinbetween">
-            <img src="/static/toredo/{{exhibit.F_ExPhotoT}}" alt="">
-          </div>
-        {% elif exhibit.F_ExPhotoF %}
-          <div class="shouhinbetween">
-            <img src="/static/toredo/{{exhibit.F_ExPhotoF}}" alt="">
-          </div>
-        {% elif exhibit.F_ExPhotoH %}
-          <div class="shouhinbetween">
-            <img src="/static/toredo/{{exhibit.F_ExPhotoH}}" alt="">
-          </div>
-        {% endif %}
+          <div class="shouhinbetween"></div>
+          <div class="shouhinbetween"></div>
+          <div class="shouhinbetween"></div>
+          <div class="shouhinbetween"></div>
         </div>
       </div>
 
@@ -71,13 +54,7 @@
           <a href="#"></a>
         </div>
 
-        {% if exhibit.F_Sold == true %}
-        <a href="#" id="ka-to">SoldOut</a>
-        {% elif exhibit.F_EXhibitType == 1 %}
         <a href="/settelement_check/{{exhibit.F_ExID}}" id="ka-to">購入する</a>
-        {% elif exhibit.F_EXhibitType == 2 %}
-        <input type="button" value="欲しい!!" id="cart">
-        {%endif%}
 
         <div id="moxtutomiru">
           <h1 id="shouhinnsetumei1">商品詳細</h1>
@@ -93,7 +70,7 @@
             <tr>
               <th>カテゴリー</th>
               <td>
-                <p class="hyounomoji">{{exhibit_category.F_CategoryName}}</p>
+                <p class="hyounomoji">{{exhibit.F_CategoryID}}</p>
               </td>
             </tr>
             <tr>
@@ -123,11 +100,15 @@
           <div id="saizukankakuninnBox">
             <p id="shouhinhyouji">ゲージなど商品を表示</p>
             <div id="popup-container" class="popup-container">
-              <canvas id="canvas" width="480px" height="300px"></canvas>
+              <canvas id="canvas" width="480px" height="300"></canvas>
               <div id="close-button" class="close-button"></div>
             </div>
           </div>
 
+          <div id="objbtnbox">
+            <button  id="bicy" class="objbtn"  onclick="objBtn(this)">自転車</button>
+            <button  id="bottle" class="objbtn" onclick="objBtn(this)" >ボトル</button>
+          </div>
           
 
           <h1 id="shuxtupinshaProtext">出品者情報</h1>
@@ -137,7 +118,7 @@
             </div>
             <div id="namaetofollow">
               <a href="/userprof/{{users.F_UserID}}">{{ users.F_UserName}}</a>
-              <form action="/add_friend_product/{{ users.F_UserID }}" method="post">
+              <form action="/add_friend/{{ users.F_UserID }}" method="post">
                 <input type="submit" value="フォロー">
               </form>
               <a href="#" id="reviewhoshi"></a>
@@ -151,11 +132,12 @@
 
     <p id="osusume">こちらの商品もおすすめです</p>
     <div id="osusumeshouhin">
-      {%for recomend_list in recomend%}
-        {%for recomends in recomend_list %}
-        <a href="/product_detail/{{recomends.F_ExID}}"><img src="/static/toredo/{{recomends.F_ExPhoto}}" alt=""></a>
-        {%endfor%}
-      {%endfor%}
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
     </div>
       </div><!-- class="wrap" -->
 
