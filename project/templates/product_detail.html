@@ -13,7 +13,7 @@
 
     <script src="/static/js/three.js"></script>
     <script src="https://unpkg.com/three@0.131.3/examples/js/controls/OrbitControls.js"></script>
-
+    <script src="https://unpkg.com/three@0.131.0/examples/js/loaders/OBJLoader.js"></script>
 
 {% endblock%}
 
@@ -105,6 +105,10 @@
             </div>
           </div>
 
+          <div id="objbtnbox">
+            <button  id="bicy" class="objbtn"  onclick="objBtn(this)">自転車</button>
+            <button  id="bottle" class="objbtn" onclick="objBtn(this)" >ボトル</button>
+          </div>
           
 
           <h1 id="shuxtupinshaProtext">出品者情報</h1>

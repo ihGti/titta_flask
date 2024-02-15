@@ -447,3 +447,15 @@ div#osusumeshouhin a {
   background-image: url(../images/geji.jpg);
   background-size: contain;
 }
+
+div#objbtnbox{
+  display: flex;
+}
+
+.objbtn{
+  margin:5px 10px 0 0;
+  display: none;
+  border-radius: 4px;
+  border: 1px solid #000;
+  padding: 3px; 
+}
