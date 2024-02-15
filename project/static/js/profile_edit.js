@@ -20,6 +20,10 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault(); // フォームの自動送信を防止
     var formData = new FormData(this);
+
+    if (!formData.get("profile_image")) {
+      formData.delete('profile_image');
+    }
     // サーバーにデータを送信
     fetch("/prof_edit", {
       method: "POST",
@@ -30,7 +34,7 @@ document
         // サーバーからのレスポンスを処理
         console.log(data);
         if (data.success) {
-            window.location.href = '/myprof';
+          window.location.href = "/myprof";
         }
       })
       .catch((error) => {

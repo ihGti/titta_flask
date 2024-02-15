@@ -74,7 +74,7 @@
                             <div id="type">
                                 <h3>種別</h3>
                                 <ul>
-                                    <li><input type="checkbox" name="syubetu" value="0">すべて</li>
+                                    <li><input type="checkbox" name="syubetu1" value="0">すべて</li>
                                     {%for pet in category[:7]%}
                                     <li><input type="checkbox" name="syubetu" value="{{pet.F_CategoryID}}">{{pet.F_CategoryName}}</li>
                                     {%endfor%}
@@ -233,6 +233,7 @@
                       <button type="submit">検索する</button>
                     </div>
                 </div>
+            </form>
 
 
 
@@ -245,7 +246,6 @@
 <div id="pagesuu">
   <p>約{{num_product}}件中</p>
   
-  <p id="nasi">{{ pagination.info }}</p>
 </div>
 
 {% for lost in lost_pet %}
@@ -275,7 +275,6 @@
               <!-- ここまで投稿のdiv -->
               <div class="paginations">
                 <div>
-                  {{ pagination.links }}
     
                 </div>
 

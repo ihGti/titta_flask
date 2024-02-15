@@ -91,6 +91,18 @@
                       <input type="submit" name="check" value="確認" id="btn2" onclick="return settelesub()">
                     </div>
                   </div>
+                  <div id="Box3" style="display:none;">
+                    <div>
+                      <input type="radio" name="payselect" value="paypay" id="paypay" checked><label for="paypay"></label>
+                      <input type="radio" name="payselect" value="linepay" id="linepay"><label for="linepay"></label>
+                      <input type="radio" name="payselect" value="aupay" id="aupay"><label for="aupay"></label>
+                      <input type="radio" name="payselect" value="dpay" id="dpay"><label for="dpay"></label>
+                      <input type="radio" name="payselect" value="rpay" id="rpay"><label for="rpay"></label>
+                    </div>
+                    <div>
+                      <input type="submit" name="check" value="確認" id="btn2" onclick="return settelesub()">
+                    </div>
+                  </div>
                   </td>
                 </tr>   
               </table>
@@ -131,6 +143,19 @@
             </div>
           </div>
 
+          <div>
+            {%if pay == 'paypay'%}
+            <img src="/static/images/qr_paypay.png" alt="">
+            {%elif pay == 'linepay'%}
+            <img src="/static/images/qr_line.png" alt="">
+            {%elif pay == 'aupay' %}
+            <img src="/static/images/qr_aupay.png" alt="">
+            {%elif pay == 'dpay'%}
+            <img src="/static/images/qr_dpay.png" alt="">
+            {%elif pay == 'rpay'%}
+            <img src="/static/images/qr_rpay.png" alt="">
+            {%endif%}
+          </div>
           <input type="submit" form="formr" value="購入を確定する" id="btn" name="comp" onclick="return setteledialog()">
 
 

@@ -12,7 +12,7 @@ def titta_web():
     return response[random.randint(0,len(response)-1)]
 
 # 出品関連
-def product():
+def product_titta():
     
     response = [
         '出品する商品の画像は最大で5枚出品できます。(最低で1枚は必須になります)',
@@ -46,7 +46,7 @@ def contest_all():
     return response[random.randint(0,len(response)-1)]
 
 # 里親投稿
-def foster():
+def foster_titta():
     response = [
         'Tittaでは、ペットを里親に出すこともできます。',
         'お住まいの地域で探してもらってもかまいませんし、全く別の地域での検索も可になっています。',
@@ -57,7 +57,7 @@ def foster():
     return response[random.randint(0,len(response)-1)]
 
 # 迷子投稿
-def lost():
+def lost_titta():
     response = [
         'Tittaでは、迷子ペットの捜索願を出すことができます。',
         '投稿されている迷子ペットを発見した場合は投稿したユーザーとのチャットをすることもできます。',
