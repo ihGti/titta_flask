@@ -63,32 +63,57 @@
 
             <div id="pro-wrap">
 
-{% set a = ["/static/images/bed.jpg", "/static/images/active.png", "a[2]", "a[3]", "a[4]", "a[5]"] %}
 
-{% for i in range(12)%}
+{% for pets in pet_all%}
+              {%if pets[0] %}
               <div class="product">
-                <a href="/product_detail?id={{i}}"><!-- 商品詳細ページへ -->
+                <a href="/lost_detail/{{pets[0].F_LostPetID}}"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
-                      <img src="{{ a[0] }}" alt="サンプル画像">
-                      <img src="{{ a[1] }}" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                      <img src="/static/lost_pet/{{pets[2].F_Image}}" alt="サンプル画像">
+                      <img src="" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
                     </figure>
                   </div>
                 </a>
 
                 <div class="pro_detail">
-                  <a href="/product_detail?id={{i}}"><!-- 商品詳細ページへ -->
-                    <h2>{{ a[2] }}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  <a href="/lost_detail/{{pets[0].F_LostPetID}}"><!-- 商品詳細ページへ -->
+                    <h2>{{ pets[0].F_LostTitle }}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
                   </a>
 
                   <div class="more_detail">
-                    <p><span>種類</span>{{ a[3] }}</p>
-                    <p><span>名前</span>{{ a[4] }}</p>
-                    <p><span>状況</span>{{ a[5] }}</p>
+                    <p><span>種類</span>{{ pets[4].F_CategoryName }}</p>
+                    <p><span>名前</span>{{ pets[0].F_LostTitle }}</p>
+                    <p><span>状況</span>{{ pets[2].F_Background }}</p>
                   </div>
                 </div>
 
               </div>
+              {%elif pets[1] %}
+              <div class="product">
+                <a href="/foster_detail/{{pets[1].F_FosterPetID}}"><!-- 商品詳細ページへ -->
+                  <div class="proImg">
+                    <figure class="main">
+                      <img src="/static/foster_pet/{{pets[3].F_Image}}" alt="サンプル画像">
+                      <img src="" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
+                    </figure>
+                  </div>
+                </a>
+
+                <div class="pro_detail">
+                  <a href="/foster_detail/{{pets[1].F_FosterPetID}}"><!-- 商品詳細ページへ -->
+                    <h2>{{ pets[1].F_FosterTitle }}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                  </a>
+
+                  <div class="more_detail">
+                    <p><span>種類</span>{{ pets[4].F_CategoryName }}</p>
+                    <p><span>名前</span>{{ pets[1].F_FosterTitle }}</p>
+                    <p><span>状況</span>{{ pets[3].F_Background }}</p>
+                  </div>
+                </div>
+
+              </div>
+              {%endif%}
 
 {% endfor %}
 
