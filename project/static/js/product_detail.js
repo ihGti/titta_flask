@@ -10,10 +10,10 @@ moreBtn.addEventListener("click", () => {
 
   if (prev.classList.contains("active") === true) {
     prev.classList.remove("active");
-    moreBtn.textContent = "もっと見る";
+    moreBtn.textContent = "閉じる";
   } else {
     prev.classList.add("active");
-    moreBtn.textContent = "閉じる";
+    moreBtn.textContent = "もっと見る";
   }
 });
 

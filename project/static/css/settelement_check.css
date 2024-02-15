@@ -196,3 +196,38 @@ td{
   background-color: #6f00c4;
   color: #ffffff;
 }
+
+input[type=radio]+label::before{
+  content: "";
+  display: inline-block;
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  margin: 20px 0 0 20px;
+}
+
+input[type=radio][value="paypay"]+label:before{
+  background-image: url(../images/paypay.png);
+}
+input[type=radio][value="linepay"]+label:before{
+  background-image: url(../images/line.png);
+}
+input[type=radio][value="aupay"]+label:before{
+  background-image: url(../images/aupay.png);
+}
+input[type=radio][value="dpay"]+label:before{
+  background-image: url(../images/dpay.png);
+}
+input[type=radio][value="rpay"]+label:before{
+  background-image: url(../images/rpay.png);
+
+}
+
+input[type=radio]:checked+label::before{
+  border: 3px solid #000;
+  box-sizing: border-box;
+}
+input[type=radio]{
+  display: none;
+}

@@ -13,7 +13,7 @@ from project.models import T_User , T_Exhibit , T_Paramerter , T_Category , T_Fa
 # flask-socketio
 from project import socketio
 # チャットボット
-from project.chatbot import titta_web, product ,purchase ,chat, contest_all ,traial ,dressup, foster ,lost
+from project.chatbot import titta_web, product_titta ,purchase ,chat, contest_all ,traial ,dressup, foster_titta ,lost_titta
 # メッセージボックス
 from project.message import create_message
 
@@ -124,6 +124,9 @@ def search():
         # 上限金額
         if h_price:
             query = query.filter(T_Exhibit.F_ExPrice <= h_price)
+            
+        if l_price is None and h_price is None:
+            query = query.filter(T_Exhibit.F_ExPrice.between(l_price,h_price))
         
         # カテゴリー検索
         if genre:
@@ -133,7 +136,8 @@ def search():
         
         # 商品検索結果
         product = query.all()
-        product_dict = [{'id':products.F_ExID,'title':products.F_ExTitle,'tag':products.F_ExTag} for products in product]
+        print(product)
+        product_dict = [{'id':products.F_ExID} for products in product]
         page = pagenate(product)
 
         session['product'] = product_dict
@@ -283,7 +287,12 @@ def login_bornus():
     # ネコ用品
     cat_category = T_Category.query.filter_by(F_CategoryID=16).first()
     c_product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(cat_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
-
+    pets = T_Pet.query.all()
+    pet_ids = [pet.F_PetID for pet in pets]
+    foster = T_FosterPet.query.filter(T_FosterPet.F_PetID.in_(pet_ids)).all()
+    
+    lost = T_LostPet.query.filter(T_LostPet.F_PetID.in_(pet_ids)).all()
+    
 
     if request.method == 'POST':
         
@@ -296,6 +305,7 @@ def login_bornus():
                 new_point = point.F_PointQuantity + get_point
                 point.F_PointQuantity = new_point
                 db.session.commit()
+                return jsonify({'type':'points','amount':get_point})
             
             elif session['login_bornas']['type'] == 'coupon':
                 get_coupon = session['login_bornas']['coupon']
@@ -305,9 +315,10 @@ def login_bornus():
                     coupon = T_CouponPos(F_UserID=current_user.F_UserID, F_CouponID=get_coupon, F_CouponQuantity=1)
                     db.session.add(coupon)
                     db.session.commit()
+                    return jsonify({'type':'coupon'})
             
         db.session.commit()
-    return render_template('index.html',user=current_user,category=category, p_category=p_category , dog_product=dog_product, c_product=c_product)
+    return render_template('index.html',user=current_user,category=category, p_category=p_category , dog_product=dog_product, c_product=c_product , foster=foster , lost=lost)
 
 # マイページ
 @bp.route("/myprof")
@@ -346,10 +357,12 @@ def prof_edit():
         
         # プロフ画像の更新
         if profile_image:
-            fileimage = secure_filename(profile_image.filename)
-            profile_image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], fileimage))
-            
-            user.F_ProfileImage = fileimage
+            if profile_image.filename != '':
+                fileimage = secure_filename(profile_image.filename)
+                profile_image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], fileimage))
+                user.F_ProfileImage = fileimage
+            else:
+                user.F_ProfileImage = None
         
         # 内容の更新処理
         db.session.commit()
@@ -647,10 +660,21 @@ def swithing(exhibit_id):
 @bp.route("/product",methods=['GET','POST'])
 def product():
     
+    product = T_Exhibit.query.all()
+    category = T_Category.query.all()
+    
+    c_category = T_Category.query.filter_by(F_CategoryCode='c')
+    p_category = T_Category.query.filter_by(F_CategoryCode='p')
+    page = pagenate(product)
+    
+    return render_template("product.html" , product=product , user=current_user , category=category, rows=page[0], pagination=page[1] , c_category=c_category, p_category=p_category)
+
+# 並び替え
+@bp.route('/narrow',methods=['GET','POST'])
+def narrow():
     if request.method == 'POST':
         sold = request.form.get('checkbox-001')
         select = request.form.get('selectbox','おすすめ順')
-        toggle = request.form.get('toggle') == 'on'
         sort = T_Exhibit.query.filter_by(F_EXhibitType=1)
         
         if sold:
@@ -660,38 +684,106 @@ def product():
             query = sort.order_by(T_Exhibit.F_ExTime.asc())
         
         if select == '価格の安い順':
-            query = sort.order_by(T_Exhibit.F_ExPrice.desc())
+            query = sort.order_by(T_Exhibit.F_ExPrice.asc())
             
         if select == '価格の高い順':
-            query = sort.order_by(T_Exhibit.F_ExPrice.asc())
+            query = sort.order_by(T_Exhibit.F_ExPrice.desc())
         
-        if toggle:
-            query = sort.filter(T_Exhibit.F_EXhibitType == 2)
         product = query.all()
-        return render_template('product.html',user=current_user, product=product)
-    product = T_Exhibit.query.all()
-    category = T_Category.query.all()
-    page = pagenate(product)
-       
-    return render_template("product.html" , product=product , user=current_user , category=category, rows=page[0], pagination=page[1])
+        c_category = T_Category.query.filter_by(F_CategoryCode='c')
+        p_category = T_Category.query.filter_by(F_CategoryCode='p')
+
+        page = pagenate(product)
+    return render_template('product.html',user=current_user, product=product, rows=page[0], pagination=page[1])
+
+# 商品一覧内の検索
+@bp.route("/product_search", methods=['GET','POST'])
+def product_search():
+    # methodがpostの場合
+    if request.method== 'POST':
+        category_list = session.get('category',[])
+        word = request.form.get('word')
+        exword = request.form.get('exword')
+        genre = request.form.get('genre')
+        if genre:
+            category = T_Category.query.get(genre)
+            if category:
+                category_list.append(category.F_CategoryID)
+                session['category'] = category_list
+        l_price= request.form.get('lowerprice')
+        h_price = request.form.get('highprice')
+        
+        # 本出品だけを抽出
+        query = T_Exhibit.query.filter_by(F_EXhibitType=1)
+        
+        # タグ検索
+        if word:
+            query = query.filter(T_Exhibit.F_ExTag.contains(word))
+            
+        # 除外ワード
+        if exword:
+            query = query.filter(T_Exhibit.F_ExInfo.like(f"%{exword}%"))
+            
+        # 下限金額
+        if l_price:
+            query = query.filter(T_Exhibit.F_ExPrice >= l_price)
+        # 上限金額
+        if h_price:
+            query = query.filter(T_Exhibit.F_ExPrice <= h_price)
+            
+        if l_price is None and h_price is None:
+            query = query.filter(T_Exhibit.F_ExPrice.between(l_price,h_price))
+        
+        # カテゴリー検索
+        if genre:
+            category = T_Category.query.filter_by(F_CategoryID=genre).first()
+            if category:
+                query = query.filter(T_Exhibit.F_CategoryID==category.F_CategoryID)
+        
+        # 商品検索結果
+        product = query.all()
+        print(product)
+        product_dict = [{'id':products.F_ExID} for products in product]
+        page = pagenate(product)
+
+        session['product'] = product_dict
+        # 検索した商品の数を取得
+        num_product = len(product)
+        category= T_Category.query.filter_by(F_CategoryCode='c')
+        c_category = T_Category.query.filter_by(F_CategoryCode='c')
+        p_category = T_Category.query.filter_by(F_CategoryCode='p')
+
+    return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , category=category , num_product=num_product , l_price=l_price , h_price=h_price,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
 
 
 # カテゴリー検索:index.html
 @bp.route('/category_product/<int:category_id>/products', methods=['GET'])
 @login_required
 def category_product(category_id):
+    category_list = session.get('category',[])
     category = T_Category.query.get(category_id)
+    category_list.append(category.F_CategoryID)
+    session["category"] = category_list
     product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
+    c_category = T_Category.query.filter_by(F_CategoryCode='c')
+    p_category = T_Category.query.filter_by(F_CategoryCode='p')
+
     page = pagenate(product)
-    return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1])
+    return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
 
 # 画像クリックでカテゴリー検索:index.html
 @bp.route('/category_image/<int:category_id>/product' , methods=['GET'])
 def category_image(category_id):
+    category_list = session.get('category',[])
     category_image = T_Category.query.get(category_id)
+    category_list.append(category_image.F_CategoryID)
+    session["category"] = category_list
     product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
+    c_category = T_Category.query.filter_by(F_CategoryCode='c')
+    p_category = T_Category.query.filter_by(F_CategoryCode='p')
+
     page = pagenate(product)
-    return render_template('product.html', product=product, category_image=category_image, user=current_user,rows = page[0],pagination = page[1])
+    return render_template('product.html', product=product, category_image=category_image, user=current_user,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
 
 
 # ペット検索
@@ -699,27 +791,65 @@ def category_image(category_id):
 def pet_category(category_id):
     pet_category = T_Category.query.get(category_id)
     product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
+    c_category = T_Category.query.filter_by(F_CategoryCode='c')
+    p_category = T_Category.query.filter_by(F_CategoryCode='p')
+
     page = pagenate(product)
-    return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1])
+    return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
 
 # ペット検索画像で
 @bp.route('/pet_image/<int:category_id>/product', methods=['GET'])
 def pet_image(category_id):
     pet_image = T_Category.query.get(category_id)
     product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_image.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
+    c_category = T_Category.query.filter_by(F_CategoryCode='c')
+    p_category = T_Category.query.filter_by(F_CategoryCode='p')
+
     page=pagenate(product)
-    return render_template('product.html',user=current_user, product=product, pet_image=pet_image,rows = page[0],pagination = page[1])
+    return render_template('product.html',user=current_user, product=product, pet_image=pet_image,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
 
 # ペット検索全部
 @bp.route('/pet_all',methods=['GET'])
 def pet_all():
     pet_all = T_Category.query.all()
     product = []
+    c_category = T_Category.query.filter_by(F_CategoryCode='c')
+    p_category = T_Category.query.filter_by(F_CategoryCode='p')
+
     for pet_category in pet_all:
         pet_product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
         product.extend(pet_product)
     page = pagenate(product)
-    return render_template('product.html',user=current_user, product=product, pet_all=pet_all,rows = page[0],pagination = page[1])
+    return render_template('product.html',user=current_user, product=product, pet_all=pet_all,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
+
+# カテゴリー検索:product.html
+@bp.route('/category_search/<int:category_id>/search', methods=['GET'])
+@login_required
+def category_search(category_id):
+    category_list = session.get('category',[])
+    category = T_Category.query.get(category_id)
+    category_list.append(category.F_CategoryID)
+    session["category"] = category_list
+    product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
+    c_category = T_Category.query.filter_by(F_CategoryCode='c')
+    p_category = T_Category.query.filter_by(F_CategoryCode='p')
+
+    page = pagenate(product)
+    return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1] , c_category=c_category , p_category=p_category)
+
+# ペット検索
+@bp.route('/pet_search/<int:category_id>/product', methods=['GET'])
+def pet_search(category_id):
+    pet_category = T_Category.query.get(category_id)
+    product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
+    
+    c_category = T_Category.query.filter_by(F_CategoryCode='c')
+    p_category = T_Category.query.filter_by(F_CategoryCode='p')
+
+    page = pagenate(product)
+    return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1], c_category=c_category, p_category=p_category)
+
+
 
 # 商品詳細
 @bp.route("/product_detail/<int:exhibit_id>")
@@ -792,6 +922,7 @@ def settelement_comp(exhibit_id):
                 db.session.commit()
                 return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price , k_point=k_point , coupon=coupon)
             elif settelement == "select3":
+                pay = request.form.get('payselect')
                 if points and user_point.F_PointQuantity > 0:
                 # ユーザーがポイントを持っており、ポイントを使う場合の処理
                     cart_price =exhibit.F_ExPrice - points
@@ -816,7 +947,7 @@ def settelement_comp(exhibit_id):
                         cart_price=exhibit.F_ExPrice
                         session["cart_price"] = cart_price
             
-            return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price , k_point=k_point , coupon=coupon)
+                return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price , k_point=k_point , coupon=coupon , pay=pay)
         # 購入完了画面に進む
         elif 'comp' in request.form:
             exhibit = T_Exhibit.query.get(exhibit_id)
@@ -873,14 +1004,8 @@ def foster_board():
 @login_required
 def lost_petboard():
     if request.method == 'POST':
+        category_all = request.form.getlist('syubetu1')
         category_p = request.form.getlist('syubetu')
-        # 「すべて」が選択されているかどうかをチェック
-        if '0' in category_p:
-    # すべてのカテゴリーを取得
-            pet_category = T_Category.query.all()
-        else:
-    # 選択されたカテゴリーのみを取得
-            pet_category = T_Category.query.filter(T_Category.F_CategoryID.in_(category_p)).all()
         location = request.form.get('hakkenti')
         lostarea = request.form.get('lostarea')
         # lost_date = request.form.get('foundday')
@@ -893,24 +1018,26 @@ def lost_petboard():
         pet_ids = [pet.F_PetID for pet in pets]    
         query2 = T_LostPet.query.join(T_Pet).filter(T_Pet.F_PetID.in_(pet_ids))
     
-        if pet_category:
-            query = query2.filter(T_Pet.F_CategoryID == pet_category)
-        if location:
+        if category_all:
+            query = query2
+        elif category_p:
+            query = query2.filter(T_Pet.F_CategoryID.in_(category_p))
+        elif location:
             query = query2.filter(T_LostPet.F_LostPlase == location)
-        if lostarea:
+        elif lostarea:
             query = query2.filter(T_LostPet.F_LostPlace == lostarea)
-        if gender:
+        elif gender:
             query = query2.filter(T_Pet.F_Seibetu == gender)
-        if freeword:
+        elif freeword:
             query = query2.filter(T_LostPet.F_LostFeatures == freeword)
         # if situation:
         #     query = query2.filter()
         lost_pet = query.all()
+        # page = pagenate(lost_pet)
         category = T_Category.query.filter_by(F_CategoryCode='p')
-
+        print(query)
         return render_template("lost_petboard.html" , user=current_user , lost_pet=lost_pet , category=category)
     #できてから
-    page = pagenate()
     category = T_Category.query.filter_by(F_CategoryCode='p')
     return render_template("lost_petboard.html",user=current_user , category=category)
 
@@ -1078,8 +1205,20 @@ def lost_detail(pet_id):
 @bp.route("/reg_pet")
 def pet_list():
     
-    page = pagenate()
-    return render_template("reg_pet.html" , user=current_user, rows=page[0], pagination=page[1])
+    pet = T_Pet.query.filter_by(F_UserID = current_user.F_UserID).all()
+    pet_all = []
+    
+    for pets in pet:
+        lost = T_LostPet.query.get(pets.F_PetID)
+        if lost is None:
+            continue
+        foster = T_FosterPet.query.get(pets.F_PetID)
+        pet_l = T_Pet.query.get(lost.F_PetID)
+        pet_f = T_Pet.query.get(foster.F_PetID)
+        pet_category = T_Category.query.get(pet.F_CategoryID)
+        pet_all.append(lost,foster,pet_l,pet_f,pet_category)
+    
+    return render_template("reg_pet.html" , user=current_user , pet_all=pet_all)
 
 # コンテストマスター
 @bp.route("/master_upload", methods=['GET','POST'])
@@ -1100,7 +1239,7 @@ def master_upload():
             F_ContestMasterContent = content,
             F_ContestMasterImage = file,
             F_ContestMasterTime = c_date,
-            F_CouponID = randam_coupon
+            F_CouponID = randam_coupon.F_CouponID
         )
         
         
@@ -1142,6 +1281,7 @@ def contest():
                     #     else:
                     #         use_coupon = T_CouponPos(F_UserID=winners.F_UserID, F_CouponID=coupon.F_CouponID, F_CouponQuantity=1)
                     #     db.session.add(use_coupon)
+                    db.session.commit()
         db.session.commit()
     contestpost = len(contest)
     return render_template("contest.html",user=current_user , contest=contest , contestpost=contestpost, slider=slider)
@@ -1378,7 +1518,7 @@ def earnings_history():
     return render_template("earnings_history.html", user=current_user , sales_info=sales_info)
 
 # 掲載履歴
-@bp.route("/petpublish_hiatory")
+@bp.route("/petpublish_history")
 def petpublish_history():
     return render_template("petpublish_history.html" , user=current_user)
 
@@ -1424,22 +1564,22 @@ def handle_message(data):
         response_message = titta_web()
     # 出品関連
     elif '出品' in use_message:
-        response_message = product()
+        response_message = product_titta()
     # 購入関連
     elif '購入' in use_message:
         response_message = purchase()
     # お試し出品関連
-    elif 'お試し出品' in use_message:
+    elif 'お試し' in use_message:
         response_message = traial()
     # コンテスト関連
     elif 'コンテスト' in use_message:
         response_message = contest_all()
     # 里親
     elif '里親' in use_message:
-        response_message = foster()
+        response_message = foster_titta()
     # 迷子
     elif '迷子' in use_message:
-        response_message = lost()
+        response_message = lost_titta()
     # チャット
     elif 'チャット' in use_message or 'コミュニティ' in use_message:
         response_message = chat()
@@ -1460,23 +1600,6 @@ def inquiry():
 @bp.route("/maintenance")
 def maintenance():
     return render_template("maintenance.html", user=current_user)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

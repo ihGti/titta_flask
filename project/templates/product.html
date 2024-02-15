@@ -18,7 +18,7 @@
 
       <div class="wrap">
         <div id="wrap-left">
-        <form action="/narrow" method="post">
+        <form action="/product_search" method="post">
           <div id="Refine-search">
 
             <h2>絞り込み検索</h2>
@@ -34,7 +34,12 @@
               </li>
               <li>
                 <p>カテゴリー</p>
-                  <input type="text" name="" id="">
+                <select name="genre" id="">
+                  {%for categorys in c_category %}
+                  <option value="{{categorys.F_CategoryID}}">{{categorys.F_CategoryName}}</option>
+                  {%endfor%}
+                </select>
+
               </li>
               <li>
                 <p id="kakaku">価格</p>
@@ -52,32 +57,15 @@
           <div id="category">
             <p class="category-head">ペットから探す</p>
             <ul>
-              <li><a href="#">犬</a></li>
-              <li><a href="#">猫</a></li>
-              <li><a href="#">小動物</a></li>
-              <li><a href="#">鳥</a></li>
-              <li><a href="#">爬虫類</a></li>
-              <li><a href="#">両生類</a></li>
-              <li><a href="#">昆虫</a></li>
-              <li><a href="#">淡水魚</a></li>
-              <li><a href="#">海水魚</a></li>
+              {%for pet in p_category%}
+              <li><a href="{{url_for('main.pet_search',category_id=pet.F_CategoryID)}}">{{pet.F_CategoryName}}</a></li>
+              {%endfor%}
             </ul>
             <p class="category-head">カテゴリーから探す</p>
             <ul>
-              <li><a href="">ケージ/水槽</a></li>
-              <li><a href="">エサ入れ/水入れ</a></li>
-              <li><a href="">首輪/リード/ハーネス</a></li>
-              <li><a href="">おもちゃ</a></li>
-              <li><a href="">キャリーバッグ</a></li>
-              <li><a href="">爪とぎ</a></li>
-              <li><a href="">ペット家具</a></li>
-              <li><a href="">飼育セット</a></li>
-              <li><a href="">照明</a></li>
-              <li><a href="">保温器具</a></li>
-              <li><a href="">床材</a></li>
-              <li><a href="">シェルター</a></li>
-              <li><a href="">温湿度計/サーモスタット</a></li>
-              <li><a href="">ピンセット</a></li>
+              {% for categories in c_category %}
+              <li><a href="{{url_for('main.category_search', category_id = categories.F_CategoryID)}}">{{categories.F_CategoryName}}</a></li>
+              {% endfor %}
             </ul>
 
           </div>
@@ -105,7 +93,7 @@
               {% elif genre %}
                 {{category.F_CategoryName}}
               {% elif l_price %}
-                {{l_price}}円以下の商品
+                {{l_price}}円以上の商品
               {% elif h_price %}
                 {{h_price}}円以下の商品
               {%endif%}
@@ -117,7 +105,7 @@
 
           <div id="yoko">
 
-            <form method="post">
+            <form action="/narrow" method="post">
               <fieldset class="checkbox-001">
                 <label>
                     <input type="checkbox" name="checkbox-001"/>
