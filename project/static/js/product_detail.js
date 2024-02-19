@@ -1,3 +1,7 @@
+    
+const objpath = {"bicy":"/static/models/bicycle.obj","bottle":"/static/models/14042_750_mL_Wine_Bottle_r_v1_L3.obj"}
+
+
 //もっと見るボタン要素
 const moreBtn = document.querySelector("button");
 window.addEventListener('DOMContentLoaded', draw);
@@ -10,10 +14,10 @@ moreBtn.addEventListener("click", () => {
 
   if (prev.classList.contains("active") === true) {
     prev.classList.remove("active");
-    moreBtn.textContent = "閉じる";
+    moreBtn.textContent = "もっと見る";
   } else {
     prev.classList.add("active");
-    moreBtn.textContent = "もっと見る";
+    moreBtn.textContent = "閉じる";
   }
 });
 
@@ -27,6 +31,8 @@ const popupContainer = document.getElementById("popup-container");
 const closeButton = document.getElementById("close-button");
 
 const a = document.getElementById("saizukankakuninnBox")
+const b = document.getElementById("bicy")
+const c = document.getElementById("bottle")
 
 // リンクをクリックしたときの処理
 popupLink.addEventListener("click", function (e) {
@@ -34,28 +40,33 @@ popupLink.addEventListener("click", function (e) {
   popupContainer.style.display = "flex"; // ポップアップを表示
   popupLink.style.display = "none"
   a.style.display = "flex"
+  b.style.display = "flex"
+  c.style.display = "flex"
 });
 // 閉じるボタンをクリックしたときの処理
 closeButton.addEventListener("click", function () {
   popupLink.style.display = "flex"
   popupContainer.style.display = "none"; // ポップアップを非表示
   a.style.display = "none"; // ポップアップを非表示
+  b.style.display = "none"; // ポップアップを非表示
+  c.style.display = "none"; // ポップアップを非表示
 });
 
-var cart = document.getElementById('cart')
 
-cart.addEventListener("click", function(){
-  alert('お試し出品機能を楽しめましたか？')
-});
+
+
 function draw() {
   
 
   //DBから引っ張ってきて代入して
-  objhi = 400
-  objwid = 300
-  color = 0xFF0000
-  //高さ、横幅、色
-  three(objhi,objwid, color)
+  objhi = 400;
+  objwid = 180;
+  color = 0xFF0000;
+
+  //比較モデルの初期設定
+  var nmodel = "bicy";
+  //高さ、横幅、色,初期のモデル
+  three(objhi,objwid, color,nmodel)
   
       
  }
@@ -69,11 +80,27 @@ function draw() {
 
 
 
-
-
 //3d操作 
- three = (objhi,objwid, color) =>{ 
+ three = (objhi,objwid, color,nmodel) =>{ 
   //こっから初期設定多分触んない
+  object = (objhi,objwid,color,boo) => {
+
+    //こっから好みで触って
+  
+    //オブジェクト生成(高さ,横幅、x,y座標、色)
+      //商品
+      if (boo == false){
+         exobj = objadd(objhi,objwid,exx,objhi/2-50,color)
+
+      }else{
+         exobj = objadd(objhi,objwid,exx,objhi/2,color)
+
+      }
+      //変数名ぶち込んで
+      scene.add(exobj);  
+    }; 
+  
+  
 
 
   const width = 480;
@@ -91,7 +118,7 @@ function draw() {
   const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
 
   // カメラの初期座標
-  camera.position.set(0, 0, 1500);  
+  camera.position.set(0, 0, 750);  
   //カメラ操作
   controls = new THREE.OrbitControls(camera, renderer.domElement);
 
@@ -99,72 +126,99 @@ function draw() {
   //光、気に食わないなら調節して
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
   const pointLight = new THREE.DirectionalLight(0xffffff, 0.8)
-  pointLight.position.set(2, 3,4)
+  pointLight.position.set(2, 3)
   scene.add(ambientLight,pointLight);
-
-     
-//なくても変わんないような気がする
-window.addEventListener("resize", () => {
-  sizes.width = window.innerWidth;
-  sizes.height = window.innerHeight;
- 
-  camera.aspect = sizes.width / sizes.height;
-  camera.updateProjectionMatrix();
- 
-  renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(window.devicePixelRatio);
-});
-
 
   scene.background = new THREE.Color( 0x000000 );
 
+    
+  //座標系のあれ、触んなくていい
+  var exx = objwid
+  //触るなら計算して
+
 //ここまで初期設定
 
-object = (objhi,objwid) => {
-  
-  //座標系のあれ、触んなくていい
-  const exx = -250-(objwid /4)
-  const deffx = -exx
-  //高さをそろえる
-  const deffhi = 500
-  const objy = (objhi - deffhi)/2
-  //ここまで触るなら計算して
-
-  //こっから好みで触って
-
-  //オブジェクト生成(高さ,横幅、x,y座標、色)
-  const deffobj = objadd(250,500,deffx,objy,0xFFFFFF)
-
-  //商品
-  const exobj = objadd(objhi,objwid,exx,0,color)
-
-  //変数名ぶち込んで
-  scene.add(exobj,deffobj);  
- }; 
-
-object(objhi,objwid)
 
 
 
 
+    // 3Dモデルの読み込み 
+  modelobj = (nmodel) =>{
+      
+    const objLoader = new THREE.OBJLoader();
+    objLoader.load(
+      objpath[nmodel],
+      function (obj) {
+        scene.add(obj);
+        
+        const box = new THREE.Box3().setFromObject(obj);
+        const height = box.max.y - box.min.y;
+        var objy = (height)/2
 
-//3dモデル使うなら使って
-//    const loader = new THREE.ColladaLoader();
-//    loader.load('ファイルまでのパス', collada => {
-//    const model = collada.scene;
-//    scene.add(model);
-//  });
-  
-  //アニメーション
+        if(nmodel == "bicy"){
+          obj.rotation.set(0,1.5,0 );
+          obj.scale.set(10,10,10);
+
+        }else if(nmodel == "bottle"){
+        obj.rotation.set(-1.5,0,0 );
+        obj.scale.set(2,2,2);
+        
+        };
+        const x = -(objwid)
+
+        obj.position.x = x;
+        obj.position.y = objy - 100;
+      },
+    );
+    
+
+
+  };
+
+
+
+  modelobj(nmodel)
+
+  object(objhi,objwid,color,true)
+
+
   function animate(time) {
     time *= 0.001;//フレームレート的な
     renderer.render(scene, camera);
     requestAnimationFrame(animate)
-  }
+  } 
+  
+
+
+
+
+
+
   
   animate();
  
 }
+
+
+function objBtn (button){ 
+  nmodel = button.id
+  three(objhi,objwid, color,nmodel)
+}
+
+
+//これなんか忘れた
+loader = (path,objhi,objwid) =>{
+};
+
+
+
+
+
+
+
+  //アニメーションっていうかそんな感じのやつ
+
+
 
 
 
@@ -183,7 +237,7 @@ objadd = (objhigh,objwid , x,y, color) =>{
   const box = new THREE.Mesh(geometry, material);  
 
   box.position.x = x;
-  box.position.y = y;
+  box.position.y = y-100;
   return box
 }
 
