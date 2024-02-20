@@ -88,7 +88,9 @@ def index():
     
     contest = T_ContestMaster.query.filter_by(F_ContestPeriod = False).all()
 
-    return render_template("index.html" , username=current_user.F_UserName , user=current_user, category=category , c_category=c_category, p_category=p_category , dog_product=dog_product, c_product=c_product , foster=foster , lost=lost , contest=contest)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("index.html" , username=current_user.F_UserName , user=current_user, category=category , c_category=c_category, p_category=p_category , dog_product=dog_product, c_product=c_product , foster=foster , lost=lost , contest=contest , favorites_exhibit=favorites_exhibit)
 
 # 商品一覧(トップから)
 @bp.route("/search", methods=['GET','POST'])
@@ -144,7 +146,9 @@ def search():
         # 検索した商品の数を取得
         num_product = len(product)
         category= T_Category.query.filter_by(F_CategoryCode='c')
-    return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , category=category , num_product=num_product , l_price=l_price , h_price=h_price,rows = page[0],pagination = page[1])
+        favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , category=category , num_product=num_product , l_price=l_price , h_price=h_price,rows = page[0],pagination = page[1],favorites_exhibit=favorites_exhibit)
 
 
 
@@ -292,7 +296,8 @@ def login_bornus():
     foster = T_FosterPet.query.filter(T_FosterPet.F_PetID.in_(pet_ids)).all()
     
     lost = T_LostPet.query.filter(T_LostPet.F_PetID.in_(pet_ids)).all()
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
 
     if request.method == 'POST':
         
@@ -305,7 +310,6 @@ def login_bornus():
                 new_point = point.F_PointQuantity + get_point
                 point.F_PointQuantity = new_point
                 db.session.commit()
-                return jsonify({'type':'points','amount':get_point})
             
             elif session['login_bornas']['type'] == 'coupon':
                 get_coupon = session['login_bornas']['coupon']
@@ -315,10 +319,9 @@ def login_bornus():
                     coupon = T_CouponPos(F_UserID=current_user.F_UserID, F_CouponID=get_coupon, F_CouponQuantity=1)
                     db.session.add(coupon)
                     db.session.commit()
-                    return jsonify({'type':'coupon'})
             
         db.session.commit()
-    return render_template('index.html',user=current_user,category=category, p_category=p_category , dog_product=dog_product, c_product=c_product , foster=foster , lost=lost)
+    return render_template('index.html',user=current_user,category=category, p_category=p_category , dog_product=dog_product, c_product=c_product , foster=foster , lost=lost,favorites_exhibit=favorites_exhibit)
 
 # マイページ
 @bp.route("/myprof")
@@ -328,7 +331,8 @@ def myprof():
     user = T_User.query.get(current_user.F_UserID)
     followers_count = 0
     following_count = 0
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     if user:
         # フォローしているユーザーを取得
         friends = T_User.query.join(T_Paramerter, T_Paramerter.F_friendid == T_User.F_UserID).filter(T_Paramerter.F_userid == T_User.F_UserID).all()
@@ -337,12 +341,14 @@ def myprof():
         # フォロー中のユーザーをカウント
         following_count = T_Paramerter.query.filter_by(F_userid=user.F_UserID).count()
     
-    return render_template("my_profile.html", user=user, followers_count=followers_count, following_count=following_count)
+    return render_template("my_profile.html", user=user, followers_count=followers_count, following_count=following_count,favorites_exhibit=favorites_exhibit)
 
 # マイページ編集
 @bp.route("/prof_edit", methods=['GET','POST'])
 def prof_edit():
     user = T_User.query.get(current_user.F_UserID)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     if request.method == 'POST':
         # ユーザーネームを入力
         username = request.form.get("username")
@@ -368,7 +374,7 @@ def prof_edit():
         db.session.commit()
         return jsonify({'success': True})
     
-    return render_template("profile_edit.html", user=user)
+    return render_template("profile_edit.html", user=user,favorites_exhibit=favorites_exhibit)
 
 
 
@@ -381,7 +387,8 @@ def user_prof(user_id):
     
     exhibits = T_Exhibit.query.filter_by(F_UserID=user_id).all()
     exhibit_len = len(exhibits)
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     if users:
         # フォローしているユーザーを取得
         friends = T_User.query.join(T_Paramerter, T_Paramerter.F_friendid == T_User.F_UserID).filter(T_Paramerter.F_userid == T_User.F_UserID).all()
@@ -389,7 +396,7 @@ def user_prof(user_id):
         followers_count = T_Paramerter.query.filter_by(F_friendid=users.F_UserID).count()
         # フォロー中のユーザーをカウント
         following_count = T_Paramerter.query.filter_by(F_userid=users.F_UserID).count()
-    return render_template("user_profile.html",users=users, friends=friends , followers_count=followers_count , following_count=following_count , user=current_user , exhibits=exhibits , exhibit_len=exhibit_len)
+    return render_template("user_profile.html",users=users, friends=friends , followers_count=followers_count , following_count=following_count , user=current_user , exhibits=exhibits , exhibit_len=exhibit_len , favorites_exhibit=favorites_exhibit)
 
 # フォロー関連/user_prof内
 @bp.route("/add_friend/<int:user_id>",methods=['POST'])
@@ -436,7 +443,7 @@ def add_friend_product(user_id):
 # 出品関連
 # 本出品
 @bp.route("/upload" , methods=['POST'])
-def exhibit():    
+def exhibit():
     if request.method == "POST":
         image_files=[]
             # 1~5枚の画像を保存する処理
@@ -496,7 +503,9 @@ def exhibit():
 def upload_page():
     # カテゴリー全件取得
     categories = T_Category.query.filter_by(F_CategoryCode='c')
-    return render_template('exhibit.html' , user=current_user , categories=categories)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template('exhibit.html' , user=current_user , categories=categories, favorites_exhibit=favorites_exhibit)
 
 # 出品確認
 @bp.route("/exhibit_con", methods=["GET","POST"])
@@ -507,7 +516,9 @@ def exhibit_con():
     category = T_Category.query.get(exhibit_info["category"])
     # これはちゃんと保存しているか分からなかったためデバッグ用
     print(exhibit_info)
-    return render_template("exhibit_con.html" , user=current_user , exhibit_info=exhibit_info , category=category)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("exhibit_con.html" , user=current_user , exhibit_info=exhibit_info , category=category,favorites_exhibit=favorites_exhibit)
 
 # 出品完了
 @bp.route("/exhibit_comp", methods=["GET","POST"])
@@ -643,7 +654,9 @@ def trial_upload():
 @bp.route("/exhibit_trial", methods=['GET'])
 def exhibit_trial():
     categories = T_Category.query.filter_by(F_CategoryCode='c')
-    return render_template("exhibit_trial.html" , user=current_user , categories=categories)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("exhibit_trial.html" , user=current_user , categories=categories,favorites_exhibit=favorites_exhibit)
 
 # 出品形態の切り替え
 @bp.route('/swithing_type/<int:exhibit_id>',methods=['GET','POST'])
@@ -662,12 +675,13 @@ def product():
     
     product = T_Exhibit.query.all()
     category = T_Category.query.all()
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
     page = pagenate(product)
     
-    return render_template("product.html" , product=product , user=current_user , category=category, rows=page[0], pagination=page[1] , c_category=c_category, p_category=p_category)
+    return render_template("product.html" , product=product , user=current_user , category=category, rows=page[0], pagination=page[1] , c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 # 並び替え
 @bp.route('/narrow',methods=['GET','POST'])
@@ -692,9 +706,10 @@ def narrow():
         product = query.all()
         c_category = T_Category.query.filter_by(F_CategoryCode='c')
         p_category = T_Category.query.filter_by(F_CategoryCode='p')
+        favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
         page = pagenate(product)
-    return render_template('product.html',user=current_user, product=product, rows=page[0], pagination=page[1])
+    return render_template('product.html',user=current_user, product=product, rows=page[0], pagination=page[1], c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 # 商品一覧内の検索
 @bp.route("/product_search", methods=['GET','POST'])
@@ -752,8 +767,9 @@ def product_search():
         category= T_Category.query.filter_by(F_CategoryCode='c')
         c_category = T_Category.query.filter_by(F_CategoryCode='c')
         p_category = T_Category.query.filter_by(F_CategoryCode='p')
+        favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
-    return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , category=category , num_product=num_product , l_price=l_price , h_price=h_price,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
+    return render_template('product.html', product=product , user=current_user , word=word , exword=exword , genre=genre , category=category , num_product=num_product , l_price=l_price , h_price=h_price,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 
 # カテゴリー検索:index.html
@@ -767,9 +783,9 @@ def category_product(category_id):
     product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
-
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
     page = pagenate(product)
-    return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
+    return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 # 画像クリックでカテゴリー検索:index.html
 @bp.route('/category_image/<int:category_id>/product' , methods=['GET'])
@@ -781,9 +797,10 @@ def category_image(category_id):
     product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
     page = pagenate(product)
-    return render_template('product.html', product=product, category_image=category_image, user=current_user,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
+    return render_template('product.html', product=product, category_image=category_image, user=current_user,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 
 # ペット検索
@@ -793,9 +810,10 @@ def pet_category(category_id):
     product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
     page = pagenate(product)
-    return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
+    return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 # ペット検索画像で
 @bp.route('/pet_image/<int:category_id>/product', methods=['GET'])
@@ -804,9 +822,10 @@ def pet_image(category_id):
     product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_image.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
     page=pagenate(product)
-    return render_template('product.html',user=current_user, product=product, pet_image=pet_image,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
+    return render_template('product.html',user=current_user, product=product, pet_image=pet_image,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 # ペット検索全部
 @bp.route('/pet_all',methods=['GET'])
@@ -815,12 +834,13 @@ def pet_all():
     product = []
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
     for pet_category in pet_all:
         pet_product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
         product.extend(pet_product)
     page = pagenate(product)
-    return render_template('product.html',user=current_user, product=product, pet_all=pet_all,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category)
+    return render_template('product.html',user=current_user, product=product, pet_all=pet_all,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 # カテゴリー検索:product.html
 @bp.route('/category_search/<int:category_id>/search', methods=['GET'])
@@ -833,9 +853,10 @@ def category_search(category_id):
     product = T_Exhibit.query.filter_by(F_CategoryID=category_id,F_EXhibitType=1).all()
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
     page = pagenate(product)
-    return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1] , c_category=c_category , p_category=p_category)
+    return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1] , c_category=c_category , p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 # ペット検索
 @bp.route('/pet_search/<int:category_id>/product', methods=['GET'])
@@ -845,9 +866,10 @@ def pet_search(category_id):
     
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
     page = pagenate(product)
-    return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1], c_category=c_category, p_category=p_category)
+    return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1], c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
 
 
@@ -863,13 +885,15 @@ def product_detail(exhibit_id):
     exhibit_category = T_Category.query.get(exhibit.F_CategoryID)
     # これまで検索したカテゴリーを取得
     c_category = session.get('category',[])
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     recomend = []
     for categiry in c_category:
         recomend_product =T_Exhibit.query.filter_by(F_CategoryID=categiry).all()
         num_rekomend = 6
         recomend.append(random.sample(recomend_product,min(num_rekomend, len(recomend_product))))
 
-    return render_template("product_detail.html", exhibit=exhibit , user=current_user , users=users , exhibit_category=exhibit_category , recomend=recomend)
+    return render_template("product_detail.html", exhibit=exhibit , user=current_user , users=users , exhibit_category=exhibit_category , recomend=recomend, favorites_exhibit=favorites_exhibit)
 
 
 # 購入確認
@@ -895,6 +919,7 @@ def settelement_comp(exhibit_id):
     user_coupon = T_CouponPos.query.filter_by(F_UserID=current_user.F_UserID).all()
     # 出品したユーザーとログインユーザーが一致した場合
     k_point = exhibit.F_ExPrice * 0.1
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
     coupon_info = []
     for coupon_pos in user_coupon:
@@ -947,7 +972,7 @@ def settelement_comp(exhibit_id):
                         cart_price=exhibit.F_ExPrice
                         session["cart_price"] = cart_price
             
-                return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price , k_point=k_point , coupon=coupon , pay=pay)
+                return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price , k_point=k_point , coupon=coupon , pay=pay,favorites_exhibit=favorites_exhibit)
         # 購入完了画面に進む
         elif 'comp' in request.form:
             exhibit = T_Exhibit.query.get(exhibit_id)
@@ -983,7 +1008,7 @@ def settelement_comp(exhibit_id):
             
             return render_template("settlement_comp.html",exhibit=exhibit, user=current_user , cart_price=cart_price)
 
-    return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point , k_point=k_point , coupon_info=coupon_info)
+    return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point , k_point=k_point , coupon_info=coupon_info,favorites_exhibit=favorites_exhibit)
 
 
 # 目玉機能
@@ -1035,11 +1060,13 @@ def lost_petboard():
         lost_pet = query.all()
         # page = pagenate(lost_pet)
         category = T_Category.query.filter_by(F_CategoryCode='p')
-        print(query)
-        return render_template("lost_petboard.html" , user=current_user , lost_pet=lost_pet , category=category)
+        losts = len(lost_pet)
+        return render_template("lost_petboard.html" , user=current_user , lost_pet=lost_pet , category=category,losts=losts)
     #できてから
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     category = T_Category.query.filter_by(F_CategoryCode='p')
-    return render_template("lost_petboard.html",user=current_user , category=category)
+    return render_template("lost_petboard.html",user=current_user , category=category,favorites_exhibit=favorites_exhibit)
 
 
 # 里親投稿
@@ -1111,7 +1138,9 @@ def foster_post():
 @login_required
 def foster():
     category = T_Category.query.filter_by(F_CategoryCode='p')
-    return render_template("foster_post.html",category=category, user=current_user)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("foster_post.html",category=category, user=current_user,favorites_exhibit=favorites_exhibit)
 
 # 迷子投稿
 @bp.route("/lost_post_page", methods=['POST'])
@@ -1184,7 +1213,9 @@ def lost_post():
 @login_required
 def lost():
     category = T_Category.query.filter_by(F_CategoryCode='p')
-    return render_template('lost_post.html', user=current_user , category=category)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template('lost_post.html', user=current_user , category=category, favorites_exhibit=favorites_exhibit)
 
 # 里親詳細
 @bp.route("/foster_detail")
@@ -1197,7 +1228,9 @@ def lost_detail(pet_id):
     pet = T_LostPet.query.get(pet_id)
     lost = T_Pet.query.get(pet.F_PetID)
     category = T_Category.query.get(lost.F_CategoryID)
-    return render_template("lost_detail.html", user=current_user , pet=pet , lost=lost , category=category)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("lost_detail.html", user=current_user , pet=pet , lost=lost , category=category,favorites_exhibit=favorites_exhibit)
 
 
 #DB連携後
@@ -1207,7 +1240,8 @@ def pet_list():
     
     pet = T_Pet.query.filter_by(F_UserID = current_user.F_UserID).all()
     pet_all = []
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     for pets in pet:
         lost = T_LostPet.query.get(pets.F_PetID)
         if lost is None:
@@ -1218,7 +1252,7 @@ def pet_list():
         pet_category = T_Category.query.get(pet.F_CategoryID)
         pet_all.append(lost,foster,pet_l,pet_f,pet_category)
     
-    return render_template("reg_pet.html" , user=current_user , pet_all=pet_all)
+    return render_template("reg_pet.html" , user=current_user , pet_all=pet_all,favorites_exhibit=favorites_exhibit)
 
 # コンテストマスター
 @bp.route("/master_upload", methods=['GET','POST'])
@@ -1259,6 +1293,8 @@ def contest():
     slider = T_ContestMaster.query.all()
     contest = T_ContestMaster.query.all()
     winner_list = []
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     for contests in contest:
         date = datetime.utcnow().date()
 
@@ -1284,7 +1320,7 @@ def contest():
                     db.session.commit()
         db.session.commit()
     contestpost = len(contest)
-    return render_template("contest.html",user=current_user , contest=contest , contestpost=contestpost, slider=slider)
+    return render_template("contest.html",user=current_user , contest=contest , contestpost=contestpost, slider=slider, favorites_exhibit=favorites_exhibit)
 
 # コンテスト詳細
 @bp.route("/contest_detail/<int:contest_id>")
@@ -1292,13 +1328,16 @@ def contest_detail(contest_id):
     contest_detail = T_ContestMaster.query.get(contest_id)
     coupon = T_Coupon.query.get(contest_detail.F_CouponID)
     time = datetime.now()
-    return render_template("contest_detail.html",user=current_user, contest_detail=contest_detail , coupon=coupon , time=time)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+    return render_template("contest_detail.html",user=current_user, contest_detail=contest_detail , coupon=coupon , time=time,favorites_exhibit=favorites_exhibit)
 
 # コンテスト応募
 @bp.route("/apply/<int:contest_id>")
 def apply(contest_id):
     apply = T_ContestMaster.query.get(contest_id)
-    return render_template("apply.html",user=current_user , apply=apply)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("apply.html",user=current_user , apply=apply,favorites_exhibit=favorites_exhibit)
 
 # コンテスト応募投稿
 @bp.route('/apply_upload/<int:contest_id>',methods=['GET','POST'])
@@ -1328,12 +1367,13 @@ def apply_upload(contest_id):
 @bp.route("/contest_list/<int:contest_id>", methods=["GET","POST"])
 def contest_list(contest_id):
     contest_master = T_ContestMaster.query.get(contest_id)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
     if contest_master:
         contest_list = contest_master.contest
         contest = len(contest_list)
         return render_template('contest_list.html',user=current_user, contest_list=contest_list, contest_master=contest_master , contest=contest)
-    return render_template("contest_list.html" , user=current_user , contest_master=contest_master,contest=contest)
+    return render_template("contest_list.html" , user=current_user , contest_master=contest_master,contest=contest,favorites_exhibit=favorites_exhibit)
 
 # 投票
 @bp.route('/contest_voting/<int:contest_id>',methods=["GET","POST"])
@@ -1367,7 +1407,8 @@ def assignment():
 def community():
     
     user_chat = T_Chat.query.filter((T_Chat.F_SenderID == current_user.F_UserID) | (T_Chat.F_ReceiverID == current_user.F_UserID))
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     last_message = {}
     for chat in user_chat:
         other_user_id = chat.F_SenderID if chat.F_SenderID != current_user.F_UserID else chat.F_ReceiverID
@@ -1383,7 +1424,7 @@ def community():
         users[user_id] = user
         
 
-    return render_template("community.html",user=current_user , last_message=last_message,users=users)
+    return render_template("community.html",user=current_user , last_message=last_message,users=users,favorites_exhibit=favorites_exhibit)
 
 
 # チャットメイン
@@ -1411,7 +1452,8 @@ def community_mein(receiver_id):
         db.session.commit()
     receiver = T_User.query.get(receiver_id)
     messages = T_Chat.query.filter(((T_Chat.F_SenderID == current_user.F_UserID) & (T_Chat.F_ReceiverID == receiver_id)) | ((T_Chat.F_SenderID == receiver_id) & (T_Chat.F_ReceiverID == current_user.F_UserID))).order_by(T_Chat.F_ChatTime)
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     user_chat = T_Chat.query.filter((T_Chat.F_SenderID == current_user.F_UserID) | (T_Chat.F_ReceiverID == current_user.F_UserID))
     
     last_message = {}
@@ -1426,7 +1468,7 @@ def community_mein(receiver_id):
     for user_id in last_message.keys():
         user = T_User.query.get(user_id)
         users[user_id] = user
-    return render_template('community.html',user=current_user, receiver=receiver, messages=messages , users=users)
+    return render_template('community.html',user=current_user, receiver=receiver, messages=messages , users=users,favorites_exhibit=favorites_exhibit)
 
 # 履歴関連
 # お気に入り
@@ -1448,8 +1490,9 @@ def favorite(exhibit_id):
 @bp.route('/favorites')
 @login_required
 def favorites():
-    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).all()
-    return render_template('favorite.html',favorites_exhibit=favorites_exhibit , user=current_user)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+    favorite_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).all()
+    return render_template('favorite.html',favorites_exhibit=favorites_exhibit , user=current_user , favorite_exhibit=favorite_exhibit)
 
 # 閲覧履歴
 @bp.route("/browsing")
@@ -1460,7 +1503,8 @@ def browsing():
 @bp.route("/listing_list")
 def listing_list():
     cart = T_Cartlist.query.filter_by(F_UserID=current_user.F_UserID).all()
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     
     exhibit_info = []
     for carts in cart:
@@ -1470,7 +1514,7 @@ def listing_list():
         exhibit_info.append((exhibit,user,cart_list))
         
     num_list = len(exhibit_info)
-    return render_template("listing_list.html",user=current_user, exhibit_info=exhibit_info , num_list=num_list)
+    return render_template("listing_list.html",user=current_user, exhibit_info=exhibit_info , num_list=num_list,favorites_exhibit=favorites_exhibit)
 
 # 出品リスト
 @bp.route("/exhibition_list",methods=['GET','POST'])
@@ -1497,16 +1541,18 @@ def exhibition_list():
         return render_template("exhibition_list.html",exhibit=exhibit,user=current_user)
     exhibit = T_Exhibit.query.filter_by(F_EXhibitType=1,F_UserID=current_user.F_UserID).all()
     demoexhibit = T_Exhibit.query.filter_by(F_EXhibitType=2)
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     num_exhibit =len(exhibit)
-    return render_template("exhibition_list.html",user=current_user,exhibit=exhibit, demoexhibit=demoexhibit , num_exhibit=num_exhibit)
+    return render_template("exhibition_list.html",user=current_user,exhibit=exhibit, demoexhibit=demoexhibit , num_exhibit=num_exhibit,favorites_exhibit=favorites_exhibit)
 
 # 売上履歴
 @bp.route("/earnings_history")
 def earnings_history():
     
     sales = T_Cartlist.query.all()
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     sales_info = []
     
     for purchase in sales:
@@ -1515,7 +1561,7 @@ def earnings_history():
         cart = T_Cartlist.query.get(exhibit.F_ExID)
         sales_info.append((exhibit, user,cart))
         
-    return render_template("earnings_history.html", user=current_user , sales_info=sales_info)
+    return render_template("earnings_history.html", user=current_user , sales_info=sales_info,favorites_exhibit=favorites_exhibit)
 
 # 掲載履歴
 @bp.route("/petpublish_history")
@@ -1527,7 +1573,9 @@ def petpublish_history():
 def listing_history():
     user_id = current_user.F_UserID
     post_exhibit = T_Exhibit.query.filter_by(F_UserID =user_id).all()
-    return render_template("listing_list.html",post_exhibit=post_exhibit , user=current_user)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("listing_list.html",post_exhibit=post_exhibit , user=current_user,favorites_exhibit=favorites_exhibit)
 
 
 # その他
@@ -1535,25 +1583,32 @@ def listing_history():
 @bp.route("/point")
 @login_required
 def point():
-    
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
     points = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
-    return render_template("point.html" , points=points , user=current_user)
+    return render_template("point.html" , points=points , user=current_user,favorites_exhibit=favorites_exhibit)
 
 # お知らせ
 @bp.route("/notice")
 def notice():
-    return render_template("notice.html" , user=current_user)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("notice.html" , user=current_user,favorites_exhibit=favorites_exhibit)
 
 # 設定
 @bp.route("/setting")
 def setting():
-    return render_template("setting.html" , user=current_user)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("setting.html" , user=current_user,favorites_exhibit=favorites_exhibit)
 
 
 # Q&A
 @bp.route("/qa")
 def qa():
-    return render_template("qa.html", user=current_user)
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+
+    return render_template("qa.html", user=current_user,favorites_exhibit=favorites_exhibit)
 
 @socketio.on('send_message')
 def handle_message(data):
