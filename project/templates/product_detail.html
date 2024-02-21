@@ -38,10 +38,23 @@
           <img src="/static/toredo/{{exhibit.F_ExPhoto}}" alt="">
         </div>
         <div id="shouhinhukusuu">
-          <div class="shouhinbetween"></div>
-          <div class="shouhinbetween"></div>
-          <div class="shouhinbetween"></div>
-          <div class="shouhinbetween"></div>
+          {%if exhibit.F_ExPhotoS%}
+          <div class="shouhinbetween">
+            <img src="/static/toredo/{{exhibit.F_ExPhotoS}}" alt="">
+          </div>
+          {%elif exhibit.F_ExPhotoT%}
+          <div class="shouhinbetween">
+            <img src="/static/toredo/{{exhibit.F_ExPhotoT}}" alt="">
+          </div>
+          {%elif exhibit.F_ExPhotoF%}
+          <div class="shouhinbetween">
+            <img src="/static/toredo/{{exhibit.F_ExPhotoF}}" alt="">
+          </div>
+          {%elif exhibit.F_ExPhotoH%}
+          <div class="shouhinbetween">
+            <img src="/static/toredo/{{exhibit.F_ExPhotoH}}" alt="">
+          </div>
+          {%endif%}
         </div>
       </div>
 
@@ -54,7 +67,13 @@
           <a href="#"></a>
         </div>
 
+        {%if exhibit.F_EXhibitType == 2%}
+        <a href="#" id="ka-to">欲しい</a>
+        {%elif exhibit.F_Sold == False%}
         <a href="/settelement_check/{{exhibit.F_ExID}}" id="ka-to">購入する</a>
+        {%elif exhibit.F_Sold == True%}
+        <a href="#" id="ka-to">SOLD OUT !!</a>
+        {%endif%}
 
         <div id="moxtutomiru">
           <h1 id="shouhinnsetumei1">商品詳細</h1>
@@ -70,7 +89,7 @@
             <tr>
               <th>カテゴリー</th>
               <td>
-                <p class="hyounomoji">{{exhibit.F_CategoryID}}</p>
+                <p class="hyounomoji">{{exhibit_category.F_CategoryName}}</p>
               </td>
             </tr>
             <tr>
@@ -100,7 +119,7 @@
           <div id="saizukankakuninnBox">
             <p id="shouhinhyouji">ゲージなど商品を表示</p>
             <div id="popup-container" class="popup-container">
-              <canvas id="canvas" width="480px" height="300"></canvas>
+              <canvas id="canvas" width="{{exhibit.F_Width}}" height="{{exhibit.F_Height}}"></canvas>
               <div id="close-button" class="close-button"></div>
             </div>
           </div>
@@ -132,12 +151,12 @@
 
     <p id="osusume">こちらの商品もおすすめです</p>
     <div id="osusumeshouhin">
-      <a href="#"></a>
-      <a href="#"></a>
-      <a href="#"></a>
-      <a href="#"></a>
-      <a href="#"></a>
-      <a href="#"></a>
+    {% for recomends_list in recomend %}
+      {% for recomends in recomends_list %}
+        <a href="/product_detail/{{ recomends.F_ExID }}"><img src="/static/toredo/{{ recomends.F_ExPhoto }}" alt=""></a>
+      {% endfor %}
+    {% endfor %}
+    
     </div>
       </div><!-- class="wrap" -->
 

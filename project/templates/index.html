@@ -161,10 +161,9 @@
               <!-- スライドショー -->
               <div id="index_M_sec2_di_2_slide">
                 <ul class="slider" id="slider_js">
-                  <li><figure><img src="./static/images/43.png" alt=""></figure></li>
-                  <li><figure><img src="./static/images/court.jpg" alt=""></figure></li>
-                  <li><figure><img src="./static/images/toppage_room.jpg" alt=""></figure></li>
-                  <li><figure><img src="./static/images/court.jpg" alt=""></figure></li>
+                  {%for contests in contest %}
+                  <li><figure><img src="/static/master/{{contests.F_ContestMasterImage}}" alt=""></figure></li>
+                  {%endfor%}
                 </ul>
                 <div class="S_dots"></div>
               </div>
@@ -206,7 +205,7 @@
               <p class="satooyabo">里親掲示板</p>
               <div class="satooya_flex">
               {% for pet_f in foster %}
-                <a href="/foster_detail" class="satooyaboshuBox">
+                <a href="/foster_detail/{{pet_f.F_FosterPetID}}" class="satooyaboshuBox">
                   <div class="satooyaoseru"><img src="/static/foster_pet/{{pet_f.pets.F_Image}}" alt=""></div>
                   <p class="satooyasagasi_m">{{ pet_f.F_FosterTitle }}</p>
                 </a>
@@ -256,7 +255,8 @@
                       {%else%}
                       <img src="/static/toredo/{{cat.F_ExPhoto}}" alt="">
                       {%endif%}
-                    {%endif%}                  </div>
+                    {%endif%}
+                  </div>
                   <p class="satooyasagasi_m">{{ cat.F_ExTitle }}</p>
                 </a>
                 {% endfor %}

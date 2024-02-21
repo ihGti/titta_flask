@@ -882,12 +882,17 @@ a.satooyaboshuBox:hover {
 }
 
 /* 里親掲示板の個々の写真 */
-a.satooyaboshuBox div.satooyaoseru {
+a.satooyaboshuBox div.satooyaoseru{
   width: 130px;
   height: 130px;
-  background-color: #41537d;
-  background-image: url(../images/neko.jpg);
+  /* background-color: #41537d; */
+  /* background-image: url(../images/neko.jpg); */
   background-size: cover;
+}
+
+a.satooyaboshuBox div.satooyaoseru img{
+  max-width: 100%;
+  margin: 0 auto 0 auto;
 }
 
 /* 里親掲示板の下の文字 */

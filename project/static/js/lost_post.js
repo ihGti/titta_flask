@@ -1,7 +1,6 @@
 var on1 = document.getElementById("on1");
 var on2 = document.getElementById("on2");
 var on3 = document.getElementById("on3");
-//var location = radio("radio-001")
 var on4 = document.getElementById("on4");
 var on5 = document.getElementById("on5");
 var on6= document.getElementById("on6");
@@ -35,10 +34,9 @@ let radioerp = [locationer,gener, injuryer]
 function lostsub() {
     val = true
     val2 = true
-    var radio1 = radio("radio-001");
     var radio2= radio("radio-002");
     var radio3 = radio("radio-003");
-    let radiovalue = [radio1,radio2,radio3]
+    let radiovalue = [radio2,radio3]
     
 
     for(let i = 0; i < inputvalue.length; i++) { 
