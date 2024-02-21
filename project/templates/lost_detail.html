@@ -145,11 +145,11 @@
               <div id="re-wrap">
                 <div id="pro-img">
                   <figure>
-                    <img src="images/pro-icon.png" alt="プロフィール画像">
+                    <img src="/static/prof_image/{{lost_user.F_ProfileImage}}" alt="プロフィール画像">
                   </figure>
                 </div><!-- id="pro-img" -->
                 <div id="pro-inf">
-                  <p>名前：{{ profname }}</p>
+                  <p>名前：{{ lost_user.F_UserName }}</p>
                   <p>会員種別：{{ profcate }}</p>
                   <p>法人・団体名：{{ profteam }}</p>
                 </div><!-- id="pro-inf" -->
@@ -157,7 +157,7 @@
 
               <div id="pro-msg">
                 <p>
-                  {{ profmsg }}
+                  {{ lost_user.F_Profile_Comment }}
                 </p>
               </div>
             </div><!-- class="recruiter-wrap" -->

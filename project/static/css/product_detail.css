@@ -67,7 +67,7 @@ div#shouhinhukusuu div:nth-child(3),
 div#shouhinhukusuu div:nth-child(4) {
   width: 100px;
   height: 100px;
-  background-color: rgb(227, 144, 162);
+  /* background-color: rgb(227, 144, 162); */
   margin: 50px 0 0 0;
   /* background-image: url(../images/hoshitu.jpg); */
   background-size: contain;
@@ -449,7 +449,7 @@ div#osusumeshouhin a {
   display: block;
   width: 150px;
   height: 150px;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
   /* background-image: url(../images/geji.jpg); */
   background-size: contain;
 }

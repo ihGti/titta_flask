@@ -231,3 +231,16 @@ input[type=radio]:checked+label::before{
 input[type=radio]{
   display: none;
 }
+
+div#payimage{
+  margin: 0 0 0 200px;
+}
+
+div#payimage img{
+  width: 100px;
+  height: auto;
+}
+
+input#btn{
+  margin-top: -70px;
+}

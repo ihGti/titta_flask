@@ -276,12 +276,21 @@ div.index_M_sec2_di_2 {
 
 /* ログインボーナス */
 
-div.index_M_sec2_di_1 form#loginB{}
+div.index_M_sec2_di_1 form#loginB{
+  margin: 0 0 40px 20px;
+  width: 290px;
+  display: flex;
+}
+
+div.index_M_sec2_di_1 form#loginB button#bounus{
+  border: none;
+  margin: 0 auto;
+  background-color: #f7f7ff;
+}
 
 div.index_M_sec2_di_1 form#loginB button#bounus img{
-  width: 320px;
+  width: 270px;
   height: auto;
-  margin: 0 0 35px 10px;
   transition: 0.3s;
 }
 
@@ -309,7 +318,7 @@ div.index_M_sec2_di_1_1 {
   background-color: #ff000000;
   border: solid 1px #eeeeee00;
   border-bottom: none;
-  margin: 0 0 175px 0;
+  margin: 0 0 175px 20px;
   position: relative;
 }
 
@@ -388,7 +397,7 @@ div.index_M_sec2_fl_1_1_3 select option{
 
 div.index_M_sec2_fl_1_1_3 select {
   
-  width: 62px;
+  width: 155px;
   height: 30px;
   margin: 13px 0 0 20px;
   background-color: #e5867b00;
@@ -429,7 +438,7 @@ div.index_M_sec2_fl_1_1_4 div input {
 }
 
 /* 検索ボタン */
-div.index_M_sec2_fl_1 button {
+div.index_M_sec2_fl_1 button#searchbtnA {
   width: 80px;
   height: 30px;
   border: solid 1px #eebdb7;
@@ -444,7 +453,7 @@ div.index_M_sec2_fl_1 button {
   line-height: 28.7px;
 }
 
-div.index_M_sec2_fl_1 button:hover {
+div.index_M_sec2_fl_1 button#searchbtnA:hover {
   background-color: #eebdb7;
   color: #fefeff;
 }
@@ -452,20 +461,22 @@ div.index_M_sec2_fl_1 button:hover {
 
 /* カテゴリ選択 */
 div.index_M_sec2_di_1_2 {
-  width: 100%;
+  width: 90%;
   height: auto;
   background-color: #ff000000;
-  border: solid 1px #e5857b;
-  margin: 0 0 100px 0;
+  border: solid 1px #41537d;
+  margin: 0 0 100px 20px;
 }
 
 /* ペットから探す */
 div.index_M_sec2_di_1_2 h1 {
   width: 100%;
   height: 50px;
-  background-color: #e5857b;
-  line-height: 3.5em;
+  background-color: #41537d;
+  color: #ffffff;
+  line-height: 3em;
   padding-left: 20px;
+  
 }
 
 /* ペットから探す（項目） */
@@ -479,6 +490,7 @@ div.index_M_sec2_di_1_2 nav ul {
 }
 
 div.index_M_sec2_di_1_2 nav ul li {
+  border-bottom: solid 1px #41537d;
 }
 
 /* 項目 */
@@ -493,17 +505,20 @@ div.index_M_sec2_di_1_2 nav ul li a {
   line-height: 3em;
   text-decoration: none;
   color: #000;
-  border-bottom: solid 1px #e5857b;
   transition: 0.5s;
 }
 
 div.index_M_sec2_di_1_2 nav ul li a:hover {
-  background-color: #ffcfcf;
+  background-color: #cfddff;
+}
+div.index_M_sec2_di_1_2 nav ul li:last-child{
+  border: none;
 }
 
 div.koukokuyou1{
-  width: 300px;
+  width: 272px;
   height: auto;
+  margin: 0 0 0 20px;
 }
 
 div.koukokuyou1 a img{
@@ -517,9 +532,9 @@ div.koukokuyou1 a img:hover{
 }
 
 div.koukokuyou2{
-  width: 300px;
+  width: 272px;
   height: auto;
-  margin-top: 70px;
+  margin: 70px 0 0 20px;
 }
 
 div.koukokuyou2 a img{
@@ -554,16 +569,19 @@ a.koukoku2 {
 
 /* Topページ下部（イベント情報）------------------ */
 
-/* div#index_M_sec2_di_2_slide */
 div#index_M_sec2_di_2_slide{
   width: calc(100% - 40px);
-  height: 250px;
+  height: auto;
   /* display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   position: relative; */
   background-color: #41537d00;
+}
+
+div#index_M_sec2_di_2_slide ul.slider{
+  margin: 20px 0 0 0;
 }
 
 /* --------------------------------------ここまで */
@@ -627,6 +645,10 @@ div.index_M_sec2_di_2 div.search_from_kinds_of_pet {
   width: 810px;
   height: auto;
   background-color: #dc143c00;
+  margin: 70px 0 0 0;
+}
+div.index_M_sec2_di_2 div.search_from_kinds_of_pet h1{
+  margin: 0 0 30px 0;
 }
 
 /* 横に並べるようの箱 */
@@ -634,6 +656,13 @@ div.search_from_kinds_of_pet div.kind_of_pets_flex {
   width: 95%;
   height: auto;
   background-color: #c7158600;
+}
+div.search_from_kinds_of_pet div.kind_of_pets_flex a{
+  display: flex;
+}
+div.search_from_kinds_of_pet div.kind_of_pets_flex a p{
+  
+  margin: 100px auto 0 auto;
 }
 
 /* お試し出品とはボタン */
@@ -688,7 +717,7 @@ div.index_M_sec2_di_2 div.tutorial_choice {
   width: 810px;
   height: auto;
   background-color: #dc143c00;
-  margin: 70px auto 0 auto;
+  margin: 40px auto 30px auto;
   display: flex;
   justify-content: space-between;
 }
@@ -725,7 +754,7 @@ div.index_M_sec2_di_2 div.search_from_category_of_goods {
   width: 810px;
   height: auto;
   background-color: #dc143c00;
-  margin: 50px auto 150px auto;
+  margin: 100px auto 150px auto;
 }
 
 div.search_from_category_of_goods div.category_of_goods_flex {
@@ -853,12 +882,17 @@ a.satooyaboshuBox:hover {
 }
 
 /* 里親掲示板の個々の写真 */
-a.satooyaboshuBox div.satooyaoseru {
+a.satooyaboshuBox div.satooyaoseru{
   width: 130px;
   height: 130px;
-  background-color: #41537d;
-  background-image: url(../images/neko.jpg);
+  /* background-color: #41537d; */
+  /* background-image: url(../images/neko.jpg); */
   background-size: cover;
+}
+
+a.satooyaboshuBox div.satooyaoseru img{
+  max-width: 100%;
+  margin: 0 auto 0 auto;
 }
 
 /* 里親掲示板の下の文字 */
@@ -869,3 +903,94 @@ a.satooyaboshuBox p.satooyasagasi_m {
 /* --------------------------------------- */
 
 
+
+
+
+
+/* ----------slick_slider----------- */
+
+.slider .slick-slide {
+  margin: 0 60px;
+  padding: 60px 0 30px 0;
+  position: relative;
+}
+.slider .slick-slide figure {
+  width: 300px;
+  height: auto;
+  transition: all 0.6s ease 0.4s;
+  opacity: 0.6;
+  box-shadow: 7px 7px 15px -5px #666;
+  overflow: hidden;
+}
+.slider .slick-slide.slick-current figure {
+  transform: scale(1.2);
+  opacity: 1;
+}
+.slider .slick-slide figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin: 0 auto;
+}
+.slider .slick-arrow {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 0;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+}
+.slider .slick-arrow::before {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #09000d;
+  border-width: 3px 3px 0 0;
+  position: absolute;
+  top: 24px;
+  transform: rotate(45deg);
+}
+.slider .slick-next {
+  right: 0;
+}
+.slider .slick-prev {
+  left: 0;
+}
+.slider .slick-next::before {
+  left: 20px;
+}
+.slider .slick-prev::before {
+  border-width: 0 0 3px 3px;
+  right: 22px;
+}
+.S_dots .slick-dots {
+  text-align: center;
+}
+.S_dots .slick-dots li {
+  display: inline-block;
+}
+.S_dots .slick-dots button {
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: 6px;
+  font-size: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  background: #bcbcbc;
+  border-radius: 50%;
+}
+.S_dots .slick-dots .slick-active button {
+  background: #0a467d;
+}

@@ -19,7 +19,7 @@
 
         <div class="p_detail-heading">
           <p><a href="/foster_board"><< 検索に戻る</a></p>
-          <p id="p-id">投稿ID:{{ fosterd_id }}</p>
+          <p id="p-id">投稿ID:{{ foster_pet.F_FosterPetID }}</p>
         </div><!-- class="p_detail-heading" -->
 
 
@@ -33,10 +33,10 @@
 
 
           <div class="p-detail_left">
-            <h2>投稿タイトル</h2>
+            <h2>{{foster_pet.F_FosterTitle}}</h2>
             <div class="post-img">
               <figure>
-                <img src="images/pet1.png" alt="petimg">
+                <img src="/static/foster_pet/{{pet.F_Image}}" alt="petimg">
                 <!-- 画像リンクはお願い -->
               </figure>
             </div>
@@ -46,45 +46,49 @@
             <table>
               <tr>
                 <th>状況</th>
+                {%if foster_pet.F_FosterPeriod == False%}
                 <td colspan="3">募集中</td>
+                {%elif foster_pet.F_FosterPeriod == True%}
+                <td colspan="3">里親決定</td>
+                {%endif%}
               </tr>
               <tr>
                 <th>種類</th>
-                <td>{{ syurui }}</td>
+                <td>{{ category.F_CategoryID }}</td>
                 <th>大きさ</th>
-                <td>{{ ookisa }}</td>
+                <td>{{ pet.F_Size }}</td>
               </tr>
               <tr>
                 <th>性別</th>
-                <td>{{ gender }}</td>
+                <td>{{ pet.F_Seibetu }}</td>
                 <th>年齢</th>
-                <td>{{ nenrei }}</td>
+                <td>{{ pet.F_Age }}</td>
               </tr>
               <tr>
                 <th>ワクチン接種</th>
-                <td>{{ vaccine }}</td>
+                <td>{{ pet.F_VeccineR }}</td>
                 <th>去勢・避妊</th>
-                <td>{{ kyosei }}</td>
+                <td>{{ pet.F_Castration }}</td>
               </tr>
               <tr>
                 <th>単身応募</th>
-                <td>{{ tanshin }}</td>
+                <td>{{ foster_pet.F_Single }}</td>
                 <th>高齢者応募</th>
-                <td>{{ koureisha }}</td>
+                <td>{{ foster_pet.F_Senoir }}</td>
               </tr>
               <tr>
                 <th>掲載日</th>
-                <td>{{ keisaibi }}</td>
+                <td>{{ pet.F_Date }}</td>
                 <th>掲載期日</th>
-                <td>{{ kijitsu}}</td>
+                <td>{{ pet.F_Date }}</td>
               </tr>
               <tr>
                 <th>ペット所在地</th>
-                <td colspan="3">{{ syozai }}</td>
+                <td colspan="3">{{ foster_pet.F_Location }}</td>
               </tr>
               <tr>
                 <th>応募可能地域</th>
-                <td colspan="3">{{ oubokanou }}</td>
+                <td colspan="3">{{ foster_pet.F_FosterPlase }}</td>
               </tr>
             </table>
 
@@ -94,18 +98,18 @@
               <tr>
                 <th>募集の経緯</th>
                 <td>
-                  {{ keii }}
+                  {{ pet.F_Background }}
                 </td>
               </tr>
               <tr>
                 <th>性格・特徴</th>
                 <td>
-                  {{ seikaku }}
+                  {{ pet.F_Features }}
                 </td>
               <tr>
                 <th>健康状態</th>
                 <td>
-                  {{ kenkou }}
+                  {{ pet.F_Health }}
                 </td>
               </tr>
               <tr>
@@ -117,7 +121,7 @@
               <tr>
                 <th>その他備考</th>
                 <td>
-                  {{ bikou }}
+                  {{ pet.F_Remarks }}
                 </td>
               </tr>
             </table>
@@ -152,12 +156,12 @@
               <div id="re-wrap">
                 <div id="pro-img">
                   <figure>
-                    <img src="images/pro-icon.png" alt="プロフィール画像">
+                    <img src="/static/prof_image/{{post_user.F_ProfileImage}}" alt="プロフィール画像">
                     <!-- ここおねがい -->
                   </figure>
                 </div><!-- id="pro-img" -->
                 <div id="pro-inf">
-                  <p>名前：{{ profname }}</p>
+                  <p>名前：{{ post_user.F_UserName }}</p>
                   <p>会員種別：{{ profcate }}</p>
                   <p>法人・団体名：{{ profteam }}</p>
                 </div><!-- id="pro-inf" -->
@@ -165,7 +169,7 @@
 
               <div id="pro-msg">
                 <p>
-                  {{ profmsg }}
+                  {{ post_user.F_Profile_Comment }}
                 </p>
               </div>
             </div><!-- class="recruiter-wrap" -->

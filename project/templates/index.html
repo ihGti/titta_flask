@@ -5,7 +5,9 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="static/css/index.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+
 {% endblock %}
 
 {% block content %}
@@ -115,7 +117,7 @@
                           <input type="text" placeholder="上限" name="highprice">
                       </div>
                     </div>
-                    <button type="submit">検索する</button>
+                    <button type="submit" id="searchbtnA">検索する</button>
 
               </div>
                 </form>
@@ -156,14 +158,17 @@
 
             <div class="index_M_sec2_di_2">
               <h1>イベント情報</h1>
+              <!-- スライドショー -->
               <div id="index_M_sec2_di_2_slide">
-                <!-- <div class="slide"><img src="./static/images/hal_koukoku1.png"></div>
-                <div class="slide"><img src="./static/images/modo_koukoku1.png"></div>
-                <div class="slide"><img src="./static/images/hal_koukoku1.png"></div>
-              </div> -->
+                <ul class="slider" id="slider_js">
+                  {%for contests in contest %}
+                  <li><figure><img src="/static/master/{{contests.F_ContestMasterImage}}" alt=""></figure></li>
+                  {%endfor%}
+                </ul>
+                <div class="S_dots"></div>
               </div>
 
-
+              <!-- cssで画像入れてる -->
               <div class="tutorial_choice">
                 <a href="/exhibit_trial"></a>
                 <a href="#"></a>
@@ -174,7 +179,7 @@
                 <div class="kind_of_pets_flex">
                   {%for pet_images in p_category[:7] %}
                   <a href="{{url_for('main.pet_image', category_id = pet_images.F_CategoryID)}}">
-                    <p style="margin: 100px 0 0 30px;">{{pet_images.F_CategoryName}}</p>
+                    <p>{{pet_images.F_CategoryName}}</p>
                   </a>
                   {%endfor%}
                 </div>
@@ -200,11 +205,12 @@
               <p class="satooyabo">里親掲示板</p>
               <div class="satooya_flex">
               {% for pet_f in foster %}
-                <a href="/foster_detail" class="satooyaboshuBox">
+                <a href="/foster_detail/{{pet_f.F_FosterPetID}}" class="satooyaboshuBox">
                   <div class="satooyaoseru"><img src="/static/foster_pet/{{pet_f.pets.F_Image}}" alt=""></div>
                   <p class="satooyasagasi_m">{{ pet_f.F_FosterTitle }}</p>
                 </a>
               {% endfor %}
+
               </div>
 
               <p class="satooyabo">迷子掲示板</p>
@@ -249,23 +255,20 @@
                       {%else%}
                       <img src="/static/toredo/{{cat.F_ExPhoto}}" alt="">
                       {%endif%}
-                    {%endif%}                  </div>
+                    {%endif%}
+                  </div>
                   <p class="satooyasagasi_m">{{ cat.F_ExTitle }}</p>
                 </a>
                 {% endfor %}
-                
-                </div>
-              
+
 
         </section>
       </div><!-- class="wrap" -->
 
     </main>
-
-    <!-- <script src="./static/js/index.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="./static/js/jquery-3.6.4.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="./static/js/index.js"></script>
     <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-7/js/6-1-7.js"></script>
 
 {% endblock %}

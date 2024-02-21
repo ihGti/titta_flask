@@ -484,12 +484,6 @@ div.wrap{
   height: 9px;
   background-color: #dee5eb;
 }
-.radio-001 label:has(:checked)::after {
-  background-color: #000000;
-}
-.radio-001 input {
-  display: none;
-}
 
 
 .radio-002 {
