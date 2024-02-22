@@ -29,3 +29,15 @@ $('#page-top a').click(function () {
     }, 500);//ページトップスクロールの速さ。数字が大きいほど遅くなる
     return false;//リンク自体の無効化
 });
+
+// JavaScript で現在のページを取得し、リンクに下線を付ける
+document.addEventListener("DOMContentLoaded", function() {
+  var currentLocation = window.location.href;
+  var navLinks = document.getElementsByClassName("nav-buttom")[0].getElementsByTagName("a");
+  for (var i = 0; i < navLinks.length; i++) {
+    if (navLinks[i].href === currentLocation) {
+      navLinks[i].classList.add("active");
+      break;
+    }
+  }
+});

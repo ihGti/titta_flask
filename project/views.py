@@ -140,9 +140,9 @@ def search():
         product = query.all()
         print(product)
         product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+        session['product'] = product_dict
         page = pagenate(product)
 
-        session['product'] = product_dict
         # 検索した商品の数を取得
         num_product = len(product)
         category= T_Category.query.filter_by(F_CategoryCode='c')
@@ -786,6 +786,8 @@ def category_product(category_id):
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+    product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+    session['product'] = product_dict
     page = pagenate(product)
     return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
@@ -800,7 +802,8 @@ def category_image(category_id):
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
-
+    product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+    session['product'] = product_dict
     page = pagenate(product)
     return render_template('product.html', product=product, category_image=category_image, user=current_user,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
@@ -813,7 +816,8 @@ def pet_category(category_id):
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
-
+    product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+    session['product'] = product_dict
     page = pagenate(product)
     return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
@@ -825,7 +829,8 @@ def pet_image(category_id):
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
-
+    product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+    session['product'] = product_dict
     page=pagenate(product)
     return render_template('product.html',user=current_user, product=product, pet_image=pet_image,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
@@ -841,6 +846,8 @@ def pet_all():
     for pet_category in pet_all:
         pet_product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
         product.extend(pet_product)
+        product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+        session['product'] = product_dict
     page = pagenate(product)
     return render_template('product.html',user=current_user, product=product, pet_all=pet_all,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
@@ -856,7 +863,8 @@ def category_search(category_id):
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
-
+    product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+    session['product'] = product_dict
     page = pagenate(product)
     return render_template('product.html', product=product, category=category , user=current_user,rows = page[0],pagination = page[1] , c_category=c_category , p_category=p_category,favorites_exhibit=favorites_exhibit)
 
@@ -869,7 +877,8 @@ def pet_search(category_id):
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
-
+    product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+    session['product'] = product_dict
     page = pagenate(product)
     return render_template('product.html',user=current_user, product=product, pet_category=pet_category,rows = page[0],pagination = page[1], c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 

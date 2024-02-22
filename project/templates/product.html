@@ -91,7 +91,7 @@
               {% elif exword %}
                 {{exword}}
               {% elif genre %}
-                {{genre.F_CategoryName}}
+                {{category.F_CategoryName}}
               {% elif l_price %}
                 {{l_price}}円以上の商品
               {% elif h_price %}
@@ -150,7 +150,11 @@
         {% for row in rows %}
 
               <div class="product">
+                {%if sort %}
+                <a href="/product_detail/{{row['id']}}">
+                {%else%}
                 <a href="/product_detail/{{row.F_ExID}}">
+                {%endif%}
                   <figure class="main">
                     {%if sort %}
                     <img src="{{ url_for('static', filename='toredo/' + row['photo'])}}" alt="big" id="bigimg">
