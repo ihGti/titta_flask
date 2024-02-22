@@ -857,24 +857,25 @@ div.satooya_flex {
 }
 
 /* 掲示板の個々 */
-div#satooya_flex a.satooyaboshuBox {
+div.satooya_flex a.satooyaboshuBox {
   display: block;
-  width: auto;
+  width: 250px;
   height: auto;
   background-color: #ff220000;
   /* border: solid 0.5px #ddd; */
   box-shadow: 2px 2px 7px #ddd;
   padding: 20px;
+  margin: 20px 0 20px 0;
   text-decoration: none;
   text-align: center;
   transition: 0.5s;
 }
 
 /* スキマ開ける為 */
-div#satooya_flex a.satooyaboshuBox:nth-child(2),
-div#satooya_flex a.satooyaboshuBox:nth-child(3),
-div#satooya_flex a.satooyaboshuBox:nth-child(4) {
-  margin: 0 0 0 30px;
+div.satooya_flex a.satooyaboshuBox:nth-child(2),
+div.satooya_flex a.satooyaboshuBox:nth-child(3),
+div.satooya_flex a.satooyaboshuBox:nth-child(4) {
+  margin: 0 10px 0 30px;
 }
 
 a.satooyaboshuBox:hover {
