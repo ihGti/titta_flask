@@ -22,6 +22,20 @@
         <div id="right"><!-- 右  -->
           <h1>- 購入手続き -</h1>
 
+          {% with messages = get_flashed_messages() %} {% for message in
+            messages %}
+            <ul id="flash">
+              <li>
+                <font color="red">{{ message }}</font>
+              </li>
+            </ul>
+            {% endfor %} {% endwith %}
+            <style>
+              ul#flash {
+                list-style: none;
+                margin-top: 10px;
+              }
+            </style>
           <form method="post">
             <div id="list">
               <div id="product">
@@ -112,18 +126,18 @@
           <div id="kei">
             <div id="ue">
               <p id="pp">小計：￥{{ '{:,.0f}'.format(exhibit.F_ExPrice) }}
-                 ポイント利用：
-                 {%if points%}
+                  ポイント利用：
+                  {%if points%}
                   はい
-                 {%else%}
-                  無し
-                 {%endif%}
-                 クーポン利用：
-                 {%if coupon%}
-                 はい
-                 {%else%}
-                 なし
-                 {%endif%}
+                  {%else%}
+                  なし
+                  {%endif%}
+                  クーポン利用：
+                  {%if coupon%}
+                  はい
+                  {%else%}
+                  なし
+                  {%endif%}
                 </p>
             </div>
             <div id="sita">
@@ -134,11 +148,11 @@
                 0
                 {%endif%}
               取得ポイント：
-              {%if points%}
+                {%if points%}
                 {{ points }}
-              {%else%}
+                {%else%}
                 0
-              {%endif%}
+                {%endif%}
               </h2>
             </div>
           </div>

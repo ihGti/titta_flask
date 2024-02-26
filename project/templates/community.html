@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block js%}
-     <script type="text/javascript" src="/static/js/community.js"></script>
+      <script type="text/javascript" src="/static/js/community.js"></script>
 {% endblock%}
 
 {% block content %}
@@ -53,7 +53,9 @@
 
             <div class="c_frame_mc_chat">
               <div class="mc_contents_user">
-                <p>{{users.F_UserName}}</p>
+                {%if receiver %}
+                <p>{{receiver.F_UserName}}</p>
+                {%endif%}
 
               </div>
               <ul class="mc_contents">

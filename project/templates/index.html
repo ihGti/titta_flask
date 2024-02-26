@@ -204,7 +204,7 @@
 
               <p class="satooyabo">里親掲示板</p>
               <div class="satooya_flex">
-              {% for pet_f in foster %}
+              {% for pet_f in foster[:4] %}
                 <a href="/foster_detail/{{pet_f.F_FosterPetID}}" class="satooyaboshuBox">
                   <div class="satooyaoseru"><img src="/static/foster_pet/{{pet_f.pets.F_Image}}" alt=""></div>
                   <p class="satooyasagasi_m">{{ pet_f.F_FosterTitle }}</p>
@@ -215,7 +215,7 @@
 
               <p class="satooyabo">迷子掲示板</p>
               <div class="satooya_flex">
-              {% for losts in lost %}
+              {% for losts in lost[:4] %}
                 <a href="/lost_detail/{{losts.F_LostPetID}}" class="satooyaboshuBox">
                   <div class="satooyaoseru"><img src="/static/lost_pet/{{losts.pets.F_Image}}" alt=""></div>
                   <p class="satooyasagasi_m">{{ losts.F_LostTitle }}</p>

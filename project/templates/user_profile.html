@@ -50,6 +50,20 @@
             </div>
 
             <div id="t_right">
+              {% with messages = get_flashed_messages() %} {% for message in
+                messages %}
+                <ul id="flash">
+                  <li>
+                    <font color="red">{{ message }}</font>
+                  </li>
+                </ul>
+                {% endfor %} {% endwith %}
+                <style>
+                  ul#flash {
+                    list-style: none;
+                    margin-top: 10px;
+                  }
+                </style>
               <form action="/add_friend/{{users.F_UserID}}" method="post">
                 <input type="submit" id="followBtn" value="＋ フォロー">
               </form>
@@ -102,7 +116,7 @@
 
                 <div class="pro_detail">
                   <a href="/product_detail/{{exhibit.F_ExID}}"><!-- 商品詳細ページへ -->
-                    <h2>{{exhibit.F_ExInfo}}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
+                    <h2>{{exhibit.F_ExTitle}}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
                   </a>
 
                   <div class="heart">

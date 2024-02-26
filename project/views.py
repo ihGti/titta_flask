@@ -72,7 +72,6 @@ def index():
     category=T_Category.query.filter_by(F_CategoryCode='c')
     c_category = session.get('category',[])
     p_category = T_Category.query.filter_by(F_CategoryCode = 'p')
-    print("Current session:", session)
     # 犬用品
     d_category = T_Category.query.filter_by(F_CategoryID=15).first()
     dog_product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(d_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
@@ -312,16 +311,20 @@ def login_bornus():
                 get_point = session['login_bornas']['points']
                 new_point = point.F_PointQuantity + get_point
                 point.F_PointQuantity = new_point
+                response_data = {'result': 'points', 'points': get_point}
                 db.session.commit()
             
             elif session['login_bornas']['type'] == 'coupon':
                 get_coupon = session['login_bornas']['coupon']
+                response_data = {'result': 'coupon'}
                 if coupon:
                     coupon.F_CouponQuantity += 1
                 else:
                     coupon = T_CouponPos(F_UserID=current_user.F_UserID, F_CouponID=get_coupon, F_CouponQuantity=1)
                     db.session.add(coupon)
                     db.session.commit()
+            
+            return jsonify(response_data)
             
         db.session.commit()
     return render_template('index.html',user=current_user,category=category, p_category=p_category , dog_product=dog_product, c_product=c_product , foster=foster , lost=lost,favorites_exhibit=favorites_exhibit,contest=contest)
@@ -411,7 +414,8 @@ def add_friend(user_id):
     user_friendship = T_Paramerter.query.filter_by(F_userid = current_user_id, F_friendid = user_id).first()
     # フォローしていたら
     if user_friendship:
-        return "すでにフォローされています"
+        flash('すでにフォローしています')
+        return redirect(url_for('main.user_prof', user_id=user_id))
     # フォローしていない場合はフォロー処理をする
     friendship = T_Paramerter(F_userid=current_user_id, F_friendid=user_id)
     db.session.add(friendship)
@@ -434,7 +438,8 @@ def add_friend_product(user_id):
     user_friendship = T_Paramerter.query.filter_by(F_userid = current_user_id, F_friendid = user_id).first()
     # フォローしていたら
     if user_friendship:
-        return "すでにフォローされています"
+        flash('すでにフォローしています')
+        return redirect(url_for('main.product_detail', user_id=user_id))
     # フォローしていない場合はフォロー処理をする
     friendship = T_Paramerter(F_userid=current_user_id, F_friendid=user_id)
     db.session.add(friendship)
@@ -846,8 +851,9 @@ def pet_all():
     for pet_category in pet_all:
         pet_product = T_Exhibit.query.filter(T_Exhibit.F_ExTag.contains(pet_category.F_CategoryName),T_Exhibit.F_EXhibitType==1).all()
         product.extend(pet_product)
-        product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
-        session['product'] = product_dict
+    product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+    session['product'] = product_dict
+    print(product_dict)
     page = pagenate(product)
     return render_template('product.html',user=current_user, product=product, pet_all=pet_all,rows = page[0],pagination = page[1],c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit)
 
@@ -937,6 +943,7 @@ def settelement_comp(exhibit_id):
         coupons = T_Coupon.query.get(coupon_pos.F_CouponID)
         coupon_info.append({'id':coupons.F_CouponID,'name':coupons.F_CouponCode, 'Quantity':coupon_pos.F_CouponQuantity})
     if exhibit.F_UserID == current_user.F_UserID:
+        flash('これは自分が出品した商品です。')
         return redirect(url_for('main.product_detail', exhibit_id=exhibit_id))
     
     if request.method=='POST':
@@ -950,6 +957,7 @@ def settelement_comp(exhibit_id):
             use_coupon = T_CouponPos.query.filter_by(F_UserID = current_user.F_UserID).all()
             user_point = T_Point.query.filter_by(F_UserID = current_user.F_UserID).first()
             if user_point.F_PointQuantity < points:
+                flash('入力したポイント数が保有ポイントよりも多いです。再入力してください')
                 return render_template("settelement_check.html", user=current_user,points=points , user_point=user_point , exhibit=exhibit)
             if settelement == "select2" and user_point.F_PointQuantity > exhibit.F_ExPrice:
                 cart_price = 0
@@ -957,6 +965,9 @@ def settelement_comp(exhibit_id):
                 user_point.F_PointQuantity = user_point.F_PointQuantity - exhibit.F_ExPrice
                 db.session.commit()
                 return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price , k_point=k_point , coupon=coupon)
+            elif settelement == "select2" and user_point.F_PointQuantity < exhibit.F_ExPrice:
+                flash('保有ポイントで全額支払うことができません')
+                return render_template("settelement_check.html", exhibit=exhibit, user=current_user , user_point=user_point , k_point=k_point , coupon_info=coupon_info,favorites_exhibit=favorites_exhibit)
             elif settelement == "select3":
                 pay = request.form.get('payselect')
                 if points and user_point.F_PointQuantity > 0:
@@ -982,7 +993,14 @@ def settelement_comp(exhibit_id):
                     except:
                         cart_price=exhibit.F_ExPrice
                         session["cart_price"] = cart_price
-            
+                        
+                elif points == 0 and not use_coupon:
+                    cart_price = exhibit.F_ExPrice
+                    session["cart_price"] = cart_price
+                
+                elif points and use_coupon:
+                    flash('ポイントかクーポンどちらかしか使えません')
+                    
                 return render_template("settelement_check.html",exhibit=exhibit, user=current_user, points=points, user_point=user_point, cart_price=cart_price , k_point=k_point , coupon=coupon , pay=pay,favorites_exhibit=favorites_exhibit)
         # 購入完了画面に進む
         elif 'comp' in request.form:
@@ -1079,10 +1097,6 @@ def foster_board():
     category = T_Category.query.filter_by(F_CategoryCode='p')
 
     return render_template("foster_board.html" , user=current_user, results=results,category=category)
-
-
-
-
 
 # 迷子掲示板
 @bp.route("/lost_petboard" , methods=['GET','POST'])
@@ -1307,22 +1321,32 @@ def lost_detail(pet_id):
 # ペット一覧
 @bp.route("/reg_pet")
 def pet_list():
-    
-    pet = T_Pet.query.filter_by(F_UserID = current_user.F_UserID).all()
+    pet = T_Pet.query.filter_by(F_UserID=current_user.F_UserID).all()
     pet_all = []
-    favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite, T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(
+        T_Favorite.user_id == current_user.F_UserID).count()
 
-    for pets in pet:
-        lost = T_LostPet.query.get(pets.F_PetID)
-        if lost is None:
-            continue
-        foster = T_FosterPet.query.get(pets.F_PetID)
-        pet_l = T_Pet.query.get(lost.F_PetID)
-        pet_f = T_Pet.query.get(foster.F_PetID)
-        pet_category = T_Category.query.get(pet.F_CategoryID)
-        pet_all.append(lost,foster,pet_l,pet_f,pet_category)
-    
-    return render_template("reg_pet.html" , user=current_user , pet_all=pet_all,favorites_exhibit=favorites_exhibit)
+    for pet_item in pet:
+        lost = T_LostPet.query.get(pet_item.F_PetID)
+        foster = T_FosterPet.query.get(pet_item.F_PetID)
+
+        if lost:
+            lost_pet = T_Pet.query.get(lost.F_PetID)
+            lost_category = T_Category.query.get(lost_pet.F_CategoryID)
+            pet_all.append((lost, None, lost_pet, None, lost_category))
+
+        else:
+            pet_all.append((None,None,pet_item,None,None))
+        
+        if foster:
+            foster_pet = T_Pet.query.get(foster.F_PetID)
+            foster_category = T_Category.query.get(foster_pet.F_CategoryID)
+            pet_all.append((None, foster, None, foster_pet, foster_category))
+            
+        else:
+            pet_all.append((None,None,None,None,None))
+    print(pet_all)
+    return render_template("reg_pet.html", user=current_user, pet_all=pet_all, favorites_exhibit=favorites_exhibit)
 
 # コンテストマスター
 @bp.route("/master_upload", methods=['GET','POST'])
@@ -1362,6 +1386,7 @@ def master():
 def contest():
     slider = T_ContestMaster.query.all()
     contest = T_ContestMaster.query.all()
+    contest_user = T_Contest.query.all()
     winner_list = []
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
@@ -1390,7 +1415,8 @@ def contest():
                     db.session.commit()
         db.session.commit()
     contestpost = len(contest)
-    return render_template("contest.html",user=current_user , contest=contest , contestpost=contestpost, slider=slider, favorites_exhibit=favorites_exhibit)
+    contest_user_all = len(contest_user)
+    return render_template("contest.html",user=current_user , contest=contest , contestpost=contestpost, slider=slider, favorites_exhibit=favorites_exhibit, contest_user_all=contest_user_all)
 
 # コンテスト詳細
 @bp.route("/contest_detail/<int:contest_id>")

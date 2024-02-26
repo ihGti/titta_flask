@@ -25,11 +25,11 @@
                 <figure><img src="/static/toredo/{{session['exhibit_info']['image_files'][0]}}" alt="big" id="bigimg"></figure>
             
 
-            {% for image_files in session['exhibit_info']['image_files'][1:] %}
               <div id="minidiv">
+                  {% for image_files in session['exhibit_info']['image_files'][1:] %}
                   <figure><img src="/static/toredo/{{ image_files }}" alt="mini" class="miniimg"></figure>
+                  {% endfor %}
               </div>
-            {% endfor %}
             </div>
           <div id="form">
             <form>

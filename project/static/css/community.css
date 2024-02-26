@@ -375,7 +375,7 @@ div#c_frame_mc{
 div#hide_ui_sendimg{
   bottom: 200px;
   left: 700px;
-  position: fixed;
+  /* position: fixed; */
   width: 150px;
   height: 150px;
   background-color:rgba(71,71,74,1) ;
@@ -414,7 +414,7 @@ input#sendimg{
 div#hide_ui_stamp{
   bottom: 200px;
   right: 500px;
-  position: fixed;
+  /* position: fixed; */
   width: 400px;
   height: 400px;
   background-color:rgba(71,71,74,1) ;
