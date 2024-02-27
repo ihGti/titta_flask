@@ -14,7 +14,7 @@ fetch('/data_javascript')
                     const hours = Math.floor((disTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const minutes = Math.floor((disTime % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((disTime % (1000 * 60)) / 1000);
-                    const formattedTime = ` 残り:${days}日 ${hours}時 ${minutes}分 ${seconds}秒`;
+                    const formattedTime = ` 残り:${days}日 ${hours}時間 ${minutes}分 ${seconds}秒`;
                     console.log(formattedTime);
                     contests[index].innerText = formattedTime;
                 } else {
