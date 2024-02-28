@@ -54,7 +54,7 @@ def login_bornas():
         coupon = random.choice(T_Coupon.query.all())
         session['login_bornas'] = {
             'type':'coupon',
-            'coupon':coupon.F_CouponID,
+            'coupon':coupon.F_CouponCode,
             'expiration_time': datetime.utcnow() + bornas
         }
     return session['login_bornas']
@@ -316,7 +316,7 @@ def login_bornus():
             
             elif session['login_bornas']['type'] == 'coupon':
                 get_coupon = session['login_bornas']['coupon']
-                response_data = {'result': 'coupon'}
+                response_data = {'result': 'coupon','coupon': get_coupon}
                 if coupon:
                     coupon.F_CouponQuantity += 1
                 else:
