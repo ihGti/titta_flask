@@ -790,8 +790,19 @@
 
 
 
+#hogoW,#colorW,#institutionW,#featuresW,#hogoplaceW{
+  padding: 20px 0;
+}
 
+#sentakusi{
+  margin: 25px 40px;
+  font-size: 1.3rem;
+}
+#sentakusi2{
+  margin: 10px;
+  font-size: 1.3rem;
 
+}
 
 
 
