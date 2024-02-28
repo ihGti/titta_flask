@@ -1133,12 +1133,13 @@ def lost_petboard():
         #     query = query2.filter()
         lost_pet = query.all()
         # page = pagenate(lost_pet)
+        categories = set([pet.pets.F_CategoryID for pet in lost_pet])
         category = T_Category.query.filter_by(F_CategoryCode='p')
         losts = len(lost_pet)
 
 
 
-        return render_template("lost_petboard.html" , user=current_user , lost_pet=lost_pet , category=category,losts=losts)
+        return render_template("lost_petboard.html" , user=current_user , lost_pet=lost_pet , category=category,losts=losts, categories=categories)
     #できてから
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
