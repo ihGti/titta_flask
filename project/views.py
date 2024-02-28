@@ -320,7 +320,7 @@ def login_bornus():
                 if coupon:
                     coupon.F_CouponQuantity += 1
                 else:
-                    coupon = T_CouponPos(F_UserID=current_user.F_UserID, F_CouponID=get_coupon, F_CouponQuantity=1)
+                    coupon = T_CouponPos(F_UserID=current_user.F_UserID, F_CouponID=get_coupon.F_CouponID, F_CouponQuantity=1)
                     db.session.add(coupon)
                     db.session.commit()
             
@@ -685,9 +685,12 @@ def product():
     category = T_Category.query.all()
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
 
+    product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+    session['product'] = product_dict
     c_category = T_Category.query.filter_by(F_CategoryCode='c')
     p_category = T_Category.query.filter_by(F_CategoryCode='p')
     page = pagenate(product)
+    print(product_dict)
     
     return render_template("product.html" , product=product , user=current_user , category=category, rows=page[0], pagination=page[1] , c_category=c_category, p_category=p_category,favorites_exhibit=favorites_exhibit, productname=productname)
 
@@ -765,10 +768,10 @@ def product_search():
         # 商品検索結果
         product = query.all()
         print(product)
-        product_dict = [{'id':products.F_ExID} for products in product]
+        product_dict = [{'id':products.F_ExID,'price':products.F_ExPrice,'sold':products.F_Sold,'time':products.F_ExTime,'photo':products.F_ExPhoto,'title':products.F_ExTitle} for products in product]
+        session['product'] = product_dict
         page = pagenate(product)
 
-        session['product'] = product_dict
         # 検索した商品の数を取得
         num_product = len(product)
         category= T_Category.query.filter_by(F_CategoryCode='c')
