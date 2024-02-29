@@ -165,7 +165,6 @@
                   <li><figure><img src="/static/master/{{contests.F_ContestMasterImage}}" alt=""></figure></li>
                   {%endfor%}
                 </ul>
-                <div class="S_dots"></div>
               </div>
 
               <!-- cssで画像入れてる -->
@@ -195,80 +194,104 @@
                   </a>
                   {%endfor%}
                 </div>
-              <a href="/product">全ての商品を見る</a>
+                <a href="/product">全ての商品を見る</a>
               </div>
 
 <!-- この下デバッグ用変数の設定、flask側で処理が作れたら消す -->
 
 
 
-              <p class="satooyabo">里親掲示板</p>
-              <div class="satooya_flex">
-              {% for pet_f in foster %}
-                <a href="/foster_detail/{{pet_f.F_FosterPetID}}" class="satooyaboshuBox">
-                  <div class="satooyaoseru"><img src="/static/foster_pet/{{pet_f.pets.F_Image}}" alt=""></div>
-                  <p class="satooyasagasi_m">{{ pet_f.F_FosterTitle }}</p>
-                </a>
-              {% endfor %}
-
+              <p class="satooyaboF">里親掲示板</p>
+              <div class="slider_sJs">
+                {% for pet_f in foster[:8]%}
+                <div class="slideSize" id="slideX">
+                  <a href="/foster_detail/{{pet_f.F_FosterPetID}}" class="slideBox">
+                    <div class="imageSize">
+                      <figure>
+                        <img src="/static/foster_pet/{{pet_f.pets.F_Image}}" alt="">
+                      </figure>
+                    </div>
+                    <p class="slide_title">{{ pet_f.F_FosterTitle }}</p>
+                  </a>
+                </div>
+                {% endfor %}
               </div>
+              <a href="/foster_board" class="boards">全ての投稿を見る</a>
 
               <p class="satooyabo">迷子掲示板</p>
-              <div class="satooya_flex">
-              {% for losts in lost %}
-                <a href="/lost_detail/{{losts.F_LostPetID}}" class="satooyaboshuBox">
-                  <div class="satooyaoseru"><img src="/static/lost_pet/{{losts.pets.F_Image}}" alt=""></div>
-                  <p class="satooyasagasi_m">{{ losts.F_LostTitle }}</p>
-                </a>
-              {% endfor %}
+              <div class="slider_sJs">
+                {% for losts in lost[:8]%}
+                <div class="slideSize" id="slideX">
+                  <a href="/lost_detail/{{losts.F_LostPetID}}" class="slideBox">
+                    <div class="imageSize">
+                      <figure>
+                        <img src="/static/lost_pet/{{losts.pets.F_Image}}" alt="">
+                      </figure>
+                    </div>
+                    <p class="slide_title">{{ losts.F_LostTitle }}</p>
+                  </a>
+                </div>
+                {% endfor %}
               </div>
+              <a href="/lost_petboard" class="boards">全ての投稿を見る</a>
 
               <p class="satooyabo">犬用品</p>
-              <div class="satooya_flex">
-                {% for dog in dog_product[:4]%}
-                
-                  <a href="/product_detail/{{dog.F_ExID}}" class="satooyaboshuBox">
-                    <div class="satooyaoseru">
-                    {%if dog.F_ExPhoto%}
-                      {%if dog.F_ExPhoto.endswith('.mp4')%}
-                      <video src="/static/toredo/{{dog.F_ExPhoto}}" alt="" autoplay>
-                      {%else%}
-                      <img src="/static/toredo/{{dog.F_ExPhoto}}" alt="">
+              <div class="slider_sJs">
+                {% for dog in dog_product[:8]%}
+                <div class="slideSize" id="slideX">
+                  <a href="/product_detail/{{dog.F_ExID}}" class="slideBox">
+                    <div class="imageSize">
+                      {%if dog.F_ExPhoto%}
+                        {%if dog.F_ExPhoto.endswith('.mp4')%}
+                        <figure>
+                          <video src="/static/toredo/{{dog.F_ExPhoto}}" alt="" autoplay>
+                        </figure>
+                        {%else%}
+                        <figure>
+                          <img src="/static/toredo/{{dog.F_ExPhoto}}" alt="">
+                        </figure>
+                        {%endif%}
                       {%endif%}
-                    {%endif%}
                     </div>
-                    <p class="satooyasagasi_m">{{ dog.F_ExTitle }}</p>
+                    <p class="slide_title">{{ dog.F_ExTitle }}</p>
                   </a>
-                {% endfor %}
-                
                 </div>
+                {% endfor %}
+              </div>
 
               <p class="satooyabo">猫用品</p>
-              <div class="satooya_flex">
-                {% for cat in c_product[:4]%}
-                
-                <a href="/product_detail/{{cat.F_ExID}}" class="satooyaboshuBox">
-                  <div class="satooyaoseru">
-                    {%if cat.F_ExPhoto%}
-                      {%if cat.F_ExPhoto.endswith('.mp4')%}
-                      <video src="/static/toredo/{{cat.F_ExPhoto}}" alt="" autoplay>
-                      {%else%}
-                      <img src="/static/toredo/{{cat.F_ExPhoto}}" alt="">
+              <div class="slider_sJs">
+                {% for cat in c_product[:8]%}
+                <div class="slideSize" id="slideX">
+                  <a href="/product_detail/{{cat.F_ExID}}" class="slideBox">
+                    <div class="imageSize">
+                      {%if cat.F_ExPhoto%}
+                        {%if cat.F_ExPhoto.endswith('.mp4')%}
+                        <figure>
+                          <video src="/static/toredo/{{cat.F_ExPhoto}}" alt="" autoplay>
+                        </figure>
+                        {%else%}
+                        <figure>
+                          <img src="/static/toredo/{{cat.F_ExPhoto}}" alt="">
+                        </figure>
+                        {%endif%}
                       {%endif%}
-                    {%endif%}
-                  </div>
-                  <p class="satooyasagasi_m">{{ cat.F_ExTitle }}</p>
-                </a>
+                    </div>
+                    <p class="slide_title">{{ cat.F_ExTitle }}</p>
+                  </a>
+                </div>
                 {% endfor %}
+              </div>
+              
 
 
         </section>
       </div><!-- class="wrap" -->
 
     </main>
-    <script src="./static/js/jquery-3.6.4.js"></script>
+    <script src="/static/js/jquery-3.6.4.js"></script>
     <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="./static/js/index.js"></script>
-    <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-7/js/6-1-7.js"></script>
+    <script src="/static/js/index.js"></script>
+    <!-- <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-1-7/js/6-1-7.js"></script> -->
 
 {% endblock %}
