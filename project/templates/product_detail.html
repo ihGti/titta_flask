@@ -154,6 +154,8 @@
               <form action="/add_friend/{{ users.F_UserID }}" method="post">
                 <input type="submit" value="フォロー">
               </form>
+              
+              <a href="{{ url_for('main.community_mein', receiver_id=users.F_UserID)}}">取引チャットをする</a>
               <a href="#" id="reviewhoshi"></a>
               <p></p>
             </div>
