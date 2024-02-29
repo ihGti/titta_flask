@@ -57,66 +57,56 @@
 
           <div id="itiran">
             <div id="pagesuu">
-              <p>約6917件中</p><!--{{count}}入れる-->
+              <p>約件中</p><!--{{count}}入れる-->
               <p id="nasi">1-7件</p><!--同じく-->
             </div>
 
             <div id="pro-wrap">
 
-
-{% for pets in pet_all%}
-              {%if pets[0] %}
+              {% for pets in pet_all %}
               <div class="product">
-                <a href="/lost_detail/{{pets[0].F_LostPetID}}"><!-- 商品詳細ページへ -->
-                  <div class="proImg">
-                    <figure class="main">
-                      <img src="/static/lost_pet/{{pets[2].F_Image}}" alt="サンプル画像">
-                      <img src="" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
-                    </figure>
-                  </div>
-                </a>
-
-                <div class="pro_detail">
-                  <a href="/lost_detail/{{pets[0].F_LostPetID}}"><!-- 商品詳細ページへ -->
-                    <h2>{{ pets[0].F_LostTitle }}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
-                  </a>
-
-                  <div class="more_detail">
-                    <p><span>種類</span>{{ pets[4].F_CategoryName }}</p>
-                    <p><span>名前</span>{{ pets[0].F_LostTitle }}</p>
-                    <p><span>状況</span>{{ pets[2].F_Background }}</p>
-                  </div>
-                </div>
-
+                  {% if pets[0] %}
+                      <a href="/lost_detail/{{ pets[0].F_LostPet.F_LostPetID }}">
+                          <div class="proImg">
+                              <figure class="main">
+                                  <img src="/static/lost_pet/{{ pets[0].F_LostPet.F_Image }}" alt="サンプル画像">
+                                  <img src="/static/sold.png" alt="売り切れ" class="situ">
+                              </figure>
+                          </div>
+                      </a>
+                      <div class="pro_detail">
+                          <a href="/lost_detail/{{ pets[0].F_LostPet.F_LostPetID }}">
+                              <h2>{{ pets[0].F_LostPet.F_LostTitle }}</h2>
+                          </a>
+                          <div class="more_detail">
+                              <p><span>種類</span>{{ pets[0].F_LostPet.F_Category.F_CategoryName }}</p>
+                              <p><span>名前</span>{{ pets[0].F_LostPet.F_LostTitle }}</p>
+                              <p><span>状況</span>{{ pets[0].F_LostPet.F_Background }}</p>
+                          </div>
+                      </div>
+                  {% elif pets[1] %}
+                      <a href="/foster_detail/{{ pets[1].F_FosterPet.F_FosterPetID }}">
+                          <div class="proImg">
+                              <figure class="main">
+                                  <img src="/static/foster_pet/{{ pets[1].F_FosterPet.F_Image }}" alt="サンプル画像">
+                                  <img src="/static/sold.png" alt="売り切れ" class="situ">
+                              </figure>
+                          </div>
+                      </a>
+                      <div class="pro_detail">
+                          <a href="/foster_detail/{{ pets[1].F_FosterPetID }}">
+                              <h2>{{ pets[1].F_FosterPet.F_FosterTitle }}</h2>
+                          </a>
+                          <div class="more_detail">
+                              <p><span>種類</span>{{ pets[1].F_FosterPet.F_Category.F_CategoryName }}</p>
+                              <p><span>名前</span>{{ pets[1].F_FosterPet.F_FosterTitle }}</p>
+                              <p><span>状況</span>{{ pets[1].F_FosterPet.F_Background }}</p>
+                          </div>
+                      </div>
+                  {% endif %}
               </div>
-              {%elif pets[1] %}
-              <div class="product">
-                <a href="/foster_detail/{{pets[1].F_FosterPetID}}"><!-- 商品詳細ページへ -->
-                  <div class="proImg">
-                    <figure class="main">
-                      <img src="/static/foster_pet/{{pets[3].F_Image}}" alt="サンプル画像">
-                      <img src="" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
-                    </figure>
-                  </div>
-                </a>
-
-                <div class="pro_detail">
-                  <a href="/foster_detail/{{pets[1].F_FosterPetID}}"><!-- 商品詳細ページへ -->
-                    <h2>{{ pets[1].F_FosterTitle }}</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
-                  </a>
-
-                  <div class="more_detail">
-                    <p><span>種類</span>{{ pets[4].F_CategoryName }}</p>
-                    <p><span>名前</span>{{ pets[1].F_FosterTitle }}</p>
-                    <p><span>状況</span>{{ pets[3].F_Background }}</p>
-                  </div>
-                </div>
-
-              </div>
-              {%endif%}
-
-{% endfor %}
-
+          {% endfor %}
+          
 
             </div>
 

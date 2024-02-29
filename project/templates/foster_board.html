@@ -17,33 +17,19 @@
       <div class="wrap">
         <div class="foster-wrap">
            
-            <div id="left">
+          <div id="left">
 
-              <div class="b-list">
-                <h2>ログイン</h2>
-                <p><a href="/foster_post">里親情報を投稿される方</a></p>
-                <p><a href="/foster_post">里親になられる方</a></p>
-              </div>
+            <div class="b-list">
+              <h2>ログイン</h2>
+              <p><a href="/lost_post">迷子情報を投稿される方</a></p>
+              <p><a href="/foster_post">保護情報を投稿される方</a></p>
+            </div>
 
-              <div class="b-list">
-                <h2>ご利用案内</h2>
-                <ul>
-                  <li><a href="#">・初めての方へ</a></li>
-                  <li><a href="#">・里親になるには？</a></li>
-                  <li><a href="#">・募集・応募について</a></li>
-                </ul>
-              </div>
-
-              <div class="b-list">
-                <h2>里親になる</h2>
-                <ul>
-                  <li><a href="/foster_board">・ペットを探す</a></li>
-                  <li><a href="/assignment">・譲渡会を探す</a></li>
-                  <li><a href="#">・保護活動者・法人を探す</a></li>
-                </ul>
-              </div>
-
-            </div><!-- id="left" -->
+            <div class="koukokuyou1">
+              <a href="https://www.hal.ac.jp/nagoya" class="koukoku1"><img src="./static/images/hal_koukoku1.png"></a>
+            </div>
+            
+          </div><!-- id="left" -->
 
 
 
@@ -59,11 +45,11 @@
                                 <div id="type">
                                     <h3>種別</h3>
                                     <ul>
-                                        <li><input type="checkbox" name="syubetu1" value="0">すべて</li>
-                                        {%for pet in category[:7]%}
-                                        <li><input type="checkbox" name="syubetu" value="{{pet.F_CategoryID}}">{{pet.F_CategoryName}}</li>
-                                        {%endfor%}
-                                    </ul>
+                                      <li><label for="0" class="labeln"><input type="checkbox" name="syubetu1" value="0" id="0" class="haikei" onclick="chebg('0')">すべて</label></li>
+                                      {%for pet in category[:7]%}
+                                      <li><label for="{{pet.F_CategoryID}}" class="labeln"><input type="checkbox" name="syubetu" value="{{pet.F_CategoryID}}" id="{{pet.F_CategoryID}}" class="haikei" onclick="chebg('{{pet.F_CategoryID}}')">{{pet.F_CategoryName}}</label></li>
+                                      {%endfor%}
+                                  </ul>
                                 </div>
                                 <div id="location">
                                     <h3>所在地</h3>
@@ -147,9 +133,9 @@
                                 </div>
                             </div>
                             <div id="bottom">
-                                <div id="word">
+                                <div class="word" style="padding: 30px 0 0 0;">
                                     <h3>フリーワードで探す</h3><!-- 性格・特徴 -->
-                                    <input type="text" class="textbox-001" name="word" id="word" placeholder="フリーワードを入力する">
+                                    <input type="text" class="textbox-001" name="word" class="word" placeholder="フリーワードを入力する">
                                 </div>
                             </div>
                         </div>
@@ -162,69 +148,72 @@
                     </div>
                 </form>
 
-<!-- ↓検索結果 -->
-<!-- class名が気になる -->
-              <div class="p-similar">
 
-                <div class="similar-wrap">
-
-
-                  {% for foster_pet, pet in results %}
-                  <!-- 投稿状態カラム追加よろ -->
-                  <!-- もし投稿状態が真なら投稿中を、違うなら偽を -->
-
-                    <div class="post">
-                      <a href="/foster_detail/{{foster_pet.F_FosterPetID}}">
-                        <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
-                        <figure>
-                          <img src="{{ url_for('static', filename='foster_pet/' + pet.F_Image)}}" alt="mainimg" id="mainimg">
-                        </figure>
-                        <h3>{{foster_pet.F_FosterTitle}}</h3><!--投稿タイトル-->
-                        <p><span>種類</span><!--猫--></p><!--カテゴリーにしてくれるならココ追加で-->
-                        <p><span>性別</span>{{pet.F_Seibetu}}</p>
-                        <p><span>所在地</span>{{foster_pet.F_Location}}</p>
-                        <p><span>応募可能地域</span></p>
-                        <p id="brbr">愛知県、岐阜県、三重県</p><!--検索窓から相談-->
-                      </a>
-                    </div>
-                    <!-- class="post" -->
-                  {% endfor %}
-                  
-
-                </div><!-- class="similar-wrap" -->
-
-              </div><!-- class="p-similar" -->
 <!-- ここまで検索結果のdiv -->
 
+<!-- ↓検索結果 -->
+<!-- class名が気になる -->
 
-              <div id="num">
-                <p>全 30 件中 1 - 20 件を表示</p>
-                <div id="numpage">
-                  <div id="before"><a href="#">＜ 前へ</a></div>
-              
-                  <div id="num_list">
-                    <ul>
-                      <li id="ittan-color"><a href="./product.html">1</a></li>
-                      <li><a href="./num_two.html">2</a></li>
-                      <li><a href="./num_three.html">3</a></li>
-                      <li><a href="./num_for.html">4</a></li>
-                      <li><a href="./num_five.html">5</a></li>
-                    </ul>
-                  </div>
-              
-                  <div id="after"><a href="#">次へ ＞</a></div>
-                </div>
-              </div>
+
 
             </div><!-- id="right" -->
+        </div>
 
+
+        <div class="p-similar">
+
+          <div class="similar-wrap">
+    {% for foster_pet, pet in results %}
+    <!-- 投稿状態カラム追加よろ -->
+    <!-- もし投稿状態が真なら投稿中を、違うなら偽を -->
+
+      <div class="post">
+        <a href="/foster_detail/{{foster_pet.F_FosterPetID}}">
+          <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+          <figure>
+            <img src="{{ url_for('static', filename='foster_pet/' + pet.F_Image)}}" alt="mainimg" id="mainimg">
+          </figure>
+          <h3>{{foster_pet.F_FosterTitle}}</h3><!--投稿タイトル-->
+          <p><span>種類</span><!--猫--></p><!--カテゴリーにしてくれるならココ追加で-->
+          <p><span>性別</span>{{pet.F_Seibetu}}</p>
+          <p><span>所在地</span>{{foster_pet.F_Location}}</p>
+          <p><span>応募可能地域</span></p>
+          <p id="brbr">愛知県、岐阜県、三重県</p><!--検索窓から相談-->
+        </a>
+      </div><!-- class="post" -->
+    {% endfor %}
+    
+  </div><!-- class="similar-wrap" -->
+
+</div><!-- class="p-similar" -->
+
+
+            <div id="num">
+              <p>全 30 件中 1 - 20 件を表示</p>
+              <div id="numpage">
+                <div id="before"><a href="#">＜ 前へ</a></div>
+            
+                <div id="num_list">
+                  <ul>
+                    <li id="ittan-color"><a href="./product.html">1</a></li>
+                    <li><a href="./num_two.html">2</a></li>
+                    <li><a href="./num_three.html">3</a></li>
+                    <li><a href="./num_for.html">4</a></li>
+                    <li><a href="./num_five.html">5</a></li>
+                  </ul>
+                </div>
+            
+                <div id="after"><a href="#">次へ ＞</a></div>
+              </div>
             </div>
+
+        
 
 
 
         
       </div><!-- class="wrap" -->
-
+      <script src="{{ url_for('static', filename='js/board.js')}}"></script>
     </main>
 
 

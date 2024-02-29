@@ -74,6 +74,20 @@
         {%elif exhibit.F_Sold == True%}
         <a href="#" id="ka-to">SOLD OUT !!</a>
         {%endif%}
+        {% with messages = get_flashed_messages() %} {% for message in
+          messages %}
+          <ul id="flash">
+            <li>
+              <font color="red">{{ message }}</font>
+            </li>
+          </ul>
+          {% endfor %} {% endwith %}
+          <style>
+            ul#flash {
+              list-style: none;
+              margin-top: 10px;
+            }
+          </style>
 
         <div id="moxtutomiru">
           <h1 id="shouhinnsetumei1">商品詳細</h1>

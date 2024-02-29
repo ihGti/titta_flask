@@ -690,6 +690,7 @@ div.search_from_kinds_of_pet div.kind_of_pets_flex {
   background-color: #c7158600;
 }
 div.search_from_kinds_of_pet div.kind_of_pets_flex a{
+  text-decoration: none;
   display: flex;
 }
 div.search_from_kinds_of_pet div.kind_of_pets_flex a p{
@@ -761,7 +762,7 @@ div.tutorial_choice a:first-child {
   border-radius: 10px;
   background-image: url(../images/3.png);
   background-size: cover;
-  transition: 0.5s;Users/kazum/Downloads/初心者ガイド/2.png Users/kazum/Downloads/初心者ガイド/3.png
+  transition: 0.5s;
 }
 
 div.tutorial_choice a:first-child:hover {

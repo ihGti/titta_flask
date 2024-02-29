@@ -11,7 +11,7 @@ div.foster-wrap{
 div.foster-wrap div#left{
     width: 300px;
     /* background-color: #ddf; */
-    height: 1000px;
+    height: 500px;
 }
 
 
@@ -215,12 +215,12 @@ div.foster-wrap div#right{
     display: flex;
 }
 
-#square #bottom #word{
+#square #bottom .word{
     display: flex;
     margin: 0 0 0 0;
 }
 
-#square #bottom #word h3{
+#square #bottom .word h3{
     margin: 25px 0 0 30px;
     font-weight: 400;
     font-size: 0.8rem;
@@ -449,7 +449,7 @@ div.foster-wrap div#right{
 /* 投稿関連css*/
 div.p-similar {
     /*  height: 100px;*/
-    width: 750px;
+    /* width: 750px; */
     margin: 0 auto 0 auto;
     padding: 60px 0px 20px 0px;
     /*  background-color: #ddddff;*/
@@ -458,7 +458,7 @@ div.p-similar {
 
 /* 掲示板div.postのdiv */
 div.similar-wrap {
-    width: 750px;
+    /* width: 750px; */
     margin: 0 auto 0 auto;
     padding: 0 0 30px 0;
     display: flex;
@@ -466,13 +466,30 @@ div.similar-wrap {
 }
 
 
+div.koukokuyou1{
+    padding: 30px 0 0 0;
+    width: 250px;
+    height: auto;
+    margin: 0 0 0 20px;
+}
+
+div.koukokuyou1 a img{
+    width: 100%;
+    height: auto;
+    transition: 0.3s;
+}
+
+div.koukokuyou1 a img:hover{
+    opacity: 0.5;
+}
 
 /* 掲示板投稿パーツ */
 div.post {
     margin: 5px 5px 5px 5px;
     padding: 3px 12px 20px 12px;
-    width: 23.5%;
+    width: 19%;
     box-sizing: border-box;
+    
 
     border: 1px #ddd solid;
     box-shadow: 2px 2px 6px #ddd;
@@ -590,6 +607,7 @@ div.p-similar p a:hover {
 
 
 #num {
+    padding: 30px 0 0 0;
     width: 480px;
     margin: 0 auto 40px auto;
     font-size: 0.9rem;
@@ -735,4 +753,31 @@ div.p-similar p a:hover {
 
 .radio-002 input {
     display: none;
+}
+
+
+
+.haikei{
+    display: none;
+}
+.haikei label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc; /* ボーダーの色 */
+    background-color: #fff; /* 未選択時の背景色 */
+}
+.labeln{
+    width: 100%;
+    padding: 9px 0;
+}
+.labeln:hover{
+    opacity: 0.7;
+}
+
+.haikei input[type="checkbox"]:checked + label:before {
+    background-color: #cae30c; /* 選択時の背景色 */
 }

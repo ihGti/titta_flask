@@ -8,17 +8,18 @@
 -lost_petboard
 {% endblock%}
 
+
+
+
+
+
+
 {% block content %}
     <main id="m-sample">
 
       <div class="wrap">
 
         <div class="foster-wrap">
-
-
-
-
-
 
             <div id="left">
 
@@ -28,37 +29,11 @@
                 <p><a href="/foster_post">保護情報を投稿される方</a></p>
               </div>
 
-              <div class="b-list">
-                <h2>ご利用案内</h2>
-                <ul>
-                  <li><a href="/">・初めての方へ</a></li>
-                  <li><a href="/">・ペットを保護したら？</a></li>
-                  <li><a href="/">・募集・応募について</a></li>
-                </ul>
+              <div class="koukokuyou1">
+                <a href="https://www.hal.ac.jp/nagoya" class="koukoku1"><img src="./static/images/hal_koukoku1.png"></a>
               </div>
-
-              <div class="b-list">
-                <h2>飼い主を探す</h2>
-                <ul>
-                  <li><a href="/">・ペットを探す</a></li>
-                  <li><a href="/">・地域を探す</a></li>
-                  <li><a href="/">・保護活動者・法人を探す</a></li>
-                </ul>
-              </div>
-
+              
             </div><!-- id="left" -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             <div id="right">
@@ -66,7 +41,7 @@
                 <p id="link"><a href="/top">Titta</a> > <a href="/lost_board">里親情報一覧</a></p>
 
                 <h2>迷子情報一覧</h2>
-            <form method="post">
+              <form method="post">
 
                 <div id="all">
                     <div id="square">
@@ -74,9 +49,9 @@
                             <div id="type">
                                 <h3>種別</h3>
                                 <ul>
-                                    <li><input type="checkbox" name="syubetu1" value="0">すべて</li>
+                                    <li><label for="0" class="labeln"><input type="checkbox" name="syubetu1" value="0" id="0" class="haikei" onclick="chebg('0')">すべて</label></li>
                                     {%for pet in category[:7]%}
-                                    <li><input type="checkbox" name="syubetu" value="{{pet.F_CategoryID}}">{{pet.F_CategoryName}}</li>
+                                    <li><label for="{{pet.F_CategoryID}}" class="labeln"><input type="checkbox" name="syubetu" value="{{pet.F_CategoryID}}" id="{{pet.F_CategoryID}}" class="haikei" onclick="chebg('{{pet.F_CategoryID}}')">{{pet.F_CategoryName}}</label></li>
                                     {%endfor%}
                                 </ul>
                             </div>
@@ -209,7 +184,7 @@
                             </div>
                         </div>
                         <div id="bottom">
-                            <div id="word">
+                            <div class="word">
                                 <h3>フリーワードで探す</h3>
                                 <input type="text" name="freeword" class="textbox-001" placeholder="フリーワードを入力する"/>
                             </div>
@@ -233,56 +208,77 @@
                       <button type="submit">検索する</button>
                     </div>
                 </div>
-            </form>
+              </form>
 
 
 
 
-              <div class="p-similar">
-
-                <div class="similar-wrap">
-
-<!-- viewで実装する際に調整して -->
-<div id="pagesuu">
-  <p>約{{losts}}件中</p>
-  
-</div>
-
-{% for lost in lost_pet %}
-                  <div class="post">
-                    <a href="/lost_detail/{{lost.F_LostPetID}}">
-                      <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
-                      <figure>
-                        <img src="/static/lost_pet/{{lost.pets.F_Image}}" alt="sample">
-                      </figure>
-
-                      <h3>投稿タイトル{{lost.F_LostTitle}}</h3>
-                      <p><span>種類</span></p>
-                      <p><span>性別</span>{{lost.pets.F_Seibetu}}</p>
-                      <p><span>発見地</span>{{lost.F_LostPlace}}</p>
-                      <p><span>発見日時</span>{{lost.F_LostDate}}</p>
-                      <p><span>状況</span>{{lost.F_LostInjury}}</p>
-                    </a>
-                  </div><!-- class="post" -->
-{% endfor %}
 
 
 
 
-                </div><!-- class="similar-wrap" -->
 
-              </div><!-- class="p-similar" -->
+
+
+
+
+
               <!-- ここまで投稿のdiv -->
               <div class="paginations">
-                <div>
-    
-                </div>
+              </div>
+
+
 
             </div><!-- id="right" -->
 
+
+
+
+
         </div>
 
+        <div class="p-similar">
+
+        <div class="similar-wrap">
+{% for lost in lost_pet %}
+        <div class="post">
+          <a href="/lost_detail/{{lost.F_LostPetID}}">
+            <p id="iine"><input type="submit" value="&#xf004;" class="button"></p>
+            <figure>
+              <img src="/static/lost_pet/{{lost.pets.F_Image}}" alt="sample">
+            </figure>
+
+            <h3>投稿タイトル{{lost.F_LostTitle}}</h3>
+            <p><span>種類</span></p>
+            <p><span>性別</span>{{lost.pets.F_Seibetu}}</p>
+            <p><span>発見地</span>{{lost.F_LostPlace}}</p>
+            <p><span>発見日時</span>{{lost.F_LostDate}}</p>
+            <p><span>状況</span>{{lost.F_LostInjury}}</p>
+          </a>
+        </div><!-- class="post" -->
+{% endfor %}
+        </div><!-- class="similar-wrap" -->
+
+        </div><!-- class="p-similar" -->
+
+        <div id="num">
+          <p>全 30 件中 1 - 20 件を表示</p>
+          <div id="numpage">
+            <div id="before"><a href="#">＜ 前へ</a></div>
         
+            <div id="num_list">
+              <ul>
+                <li id="ittan-color"><a href="./product.html">1</a></li>
+                <li><a href="./num_two.html">2</a></li>
+                <li><a href="./num_three.html">3</a></li>
+                <li><a href="./num_for.html">4</a></li>
+                <li><a href="./num_five.html">5</a></li>
+              </ul>
+            </div>
+        
+            <div id="after"><a href="#">次へ ＞</a></div>
+          </div>
+        </div>
 
 
 
@@ -292,7 +288,7 @@
     </main>
 
 
-
+    <script src="{{ url_for('static', filename='js/board.js')}}"></script>
 
 
 

@@ -94,9 +94,7 @@
           {%if contest_detail.F_ContestPeriod == False%}
           <a href="/apply/{{contest_detail.F_ContestMasterID}}" id="ApplyBtn">応募する</a>
           {%endif%}
-          {%if contest_detail.F_ContestPeriod == True and contest_detail.F_VotingPeriod == False %}
           <a href="/contest_list/{{contest_detail.F_ContestMasterID}}" id="ApplyBtn">応募者一覧</a>
-          {%endif%}
         </div>
 
       </div><!-- class="wrap" -->
