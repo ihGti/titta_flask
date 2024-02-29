@@ -584,8 +584,12 @@ div.post a p span {
 
 
 /* p-similar */
+.similar-wrap{
+    display: flex;
+    justify-content: center;
+}
 div.p-similar p {
-    padding: 5px 0 5px 0;
+    padding: 5px 0 5px 0;;
 }
 
 div.p-similar p a {
