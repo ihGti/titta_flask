@@ -270,7 +270,7 @@ div.index_M_sec2_di_1 {
 /* トップページ下部（フレックス右） */
 div.index_M_sec2_di_2 {
   width: calc(100% - 300px);
-  height: 1167px;
+  height: 1150px;
   background-color: #ff440000;
 }
 
@@ -570,7 +570,7 @@ a.koukoku2 {
 /* Topページ下部（イベント情報）------------------ */
 
 div#index_M_sec2_di_2_slide{
-  width: calc(100% - 40px);
+  width: 800px;
   height: auto;
   /* display: flex;
   justify-content: center;
@@ -586,10 +586,10 @@ div#index_M_sec2_di_2_slide ul.slider{
 
 /* --------------------------------------ここまで */
 div.index_M_sec2_di_2 > div {
-  width: 810px;
+  width: 770px;
   height: auto;
   background-color: #ff000000;
-  margin: 0 auto;
+  margin: 0 0 0 30px;
 }
 
 div.index_M_sec2_di_2 div h1 {
@@ -601,14 +601,46 @@ div.index_M_sec2_di_2 div h1 {
 }
 
 /* 写真入れるフレーム */
-div.index_M_sec2_di_2 div div {
+div.index_M_sec2_di_2 div.search_from_kinds_of_pet div.kind_of_pets_flex {
+  width: 770px;
+  height: auto;
+  background-color: #dc143c00;
+  margin: 0 auto 50px auto;
+  display: flex;
+  justify-content: space-between;
+}
+div.index_M_sec2_di_2 div.search_from_kinds_of_pet div.kind_of_pets_flex a{
+  text-decoration: none;
+}
+
+
+div.index_M_sec2_di_2 div.search_from_category_of_goods div.category_of_goods_flex{
+  width: 770px;
+  height: auto;
+  background-color: #dc143c00;
+  margin: 0 auto 50px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* div.index_M_sec2_di_2 div div{
   width: 770px;
   height: auto;
   background-color: #dc143c00;
   margin: 0 auto 40px auto;
   display: flex;
   justify-content: space-between;
-}
+} */
+
+
+
+
+
+
+
+
+
 
 /* イベント写真１ */
 div.index_M_sec2_di_2 div div a.event1_frame {
@@ -648,7 +680,7 @@ div.index_M_sec2_di_2 div.search_from_kinds_of_pet {
   margin: 70px 0 0 0;
 }
 div.index_M_sec2_di_2 div.search_from_kinds_of_pet h1{
-  margin: 0 0 30px 0;
+  margin: 0 0 45px 0;
 }
 
 /* 横に並べるようの箱 */
@@ -718,7 +750,7 @@ div.index_M_sec2_di_2 div.tutorial_choice {
   width: 810px;
   height: auto;
   background-color: #dc143c00;
-  margin: 40px auto 30px auto;
+  margin: 80px auto 30px auto;
   display: flex;
   justify-content: space-between;
 }
@@ -755,7 +787,10 @@ div.index_M_sec2_di_2 div.search_from_category_of_goods {
   width: 810px;
   height: auto;
   background-color: #dc143c00;
-  margin: 100px auto 150px auto;
+  margin: 100px 0 150px 0;
+}
+div.index_M_sec2_di_2 div.search_from_category_of_goods h1{
+  margin: 0 0 25px 0;
 }
 
 div.search_from_category_of_goods div.category_of_goods_flex {
@@ -844,39 +879,26 @@ p.satooyabo {
   background-color: #ff7f5000;
   border-left: solid 8px #e5857b;
   font-size: 1.4rem;
-  padding-left: 10px;
+  padding: 0 0 0 10px;
+  margin: 60px 0 10px 0;
 }
-
-/* 掲示板の個々Flex */
-div.satooya_flex {
-  width: 550px;
+p.satooyaboF {
+  width: 100%;
   height: auto;
-  background-color: #e5867b00;
-  display: flex;
-  justify-content: space-between;
-  margin: 30px 0 70px 0;
+  background-color: #ff7f5000;
+  border-left: solid 8px #e5857b;
+  font-size: 1.4rem;
+  padding: 0 0 0 10px;
+  margin: -30px 0 10px 0;
 }
-
-/* 掲示板の個々 */
-div.satooya_flex a.satooyaboshuBox {
-  display: block;
-  width: 250px;
-  height: auto;
-  background-color: #ff220000;
-  /* border: solid 0.5px #ddd; */
-  box-shadow: 2px 2px 7px #ddd;
-  padding: 20px;
-  margin: 20px 0 20px 0;
+a.boards{
   text-decoration: none;
-  text-align: center;
-  transition: 0.5s;
-}
-
-/* スキマ開ける為 */
-div.satooya_flex a.satooyaboshuBox:nth-child(2),
-div.satooya_flex a.satooyaboshuBox:nth-child(3),
-div.satooya_flex a.satooyaboshuBox:nth-child(4) {
-  margin: 0 10px 0 30px;
+  float: right;
+  margin: 0 60px 0 0;
+  color: #000;
+  font-size: 1.1rem;
+  border: #41537d 2px solid;
+  border-radius: 30px;
 }
 
 a.satooyaboshuBox:hover {
@@ -906,13 +928,10 @@ a.satooyaboshuBox p.satooyasagasi_m {
 
 
 
-
-
-
 /* ----------slick_slider----------- */
 
 .slider .slick-slide {
-  margin: 0 60px;
+  margin: 0 60px 40px 60px;
   padding: 60px 0 30px 0;
   position: relative;
 }
@@ -996,3 +1015,77 @@ a.satooyaboshuBox p.satooyasagasi_m {
 .S_dots .slick-dots .slick-active button {
   background: #0a467d;
 }
+
+
+/* -----↓掲示板や商品のスライド------ */
+
+div.slider_sJs{
+  padding: 30px 0 20px 0;
+  margin: 0 0 0 0;
+  width: 600px;
+}
+
+div.slider_sJs div.slideSize{
+  width: 170px;
+  height: 225px;
+  border: #DDDDDD 1px solid;
+  margin: 0 30px 10px 0;
+}
+
+div.slider_sJs div.slideSize a.slideBox {
+  width: 140px;
+  margin: 20px 0 10px 0;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.5s;
+  
+}
+a.slideBox:hover {
+  opacity: 0.5;
+}
+
+a.slideBox div.imageSize{
+  width: 140px;
+  height: 140px;
+  background-size: cover;
+  background-color: #dc143c00;
+  margin: 15px auto 40px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+a.slideBox div.imageSize figure{
+  width: 140px;
+  height: 140px;
+}
+
+a.slideBox div.imageSize figure img{
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+a.slideBox p.slide_title {
+  text-decoration: none;
+  margin-top: -20px;
+  font-size: 0.9rem;
+}
+
+
+.slide-arrow {
+  bottom: 0;
+  cursor: pointer;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  width: 30px;
+}
+.prev-arrow {
+  left: -40px;
+}
+.next-arrow {
+  right: -40px;
+}
+/* --------------------------------------- */
+
