@@ -15,7 +15,7 @@ document.getElementById("loginB").addEventListener("submit", function(event) {
           if (response.result === "points") {
               alert("ポイントが付与されました: " + response.points + "ポイント");
           } else if (response.result === "coupon") {
-              alert("クーポンが付与されました: クーポンを使用してください");
+              alert("クーポンが付与されました: " + response.coupon + "獲得");
           }
       }
   };
