@@ -7,12 +7,17 @@ function previewImage(inputId, targetImageId) {
   var targetImage = document.getElementById(targetImageId);
   var reader = new FileReader();
 
+
   reader.onload = function(e) {
     targetImage.src = e.target.result;
+    targetImage.style.display="block"
   }
 
   reader.readAsDataURL(input.files[0]);
 }
+
+
+
 
 
 
