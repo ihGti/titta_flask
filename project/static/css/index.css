@@ -707,32 +707,39 @@ div.kind_of_pets_flex a {
 
 div.kind_of_pets_flex a:first-child {
   background-image: url(../images/inu.jpg);
-  background-size: contain;
+  background-size: cover;
 }
 
 div.kind_of_pets_flex a:nth-child(2) {
   background-image: url(../images/neko.jpg);
-  background-size: contain;
+  background-size: cover;
 }
 
 div.kind_of_pets_flex a:nth-child(3) {
   background-image: url(../images/hamusuta-.jpg);
-  background-size: contain;
+  background-size: cover;
 }
 
 div.kind_of_pets_flex a:nth-child(4) {
   background-image: url(../images/inko.jpg);
-  background-size: contain;
+  background-size: cover;
+  background-size: 100px 90px;
 }
 
 div.kind_of_pets_flex a:nth-child(5) {
   background-image: url(../images/reopa.jpg);
-  background-size: contain;
+  background-size: cover;
 }
 
 div.kind_of_pets_flex a:nth-child(6) {
   background-image: url(../images/kaeru.jpg);
-  background-size: contain;
+  background-size: cover;
+  background-size: 100px 90px;
+}
+
+div.kind_of_pets_flex a:nth-child(7) {
+  background-image: url(../images/hebi.jpg);
+  background-size: cover;
 }
 
 div.kind_of_pets_flex a:nth-child(7) {
@@ -897,8 +904,6 @@ a.boards{
   margin: 0 60px 0 0;
   color: #000;
   font-size: 1.1rem;
-  border: #41537d 2px solid;
-  border-radius: 30px;
 }
 
 a.satooyaboshuBox:hover {
@@ -1088,4 +1093,3 @@ a.slideBox p.slide_title {
   right: -40px;
 }
 /* --------------------------------------- */
-
