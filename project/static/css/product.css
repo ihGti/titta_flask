@@ -4,6 +4,13 @@ div.wrap{
   height: auto;
 }
 
+header div.r-wrap div.rr-wrap div.nav-top nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+
 /*product.html*/
 /* 商品一覧 */
 
@@ -21,6 +28,7 @@ div.wrap{
   border: #000 0.5px solid;
   background-color: #fff;
   width: 280px;
+  margin: 40px 0 0 0;
 }
 
 #Refine-search h2{
@@ -85,13 +93,14 @@ div.wrap{
 }
 
 #btn-search button{
-  background: #E5857B;
-  border-radius: 3px;
+  background: #41537d;
+  width: 200px;
+  border-radius: 5px;
   display: flex;
   justify-content: space-around;
-  margin: 0 0 15px 100px;
+  margin: 0 0 15px 140px;
   max-width: 280px;
-  padding: 10px 25px;
+  padding: 8px 5px;
   color: #fff;
   font-weight: 500;
   width: 100px;
@@ -101,38 +110,40 @@ div.wrap{
 /* ------------------------↓カテゴリー一覧---------------------------- */
 
 #category{
-  border: #E5857B 0.5px solid;
+  border: #41537d 0.5px solid;
   background-color: #fff;
   width: 280px;
   margin: 120px 0 0 0;
 }
 
 .category-head{
-  background-color: #E5857B;
+  background-color: #41537d;
   color: #fff;
   font-size: 1.2rem;
   padding: 10px 0 10px 10px;
+  margin: 0;
 }
 
-#category ul{
+#category ul.category-list{
   list-style: none;
+  margin: 0;
 }
 
-#category ul li{
+#category ul.category-list li{
   padding: 10px 10px 10px 30px;
-  border-bottom: #E5857B 1px solid;
+  border-bottom: #41537d 1px solid;
   font-size: 1.1rem;
 }
-#category ul li:last-child{
+#category ul.category-list li:last-child{
   border-bottom: none;
 }
 
-#category ul li a{
+#category ul.category-list li a{
   text-decoration: none;
   color: #000;
 }
 
-#category ul li a:hover{
+#category ul.category-list li a:hover{
   opacity: 0.7;
 }
 
@@ -377,6 +388,7 @@ div.wrap{
   height: 150px;
   object-fit: cover;
   border-radius: 15px;
+  position: absolute;
 }
 
 .product a h2{
@@ -384,7 +396,7 @@ div.wrap{
   color: #000;
   font-weight: 500;
   font-size: 0.85rem;
-  margin: 15px 0 0 0;
+  margin: 163px 0 0 0;
   text-align: center;
 }
 
@@ -410,6 +422,15 @@ div.wrap{
   border-radius: 30px;
 }
 
+
+#soldImage{
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+  margin-left: -105px;
+}
 
 
 

@@ -56,13 +56,13 @@
         </form>
           <div id="category">
             <p class="category-head">ペットから探す</p>
-            <ul>
+            <ul class="category-list">
               {%for pet in p_category%}
               <li><a href="{{url_for('main.pet_search',category_id=pet.F_CategoryID)}}">{{pet.F_CategoryName}}</a></li>
               {%endfor%}
             </ul>
             <p class="category-head">カテゴリーから探す</p>
-            <ul>
+            <ul class="category-list">
               {% for categories in c_category %}
               <li><a href="{{url_for('main.category_search', category_id = categories.F_CategoryID)}}">{{categories.F_CategoryName}}</a></li>
               {% endfor %}
@@ -70,14 +70,14 @@
 
           </div>
 
-          <div id="advertisement">
+          <!-- <div id="advertisement">
             <figure>
               <img src="images/#" alt="koukoku">
             </figure>
             <figure>
               <img src="images/#" alt="koukoku2">
             </figure>
-          </div>
+          </div> -->
 
         </div>
 
@@ -140,8 +140,6 @@
 
           <div id="itiran">
             <div id="pagesuu">
-              <p>約{{num_product}}件中</p>
-              
               <p id="nasi">{{ pagination.info }}</p>
             </div>
 
@@ -158,8 +156,14 @@
                   <figure class="main">
                     {%if sort %}
                     <img src="{{ url_for('static', filename='toredo/' + row['photo'])}}" alt="big" id="bigimg">
+                      {% if row.F_Sold == True%}
+                      <img src="/static/images/sold_icon.png" alt="soldImage" id="soldImage">
+                      {%endif%}
                     {%else%}
                     <img src="{{ url_for('static', filename='toredo/' + row.F_ExPhoto)}}" alt="big" id="bigimg">
+                      {% if row.F_Sold == True%}
+                        <img src="/static/images/sold_icon.png" alt="soldImage" id="soldImage">
+                        {%endif%}
                     {%endif%}
                   </figure>
                   <h2>
@@ -170,10 +174,6 @@
                     {%endif%}
                   </h2>
                   <div class="heart">
-                      {% if row.F_Sold == True%}
-                      <p>sold!!</p>
-                      {%endif%}
-
                     <div class="price">
 
                       <h5>
