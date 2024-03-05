@@ -41,17 +41,21 @@
       {%endif%}
     {%endfor%}
 
-    {% if user.F_Profile_Comment and '亀' in user.F_Profile_Comment %}
+    {%if comment%}
+    {%for comments in comment%}
+      {% if '亀' in comments %}
       <img src="./static/images/came.png" id="came">
-    {% elif user.F_Profile_Comment and '犬' in user.F_Profile_Comment %}
+      {% elif '犬' in comments %}
       <img src="./static/images/inu.png" id="inu">
-    {% elif user.F_Profile_Comment and '蛇' in user.F_Profile_Comment %}
+      {% elif '蛇' in comments %}
       <img src="./static/images/hachurui.png" id="hachurui">
-    {% elif user.F_Profile_Comment and '鳥' in user.F_Profile_Comment %}
+      {% elif '鳥' in comments %}
       <img src="./static/images/torikago.png" id="torikago">
       <!-- <div id="offright"></div> -->
-    {% elif user.F_Profile_Comment and '猫' in user.F_Profile_Comment %}
+      {% elif '猫' in comments %}
       <img src="./static/images/nozokuneko.png" id="nozokuneko">
+      {%endif%}
+    {%endfor%}
     {%endif%}
   </div>
 
@@ -203,7 +207,7 @@
 
               <p class="satooyaboF">里親掲示板</p>
               <div class="slider_sJs">
-                {% for pet_f in foster[:8]%}
+                {% for pet_f in foster%}
                 <div class="slideSize" id="slideX">
                   <a href="/foster_detail/{{pet_f.F_FosterPetID}}" class="slideBox">
                     <div class="imageSize">
@@ -220,7 +224,7 @@
 
               <p class="satooyabo">迷子掲示板</p>
               <div class="slider_sJs">
-                {% for losts in lost[:8]%}
+                {% for losts in lost%}
                 <div class="slideSize" id="slideX">
                   <a href="/lost_detail/{{losts.F_LostPetID}}" class="slideBox">
                     <div class="imageSize">

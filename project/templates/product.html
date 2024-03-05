@@ -6,7 +6,7 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="/static/css/product.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 
 
 {% endblock %}
@@ -87,29 +87,31 @@
           <div id="kekka">
             <h2>
               {% if word %}
-                {{word}}
+                {{word}}の
               {% elif exword %}
-                {{exword}}
+                {{exword}}の
               {% elif genre %}
-                {{category.F_CategoryName}}
+                {{category.F_CategoryName}}の
               {% elif l_price %}
-                {{l_price}}円以上の商品
+                {{l_price}}円以上の商品の
               {% elif h_price %}
-                {{h_price}}円以下の商品
+                {{h_price}}円以下の商品の
+              {%elif productname == 'product'%}
+                全ての商品の
               {%elif category %}
-                {{category.F_CategoryName}}
+                {{category.F_CategoryName}}の
               {%elif category_image %}
-                {{category_image.F_CategoryName}}
+                {{category_image.F_CategoryName}}の
               {%elif pet_category %}
-                {{pet_category.F_CategoryName}}
+                {{pet_category.F_CategoryName}}の
               {%elif pet_image %}
-                {{pet_image.F_CategoryName}}
+                {{pet_image.F_CategoryName}}の
               {%elif pet_all %}
-                全てのペット
+                全てのペットの
               {%endif%}
             </h2>
             <p>
-              の検索結果
+              検索結果
             </p>
           </div>
 
@@ -200,8 +202,8 @@
         {% endfor%}
 
             </div>
-            <div class="paginations">
-              <div>
+            <div id="numpage">
+              <div id="num_list">
                 {{ pagination.links }}
   
               </div>

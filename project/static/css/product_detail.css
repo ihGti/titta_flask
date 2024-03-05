@@ -449,14 +449,14 @@ div#osusumeshouhin a {
   display: block;
   width: 150px;
   height: 150px;
-  /* background-color: blueviolet; */
-  /* background-image: url(../images/geji.jpg); */
+  border: #dddddd 1px solid;
   background-size: contain;
 }
 
 div#osusumeshouhin a img{
   width: 150px;
   height: 150px;
+  border-radius: 15px;
   background-size: contain;
 }
 div#objbtnbox{

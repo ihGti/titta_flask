@@ -47,7 +47,8 @@
   border-radius: 50px;
 }
 .item{
-padding: 20px 22px;
+  height: auto;
+  padding: 20px 22px;
 }
 .img{
   width: 300px;
@@ -165,4 +166,19 @@ padding: 20px 22px;
 #numpage #after a:hover{
   color: #fff;
   background-color: #7D8BAE;
+}
+
+form input{
+  
+  font-family: FontAwesome;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  border: none;
+  background: none;
+  outline: none;
+  color: #000;
+  
+  cursor: pointer;
+  font-size: 1.2rem;
 }

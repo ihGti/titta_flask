@@ -37,9 +37,10 @@
               <h3>{{contests.F_ContestTitle}}</h3>
               <p>{{contests.F_ContestComment}}</p>
               <p class="name">{{contests.user.F_UserName}}</p>
+              <p>{{contests.F_Voting}}</p>
             </div>
             <form action="/contest_voting/{{contests.F_ContestID}}" method="post">
-              <input type="submit" value="投票する">
+              <input type="submit" value="&#xf004;" class="button" id="votingButton">
             </form>
           </div>
           {% endfor %}
