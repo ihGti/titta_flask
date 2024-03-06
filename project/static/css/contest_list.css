@@ -59,7 +59,7 @@
   width: 300px;
   border: 1px solid;
   border-radius: 10px;
-  height: 100px;
+  height: 130px;
 }
 .text h3{
   padding: 5px;
@@ -70,6 +70,14 @@
 }
 .text .name{
   font-size: 0.5rem;
+}
+
+#voting{
+  display: flex;
+  position: relative;
+}
+#voting p{
+  margin-top: -7px;
 }
 
 

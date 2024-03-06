@@ -287,7 +287,7 @@ h1#saizuchecktext {
   position: relative;
 }
 
-h1#saizuchecktext a {
+h1#saizuchecktext button {
   display: block;
   padding: 0.5px  10px;
   background-color: rgb(255, 255, 255);
@@ -301,7 +301,7 @@ h1#saizuchecktext a {
   font-size: 1rem;
   color: #000;
   line-height: 30px;
-
+  border: none;
 }
 
 
@@ -447,17 +447,26 @@ div#osusumeshouhin {
 
 div#osusumeshouhin a {
   display: block;
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   border: #dddddd 1px solid;
   background-size: contain;
+  text-decoration: none;
+  color: #000;
+}
+
+div#osusumeshouhin a figure{
+  margin: 10px 0 0 0;
+  display: flex;
+  justify-content: center;
 }
 
 div#osusumeshouhin a img{
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 15px;
   background-size: contain;
+  object-fit: cover;
 }
 div#objbtnbox{
   display: flex;

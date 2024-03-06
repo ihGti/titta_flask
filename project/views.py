@@ -998,6 +998,24 @@ def product_detail(exhibit_id):
     return render_template("product_detail.html", exhibit=exhibit , user=current_user , users=users , exhibit_category=exhibit_category , recomend=selected_recommendations, favorites_exhibit=favorites_exhibit, message=message)
 
 
+@bp.route('/get_productsize/<int:exhibit_id>',methods=["GET"])
+def get_productsize(exhibit_id):
+    product_size = T_Exhibit.query.get(exhibit_id)
+    if product_size:
+        return jsonify({
+            'id':product_size.F_ExID,
+            'width':product_size.F_Width,
+            'height': product_size.F_Height
+        })
+
+@bp.route('/get_product/<int:exhibit_id>',methods=["GET"])
+def get_product(exhibit_id):
+    product_size = T_Exhibit.query.get(exhibit_id)
+    if product_size:
+        return jsonify({
+            'id':product_size.F_ExID,
+        })
+
 # 購入確認
 @bp.route("/settelement_comp/<int:exhibit_id>", methods=['POST'])
 @login_required
@@ -1417,37 +1435,33 @@ def lost_detail(pet_id):
     return render_template("lost_detail.html", user=current_user , pet=pet , lost=lost , category=category,favorites_exhibit=favorites_exhibit,lost_user=lost_user,message=message)
 
 
+# 迷子発見
+@bp.route('/foster_period/<int:pet_id>',methods=["GET","POST"])
+def lost_period(pet_id):
+    pet = T_FosterPet.query.get(pet_id)
+    
+    if request.method == 'POST':
+        pet.F_FosterPeriod = True
+        db.session.commit()
+        return redirect(url_for('/foster_board'))
+
 #DB連携後
 # ペット一覧
 @bp.route("/reg_pet")
 def pet_list():
-    pet = T_Pet.query.filter_by(F_UserID=current_user.F_UserID).all()
-    pet_all = []
+    pets = T_Pet.query.filter_by(F_UserID=current_user.F_UserID).all()
+
+    # petリスト内の各T_PetオブジェクトのF_PetID属性をリスト化
+    pet_ids = [pet.F_PetID for pet in pets]
+
+    # F_PetIDがpet_ids内にあるT_LostPetオブジェクトを取得
+    lost = T_LostPet.query.filter(T_LostPet.F_PetID.in_(pet_ids)).all()
+
     favorites_exhibit = T_Exhibit.query.join(T_Favorite, T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(
         T_Favorite.user_id == current_user.F_UserID).count()
     message = T_Message.query.filter_by(F_UserID=current_user.F_UserID).count()
 
-    for pet_item in pet:
-        lost = T_LostPet.query.get(pet_item.F_PetID)
-        foster = T_FosterPet.query.get(pet_item.F_PetID)
-
-        if lost:
-            lost_pet = T_Pet.query.get(lost.F_PetID)
-            lost_category = T_Category.query.get(lost_pet.F_CategoryID)
-            pet_all.append((lost, None, lost_pet, None, lost_category))
-
-        else:
-            pet_all.append((None,None,pet_item,None,None))
-        
-        if foster:
-            foster_pet = T_Pet.query.get(foster.F_PetID)
-            foster_category = T_Category.query.get(foster_pet.F_CategoryID)
-            pet_all.append((None, foster, None, foster_pet, foster_category))
-            
-        else:
-            pet_all.append((None,None,None,None,None))
-    print(pet_all)
-    return render_template("reg_pet.html", user=current_user, pet_all=pet_all, favorites_exhibit=favorites_exhibit,message=message)
+    return render_template("reg_pet.html", user=current_user, lost=lost, favorites_exhibit=favorites_exhibit,message=message)
 
 # コンテストマスター
 @bp.route("/master_upload", methods=['GET','POST'])
@@ -1571,12 +1585,12 @@ def contest_list(contest_id):
     favorites_exhibit = T_Exhibit.query.join(T_Favorite,T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(T_Favorite.user_id == current_user.F_UserID).count()
     message = T_Message.query.filter_by(F_UserID=current_user.F_UserID).count()
     contest_voting = T_Contest.query.filter_by(F_ContestMasterID = contest_master.F_ContestMasterID).first()
-    voting_list = [int(''.join(sorted(str(contest_voting.F_Voting), reverse=True)))]
+    # voting_list = [int(''.join(sorted(str(contest_voting.F_Voting), reverse=True)))]
     if contest_master:
         contest_list = contest_master.contest
         contest = len(contest_list)
-        return render_template('contest_list.html',user=current_user, contest_list=contest_list, contest_master=contest_master , contest=contest,voting_list=voting_list)
-    return render_template("contest_list.html" , user=current_user , contest_master=contest_master,contest=contest,favorites_exhibit=favorites_exhibit,message=message,voting_list=voting_list)
+        return render_template('contest_list.html',user=current_user, contest_list=contest_list, contest_master=contest_master , contest=contest)
+    return render_template("contest_list.html" , user=current_user , contest_master=contest_master,contest=contest,favorites_exhibit=favorites_exhibit,message=message)
 
 # 投票
 @bp.route('/contest_voting/<int:contest_id>',methods=["GET","POST"])
@@ -1692,13 +1706,17 @@ def community_mein(receiver_id):
 @login_required
 def favorite(exhibit_id):
     favorite = T_Favorite.query.filter_by(user_id=current_user.F_UserID,exhibit_id=exhibit_id).first()
-    
+    exhibit = T_Exhibit.query.get(exhibit_id)
     if favorite:
         db.session.delete(favorite)
         
     else:
         new_favorite = T_Favorite(user_id=current_user.F_UserID, exhibit_id=exhibit_id)
         db.session.add(new_favorite)
+        db.session.commit()
+            # メッセージ生成
+        context = f'ユーザー{current_user.F_UserName}があなたの出品した商品をお気に入り登録しました。'
+        create_message(exhibit.F_UserID,context)
         db.session.commit()
     return redirect("/top")
 
@@ -1787,7 +1805,19 @@ def earnings_history():
 # 掲載履歴
 @bp.route("/petpublish_history")
 def petpublish_history():
-    return render_template("petpublish_history.html" , user=current_user)
+    pets = T_Pet.query.filter_by(F_UserID=current_user.F_UserID).all()
+
+    # petリスト内の各T_PetオブジェクトのF_PetID属性をリスト化
+    pet_ids = [pet.F_PetID for pet in pets]
+
+    # F_PetIDがpet_ids内にあるT_LostPetオブジェクトを取得
+    foster = T_FosterPet.query.filter(T_FosterPet.F_PetID.in_(pet_ids)).all()
+
+    favorites_exhibit = T_Exhibit.query.join(T_Favorite, T_Favorite.exhibit_id == T_Exhibit.F_ExID).filter(
+        T_Favorite.user_id == current_user.F_UserID).count()
+    message = T_Message.query.filter_by(F_UserID=current_user.F_UserID).count()
+
+    return render_template("petpublish_history.html" , user=current_user,foster=foster, favorites_exhibit=favorites_exhibit,message=message)
 
 # 出品履歴
 @bp.route("/listing_history")

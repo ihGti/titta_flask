@@ -63,47 +63,27 @@
 
             <div id="pro-wrap">
 
-              {% for pets in pet_all %}
+              {% for pets in lost %}
               <div class="product">
-                  {% if pets[0] %}
-                      <a href="/lost_detail/{{ pets[0].F_LostPet.F_LostPetID }}">
+                      <a href="/lost_detail/{{ pets.F_LostPetID }}">
                           <div class="proImg">
                               <figure class="main">
-                                  <img src="/static/lost_pet/{{ pets[0].F_LostPet.F_Image }}" alt="サンプル画像">
+                                  <img src="/static/lost_pet/{{ pets.F_Image }}" alt="サンプル画像">
                                   <img src="/static/sold.png" alt="売り切れ" class="situ">
                               </figure>
                           </div>
                       </a>
                       <div class="pro_detail">
-                          <a href="/lost_detail/{{ pets[0].F_LostPet.F_LostPetID }}">
-                              <h2>{{ pets[0].F_LostPet.F_LostTitle }}</h2>
+                          <a href="/lost_detail/{{ pets.F_LostPetID }}">
+                              <h2>{{ pets.F_LostTitle }}</h2>
                           </a>
                           <div class="more_detail">
-                              <p><span>種類</span>{{ pets[0].F_LostPet.F_Category.F_CategoryName }}</p>
-                              <p><span>名前</span>{{ pets[0].F_LostPet.F_LostTitle }}</p>
-                              <p><span>状況</span>{{ pets[0].F_LostPet.F_Background }}</p>
+                              <p><span>種類</span>{{ pets.F_LostPet.F_Category.F_CategoryName }}</p>
+                              <p><span>名前</span>{{ pets.F_LostTitle }}</p>
+                              <p><span>状況</span>{{ pets.F_Background }}</p>
                           </div>
                       </div>
-                  {% elif pets[1] %}
-                      <a href="/foster_detail/{{ pets[1].F_FosterPet.F_FosterPetID }}">
-                          <div class="proImg">
-                              <figure class="main">
-                                  <img src="/static/foster_pet/{{ pets[1].F_FosterPet.F_Image }}" alt="サンプル画像">
-                                  <img src="/static/sold.png" alt="売り切れ" class="situ">
-                              </figure>
-                          </div>
-                      </a>
-                      <div class="pro_detail">
-                          <a href="/foster_detail/{{ pets[1].F_FosterPetID }}">
-                              <h2>{{ pets[1].F_FosterPet.F_FosterTitle }}</h2>
-                          </a>
-                          <div class="more_detail">
-                              <p><span>種類</span>{{ pets[1].F_FosterPet.F_Category.F_CategoryName }}</p>
-                              <p><span>名前</span>{{ pets[1].F_FosterPet.F_FosterTitle }}</p>
-                              <p><span>状況</span>{{ pets[1].F_FosterPet.F_Background }}</p>
-                          </div>
-                      </div>
-                  {% endif %}
+
               </div>
           {% endfor %}
           
