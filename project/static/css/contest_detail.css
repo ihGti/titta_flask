@@ -158,14 +158,17 @@
 
 
 #ApplyBtn{
+    width: 200px;
     display: flex;
-    margin: 0 auto;
-    padding: 12px 70px;
+    margin: 10px auto 0 auto;
+    padding: 12px 60px;
     font-size: 1.4rem;
     background-color: #E5857B;
     color: #fff;
-    border: none;
+    border: unset;
     border-radius: 30px;
+    text-decoration: none;
+    text-align: center;
 }
 
 #ApplyBtn:hover{

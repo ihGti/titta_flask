@@ -64,12 +64,12 @@
             <div id="pro-wrap">
 
 
-{% for i in range(12) %}
+{% for i in foster %}
               <div class="product">
-                <a href="/"><!-- 商品詳細ページへ -->
+                <a href="/foster_detail/{{i.F_FosterPetID}}"><!-- 商品詳細ページへ -->
                   <div class="proImg">
                     <figure class="main">
-                      <img src="/static/images/bed.jpg" alt="サンプル画像">
+                      <img src="/static/foster_pet/{{i.pets.F_Image}}" alt="サンプル画像">
                       <img src="/static/images/oya_icon.png" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
                     </figure>
                   </div>
@@ -94,35 +94,7 @@
 
               </div>
 {% endfor %}
-<!-- 迷子画像サンプル 消してくれ -->
-              <div class="product">
-                <a href="/"><!-- 商品詳細ページへ -->
-                  <div class="proImg">
-                    <figure class="main">
-                      <img src="/static/images/bed.jpg" alt="サンプル画像">
-                      <img src="/static/images/maigo_icon.png" alt="商品状態" class="situ"><!--ココを商品の状態を表す画像にする、やり方わからん-->
-                    </figure>
-                  </div>
-                </a>
 
-                <div class="pro_detail">
-                  <a href="/"><!-- 商品詳細ページへ -->
-                    <h2>説明</h2><!--ココ、文字数制限かけてーそれ以上なら...って感じで-->
-                  </a>
-
-                  <div class="heart">
-                    <figure>
-                      <img src="/static/images/me_transparent.png" alt="いいね">
-                    </figure>
-                    <div class="price">
-                      <p>
-                        6,980<!--ココ、商品の値段入れて-->
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
 
 
 

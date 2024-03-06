@@ -27,8 +27,7 @@
 
 
     <div id="pankuzu">
-      <a href="#">くず</a>>
-      <a href="#">くず</a>>
+      <a href="/top">TOP</a>>
       <a href="/product">商品一覧</a>
     </div>
 
@@ -126,7 +125,7 @@
 
           <h1 id="saizuchecktext">
             サイズ感を確認する
-            <a href="#" id="popup-link">見る</a>
+            <button onclick="draw('{{exhibit.F_ExID}}')" id="popup-link">見る</button>
           </h1>
 
           
@@ -155,6 +154,7 @@
                 <input type="submit" value="フォロー">
               </form>
               <a href="#" id="reviewhoshi"></a>
+              <a href="{{ url_for('main.community_mein', receiver_id=users.F_UserID)}}">取引チャット</a>
               <p></p>
             </div>
           </div>
@@ -166,7 +166,12 @@
     <p id="osusume">こちらの商品もおすすめです</p>
     <div id="osusumeshouhin">
     {% for recomends_list in recomend %}
-        <a href="/product_detail/{{ recomends_list.F_ExID }}"><img src="/static/toredo/{{ recomends_list.F_ExPhoto }}" alt=""></a>
+        <a href="/product_detail/{{ recomends_list.F_ExID }}">
+          <figure>
+            <img src="/static/toredo/{{ recomends_list.F_ExPhoto }}" alt="">
+          </figure>
+          <p>{{recomends_list.F_ExTitle}}</p>
+        </a>
     {% endfor %}
     
     </div>

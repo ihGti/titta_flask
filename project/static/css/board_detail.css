@@ -116,9 +116,14 @@ div.p-detail-wrap div.p-detail_right p#pet-buttom{
   background-color:#E5857B;
   box-shadow: 5px 3px 3px #ddd;
 }
-div.p-detail-wrap div.p-detail_right p#pet-buttom a{
-  text-decoration: none;
-  color: #fff;
+div.p-detail-wrap div.p-detail_right p#pet-buttom form input{
+  margin: 20px auto 20px auto;
+  padding: 30px 30px 30px 30px;
+  width: 300px;
+  text-align: center;
+  background-color:#E5857B;
+  box-shadow: 5px 3px 3px #ddd;
+
 }
 div.p-detail-wrap div.p-detail_right p#pet-buttom:hover{
   opacity: 0.7;
