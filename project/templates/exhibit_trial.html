@@ -1,67 +1,74 @@
 {% extends "base.html" %}
 
 {% block title %}
--exhibit_trial
+-exhibit
 {% endblock %}
 
 {% block css %}
-  <link rel="stylesheet" type="text/css" href="/static/css/exhibit.css">
+    <link rel="stylesheet" type="text/css" href="static/css/exhibit.css">
 {% endblock %}
 
 {% block content %}
+  <form action="/upload" method="post" enctype="multipart/form-data" id="imageForm" onsubmit="return exhibisub()">
 
-  <form action="/trial_page" method="post" enctype="multipart/form-data" id="imageForm">
     <main id="m-sample">
+
       <div class="wrap">
 
-        <h1>お試し出品</h1>
+
+
+        <section id="h1line">
+        <h1>出品</h1>
+
+        </section>
+
 
         <div id="herf">
           <div id="img">
-            <figure>
+            <figure id="tukurikata">
               <img src="/static/images/img1.jpg" alt="big" id="bigimg">
-              <input type="file" class="button" id="imageinput1" name="imageinput1" style="display: none;" onchange="previewImage('imageinput1','bigimg')">
-              <label class="button" for="imageinput1">&#xf03e;</label>
+              <input type="file" class="exbutton" id="imageinput1" name="imageinput1" style="display: none;" onchange="previewImage('imageinput1','bigimg')">
+              <label class="exbutton" for="imageinput1">&#xf03e;</label>
             </figure>
             <!-- <div id="btndiv">
               <button id="btn" name="selectimg">画像選択</button>
             </div> -->
             <div id="minidiv">
               <figure>
-                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="secondimage">
-                <input type="file" class="button" id="imageinput2" name="imageinput2" style="display: none;" onchange="previewImage('imageinput2','secondimage')">
-                <label class="button" for="imageinput2">&#xf03e;</label>
+                <img src="" alt="mini" class="miniimg" id="secondimage"onerror="this.style.display='none';">
+                <input type="file" class="exbutton" id="imageinput2" name="imageinput2" style="display: none;" onchange="previewImage('imageinput2','secondimage')">
+                <label class="exbutton" for="imageinput2">&#xf03e;</label>
               </figure>
               <figure>
-                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="thirdimage">
-                <input type="file" class="button" id="imageinput3" name="imageinput3" style="display: none;" onchange="previewImage('imageinput3','thirdimage')">
-                <label class="button" for="imageinput3">&#xf03e;</label>
+                <img src="" alt="mini" class="miniimg" id="thirdimage" onerror="this.style.display='none';">
+                <input type="file" class="exbutton" id="imageinput3" name="imageinput3" style="display: none;" onchange="previewImage('imageinput3','thirdimage')">
+                <label class="exbutton" for="imageinput3">&#xf03e;</label>
               </figure>
               <figure>
-                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="fourimage">
-                <input type="file" class="button" id="imageinput4" name="imageinput4" style="display: none;" onchange="previewImage('imageinput4','fourthimage')">
-                <label class="button" for="imageinput4">&#xf03e;</label>
+                <img src="" alt="mini" class="miniimg" id="fourthimage" onerror="this.style.display='none';">
+                <input type="file" class="exbutton" id="imageinput4" name="imageinput4" style="display: none;" onchange="previewImage('imageinput4','fourthimage')">
+                <label class="exbutton" for="imageinput4">&#xf03e;</label>
               </figure>
               <figure>
-                <img src="/static/images/img1.jpg" alt="mini" class="miniimg" id="fifthimage">
-                <input type="file" class="button" id="imageinput5" name="imageinput5" style="display: none;" onchange="previewImage('imageinput5','fifthimage')">
-                <label class="button" for="imageinput5">&#xf03e;</label>
+                <img src="" alt="mini" class="miniimg" id="fifthimage" onerror="this.style.display='none';">
+                <input type="file" class="exbutton" id="imageinput5" name="imageinput5" style="display: none;" onchange="previewImage('imageinput5','fifthimage')">
+                <label class="exbutton" for="imageinput5">&#xf03e;</label>
               </figure>
             </div>
           </div>
           <div id="form">
             <div id="inform">
               <div>
-                <label for="title">タイトル</label><input type="text" id="title" name="title" placeholder="題名や注目部分を記載してください。">
+                <label>タイトル</label><input type="text" id="title" name="title">
               </div>
               <div>
-                <section class="sec"><label class="areatag" for="setumei">商品説明</label></section>
-                <textarea id="setumei" name="setumei" placeholder="商品に関する説明をできるだけ詳しく記載してください。"></textarea>
+                <section class="sec"><label class="areatag">商品説明</label></section>
+                <textarea id="setumei" name="setumei"></textarea>
               </div>
               <div id="form-2">
                 <div>
-                  <label for="situation">商品状態</label>
-                  <select name="situation">
+                  <label>商品状態</label>
+                  <select name="situation" id="situation">
                     <option value="">選択してください</option>
                     <option value="新品">新品</option>
                     <option value="開封済み">開封済み</option>
@@ -71,19 +78,19 @@
                 </div>
 
                 <div>
-                  <label for="deli">配達方法</label>
-                  <select name="deli">
+                  <label>配達方法</label>
+                  <select name="deli" id="deli">
                     <option value="">選択してください</option>
-                    <option value="郵便">郵便</option>
                     <option value="レターパック">レターパック</option>
-                    <option value="Titta便">Titta便</option>
-                    <option value="ゆうパック">ゆうパック</option>
+                    <option value="郵送">郵送</option>
+                    <option value="titta便">Titta便</option>
+                    <option value="宅急便">宅急便</option>
                   </select>
                 </div>
                 
                 <div>
-                  <label for="genre">ジャンル</label>
-                  <select name="genre">
+                  <label>ジャンル</label>
+                  <select name="genre" id="genre">
                     <option value="">選択してください</option>
                     {% for category in categories %}
                     <option value="{{ category.F_CategoryID }}">{{ category.F_CategoryName }}</option>
@@ -91,30 +98,34 @@
                   </select>
                 </div>
                 <div>
-                  <label for="kane">￥</label><input type="text" id="kane" name="kane" placeholder="金額(円)">
-                </div>
-                <div>
-                  <label for="kane"></label><input type="text" id="width" name="width" placeholder="商品の横幅">
-                </div>
-                <div>
-                  <label for="kane"></label><input type="text" id="height" name="height" placeholder="商品の高さ">
+                  <label id="kanee">金額</label><input type="number" id="kane" name="kane"  placeholder="金額(円)">
                 </div>
               </div>
+
+              <div id="harborcon">
+                <div class="harbor">
+                  <label class="harbor-label">横幅</label><input type="number" id="width" name="width" placeholder="商品の横幅">
+                </div>
+                <div class="harbor" id="heiharbor">
+                  <label class="harbor-label">高さ</label><input type="number" id="height" name="height"  placeholder="商品の高さ">
+                </div>
+              </div>
+
               <div>
-                <section class="sec"><label id="labtag" class="areatag" for="tag">タグ</label></section><textarea id="tag" name="tag" placeholder="タグを書き方に従って記載してください。(#タグ１.#タグ２)"></textarea>
+                <section class="sec"><label id="labtag" class="areatag">タグ</label></section><textarea id="tag" name="tag" placeholder="#タグ"></textarea>
               </div>
             
             </div>
+        <button type="submit"  id="button1">出品確認画面へ〉</button>
+
           </div>
         </div>
 
-        <input type="submit"  id="button1" value="出品確認画面へ〉">
+
       </div><!-- class="wrap" -->
 
     </main>
-  </form>
-{% endblock %}
+        </form>
 
-{% block js %}
-  <script src="/static/js/exhibit.js"></script>
-{% endblock %}
+        <script src="/static/js/exhibit.js"></script>
+        {% endblock %}

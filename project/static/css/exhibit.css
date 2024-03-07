@@ -50,6 +50,8 @@ h1{
 #btndiv{
   justify-content: left;
 }
+
+
 #bigimg{
   margin-top: 20px;
   width: 100%;
@@ -231,3 +233,6 @@ textarea,select,input{
 }
 
 
+#width, #height,#kane::placeholder{
+  text-align: left;
+}
