@@ -130,7 +130,7 @@ header div.r-wrap div.rr-wrap div.nav-top nav ul {
 }
 
 #category ul.category-list li{
-  padding: 10px 10px 10px 30px;
+  padding: 13px 10px 13px 20px;
   border-bottom: #41537d 1px solid;
   font-size: 1.1rem;
 }
@@ -449,6 +449,8 @@ header div.r-wrap div.rr-wrap div.nav-top nav ul {
 #numpage{
   display: flex;
   justify-content: space-around;
+  /* margin: 150px 0 30px 0; */
+  padding: 30px 0 0 0;
 }
 
 #numpage #before{
